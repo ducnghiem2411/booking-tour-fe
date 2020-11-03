@@ -65,7 +65,7 @@ const Header = () => {
               >
                 <img
                   className="user-avatar rounded-circle"
-                  src="assets/images/admin/admin.jpg"
+                  src="/assets/images/admin/admin.jpg"
                   alt="User Avatar"
                 />
               </a>

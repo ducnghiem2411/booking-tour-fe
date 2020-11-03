@@ -11,6 +11,7 @@ const loginRequest = (email: string, password: string) => {
 };
 
 
+
 const loginSucced = (data: any) => {
   return {
     type: type.LOGIN_SUCCESSED,
@@ -35,12 +36,39 @@ const registerRequest = (username: string, email: string,  password: string) => 
     }
   };
 };
+
+
+const createCountryRequest = (name: string, desciption: string, image: string) => {
+  return {
+    type: type.CREATE_COUNTRY_REQUESTED,
+    payload: {
+      name: name,
+      desciption: desciption,
+      image: image
+    },
+  };
+};
+const createCountrySucced = () => {
+  return {
+    type: type.CREATE_COUNTRY_SUCCESSED,
+    
+  };
+};
+const createCountryFailed = (message: string) => {
+  return {
+    type: type.CREATE_COUNTRY_FAILED,
+    message
+  };
+};
+
+
 const registerSucced = () => {
   return {
     type: type.REGISTER_SUCCESSED,
     
   };
 };
+
 const registerFailed = (message: string) => {
   return {
     type: type.REGISTER_FAILED,
@@ -84,4 +112,4 @@ const onLogout = () => {
   };
 };
 
-export { loginRequest, loginSucced, loginFailed, onLogout, registerRequest, registerSucced, showCreateAccModal,onChangeStatusCreateAccModal, registerFailed,onCloseModal,onShowModal, onUpdateStatusError};
+export { loginRequest, loginSucced, loginFailed, onLogout,createCountryRequest, createCountrySucced, createCountryFailed,registerRequest, registerSucced, showCreateAccModal,onChangeStatusCreateAccModal, registerFailed,onCloseModal,onShowModal, onUpdateStatusError};

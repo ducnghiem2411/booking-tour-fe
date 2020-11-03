@@ -14,11 +14,7 @@ import {
   Link,
   useParams
 } from "react-router-dom";
-
-
-
-
-
+import Country from './components/Admin/Content/Country/Country';
 
 
 const App = () => {
@@ -29,14 +25,10 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={User} />
           <Route path="/admin" component={Admin} />
-
-         
+          <Route path="/country" component={Country} />
         </Switch>
       </Router>
-      
-
     </div>
-     
     </>
   );
 };

@@ -1,9 +1,7 @@
-import React, { FormEvent } from "react";
+import React from "react";
 import ReactDOM from 'react-dom';
 import { Table } from "antd";
 import { ColumnsType } from 'antd/es/table';
-import {useDispatch} from 'react-redux'
-import { onShowModal } from "../../../../redux/actions";
 
 
 interface User{
@@ -90,13 +88,7 @@ const data = [
 
 
 
-const Country = () => {
-
-  const dispatch = useDispatch()
-
-  const showModal = (e: FormEvent) => {
-    dispatch(onShowModal(true))
-  }
+const Place = () => {
     
 
     const onChange = (pagination: any, filters: any, sorter: any, extra: any) => {
@@ -106,12 +98,10 @@ const Country = () => {
 
   return (
     <>
-
-    <button className="btn-create" onClick={showModal}>Create new country</button>
-    
+    place
       <Table columns={columns} dataSource={data} onChange={onChange} />
     </>
   );
 };
 
-export default Country;
+export default Place;

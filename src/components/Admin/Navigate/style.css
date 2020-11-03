@@ -5006,8 +5006,16 @@ aside.left-panel {
     padding: 0.4em 0.5em;
 }
 
+
+
 .navbar .navbar-nav li.menu-item-has-children {
     position: relative;
+    color: #c8c9ce;
+    font-size: 15px;
+}
+.navbar .navbar-nav li.menu-item-has-children span {
+    display: inline-block;
+    margin-right: 20px;
 }
 
 .navbar .navbar-nav li.menu-item-has-children a {

@@ -1,0 +1,46 @@
+button.btn-create {
+    float: right;
+    clear: both;
+    display: inline-block;
+    margin: 20px 0;
+    color: white;
+    background: #31b8e4;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    transition: .4s ease-in-out;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+button.btn-create:hover {   
+    background: #1280a4;
+}
+
+.modal-dialog.login.animated.country {
+    width: 600px;
+    /* display: flex; */
+    /* justify-content: center; */
+}
+
+.modal-content.country {
+    width: 600px;
+    padding: 0 30px 0 30px;
+}
+
+.modal-content.country .ant-col.ant-form-item-label {
+    display: block;
+    text-align: left;
+}
+.form-country .ant-row.ant-form-item {
+    flex-flow: column;
+}
+.ant-form-item{
+    margin-bottom: 5px;
+}
+.ant-form-item-label > label{
+    font-size: 13px;
+}
+.modal-content.country .modal-header{
+    padding-left: 0;
+}
