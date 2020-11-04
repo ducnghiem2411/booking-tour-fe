@@ -44,3 +44,8 @@ button.btn-create:hover {
 .modal-content.country .modal-header{
     padding-left: 0;
 }
+
+button.ant-btn.ant-btn-primary.btn-ant-modal-submit {
+    display: inline-block;
+    margin-right: 10px;
+}

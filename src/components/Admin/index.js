@@ -16,7 +16,7 @@ import {
 } from "react-router-dom";
 import Place from "./Content/Place/Place";
 import Tour from "./Content/Tour/Tour";
-import Modal from "./Modal/Modal";
+// import Modal from "./Modal/Modal";
 
 // import './asse'
 
@@ -24,7 +24,7 @@ const Admin = () => {
   return (
     <>
       {/* <Router> */}
-      <Modal/>
+      {/* <Modal/> */}
       <Navigate />
       <div id="right-panel" className="right-panel">
         <Header />

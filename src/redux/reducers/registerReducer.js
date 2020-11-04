@@ -8,7 +8,7 @@ const initialState = {
   
 };
 
-export default function registerReducer(state = initialState, action: any) {
+export default function registerReducer(state = initialState, action) {
   switch (action.type) {
     case type.REGISTER_REQUEST:
       return {

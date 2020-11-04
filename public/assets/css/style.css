@@ -30,6 +30,9 @@ font-family: 'Poppins', sans-serif;
 /*-------------------------------------
 		1.General css (Reset code)
 --------------------------------------*/
+#root, html, body{
+    overflow-x: hidden;
+}
 *{
     padding: 0;
     margin: 0;

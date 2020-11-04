@@ -1,0 +1,29 @@
+import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import * as type from "../TypeAction";
+import axios from "axios";
+
+import { fetchDataCountrySucced, fetchDataCountryFailed } from "../actions/index";
+
+const apiUrl = "https://5f854efbc29abd00161905ac.mockapi.io/user";
+
+
+export function* fetchCountryInSaga(action) {
+ 
+  try {
+    const response = yield call(axios.get, apiUrl, null);
+
+    if (response && response.status == 200) {
+      console.log('response', response)
+      yield put(fetchDataCountrySucced(response.data, false));  
+    }
+  } catch (error) {
+    // debugger
+    yield put(fetchDataCountryFailed(error));
+    
+    
+  }
+}
+
+export default function* fetchCountrySaga() {
+  yield takeLatest(type.FETCH_COUNTRY_REQUEST, fetchCountryInSaga);
+}

@@ -13,7 +13,7 @@ const initialState = {
  
 };
 
-export default function loginReduder(state = initialState, action: any) {
+export default function loginReduder(state = initialState, action) {
   switch (action.type) {
     case type.LOGIN_REQUESTED:
       return {

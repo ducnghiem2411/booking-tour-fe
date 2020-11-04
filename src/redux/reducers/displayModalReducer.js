@@ -5,7 +5,7 @@ const initialState = {
     statusCreateModal: false
 };
 
-export default function displayModalReducer(state = initialState, action: any) {
+export default function displayModalReducer(state = initialState, action) {
   switch (action.type) {
     case type.SHOW_MODAL:
       return {

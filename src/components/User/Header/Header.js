@@ -10,7 +10,7 @@ const Header = () => {
 
 
 
-  const onShowLoginModal = (e:FormEvent) => {
+  const onShowLoginModal = (e) => {
     dispatch(onShowModal(true))
 
   }

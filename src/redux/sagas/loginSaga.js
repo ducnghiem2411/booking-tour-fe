@@ -6,7 +6,7 @@ import { loginSucced, loginFailed } from "../actions/index";
 
 const apiUrl = "https://conduit.productionready.io/api/users/login";
 
-export function* signInSaga(action: any) {
+export function* signInSaga(action) {
   const data = {
     user: {
       email: action.payload.email,

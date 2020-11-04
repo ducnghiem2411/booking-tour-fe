@@ -4,7 +4,7 @@ const initialState = {
   isAuthenticated: false,
 };
 
-export default function homeReducer(state = initialState, action: any) {
+export default function homeReducer(state = initialState, action) {
   switch (action.type) {
     case type.LOGIN_SUCCESSED:
       return {

@@ -1,14 +1,11 @@
 import React, { FormEvent, useEffect, useState } from "react";
 // import { useState } from "react";
 import {connect, useDispatch} from 'react-redux'
-import { onCloseModal, showCreateAccModal, onChangeStatusCreateAccModal } from './../../../redux/actions/index'
+import { onCloseModal, showCreateAccModal, onChangeStatusCreateAccModal } from '../../../redux/actions/index'
 
-interface Props {
-  isDisplay: any
-  statusCreateModal: any
-}
 
-const Modal = (props: Props) => {
+
+const Modal = (props) => {
   const dispatch = useDispatch();
   const {isDisplay} = props.isDisplay;
   const {statusCreateModal} = props.statusCreateModal;
@@ -17,11 +14,11 @@ const Modal = (props: Props) => {
     dispatch(onCloseModal(false))
     dispatch(onChangeStatusCreateAccModal(false))
   }
-  const onCreateAccModal = (e: FormEvent) => {
+  const onCreateAccModal = (e) => {
     e.preventDefault();
     dispatch(showCreateAccModal(true))
   }
-  const changeStatusCreateAccModal = (e: FormEvent) => {
+  const changeStatusCreateAccModal = (e) => {
     e.preventDefault();
     dispatch(onChangeStatusCreateAccModal(false))
   }
@@ -162,7 +159,7 @@ const Modal = (props: Props) => {
   );
 };
 
-const mapState = (state: any) => ({
+const mapState = (state) => ({
   isDisplay: state.displayModal,
   statusCreateModal: state.displayModal,
 

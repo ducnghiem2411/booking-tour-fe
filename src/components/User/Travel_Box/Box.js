@@ -9,7 +9,7 @@ const Box = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="single-travel-boxes">
-                <div id="desc-tabs" className="desc-tabs">
+                <div id="desc-tabs" className="desc-tbs">
                   <ul className="nav nav-tabs" role="tablist">
                     <li role="presentation" className="active">
                       <a

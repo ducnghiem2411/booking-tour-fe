@@ -7,7 +7,7 @@ import { registerSucced, registerFailed } from "../actions/index";
 const apiUrl = "https://conduit.productionready.io/api/users";
 
 
-export function* registerInSaga(action: any) {
+export function* registerInSaga(action) {
   const data = {
     user: {
       email: action.payload.email,

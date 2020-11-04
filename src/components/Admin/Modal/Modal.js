@@ -5,24 +5,13 @@ import {
   onCloseModal,
   showCreateAccModal,
   onChangeStatusCreateAccModal,
-} from "./../../../redux/actions/index";
+} from "../../../redux/actions/index";
 import { Form, Input, Button, Select, Upload } from "antd";
 import { FormInstance } from "antd/lib/form";
-import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
-import {createCountryRequest} from './../../../redux/actions/index'
+import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import { createCountryRequest, fetchDataCountryRequest } from "../../../redux/actions/index";
 
-
-
-
-const { TextArea } = Input;
-const { Option } = Select;
-
-interface Props {
-  isDisplay: any;
-  statusCreateModal: any;
-}
- 
-const Modal = (props: Props) => {
+const Modal = (props) => {
   const dispatch = useDispatch();
   const { isDisplay } = props.isDisplay;
   const { statusCreateModal } = props.statusCreateModal;
@@ -30,35 +19,62 @@ const Modal = (props: Props) => {
   const closeModal = () => {
     dispatch(onCloseModal(false));
     dispatch(onChangeStatusCreateAccModal(false));
+    onReset()
   };
-  const onCreateAccModal = (e: FormEvent) => {
+  const onCreateAccModal = (e) => {
     e.preventDefault();
     dispatch(showCreateAccModal(true));
   };
-  const changeStatusCreateAccModal = (e: FormEvent) => {
+  const changeStatusCreateAccModal = (e) => {
     e.preventDefault();
     dispatch(onChangeStatusCreateAccModal(false));
   };
 
-  const formRef = useRef<FormInstance>(null);
-  //@ts-nocheck
-  const onGenderChange = (value: any) => {
-    formRef.current?.setFieldsValue({
-      note: `Hi, ${value === "male" ? "man" : "lady"}!`,
-    });
-  };
 
-  const onSubmit = (values: any) => {
-    console.log(values);
-    dispatch(createCountryRequest(values.countryName, values.description, values.upload[0].name))
+  const [form] = Form.useForm();
+
+  const onGenderChange = (value) => {
+    switch (value) {
+      case "male":
+        form.setFieldsValue({
+          note: "Hi, man!",
+        });
+        return;
+
+      case "female":
+        form.setFieldsValue({
+          note: "Hi, lady!",
+        });
+        return;
+
+      case "other":
+        form.setFieldsValue({
+          note: "Hi there!",
+        });
+        return;
+    }
   };
 
   const onReset = () => {
-    formRef.current?.resetFields();
+    form.resetFields();
   };
 
-  const normFile = (e: any) => {
-    console.log('Upload event:', e);
+  const onSubmit = (values) => {
+    // console.log(values);
+    dispatch(
+      createCountryRequest(
+        values.countryName,
+        values.description,
+        values.upload[0].name ? values.upload[0].name : ''
+      )
+    );
+    // dispatch(fetchDataCountryRequest())
+    onReset()
+    closeModal()
+  };
+
+  const normFile = (e) => {
+    // console.log("Upload event:", e);
     if (Array.isArray(e)) {
       return e;
     }
@@ -91,7 +107,7 @@ const Modal = (props: Props) => {
                 <h4 className="modal-title"> Create new country </h4>
               </div>
               <div className="form-country">
-                <Form ref={formRef} name="control-ref" onFinish={onSubmit}>
+                <Form form={form} name="control-hooks" onFinish={onSubmit}>
                   <Form.Item
                     name="countryName"
                     label="Country name"
@@ -111,7 +127,6 @@ const Modal = (props: Props) => {
                     label="Upload"
                     valuePropName="fileList"
                     getValueFromEvent={normFile}
-                    
                   >
                     <Upload name="logo" action="/upload.do" listType="picture">
                       <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -119,7 +134,7 @@ const Modal = (props: Props) => {
                   </Form.Item>
 
                   <Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" className="btn-ant-modal-submit">
                       Create
                     </Button>
                     <Button htmlType="button" onClick={onReset}>
@@ -136,7 +151,7 @@ const Modal = (props: Props) => {
   );
 };
 
-const mapState = (state: any) => ({
+const mapState = (state) => ({
   isDisplay: state.displayModal,
   statusCreateModal: state.displayModal,
 });
