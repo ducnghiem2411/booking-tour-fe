@@ -1,10 +1,14 @@
 import React from "react";
 
-import Breadcrumb from "./Content/Breadcrumb/Breadcrumb";
-import Country from "./Content/Country/Country";
-import Header from "./Content/Header/Header";
+import Breadcrumb from "./Components/Breadcrumb/Breadcrumb";
+import Country from "./Components/Country/Country";
+import Header from "./Components/Header/Header";
 
 import Navigate from "./Navigate/Navigate";
+import PostList from './Components/PostList/PostList'
+import {Admin, Resource} from 'react-admin'
+import restProvider from 'ra-data-simple-rest'
+
 
 import {
   BrowserRouter as Router,
@@ -14,17 +18,15 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
-import Place from "./Content/Place/Place";
-import Tour from "./Content/Tour/Tour";
+import Place from "./Components/Place/Place";
+import Tour from "./Components/Tour/Tour";
 // import Modal from "./Modal/Modal";
 
 // import './asse'
 
-const Admin = () => {
+const index = () => {
   return (
     <>
-      {/* <Router> */}
-      {/* <Modal/> */}
       <Navigate />
       <div id="right-panel" className="right-panel">
         <Header />
@@ -37,12 +39,10 @@ const Admin = () => {
         <Route path="/admin/tour">
           <Tour />
         </Route>
-      </div>
-      {/* </Router> */}
+      </div> 
+    
     </>
   );
 };
 
-
-
-export default Admin;
+export default index;

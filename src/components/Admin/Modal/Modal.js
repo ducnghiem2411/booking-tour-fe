@@ -60,21 +60,20 @@ const Modal = (props) => {
   };
 
   const onSubmit = (values) => {
-    // console.log(values);
+    console.log('values', values)
     dispatch(
       createCountryRequest(
         values.countryName,
-        values.description,
-        values.upload[0].name ? values.upload[0].name : ''
+        values.description ? values.description : "",
+        values.upload ? values.upload : []
       )
     );
-    // dispatch(fetchDataCountryRequest())
     onReset()
     closeModal()
   };
 
   const normFile = (e) => {
-    // console.log("Upload event:", e);
+    console.log('e', e)
     if (Array.isArray(e)) {
       return e;
     }
@@ -83,14 +82,14 @@ const Modal = (props) => {
 
   return (
     <>
-      <div className={isDisplay ? "wrap-modal active" : "wrap-modal"}>
+      <div className={isDisplay ? "wrap-modal country active" : "wrap-modal country"}>
         <div
           className={
             isDisplay
               ? "modal-form login country active"
               : "modal-form login country"
           }
-          id="loginModal"
+         
         >
           <div className="modal-dialog login animated country">
             <div className="modal-content country">
@@ -111,16 +110,18 @@ const Modal = (props) => {
                   <Form.Item
                     name="countryName"
                     label="Country name"
+                    
                     rules={[
                       {
                         required: true,
+                        whitespace: true
                       },
                     ]}
                   >
-                    <Input maxLength={90} />
+                    <Input maxLength={13} placeholder="Typing country name..." />
                   </Form.Item>
                   <Form.Item name={["description"]} label="Description">
-                    <Input.TextArea maxLength={250} />
+                    <Input.TextArea maxLength={200} placeholder="Typing description...." />
                   </Form.Item>
                   <Form.Item
                     name="upload"

@@ -5241,7 +5241,9 @@ body.open .navbar .navbar-brand.hidden {
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
   width: 79%;
+  position: relative;
 }
+
 
 .right-panel .breadcrumbs {
   background-color: #fff;

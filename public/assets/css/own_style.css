@@ -2,7 +2,7 @@ button.btn-create {
     float: right;
     clear: both;
     display: inline-block;
-    margin: 20px 0;
+    margin: 20px;
     color: white;
     background: #31b8e4;
     font-weight: 500;
@@ -12,10 +12,14 @@ button.btn-create {
     padding: 5px 10px;
     border-radius: 5px;
 }
-
+.ant-table-wrapper{
+    padding: 0 20px 20px 20px;
+}
 button.btn-create:hover {   
     background: #1280a4;
 }
+
+
 
 .modal-dialog.login.animated.country {
     width: 600px;

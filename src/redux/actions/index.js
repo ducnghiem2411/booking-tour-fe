@@ -34,112 +34,126 @@ const registerRequest = (username, email, password) => {
   };
 };
 
-const createCountryRequest = (name, desciption, image) => {
+const createCountryRequest = (name, description, images) => {
+
   return {
     type: type.CREATE_COUNTRY_REQUESTED,
     payload: {
       name: name,
-      desciption: desciption,
-      image: image,
+      description: description,
+      images: images,
     },
   };
 };
 const createCountrySucced = (data) => {
-  // console.log("createCountrySucced", data);
   return {
     type: type.CREATE_COUNTRY_SUCCESSED,
     data,
   };
 };
 const createCountryFailed = (message) => {
-  // console.log("message", message);
   return {
     type: type.CREATE_COUNTRY_FAILED,
     message,
   };
 };
-const fetchDataCountryRequest = (loading) => {
-  // console.log('fetch coutry')
+const fetchDataCountryRequest = () => {
   return {
     type: type.FETCH_COUNTRY_REQUEST,
-    loading: true
-  }
-}
+  };
+};
 
+const fetchDataCountrySucced = (data) => {
+  return {
+    type: type.FETCH_COUNTRY_SUCCED,
+    data,
+  };
+};
 
-  const fetchDataCountrySucced = (data, loading) => {
-    // console.log("data", data);
-    return {
-      type: type.FETCH_COUNTRY_SUCCED,
-      data,
-      loading: loading
-    };
+const fetchDataCountryFailed = (message) => {
+  return {
+    type: type.FETCH_COUNTRY_FAILED,
+    message,
   };
+};
+const deleteCountryItemRequest = (id) => {
+  return {
+    type: type.DELETE_COUNTRY_REQUESTED,
+    id,
+  };
+};
 
-  const fetchDataCountryFailed = (message) => {
-    // console.log("message", message);
-    return {
-      type: type.FETCH_COUNTRY_FAILED,
-      message,
-    };
+const deleteCountryItemSucced = (id) => {
+  return {
+    type: type.DELETE_COUNTRY_SUCCESSED,
+    id,
   };
+};
 
-  const registerSucced = () => {
-    return {
-      type: type.REGISTER_SUCCESSED,
-    };
+const deleteCountryItemFailed = (message) => {
+  return {
+    type: type.DELETE_COUNTRY_FAILED,
+    message,
   };
+};
 
-  const registerFailed = (message) => {
-    return {
-      type: type.REGISTER_FAILED,
-      message,
-    };
+const registerSucced = () => {
+  return {
+    type: type.REGISTER_SUCCESSED,
   };
-  const onUpdateStatusError = (data) => {
-    return {
-      type: type.UPDATE_STATUS_ERROR,
-      data,
-    };
-  };
-  const onShowModal = (status) => {
-    return {
-      type: type.SHOW_MODAL,
-      status,
-    };
-  };
-  const onCloseModal = (status) => {
-    return {
-      type: type.CLOSE_MODAL,
-      status,
-    };
-  };
-  const showCreateAccModal = (status) => {
-    return {
-      type: type.SHOW_CREATE_ACC_MODAL,
-      status,
-    };
-  };
-  const onChangeStatusCreateAccModal = (status) => {
-    return {
-      type: type.SHOW_LOGIN_ACC_MODAL,
-      status,
-    };
-  };
+};
 
-  const onLogout = () => {
-    return {
-      type: type.LOGOUT,
-    };
+const registerFailed = (message) => {
+  return {
+    type: type.REGISTER_FAILED,
+    message,
   };
+};
+const onUpdateStatusError = (data) => {
+  return {
+    type: type.UPDATE_STATUS_ERROR,
+    data,
+  };
+};
+const onShowModal = (status) => {
+  return {
+    type: type.SHOW_MODAL,
+    status,
+  };
+};
+const onCloseModal = (status) => {
+  return {
+    type: type.CLOSE_MODAL,
+    status,
+  };
+};
+const showCreateAccModal = (status) => {
+  return {
+    type: type.SHOW_CREATE_ACC_MODAL,
+    status,
+  };
+};
+const onChangeStatusCreateAccModal = (status) => {
+  return {
+    type: type.SHOW_LOGIN_ACC_MODAL,
+    status,
+  };
+};
 
+const onLogout = () => {
+  return {
+    type: type.LOGOUT,
+  };
+};
 
 export {
   loginRequest,
   loginSucced,
   loginFailed,
   onLogout,
-
+  deleteCountryItemRequest,
+  deleteCountryItemSucced,
+  deleteCountryItemFailed,
   createCountryRequest,
   fetchDataCountryRequest,
   fetchDataCountrySucced,
@@ -154,4 +168,4 @@ export {
   onCloseModal,
   onShowModal,
   onUpdateStatusError,
-}
+};

@@ -14,7 +14,7 @@ import {
   Link,
   useParams
 } from "react-router-dom";
-import Country from './components/Admin/Content/Country/Country';
+import Country from './components/Admin/Components/Country/Country';
 
 
 const App = () => {

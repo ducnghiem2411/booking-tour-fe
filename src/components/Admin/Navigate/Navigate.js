@@ -7,7 +7,7 @@ import {
   Link,
   useParams,
 } from "react-router-dom";
-import Country from "../Content/Country/Country";
+import Country from "../Components/Country/Country";
 
 const Navigate = () => {
   return (

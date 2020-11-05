@@ -8,9 +8,19 @@ const initialState = {
   dataCountry: [],
 };
 
+var findIndex = (dataCountries, id) => {
+  var result = -1;
+  dataCountries.forEach((dataCountry, index) => {
+    if (dataCountry.id === id) {
+      result = index;
+    }
+  });
+
+  return result;
+};
+
 export default function countryReducer(state = initialState, action) {
   switch (action.type) {
-    
     case type.CREATE_COUNTRY_REQUESTED:
       return {
         ...state,
@@ -20,7 +30,7 @@ export default function countryReducer(state = initialState, action) {
     case type.CREATE_COUNTRY_SUCCESSED:
       state.dataCountry.push(action.data);
       state.loading = false;
-      return state;
+      return { ...state };
 
     case type.CREATE_COUNTRY_FAILED:
       return {
@@ -29,29 +39,40 @@ export default function countryReducer(state = initialState, action) {
         message: action.message,
       };
 
-      case type.FETCH_COUNTRY_REQUEST:
+    case type.FETCH_COUNTRY_REQUEST:
       return {
         ...state,
-        loading: action.loading,
+        loading: true,
       };
 
     case type.FETCH_COUNTRY_SUCCED:
-      // console.log("action.data", action.data);
-      // console.log('action.data', action.data)
       return {
         ...state,
         dataCountry: action.data,
-        loading: action.loading
-      }
+        loading: false,
+      };
 
-      case type.FETCH_COUNTRY_FAILED:
+    case type.FETCH_COUNTRY_FAILED:
       return {
         ...state,
         error: true,
         message: action.message,
       };
+    case type.DELETE_COUNTRY_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case type.DELETE_COUNTRY_SUCCESSED:
+      const index = findIndex(state.dataCountry, action.id);
+      state.dataCountry.splice(index, 1);
+      return { ...state };
 
-    
+    case type.DELETE_COUNTRY_FAILED:
+      return {
+        ...state,
+        message: action.message,
+      };
 
     default:
       return state;

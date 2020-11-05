@@ -10,18 +10,15 @@ export function* createCountryInSaga(action) {
   const data = {
     name: action.payload.name,
     description: action.payload.description,
-    image: action.payload.image,
+    images: action.payload.images,
   };
   try {
     const response = yield call(axios.post, apiUrl, data);
 
     if (response) {
-      // console.log('response', response)
       yield put(createCountrySucced(response.data));
-      // yield put(fetchDataCountryRequest());
     }
   } catch (error) {
-    // debugger
     yield put(createCountryFailed(error));
   }
 }
