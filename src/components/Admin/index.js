@@ -5,24 +5,37 @@ import Country from "./Components/Country/Country";
 import Header from "./Components/Header/Header";
 
 import Navigate from "./Navigate/Navigate";
-import PostList from './Components/PostList/PostList'
-import {Admin, Resource} from 'react-admin'
-import restProvider from 'ra-data-simple-rest'
+import PostList from "./Components/PostList/PostList";
+import { Admin, Resource } from "react-admin";
+import restProvider from "ra-data-simple-rest";
+import routes from './../../routes'
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
 import Place from "./Components/Place/Place";
 import Tour from "./Components/Tour/Tour";
-// import Modal from "./Modal/Modal";
+import Modal from "./Modal/Modal";
 
 // import './asse'
+
+const showContentMenu = (routes) => {
+  var result = null;
+  if (routes.length > 0) {
+    result = routes.map((route, index) => {
+      return (
+        <Route
+          key={index}
+          path={route.path}
+          exact={route.exact}
+          render={route.main}
+        />
+      );
+    });
+  }
+
+  return result;
+};
 
 const index = () => {
   return (
@@ -30,7 +43,7 @@ const index = () => {
       <Navigate />
       <div id="right-panel" className="right-panel">
         <Header />
-        <Route path="/admin/country">
+        {/* <Route path="/admin/country">
           <Country />
         </Route>
         <Route path="/admin/place">
@@ -39,8 +52,11 @@ const index = () => {
         <Route path="/admin/tour">
           <Tour />
         </Route>
-      </div> 
-    
+        <Route path="/admin/country/add">
+        <Modal />
+        </Route> */}
+        <Switch>{showContentMenu(routes)}</Switch>
+      </div>
     </>
   );
 };

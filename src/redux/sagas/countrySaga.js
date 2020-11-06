@@ -4,13 +4,13 @@ import axios from "axios";
 
 import { createCountrySucced, createCountryFailed,fetchDataCountryRequest } from "../actions/index";
 
-const apiUrl = "https://5f854efbc29abd00161905ac.mockapi.io/user";
+const apiUrl = "http://192.168.4.73:8080/countries";
 
 export function* createCountryInSaga(action) {
   const data = {
     name: action.payload.name,
     description: action.payload.description,
-    images: action.payload.images,
+    image: action.payload.image,
   };
   try {
     const response = yield call(axios.post, apiUrl, data);
@@ -19,6 +19,7 @@ export function* createCountryInSaga(action) {
       yield put(createCountrySucced(response.data));
     }
   } catch (error) {
+    console.log('error', error)
     yield put(createCountryFailed(error));
   }
 }

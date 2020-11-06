@@ -1,5 +1,5 @@
-button.btn-create {
-    float: right;
+.btn-create {
+    /* float: right; */
     clear: both;
     display: inline-block;
     margin: 20px;
@@ -15,7 +15,7 @@ button.btn-create {
 .ant-table-wrapper{
     padding: 0 20px 20px 20px;
 }
-button.btn-create:hover {   
+.btn-create:hover {   
     background: #1280a4;
 }
 
@@ -53,3 +53,35 @@ button.ant-btn.ant-btn-primary.btn-ant-modal-submit {
     display: inline-block;
     margin-right: 10px;
 }
+.main-menu.admin .navi-link {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.ant-table-cell a.btn-delete {
+    color: red;
+    font-weight: 600;
+}
+
+.main-menu.admin h3.menu-title {
+    margin-bottom: 30px;
+}
+
+.main-menu.admin .navi-link li.menu-item {
+    display: block;
+    /* font-weight: 600; */
+    margin: 0;
+    padding: 10px 10px 10px 0;
+    color: #8696a1;
+    transition: .4s ease-in-out;
+    font-size: 15px;
+    position: relative;
+    /* border-bottom: 1px solid #bdbbbb; */
+}
+
+.main-menu.admin .navi-link li.menu-item span {
+    display: inline-block;
+    margin-right: 20px;
+}
+.main-menu.admin .navi-link li.menu-item:after {content: "";display: block;width: 60px;background: #d0d0d0;position: absolute;bottom: 0;left: 0;height: 2px;transition: .4s ease-in-out;}
+

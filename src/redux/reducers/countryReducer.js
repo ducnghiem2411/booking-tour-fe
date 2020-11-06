@@ -28,7 +28,8 @@ export default function countryReducer(state = initialState, action) {
       };
 
     case type.CREATE_COUNTRY_SUCCESSED:
-      state.dataCountry.push(action.data);
+      state.dataCountry.push(action.data.data);
+      console.log('action.data', action.data)
       state.loading = false;
       return { ...state };
 
@@ -66,6 +67,7 @@ export default function countryReducer(state = initialState, action) {
     case type.DELETE_COUNTRY_SUCCESSED:
       const index = findIndex(state.dataCountry, action.id);
       state.dataCountry.splice(index, 1);
+      state.loading = false;
       return { ...state };
 
     case type.DELETE_COUNTRY_FAILED:

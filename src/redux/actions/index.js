@@ -34,14 +34,14 @@ const registerRequest = (username, email, password) => {
   };
 };
 
-const createCountryRequest = (name, description, images) => {
+const createCountryRequest = (name, description, image) => {
 
   return {
     type: type.CREATE_COUNTRY_REQUESTED,
     payload: {
       name: name,
       description: description,
-      images: images,
+      image: image,
     },
   };
 };

@@ -17,24 +17,24 @@ const Navigate = () => {
           <div className="navbar-header">
             <p className="title-dash">Admin Dashboard</p>
           </div>
-          <div id="main-menu" className="main-menu collapse navbar-collapse">
+          <div id="main-menu" className="main-menu collapse navbar-collapse admin">
             <ul className="nav navbar-nav">
               <h3 className="menu-title">UI elements</h3>
               {/* /.menu-title */}
 
               <ul>
                 <Link to="/admin/country" className="navi-link">
-                  <li className="menu-item-has-children dropdown">
+                  <li className="menu-item">
                     <span><i className="menu-icon fa fa-laptop"></i></span>  Country
                   </li>
                 </Link>
                 <Link to="/admin/place" className="navi-link">
-                  <li className="menu-item-has-children dropdown">
+                  <li className="menu-item">
                     <span><i className="menu-icon fa fa-laptop"></i></span>  Place
                   </li>
                 </Link>
                 <Link to="/admin/tour" className="navi-link">
-                  <li className="menu-item-has-children dropdown">
+                  <li className="menu-item">
                     <span><i className="menu-icon fa fa-laptop"></i></span>  Tour
                   </li>
                 </Link>

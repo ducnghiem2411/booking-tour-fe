@@ -7,7 +7,7 @@ import {
   fetchDataCountryFailed,
 } from "../actions/index";
 
-const apiUrl = "https://5f854efbc29abd00161905ac.mockapi.io/user";
+const apiUrl = "http://192.168.4.73:8080/countries";
 
 export function* fetchCountryInSaga(action) {
   try {

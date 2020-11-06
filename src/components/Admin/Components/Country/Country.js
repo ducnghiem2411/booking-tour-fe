@@ -8,17 +8,26 @@ import { onShowModal } from "../../../../redux/actions";
 import axios from "axios";
 import Modal from "../../Modal/Modal";
 import { Spin, Alert, Popconfirm } from "antd";
+import Spinner from './../Spin/Spin'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 
 import {
   fetchDataCountryRequest,
   deleteCountryItemRequest,
+  onCloseModal
 } from "../../../../redux/actions/index";
-import { Link } from "react-router-dom";
 
 const Country = (props) => {
   const dispatch = useDispatch();
   const dataCountry = props.dataCountry.dataCountry;
-  const loading = props.loading.loading;
+  console.log('dataCountry', dataCountry)
+  const { loading } = props.loading;
   const [dataSource, setDataSource] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
 
@@ -34,26 +43,29 @@ const Country = (props) => {
   const onChange = (pagination, filters, sorter, extra) => {};
 
   useEffect(() => {
+    console.log("useEffect1")
     dispatch(fetchDataCountryRequest());
+    dispatch(onCloseModal(false));
   }, []);
 
 
-  console.log('dataCountry', dataCountry)
   const data = [];
-  if (dataCountry) {
-    dataCountry.map((item, index) => {  
+
+  if (dataCountry && dataCountry.data) {
+    dataCountry.data.map((item, index) => {  
       data.push({
-        key: item.id,
+        key: item._id,
         name: item.name,
         description: item.description,
-        images: item.images && item.images.map((item, index) => {
-          return (
-            <p key={index}>
+        // images: item.images && item.images.map((item, index) => {
+        //   return (
+        //     <span key={index}>
             
-            {item.name}
-            </p>
-          )
-        })
+        //     {item.name}
+        //     </span>
+        //   )
+        // })
+        image: item.image
       });
     });
   }
@@ -81,8 +93,8 @@ const Country = (props) => {
       width: 150,
     },
     {
-      title: "Images",
-      dataIndex: "images",
+      title: "Image",
+      dataIndex: "image",
     },
     {
       title: "Action",
@@ -94,20 +106,41 @@ const Country = (props) => {
           title="Sure to cancel?"
           onConfirm={() => onDelete(record.key)}
         >
-          <a>Delete</a>
+          <a className="btn-delete">Delete</a>
         </Popconfirm>
       ),
     },
   ];
+  console.log('loading', loading)
 
+ 
   return (
     <>
       <Modal />
-      <button className="btn-create" onClick={showModal}>
+      <Link  to="/admin/country/add" onClick={showModal} className="btn-create">
+       
         Create new country
-      </button>
+      
 
-      {dataSource ? (
+        
+      </Link>
+
+      <Spin spinning={loading} delay={500}>
+      <Table
+          columns={columns}
+          dataSource={data}
+          pagination={{ pageSize: 5 }}
+          onChange={handleChange}
+        />
+      </Spin>
+      
+      
+        
+         
+        
+      
+
+      {/* {dataSource ? (
         <Table
           columns={columns}
           dataSource={data}
@@ -116,7 +149,7 @@ const Country = (props) => {
         />
       ) : (
         "Loading..."
-      )}
+      )} */}
     </>
   );
 };

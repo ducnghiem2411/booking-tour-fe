@@ -32,6 +32,7 @@ font-family: 'Poppins', sans-serif;
 --------------------------------------*/
 #root, html, body{
     overflow-x: hidden;
+    font-family: 'Roboto', sans-serif !important;
 }
 *{
     padding: 0;
@@ -226,6 +227,9 @@ html,body{
 .main-menu .nav  li a:focus{
     color: #00d8ff;
     background-color:transparent;
+}
+.main-menu.admin .nav a::before{
+    content: none;
 }
 .main-menu .nav a:before{
     position: absolute;
