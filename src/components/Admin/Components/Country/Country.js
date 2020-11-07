@@ -26,7 +26,7 @@ import {
 const Country = (props) => {
   const dispatch = useDispatch();
   const dataCountry = props.dataCountry.dataCountry;
-  console.log('dataCountry', dataCountry)
+  // console.log('dataCountry', dataCountry)
   const { loading } = props.loading;
   const [dataSource, setDataSource] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -65,7 +65,7 @@ const Country = (props) => {
         //     </span>
         //   )
         // })
-        image: item.image
+        // image: item.image
       });
     });
   }
@@ -111,7 +111,7 @@ const Country = (props) => {
       ),
     },
   ];
-  console.log('loading', loading)
+  // console.log('loading', loading)
 
  
   return (

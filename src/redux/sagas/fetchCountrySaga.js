@@ -7,7 +7,7 @@ import {
   fetchDataCountryFailed,
 } from "../actions/index";
 
-const apiUrl = "http://192.168.4.73:8080/countries";
+const apiUrl = "http://localhost:8000/countries";
 
 export function* fetchCountryInSaga(action) {
   try {

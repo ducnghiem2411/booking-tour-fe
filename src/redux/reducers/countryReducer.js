@@ -11,7 +11,7 @@ const initialState = {
 var findIndex = (dataCountries, id) => {
   var result = -1;
   dataCountries.forEach((dataCountry, index) => {
-    if (dataCountry.id === id) {
+    if (dataCountry._id === id) {
       result = index;
     }
   });
@@ -28,8 +28,7 @@ export default function countryReducer(state = initialState, action) {
       };
 
     case type.CREATE_COUNTRY_SUCCESSED:
-      state.dataCountry.push(action.data.data);
-      console.log('action.data', action.data)
+      state.dataCountry.data.push(action.data);
       state.loading = false;
       return { ...state };
 
@@ -60,13 +59,14 @@ export default function countryReducer(state = initialState, action) {
         message: action.message,
       };
     case type.DELETE_COUNTRY_REQUESTED:
+      
       return {
         ...state,
         loading: true,
       };
     case type.DELETE_COUNTRY_SUCCESSED:
-      const index = findIndex(state.dataCountry, action.id);
-      state.dataCountry.splice(index, 1);
+      const index = findIndex(state.dataCountry.data, action.id);
+      state.dataCountry.data.splice(index, 1);
       state.loading = false;
       return { ...state };
 

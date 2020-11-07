@@ -12,16 +12,14 @@ export function* deleteCountryInSaga(action) {
     
 
   try {
-    const apiUrl = `https://5f854efbc29abd00161905ac.mockapi.io/user/${action.id}`;
-    console.log('id', action.id)
-    const response = yield call(axios.delete, apiUrl, null);
-    // console.log('response', response)
+    const apiUrl = `http://localhost:8000/countries/${action.id}`;
+    const response = yield call(axios.delete, apiUrl);
 
     if (response) {
-        console.log('response', response)
       yield put(deleteCountryItemSucced(action.id));
     }
   } catch (error) {
+    console.log('error', error)
     yield put(deleteCountryItemFailed(error));
   }
 }

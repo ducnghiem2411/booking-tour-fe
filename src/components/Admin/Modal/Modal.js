@@ -13,24 +13,24 @@ import {
   createCountryRequest,
   fetchDataCountryRequest,
 } from "../../../redux/actions/index";
-import countries from './../../../countries'
+import countries from "./../../../countries";
+import axios from "axios";
 const { Option } = Select;
-
 
 const Modal = (props) => {
   const dispatch = useDispatch();
   const { isDisplay } = props.isDisplay;
- 
-  const [statusUpload, setStatusUpload] = useState(true)
-  const {history} = props
+
+  const [statusUpload, setStatusUpload] = useState(true);
+  const [fileUpload, setFileUpload] = useState("");
+  // console.log('fileUpload', fileUpload)
+  const { history } = props;
 
   const closeModal = () => {
-    
     dispatch(onCloseModal(false));
     dispatch(onChangeStatusCreateAccModal(false));
     onReset();
-    history && history.push('/admin/country')
-
+    history && history.push("/admin/country");
   };
   const onCreateAccModal = (e) => {
     e.preventDefault();
@@ -65,35 +65,71 @@ const Modal = (props) => {
     }
   };
 
+  
+  
+   const waitUntilImageLoaded = resolve => {
+    setTimeout(() => {
+      fileUpload
+        ? resolve() // from onChange method
+        : waitUntilImageLoaded(resolve);
+    }, 10);
+  };
+
+ const customRequest = async (option) => {
+    const { onSuccess, onError, file, action, onProgress } = option;
+    const url = action;
+  
+    await new Promise(resolve => waitUntilImageLoaded(resolve)); //in the next section 
+    
+    const type = 'image/png';
+    axios
+      .put("http://localhost:8000/countries", fileUpload, {
+        onUploadProgress: e => {
+          onProgress({ percent: (e.loaded / e.total) * 100 });
+        },
+        headers: {
+          'Content-Type': type,
+        },
+      })
+      .then(respones => {
+        /*......*/
+        onSuccess(respones.body);
+      })
+      .catch(err => {
+        /*......*/
+        onError(err);
+      });
+  };
+
   const onReset = () => {
     form.resetFields();
   };
 
+  // console.log("fileUpload", fileUpload);
   const onSubmit = (values) => {
-    // console.log("values", values);
-    
+    console.log("values", values);
+
     dispatch(
       createCountryRequest(
         values.countryName,
-        values.description ? values.description : "",
-        values.image ? values.image[0].name : ''
+        values.description
+        // fileUpload ? fileUpload : ""
       )
     );
     onReset();
     closeModal();
-    history && history.push('/admin/country')
+    history && history.push("/admin/country");
   };
 
   const normFile = (e) => {
-    console.log("e", e);
-    
-      if(e.fileList.length >= 2){
-        // setStatusUpload(true)
-      }else{
-        // setStatusUpload(false)
-      }
-    
-      
+    // console.log("e", e);
+    setFileUpload( e.fileList[0].name);
+
+    if (e.fileList.length >= 2) {
+      // setStatusUpload(true)
+    } else {
+      // setStatusUpload(false)
+    }
   };
 
   const onChange = (value) => {
@@ -113,26 +149,25 @@ const Modal = (props) => {
   };
 
   const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
-      message.error('You can only upload JPG/PNG file!');
-      setStatusUpload(false)
+      message.error("You can only upload JPG/PNG file!");
+      setStatusUpload(false);
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
-      setStatusUpload(false)
+      message.error("Image must smaller than 2MB!");
+      setStatusUpload(false);
     }
-    if(isJpgOrPng && isLt2M){
-      setStatusUpload(true)
+    if (isJpgOrPng && isLt2M) {
+      setStatusUpload(true);
     }
-   
-  }
+  };
 
  
 
+ 
 
-  console.log('statusUpload', statusUpload)
   return (
     <>
       <div
@@ -163,33 +198,37 @@ const Modal = (props) => {
               </div>
               <div className="form-country">
                 <Form form={form} name="control-hooks" onFinish={onSubmit}>
-                <Form.Item name="countryName" label="Country name" rules={[{ required: true }]}>
-                  <Select
-                    showSearch
-                    style={{ width: "100%" }}
-                    placeholder="Select a country"
-                    optionFilterProp="children"
-                    onChange={onChange}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    allowClear
-                    onSearch={onSearch}
-                    filterOption={(input, option) =>
-                      option.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
+                  <Form.Item
+                    name="countryName"
+                    label="Country name"
+                    rules={[{ required: true }]}
                   >
-                    {
-                      countries ? countries.map((item, index) => {
-                        return (
-                          <Option value={item} key={index}>{item}</Option>
-                        )
-                      }) : []
-                    }
-                    
-                    
-                  </Select>
+                    <Select
+                      showSearch
+                      style={{ width: "100%" }}
+                      placeholder="Select a country"
+                      optionFilterProp="children"
+                      onChange={onChange}
+                      onFocus={onFocus}
+                      onBlur={onBlur}
+                      allowClear
+                      onSearch={onSearch}
+                      filterOption={(input, option) =>
+                        option.children
+                          .toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
+                      }
+                    >
+                      {countries
+                        ? countries.map((item, index) => {
+                            return (
+                              <Option value={item} key={index}>
+                                {item}
+                              </Option>
+                            );
+                          })
+                        : []}
+                    </Select>
                   </Form.Item>
                   ,
                   <Form.Item name={["description"]} label="Description">
@@ -198,18 +237,22 @@ const Modal = (props) => {
                       placeholder="Typing description...."
                     />
                   </Form.Item>
-                  <Form.Item
+                  {/* <Form.Item
                     name="image"
                     label="Images"
                     valuePropName="fileList"
                     getValueFromEvent={normFile}
                     showUploadList={statusUpload}
                   >
-                    <Upload name="logo" listType="picture" beforeUpload={beforeUpload} >
-
+                    <Upload
+                      name="file"
+                      listType="picture"
+                      beforeUpload={beforeUpload}
+                      customRequest={customRequest}
+                    >
                       <Button icon={<UploadOutlined />}>Click to upload</Button>
                     </Upload>
-                  </Form.Item>
+                  </Form.Item> */}
                   <Form.Item>
                     <Button
                       type="primary"
@@ -235,7 +278,7 @@ const Modal = (props) => {
 const mapState = (state) => ({
   isDisplay: state.displayModal,
   statusCreateModal: state.displayModal,
-  loading: state.country
+  loading: state.country,
 });
 
 export default connect(mapState)(Modal);

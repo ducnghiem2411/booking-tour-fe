@@ -34,14 +34,26 @@ const registerRequest = (username, email, password) => {
   };
 };
 
-const createCountryRequest = (name, description, image) => {
+// const createCountryRequest = (name, description, image) => {
+//   console.log('image', image)
+
+//   return {
+//     type: type.CREATE_COUNTRY_REQUESTED,
+//     payload: {
+//       name: name,
+//       description: description,
+//       image: image,
+//     },
+//   };
+// };
+const createCountryRequest = (name, description) => {
 
   return {
     type: type.CREATE_COUNTRY_REQUESTED,
     payload: {
       name: name,
       description: description,
-      image: image,
+      // image: image,
     },
   };
 };
