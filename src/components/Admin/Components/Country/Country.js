@@ -8,19 +8,19 @@ import { onShowModal } from "../../../../redux/actions";
 import axios from "axios";
 import Modal from "../../Modal/Modal";
 import { Spin, Alert, Popconfirm } from "antd";
-import Spinner from './../Spin/Spin'
+import Spinner from "./../Spin/Spin";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  useParams
+  useParams,
 } from "react-router-dom";
 
 import {
   fetchDataCountryRequest,
   deleteCountryItemRequest,
-  onCloseModal
+  onCloseModal,
 } from "../../../../redux/actions/index";
 
 const Country = (props) => {
@@ -43,16 +43,15 @@ const Country = (props) => {
   const onChange = (pagination, filters, sorter, extra) => {};
 
   useEffect(() => {
-    console.log("useEffect1")
+    console.log("useEffect1");
     dispatch(fetchDataCountryRequest());
     dispatch(onCloseModal(false));
   }, []);
 
-
   const data = [];
 
   if (dataCountry && dataCountry.data) {
-    dataCountry.data.map((item, index) => {  
+    dataCountry.data.map((item, index) => {
       data.push({
         key: item._id,
         name: item.name,
@@ -60,7 +59,7 @@ const Country = (props) => {
         // images: item.images && item.images.map((item, index) => {
         //   return (
         //     <span key={index}>
-            
+
         //     {item.name}
         //     </span>
         //   )
@@ -71,7 +70,7 @@ const Country = (props) => {
   }
 
   const onDelete = (id) => {
-    dispatch(deleteCountryItemRequest(id))
+    dispatch(deleteCountryItemRequest(id));
   };
 
   const columns = [
@@ -95,50 +94,76 @@ const Country = (props) => {
     {
       title: "Image",
       dataIndex: "image",
+      width: 200
     },
     {
-      title: "Action",
+      title: "",
       key: "action",
-      width: 150,
+      width: 300,
 
       render: (text, record) => (
-        <Popconfirm
-          title="Sure to cancel?"
-          onConfirm={() => onDelete(record.key)}
-        >
-          <a className="btn-delete">Delete</a>
-        </Popconfirm>
+        <>
+          <div className="action">
+          <span className="block view">
+            <span className="icon">
+            <i class="fa fa-eye"></i>
+            </span>
+            <Link
+              type="button"
+              className="btn-delete btn-show"
+              to="/admin/country/"
+            >
+              Show
+            </Link>
+          </span>
+          <span className="block edit">
+            <span className="icon">
+              <i className="fa fa-trash-o"></i>
+            </span>
+            <Link
+              type="button"
+              className="btn-delete btn-edit"
+              to={`/admin/country/${record.key}/edit`}
+              onClick={showModal}
+            >
+              Edit
+            </Link>
+          </span>
+          <span className="block delete">
+            <span className="icon">
+              <i className="fa fa-pencil"></i>
+            </span>
+            <Popconfirm
+              title="Sure to cancel?"
+              onConfirm={() => onDelete(record.key)}
+            >
+              <a className="btn-delete">Delete</a>
+            </Popconfirm>
+          </span>
+          
+         
+          </div>
+        </>
       ),
     },
   ];
   // console.log('loading', loading)
 
- 
   return (
     <>
       <Modal />
-      <Link  to="/admin/country/add" onClick={showModal} className="btn-create">
-       
+      <Link to="/admin/country/add" onClick={showModal} className="btn-create">
         Create new country
-      
-
-        
       </Link>
 
       <Spin spinning={loading} delay={500}>
-      <Table
+        <Table
           columns={columns}
           dataSource={data}
           pagination={{ pageSize: 5 }}
           onChange={handleChange}
         />
       </Spin>
-      
-      
-        
-         
-        
-      
 
       {/* {dataSource ? (
         <Table

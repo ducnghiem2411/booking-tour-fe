@@ -53,14 +53,55 @@ button.ant-btn.ant-btn-primary.btn-ant-modal-submit {
     display: inline-block;
     margin-right: 10px;
 }
+.action .block:last-child{
+    margin-right: 0;
+}
+.action .block .icon i {
+    font-size: 18px;
+}
+
+.action .block .icon {
+    display: inline-block;
+    margin-right: 5px;
+}
+span.block.view .icon {
+    color: #218cb0;
+}
+
+span.block.view .btn-show {
+    color: #218cb0;
+}
+span.block.edit .icon {
+    color: #218cb0;
+}
+span.block.delete .icon {
+    color: red;
+}
+
+span.block.edit .btn-edit {
+    color: #218cb0;
+}
+
+.action .block {
+    display: inline-block;
+    margin: 0 35px 0 0;
+    /* color: grey; */
+}
 .main-menu.admin .navi-link {
     display: block;
     margin-bottom: 20px;
 }
 
-.ant-table-cell a.btn-delete {
+.action .block  .btn-delete, .action .block  .btn-edit {
     color: red;
     font-weight: 600;
+    display: inline-block;
+    margin: 0 5px;
+    text-transform: uppercase;
+}
+
+.action .delete, .action .edit{
+    display: inline-block;
 }
 
 .main-menu.admin h3.menu-title {

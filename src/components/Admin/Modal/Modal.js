@@ -12,6 +12,7 @@ import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import {
   createCountryRequest,
   fetchDataCountryRequest,
+  updateInfoCountryItemRequest
 } from "../../../redux/actions/index";
 import countries from "./../../../countries";
 import axios from "axios";
@@ -20,12 +21,22 @@ const { Option } = Select;
 const Modal = (props) => {
   const dispatch = useDispatch();
   const { isDisplay } = props.isDisplay;
+  const {match} = props
+  
 
   const [statusUpload, setStatusUpload] = useState(true);
   const [fileUpload, setFileUpload] = useState("");
   // console.log('fileUpload', fileUpload)
   const { history } = props;
 
+
+  useEffect(() => {
+    if(match) {
+      const id = match.params.id
+      dispatch(updateInfoCountryItemRequest(id))
+    }
+    
+  }, [])
   const closeModal = () => {
     dispatch(onCloseModal(false));
     dispatch(onChangeStatusCreateAccModal(false));

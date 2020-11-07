@@ -88,6 +88,26 @@ const fetchDataCountryFailed = (message) => {
     message,
   };
 };
+const updateInfoCountryItemRequest = (id) => {
+  return {
+    type: type.GET_INFO_COUNTRY_ITEM_REQUEST,
+    id
+  };
+};
+
+const updateInfoCountryItemSucced = () => {
+  return {
+    type: type.GET_INFO_COUNTRY_ITEM_SUCCED,
+    
+  };
+};
+
+const updateInfoCountryItemFailed = (message) => {
+  return {
+    type: type.GET_INFO_COUNTRY_ITEM_FAILED,
+    message,
+  };
+};
 const deleteCountryItemRequest = (id) => {
   return {
     type: type.DELETE_COUNTRY_REQUESTED,
@@ -170,6 +190,9 @@ export {
   fetchDataCountryRequest,
   fetchDataCountrySucced,
   fetchDataCountryFailed,
+  updateInfoCountryItemSucced,
+  updateInfoCountryItemFailed,
+  updateInfoCountryItemRequest,
   createCountrySucced,
   createCountryFailed,
   registerRequest,

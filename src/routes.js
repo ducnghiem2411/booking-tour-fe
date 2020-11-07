@@ -27,11 +27,11 @@ const routes = [
         exact : false,
         main : ({history}) => <Modal history={history}/>
     },
-    // {
-    //     path : '/product/:id/edit',
-    //     exact : false,
-    //     main : ({match, history}) => <ProductActionPage match={match} history={history}/>
-    // },
+    {
+        path : '/admin/country/:id/edit',
+        exact : false,
+        main : ({match, history}) => <Modal match={match} history={history}/>
+    },
     // {
     //     path : '',
     //     exact : false,

@@ -75,6 +75,22 @@ export default function countryReducer(state = initialState, action) {
         ...state,
         message: action.message,
       };
+    case type.GET_INFO_COUNTRY_ITEM_REQUEST:
+      return {
+        ...state,
+       loading: true
+      };
+    case type.GET_INFO_COUNTRY_ITEM_SUCCED:
+      return {
+        ...state,
+       loading: false
+      };
+    case type.GET_INFO_COUNTRY_ITEM_FAILED:
+      return {
+        ...state,
+       loading: false,
+       message: action.message,
+      };
 
     default:
       return state;
