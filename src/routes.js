@@ -10,7 +10,7 @@ const routes = [
     {
         path : '/admin/country',
         exact : true,
-        main : () => <Country/>
+        main : ({history}) => <Country history={history}/>
     },
     {
         path : '/admin/place',
@@ -23,9 +23,9 @@ const routes = [
         main : () => <Tour/>
     },
     {
-        path : '/admin/country/add',
+        path : '/admin/country/:id/add',
         exact : false,
-        main : ({history}) => <Modal history={history}/>
+        main : ({match, history}) => <Modal match={match} history={history}/>
     },
     {
         path : '/admin/country/:id/edit',

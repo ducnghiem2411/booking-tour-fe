@@ -20,7 +20,9 @@ import {
 import {
   fetchDataCountryRequest,
   deleteCountryItemRequest,
+  sendDataRowIntoStore,
   onCloseModal,
+  getDataRowTableRequested
 } from "../../../../redux/actions/index";
 
 const Country = (props) => {
@@ -28,22 +30,35 @@ const Country = (props) => {
   const dataCountry = props.dataCountry.dataCountry;
   // console.log('dataCountry', dataCountry)
   const { loading } = props.loading;
-  const [dataSource, setDataSource] = useState([]);
+  const [dataRow, setDataRow] = useState(null);
   const [filteredInfo, setFilteredInfo] = useState({});
+  const { history } = props;
+  const { isDisplay } = props.isDisplay;
 
   const handleChange = (pagination, filters, sorter) => {
     // console.log('Various parameters', pagination, filters, sorter);
     setFilteredInfo(filters);
   };
 
-  const showModal = (e) => {
+  const sendRecordToModal = (data) => {
     dispatch(onShowModal(true));
+
+    dispatch(sendDataRowIntoStore(data))
+
+    // console.log('data', data)
+
+
+    // dispatch(getDataRowTableRequested(data))
+
+
+
+    // history.push(`/admin/country/${data.key}/edit`);
   };
 
   const onChange = (pagination, filters, sorter, extra) => {};
 
   useEffect(() => {
-    console.log("useEffect1");
+    console.log("useEffectCountry");
     dispatch(fetchDataCountryRequest());
     dispatch(onCloseModal(false));
   }, []);
@@ -78,13 +93,7 @@ const Country = (props) => {
       title: "Name",
       dataIndex: "name",
       width: 150,
-      filters: [
-        { text: "nghiêm", value: "nghiêm" },
-        { text: "sang", value: "sang" },
-      ],
-      filteredValue: filteredInfo.name || null,
-      onFilter: (value, record) => record.name.includes(value),
-      ellipsis: true,
+      
     },
     {
       title: "Description",
@@ -94,7 +103,7 @@ const Country = (props) => {
     {
       title: "Image",
       dataIndex: "image",
-      width: 200
+      width: 200,
     },
     {
       title: "",
@@ -104,55 +113,61 @@ const Country = (props) => {
       render: (text, record) => (
         <>
           <div className="action">
-          <span className="block view">
-            <span className="icon">
-            <i class="fa fa-eye"></i>
+            <span className="block view">
+              <span className="icon">
+                <i className="fa fa-eye"></i>
+              </span>
+              <Link
+                type="button"
+                className="btn-delete btn-show"
+                to="/admin/country/"
+              >
+                Show
+              </Link>
             </span>
-            <Link
-              type="button"
-              className="btn-delete btn-show"
-              to="/admin/country/"
-            >
-              Show
-            </Link>
-          </span>
-          <span className="block edit">
-            <span className="icon">
-              <i className="fa fa-trash-o"></i>
+            <span className="block edit">
+              <span className="icon">
+                <i className="fa fa-trash-o"></i>
+              </span>
+             
+              <Link
+                type="button"
+                className="btn-delete btn-edit"
+                to={`/admin/country/${record.key}/edit`}
+                onClick={() => sendRecordToModal(record)}
+              >
+                Edit
+              </Link>
             </span>
-            <Link
-              type="button"
-              className="btn-delete btn-edit"
-              to={`/admin/country/${record.key}/edit`}
-              onClick={showModal}
-            >
-              Edit
-            </Link>
-          </span>
-          <span className="block delete">
-            <span className="icon">
-              <i className="fa fa-pencil"></i>
+            <span className="block delete">
+              <span className="icon">
+                <i className="fa fa-pencil"></i>
+              </span>
+              <Popconfirm
+                title="Sure to cancel?"
+                onConfirm={() => onDelete(record.key)}
+              >
+                <a className="btn-delete">Delete</a>
+              </Popconfirm>
             </span>
-            <Popconfirm
-              title="Sure to cancel?"
-              onConfirm={() => onDelete(record.key)}
-            >
-              <a className="btn-delete">Delete</a>
-            </Popconfirm>
-          </span>
-          
-         
           </div>
         </>
       ),
     },
   ];
-  // console.log('loading', loading)
+
+  const showModalAddNew = () => {
+    dispatch(onShowModal(true));
+    
+  }
+
+  const idAdd = '8mt43q3kf6'
+
 
   return (
     <>
-      <Modal />
-      <Link to="/admin/country/add" onClick={showModal} className="btn-create">
+       {isDisplay ? <Modal dataRow={dataRow} /> : ""}
+      <Link to={`/admin/country/${idAdd}/add`} onClick={showModalAddNew} className="btn-create">
         Create new country
       </Link>
 
@@ -162,7 +177,20 @@ const Country = (props) => {
           dataSource={data}
           pagination={{ pageSize: 5 }}
           onChange={handleChange}
+          // onRow = { (record, rowIndex) => {
+          //   return {
+          //     onClick: e => {
+          //       console.log('record', record)
+          //     }
+          //   }
+            
+          //   // setDataRow(record)
+
+          // }
+
+          // }
         />
+        
       </Spin>
 
       {/* {dataSource ? (
@@ -182,6 +210,7 @@ const Country = (props) => {
 const mapState = (state) => ({
   dataCountry: state.country,
   loading: state.country,
+  isDisplay: state.displayModal,
 });
 
 export default connect(mapState)(Country);

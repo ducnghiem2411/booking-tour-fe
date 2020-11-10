@@ -47,7 +47,6 @@ const registerRequest = (username, email, password) => {
 //   };
 // };
 const createCountryRequest = (name, description) => {
-
   return {
     type: type.CREATE_COUNTRY_REQUESTED,
     payload: {
@@ -88,23 +87,24 @@ const fetchDataCountryFailed = (message) => {
     message,
   };
 };
-const updateInfoCountryItemRequest = (id) => {
+const updateInfoCountryItemRequest = (id, body) => {
   return {
-    type: type.GET_INFO_COUNTRY_ITEM_REQUEST,
-    id
+    type: type.UPDATE_DATA_COUNTRY_REQUESTED,
+    id,
+    body
   };
 };
 
-const updateInfoCountryItemSucced = () => {
+const updateInfoCountryItemSucced = (data) => {
   return {
-    type: type.GET_INFO_COUNTRY_ITEM_SUCCED,
-    
+    type: type.UPDATE_DATA_COUNTRY_SUCCED,
+    data
   };
 };
 
 const updateInfoCountryItemFailed = (message) => {
   return {
-    type: type.GET_INFO_COUNTRY_ITEM_FAILED,
+    type: type.UPDATE_DATA_COUNTRY_FAILED,
     message,
   };
 };
@@ -132,6 +132,24 @@ const deleteCountryItemFailed = (message) => {
 const registerSucced = () => {
   return {
     type: type.REGISTER_SUCCESSED,
+  };
+};
+const getDataRowTableRequested = (id) => {
+  return {
+    type: type.GET_DATA_ROW_TABLE_REQUESTED,
+    id
+  };
+};
+const getDataRowTableSucced = (data) => {
+  return {
+    type: type.GET_DATA_ROW_TABLE_SUCCED,
+    data,
+  };
+};
+const getDataRowTableFailed = (message) => {
+  return {
+    type: type.GET_DATA_ROW_TABLE_FAILED,
+    message,
   };
 };
 
@@ -178,6 +196,19 @@ const onLogout = () => {
   };
 };
 
+const sendDataRowIntoStore = (data) => {
+  return {
+    type: type.SEND_DATA_ROW_INTO_STORE,
+    data
+  };
+};
+const changeStatusEdit = () => {
+  return {
+    type: type.CHANGE_STATUS_EDIT,
+    
+  };
+};
+
 export {
   loginRequest,
   loginSucced,
@@ -185,17 +216,22 @@ export {
   onLogout,
   deleteCountryItemRequest,
   deleteCountryItemSucced,
+  changeStatusEdit,
   deleteCountryItemFailed,
   createCountryRequest,
+  getDataRowTableFailed,
   fetchDataCountryRequest,
+  sendDataRowIntoStore,
   fetchDataCountrySucced,
   fetchDataCountryFailed,
   updateInfoCountryItemSucced,
   updateInfoCountryItemFailed,
   updateInfoCountryItemRequest,
+  getDataRowTableRequested,
   createCountrySucced,
   createCountryFailed,
   registerRequest,
+  getDataRowTableSucced,
   registerSucced,
   showCreateAccModal,
   onChangeStatusCreateAccModal,

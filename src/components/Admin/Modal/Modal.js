@@ -9,10 +9,13 @@ import {
 import { Form, Input, Button, Select, Upload, message } from "antd";
 import { FormInstance } from "antd/lib/form";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 import {
   createCountryRequest,
   fetchDataCountryRequest,
-  updateInfoCountryItemRequest
+  changeStatusEdit,
+  updateInfoCountryItemRequest,
+  
 } from "../../../redux/actions/index";
 import countries from "./../../../countries";
 import axios from "axios";
@@ -21,26 +24,26 @@ const { Option } = Select;
 const Modal = (props) => {
   const dispatch = useDispatch();
   const { isDisplay } = props.isDisplay;
-  const {match} = props
-  
+  const { match } = props;
+  const { selectItem, setSelectItem } = useState("");
+  const { textareaItem, setTextAreaItem } = useState("");
 
   const [statusUpload, setStatusUpload] = useState(true);
+
   const [fileUpload, setFileUpload] = useState("");
-  // console.log('fileUpload', fileUpload)
   const { history } = props;
+  const { loading } = props.loading;
+  // const [inputDataRow, setInputDataRow] = useState(null);
+  const { dataRow } = props.dataRow;
+  const { statusEdit } = props.statusEdit;
+  const formRef = React.createRef();
+  const [form] = Form.useForm();
 
-
-  useEffect(() => {
-    if(match) {
-      const id = match.params.id
-      dispatch(updateInfoCountryItemRequest(id))
-    }
-    
-  }, [])
   const closeModal = () => {
     dispatch(onCloseModal(false));
-    dispatch(onChangeStatusCreateAccModal(false));
-    onReset();
+    // dispatch(onChangeStatusCreateAccModal(false));
+    form.resetFields();
+    dispatch(changeStatusEdit());
     history && history.push("/admin/country");
   };
   const onCreateAccModal = (e) => {
@@ -52,33 +55,11 @@ const Modal = (props) => {
     dispatch(onChangeStatusCreateAccModal(false));
   };
 
-  const [form] = Form.useForm();
-
-  const onGenderChange = (value) => {
-    switch (value) {
-      case "male":
-        form.setFieldsValue({
-          note: "Hi, man!",
-        });
-        return;
-
-      case "female":
-        form.setFieldsValue({
-          note: "Hi, lady!",
-        });
-        return;
-
-      case "other":
-        form.setFieldsValue({
-          note: "Hi there!",
-        });
-        return;
-    }
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
   };
 
-  
-  
-   const waitUntilImageLoaded = resolve => {
+  const waitUntilImageLoaded = (resolve) => {
     setTimeout(() => {
       fileUpload
         ? resolve() // from onChange method
@@ -86,27 +67,27 @@ const Modal = (props) => {
     }, 10);
   };
 
- const customRequest = async (option) => {
+  const customRequest = async (option) => {
     const { onSuccess, onError, file, action, onProgress } = option;
     const url = action;
-  
-    await new Promise(resolve => waitUntilImageLoaded(resolve)); //in the next section 
-    
-    const type = 'image/png';
+
+    await new Promise((resolve) => waitUntilImageLoaded(resolve)); //in the next section
+
+    const type = "image/png";
     axios
       .put("http://localhost:8000/countries", fileUpload, {
-        onUploadProgress: e => {
+        onUploadProgress: (e) => {
           onProgress({ percent: (e.loaded / e.total) * 100 });
         },
         headers: {
-          'Content-Type': type,
+          "Content-Type": type,
         },
       })
-      .then(respones => {
+      .then((respones) => {
         /*......*/
         onSuccess(respones.body);
       })
-      .catch(err => {
+      .catch((err) => {
         /*......*/
         onError(err);
       });
@@ -118,33 +99,37 @@ const Modal = (props) => {
 
   // console.log("fileUpload", fileUpload);
   const onSubmit = (values) => {
-    console.log("values", values);
+    console.log('values', values)
+    console.log("dataRow", dataRow);
 
-    dispatch(
-      createCountryRequest(
-        values.countryName,
-        values.description
-        // fileUpload ? fileUpload : ""
-      )
-    );
-    onReset();
+    if(statusEdit){
+      dispatch(updateInfoCountryItemRequest(dataRow.key, values))
+    }else{
+      dispatch(
+        createCountryRequest(
+          values.countryName,
+          values.description
+          // fileUpload ? fileUpload : ""
+        )
+      );
+    }
+
+    
+    form.resetFields();
     closeModal();
+    dispatch(changeStatusEdit());
     history && history.push("/admin/country");
   };
 
   const normFile = (e) => {
     // console.log("e", e);
-    setFileUpload( e.fileList[0].name);
+    setFileUpload(e.fileList[0].name);
 
     if (e.fileList.length >= 2) {
       // setStatusUpload(true)
     } else {
       // setStatusUpload(false)
     }
-  };
-
-  const onChange = (value) => {
-    // console.log(`selected ${value}`);
   };
 
   const onBlur = () => {
@@ -175,9 +160,27 @@ const Modal = (props) => {
     }
   };
 
- 
+  const onChangeTextarea = (e) => {
+    // setTextAreaItem(e.target.value)
+  };
+  const onChangeSelect = (e) => {
+    // setSelectItem(e && e.target.value)
+  };
 
- 
+  // console.log('selectItem', selectItem)
+  // console.log('textareaItem', textareaItem)
+
+  useEffect(() => {
+    console.log("useEffectModal");
+    const id = match.params.id;
+    if (id == "8mt43q3kf6") {
+      console.log("new");
+    } else {
+      console.log("edit");
+    }
+  }, [dataRow]);
+
+  console.log("dataRow", dataRow);
 
   return (
     <>
@@ -208,47 +211,52 @@ const Modal = (props) => {
                 <h4 className="modal-title"> Create new country </h4>
               </div>
               <div className="form-country">
-                <Form form={form} name="control-hooks" onFinish={onSubmit}>
-                  <Form.Item
-                    name="countryName"
-                    label="Country name"
-                    rules={[{ required: true }]}
-                  >
-                    <Select
-                      showSearch
-                      style={{ width: "100%" }}
-                      placeholder="Select a country"
-                      optionFilterProp="children"
-                      onChange={onChange}
-                      onFocus={onFocus}
-                      onBlur={onBlur}
-                      allowClear
-                      onSearch={onSearch}
-                      filterOption={(input, option) =>
-                        option.children
-                          .toLowerCase()
-                          .indexOf(input.toLowerCase()) >= 0
-                      }
+                <Spin spinning={loading}>
+                  <Form form={form} name="control-hooks" onFinish={onSubmit}>
+                    <Form.Item
+                      name="countryName"
+                      label="Country name"
+                      // initialValue = {dataRow && dataRow.name ? dataRow.name : ''}
+                      initialValue={statusEdit ? dataRow.name : ""}
+                      rules={[{ required: true }]}
                     >
-                      {countries
-                        ? countries.map((item, index) => {
-                            return (
-                              <Option value={item} key={index}>
-                                {item}
-                              </Option>
-                            );
-                          })
-                        : []}
-                    </Select>
-                  </Form.Item>
-                  ,
-                  <Form.Item name={["description"]} label="Description">
-                    <Input.TextArea
-                      maxLength={200}
-                      placeholder="Typing description...."
-                    />
-                  </Form.Item>
-                  {/* <Form.Item
+                      <Select
+                        placeholder="Select a option and change input text above"
+                        onChange={handleChange}
+                        // defaultValue= {dataRow && dataRow.name ? dataRow.name : 'name'}
+                        allowClear
+                      >
+                        {countries
+                          ? countries.map((item, index) => {
+                              return (
+                                <Option value={item} key={index}>
+                                  {item}
+                                </Option>
+                              );
+                            })
+                          : []}
+                      </Select>
+                    </Form.Item>
+
+                    <Form.Item
+                      name="description"
+                      label="Description"
+                      onChange={onChangeTextarea}
+                      // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
+                      initialValue={statusEdit ? dataRow.description : ""}
+                    >
+                      <Input.TextArea maxLength={250} />
+                    </Form.Item>
+
+                    {/* <Input
+                    name="description"
+                    label="Description"
+                    // defaultValue={dataRow ? dataRow.description : "abc"}
+                    value={dataRow ? dataRow.description : "desc"}
+                    onChange={onChangeTextarea}
+                  /> */}
+
+                    {/* <Form.Item
                     name="image"
                     label="Images"
                     valuePropName="fileList"
@@ -264,19 +272,23 @@ const Modal = (props) => {
                       <Button icon={<UploadOutlined />}>Click to upload</Button>
                     </Upload>
                   </Form.Item> */}
-                  <Form.Item>
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      className="btn-ant-modal-submit"
-                    >
-                      Create
-                    </Button>
-                    <Button htmlType="button" onClick={onReset}>
-                      Reset
-                    </Button>
-                  </Form.Item>
-                </Form>
+                    <Form.Item>
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="btn-ant-modal-submit"
+                      >
+                        {statusEdit ? "Save" : "Create"}
+                      </Button>
+                      <Button
+                        htmlType="button"
+                        onClick={() => form.resetFields()}
+                      >
+                        Reset
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                </Spin>
               </div>
             </div>
           </div>
@@ -290,6 +302,8 @@ const mapState = (state) => ({
   isDisplay: state.displayModal,
   statusCreateModal: state.displayModal,
   loading: state.country,
+  dataRow: state.country,
+  statusEdit: state.country,
 });
 
 export default connect(mapState)(Modal);

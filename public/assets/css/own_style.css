@@ -67,17 +67,78 @@ button.ant-btn.ant-btn-primary.btn-ant-modal-submit {
 span.block.view .icon {
     color: #218cb0;
 }
+.btn-create:hover {
+    background: #1280a4;
+    color: white;
+}
 
+.user-area .user-menu .nav-link:hover {
+    background: #e5e5e5;
+}
+.header-left .dropdown .dropdown-menu p {
+    font-size: 15px;
+    margin: 0;
+    padding: 5px 10px;
+  }
+
+.header-left .dropdown .dropdown-menu .dropdown-item {
+  
+    width: 100%;
+  }
+  .header-left .dropdown .dropdown-menu .dropdown-item:hover {
+    background: #e7e7e7;
+}
+
+.dropdown-menu{
+    min-width: 200px;
+}
+.user-area .user-menu .nav-link {
+    color: #5a5555;
+    padding: 5px 10px;
+}
+.for-notification .dropdown-menu .dropdown-item {
+    padding: 5px 10px !important;
+  }
+
+.user-area .user-menu {
+    padding: 0;
+}
 span.block.view .btn-show {
     color: #218cb0;
 }
+.header-left .dropdown .dropdown-menu p{
+    font-size: 13px;
+}
+.for-notification .dropdown-menu .dropdown-item i{
+    font-size: 13px;
+}
+.header-left .dropdown .dropdown-menu {
+    background: #f9f9f9;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    box-shadow: -5px -4px 33px -13px rgba(0,0,0,0.64);
+    top: 49px !important;
+  }
 span.block.edit .icon {
     color: #218cb0;
 }
 span.block.delete .icon {
     color: red;
 }
+.ant-table-filter-column-title {
+    background: #454545;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 15px;
+}
+.ant-table-thead > tr > th {
+    background: #454545 !important;
+    color: white !important;
+    letter-spacing: 2px;
+    font-size: 15px;
 
+}
 span.block.edit .btn-edit {
     color: #218cb0;
 }
@@ -98,7 +159,11 @@ span.block.edit .btn-edit {
     display: inline-block;
     margin: 0 5px;
     text-transform: uppercase;
+    background: none !important;
+    border: none;
 }
+
+
 
 .action .delete, .action .edit{
     display: inline-block;

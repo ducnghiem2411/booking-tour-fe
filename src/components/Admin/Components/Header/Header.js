@@ -37,16 +37,16 @@ const Header = () => {
                   <span className="count bg-danger">5</span>
                 </button>
                 <div className="dropdown-menu" aria-labelledby="notification">
-                  <p className="red">You have 3 Notification</p>
-                  <a className="dropdown-item media bg-flat-color-1" href="#">
+                  <p className="red">Notification</p>
+                  <a className="dropdown-item" href="#">
                     <i className="fa fa-check" />
                     <p>Server #1 overloaded.</p>
                   </a>
-                  <a className="dropdown-item media bg-flat-color-4" href="#">
+                  <a className="dropdown-item" href="#">
                     <i className="fa fa-info" />
                     <p>Server #2 overloaded.</p>
                   </a>
-                  <a className="dropdown-item media bg-flat-color-5" href="#">
+                  <a className="dropdown-item" href="#">
                     <i className="fa fa-warning" />
                     <p>Server #3 overloaded.</p>
                   </a>
