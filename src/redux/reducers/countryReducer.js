@@ -9,6 +9,7 @@ const initialState = {
   dataCountry: [],
   dataRow: null,
   statusEdit: false,
+  statusCreate: false
 };
 
 var findIndex = (dataCountries, id) => {
@@ -34,6 +35,7 @@ export default function countryReducer(state = initialState, action) {
     case type.CREATE_COUNTRY_SUCCESSED:
       state.dataCountry.data.push(action.data);
       state.loading = false;
+      state.statusCreate = true;
       return { ...state };
 
     case type.CREATE_COUNTRY_FAILED:

@@ -7,7 +7,9 @@ import { useDispatch, connect } from "react-redux";
 import { onShowModal } from "../../../../redux/actions";
 import axios from "axios";
 import Modal from "../../Modal/Modal";
-import { Spin, Alert, Popconfirm } from "antd";
+import { Spin, Alert, Popconfirm ,notification} from "antd";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Spinner from "./../Spin/Spin";
 import {
   BrowserRouter as Router,
@@ -34,6 +36,7 @@ const Country = (props) => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const { history } = props;
   const { isDisplay } = props.isDisplay;
+  const { statusCreate } = props.statusCreate;
 
   const handleChange = (pagination, filters, sorter) => {
     // console.log('Various parameters', pagination, filters, sorter);
@@ -45,14 +48,18 @@ const Country = (props) => {
 
     dispatch(sendDataRowIntoStore(data))
 
-    // console.log('data', data)
 
+   
+  };
 
-    // dispatch(getDataRowTableRequested(data))
-
-
-
-    // history.push(`/admin/country/${data.key}/edit`);
+  const openNotification = placement => {
+    console.log('toast')
+    notification.info({
+      message: `Notification ${placement}`,
+      description:
+        'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+      placement,
+    });
   };
 
   const onChange = (pagination, filters, sorter, extra) => {};
@@ -61,6 +68,8 @@ const Country = (props) => {
     console.log("useEffectCountry");
     dispatch(fetchDataCountryRequest());
     dispatch(onCloseModal(false));
+    
+
   }, []);
 
   const data = [];
@@ -98,7 +107,7 @@ const Country = (props) => {
     {
       title: "Description",
       dataIndex: "description",
-      width: 150,
+      width: 300,
     },
     {
       title: "Image",
@@ -163,9 +172,20 @@ const Country = (props) => {
 
   const idAdd = '8mt43q3kf6'
 
+  // toast.success("You succeeced")
+
 
   return (
     <>
+    {/* {statusCreate ? <ToastContainer success/> : '' } */}
+    
+    {/* <div className="notify">
+      <div className="body">
+        <p className="title">Notification</p>
+        <p className="desc">I will never close automatically. This is a purposely very very long description that has many many characters and words.</p>
+      </div>
+
+    </div> */}
        {isDisplay ? <Modal dataRow={dataRow} /> : ""}
       <Link to={`/admin/country/${idAdd}/add`} onClick={showModalAddNew} className="btn-create">
         Create new country
@@ -211,6 +231,7 @@ const mapState = (state) => ({
   dataCountry: state.country,
   loading: state.country,
   isDisplay: state.displayModal,
+  statusCreate: state.country,
 });
 
 export default connect(mapState)(Country);

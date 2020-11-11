@@ -15,7 +15,6 @@ import {
   fetchDataCountryRequest,
   changeStatusEdit,
   updateInfoCountryItemRequest,
-  
 } from "../../../redux/actions/index";
 import countries from "./../../../countries";
 import axios from "axios";
@@ -36,6 +35,7 @@ const Modal = (props) => {
   // const [inputDataRow, setInputDataRow] = useState(null);
   const { dataRow } = props.dataRow;
   const { statusEdit } = props.statusEdit;
+  
   const formRef = React.createRef();
   const [form] = Form.useForm();
 
@@ -99,22 +99,16 @@ const Modal = (props) => {
 
   // console.log("fileUpload", fileUpload);
   const onSubmit = (values) => {
-    console.log('values', values)
-    console.log("dataRow", dataRow);
-
-    if(statusEdit){
-      dispatch(updateInfoCountryItemRequest(dataRow.key, values))
-    }else{
+    if (statusEdit) {
+      dispatch(updateInfoCountryItemRequest(dataRow.key, values));
+    } else {
       dispatch(
-        createCountryRequest(
-          values.countryName,
-          values.description
+        createCountryRequest(values.countryName, values.description
           // fileUpload ? fileUpload : ""
         )
       );
     }
 
-    
     form.resetFields();
     closeModal();
     dispatch(changeStatusEdit());
@@ -180,8 +174,6 @@ const Modal = (props) => {
     }
   }, [dataRow]);
 
-  console.log("dataRow", dataRow);
-
   return (
     <>
       <div
@@ -218,10 +210,15 @@ const Modal = (props) => {
                       label="Country name"
                       // initialValue = {dataRow && dataRow.name ? dataRow.name : ''}
                       initialValue={statusEdit ? dataRow.name : ""}
-                      rules={[{ required: true }]}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please select country name !",
+                        },
+                      ]}
                     >
                       <Select
-                        placeholder="Select a option and change input text above"
+                        placeholder="Select country name pls"
                         onChange={handleChange}
                         // defaultValue= {dataRow && dataRow.name ? dataRow.name : 'name'}
                         allowClear
@@ -229,8 +226,8 @@ const Modal = (props) => {
                         {countries
                           ? countries.map((item, index) => {
                               return (
-                                <Option value={item} key={index}>
-                                  {item}
+                                <Option value={item.name} key={index}>
+                                  {item.name}
                                 </Option>
                               );
                             })
@@ -244,9 +241,39 @@ const Modal = (props) => {
                       onChange={onChangeTextarea}
                       // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
                       initialValue={statusEdit ? dataRow.description : ""}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please typing description !",
+                        },
+                      ]}
                     >
                       <Input.TextArea maxLength={250} />
                     </Form.Item>
+                    {/* <Form.Item
+                      name="description"
+                      label="Description"
+                      onChange={onChangeTextarea}
+                      // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
+                      initialValue={statusEdit ? dataRow.description : ""}
+                      rules={[{ required: true }]}
+                    >
+                      {getFieldDecorator("de", {
+                        rules: [
+                          {
+                            required: true,
+                            pattern: new RegExp("^[0-9]*$"),
+                            message: "Wrong format!",
+                          },
+                        ],
+                      })(
+                        <Input
+                          className="form-control"
+                          type="text"
+                          placeholder="Phone number"
+                        />
+                      )}
+                    </Form.Item> */}
 
                     {/* <Input
                     name="description"
@@ -304,6 +331,7 @@ const mapState = (state) => ({
   loading: state.country,
   dataRow: state.country,
   statusEdit: state.country,
+ 
 });
 
 export default connect(mapState)(Modal);
