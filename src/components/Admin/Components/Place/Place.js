@@ -76,9 +76,12 @@ const Place = (props) => {
 
   const data = [];
 
+  console.log('dataPlace', dataPlace)
+
   if (dataPlace && dataPlace.data) {
     dataPlace.data.map((item, index) => {
       data.push({
+        countryId: item.countryId,
         key: item._id,
         countryName: item.country,
         placeName: item.name,

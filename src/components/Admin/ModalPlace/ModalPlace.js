@@ -37,6 +37,7 @@ const ModalPlace = (props) => {
   const { loading } = props.loading;
   // const [inputDataRow, setInputDataRow] = useState(null);
   const { dataRow } = props.dataRow;
+  console.log('dataRow', dataRow)
   const { dataCountry } = props.dataCountry;
   // console.log("dataCountry", dataCountry);
   const { statusEdit } = props.statusEdit;
@@ -128,7 +129,7 @@ const ModalPlace = (props) => {
   // console.log("fileUpload", fileUpload);
   const onSubmit = (values) => {
     if (statusEdit) {
-      dispatch(updateInfoPlaceItemRequest(dataRow.key, values));
+      dispatch(updateInfoPlaceItemRequest(dataRow.countryId, dataRow.key, values));
     } else {
       dispatch(
         createPlaceRequest(

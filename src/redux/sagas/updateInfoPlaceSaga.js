@@ -9,17 +9,22 @@ import {
 
 export function* updateInfoPlaceInSaga(action) {
   try {
+    console.log("action", action);
     const apiUrl = `http://localhost:8000/places/${action.id}`;
-    yield call(axios.put, apiUrl, {
-      countryId: action.id,
-      country: action.body.country,
-      name: action.body.name,
+    yield call(axios.put, apiUrl, { 
+      id: action.countryId,
+      countryId: action.countryId,
+      country: action.body.countryName,
+      name: action.body.placeName,
       description: action.body.description,
     });
-    const response = yield call(axios.get, `http://localhost:8000/places/${action.id}`)
-    console.log('response', response)
-    if(response){
-      yield put(updateInfoPlaceItemSucced(response.data.data))
+    const response = yield call(
+      axios.get,
+      `http://localhost:8000/places/${action.id}`
+    );
+    console.log("response", response);
+    if (response) {
+      yield put(updateInfoPlaceItemSucced(response.data.data));
     }
   } catch (error) {
     yield put(updateInfoPlaceItemFailed(error));
@@ -29,5 +34,3 @@ export function* updateInfoPlaceInSaga(action) {
 export default function* updateInfoPlaceSaga() {
   yield takeLatest(type.UPDATE_DATA_PLACE_REQUESTED, updateInfoPlaceInSaga);
 }
-
-

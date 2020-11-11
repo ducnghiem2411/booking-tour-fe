@@ -183,11 +183,12 @@ const updateInfoCountryItemFailed = (message) => {
 
 
 
-const updateInfoPlaceItemRequest = (id, body) => {
-  console.log('id', id)
-  console.log('body', body)
+const updateInfoPlaceItemRequest = (countryId, id, body) => {
+  // console.log('id', id)
+  // console.log('body', body)
   return {
     type: type.UPDATE_DATA_PLACE_REQUESTED,
+    countryId,
     id,
     body
   };
