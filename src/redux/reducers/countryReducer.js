@@ -33,6 +33,8 @@ export default function countryReducer(state = initialState, action) {
       };
 
     case type.CREATE_COUNTRY_SUCCESSED:
+      // console.log('dataCountry', state.dataCountry)
+      // console.log('dataCountry2', state.dataCountry.data)
       state.dataCountry.data.push(action.data);
       state.loading = false;
       state.statusCreate = true;

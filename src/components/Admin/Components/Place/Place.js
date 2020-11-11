@@ -20,8 +20,8 @@ import {
 } from "react-router-dom";
 
 import {
-  fetchDataCountryRequest,
-  deleteCountryItemRequest,
+  fetchDataPlaceRequest,
+  deletePlaceItemRequest,
   sendDataRowIntoStore,
   onCloseModal,
   getDataRowTableRequested
@@ -30,7 +30,7 @@ import {
 const Place = (props) => {
   const dispatch = useDispatch();
   const {dataPlace} = props.dataPlace;
-  console.log('dataPlace', dataPlace)
+  // console.log('dataPlace', dataPlace)
   // console.log('dataCountry', dataCountry)
   const { loading } = props.loading;
   const [dataRow, setDataRow] = useState(null);
@@ -46,6 +46,7 @@ const Place = (props) => {
   };
 
   const sendRecordToModal = (data) => {
+    console.log('data', data)
     dispatch(onShowModal(true));
 
     dispatch(sendDataRowIntoStore(data))
@@ -67,8 +68,7 @@ const Place = (props) => {
   const onChange = (pagination, filters, sorter, extra) => {};
 
   useEffect(() => {
-    console.log("useEffectPlace");
-    dispatch(fetchDataCountryRequest());
+    dispatch(fetchDataPlaceRequest());
     dispatch(onCloseModal(false));
     
 
@@ -76,27 +76,28 @@ const Place = (props) => {
 
   const data = [];
 
-  // if (dataCountry && dataCountry.data) {
-  //   dataCountry.data.map((item, index) => {
-  //     data.push({
-  //       key: item._id,
-  //       name: item.name,
-  //       description: item.description,
-  //       // images: item.images && item.images.map((item, index) => {
-  //       //   return (
-  //       //     <span key={index}>
+  if (dataPlace && dataPlace.data) {
+    dataPlace.data.map((item, index) => {
+      data.push({
+        key: item._id,
+        countryName: item.country,
+        placeName: item.name,
+        description: item.description,
+        // images: item.images && item.images.map((item, index) => {
+        //   return (
+        //     <span key={index}>
 
-  //       //     {item.name}
-  //       //     </span>
-  //       //   )
-  //       // })
-  //       // image: item.image
-  //     });
-  //   });
-  // }
+        //     {item.name}
+        //     </span>
+        //   )
+        // })
+        // image: item.image
+      });
+    });
+  }
 
   const onDelete = (id) => {
-    dispatch(deleteCountryItemRequest(id));
+    dispatch(deletePlaceItemRequest(id));
   };
 
   const columns = [
@@ -125,7 +126,7 @@ const Place = (props) => {
     {
       title: "",
       key: "action",
-      width: 300,
+      width: 400,
 
       render: (text, record) => (
         <>
@@ -150,7 +151,7 @@ const Place = (props) => {
               <Link
                 type="button"
                 className="btn-delete btn-edit"
-                to={`/admin/country/${record.key}/edit`}
+                to={`/admin/place/${record.key}/edit`}
                 onClick={() => sendRecordToModal(record)}
               >
                 Edit
@@ -196,9 +197,10 @@ const Place = (props) => {
       </div>
 
     </div> */}
-       {isDisplay ? <ModalPlace dataPlace={dataPlace} /> : ""}
+       {isDisplay ? <ModalPlace dataRow={dataRow} /> : ""}
+       {/* {isDisplay ? <ModalPlace /> : ""} */}
       <Link to={`/admin/place/add`} onClick={showModalAddNew} className="btn-create">
-        Create new country
+        Create new place
       </Link>
 
       <Spin spinning={loading} delay={500}>
@@ -246,3 +248,4 @@ const mapState = (state) => ({
 });
 
 export default connect(mapState)(Place);
+

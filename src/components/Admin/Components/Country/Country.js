@@ -118,7 +118,7 @@ const Country = (props) => {
     {
       title: "",
       key: "action",
-      width: 300,
+      width: 400,
 
       render: (text, record) => (
         <>

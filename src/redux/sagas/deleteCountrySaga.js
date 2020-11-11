@@ -19,7 +19,6 @@ export function* deleteCountryInSaga(action) {
       yield put(deleteCountryItemSucced(action.id));
     }
   } catch (error) {
-    console.log('error', error)
     yield put(deleteCountryItemFailed(error));
   }
 }

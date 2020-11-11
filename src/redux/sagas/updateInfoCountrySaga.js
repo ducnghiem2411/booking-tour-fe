@@ -16,11 +16,9 @@ export function* updateInfoCountryInSaga(action) {
     });
     const response = yield call(axios.get, `http://localhost:8000/countries/${action.id}`)
     if(response){
-      console.log('response', response)
       yield put(updateInfoCountryItemSucced(response.data.data))
     }
   } catch (error) {
-    console.log("error", error);
     yield put(updateInfoCountryItemFailed(error));
   }
 }

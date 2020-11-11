@@ -2,7 +2,7 @@ import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import * as type from "../TypeAction";
 import axios from "axios";
 
-import { createCountrySucced, createCountryFailed,fetchDataCountryRequest } from "../actions/index";
+import { createCountrySucced, createCountryFailed } from "../actions/index";
 
 const apiUrl = "http://localhost:8000/countries";
 
@@ -20,7 +20,6 @@ export function* createCountryInSaga(action) {
       yield put(createCountrySucced(response.data.data));
     }
   } catch (error) {
-    console.log('error', error)
     yield put(createCountryFailed(error.response));
   }
 }

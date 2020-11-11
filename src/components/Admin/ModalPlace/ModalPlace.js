@@ -16,7 +16,7 @@ import {
   createPlaceRequest,
   changeStatusEdit,
   fetchDataPlaceInCountryRequest,
-  updateInfoCountryItemRequest,
+  updateInfoPlaceItemRequest,
 } from "../../../redux/actions/index";
 import countries from "../../../countries";
 import axios from "axios";
@@ -44,6 +44,8 @@ const ModalPlace = (props) => {
 
   const formRef = React.createRef();
   const [form] = Form.useForm();
+
+  // console.log('dataRow', dataRow)
 
   const closeModal = () => {
     dispatch(onCloseModal(false));
@@ -126,7 +128,7 @@ const ModalPlace = (props) => {
   // console.log("fileUpload", fileUpload);
   const onSubmit = (values) => {
     if (statusEdit) {
-      dispatch(updateInfoCountryItemRequest(dataRow.key, values));
+      dispatch(updateInfoPlaceItemRequest(dataRow.key, values));
     } else {
       dispatch(
         createPlaceRequest(
@@ -200,9 +202,9 @@ const ModalPlace = (props) => {
   // console.log('textareaItem', textareaItem)
 
   useEffect(() => {
-    console.log("useEffectModalPlace");
-    console.log('dataCountry', dataCountry)
-    dispatch(fetchDataPlaceInCountryRequest());
+    // console.log("useEffectModalPlace");
+    // console.log('dataCountry', dataCountry)
+    dispatch(fetchDataCountryRequest());
     // const id = match.params.id;
     // console.log("match", match);
     // if (match && id == "8mt43q3kf6") {
@@ -247,7 +249,7 @@ const ModalPlace = (props) => {
                       name="countryName"
                       label="Country name"
                       // initialValue = {dataRow && dataRow.name ? dataRow.name : ''}
-                      initialValue={statusEdit ? dataRow.name : ""}
+                      initialValue={statusEdit ? dataRow.countryName : ""}
                       rules={[
                         {
                           required: true,
@@ -319,7 +321,7 @@ const ModalPlace = (props) => {
                       label="Place name"
                       onChange={onChangePlaceName}
                       // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
-                      // initialValue={statusEdit ? dataRow.description : ""}
+                      initialValue={statusEdit ? dataRow.placeName : ""}
                       rules={[
                         {
                           required: true,
@@ -334,7 +336,7 @@ const ModalPlace = (props) => {
                       label="Description"
                       onChange={onChangeTextarea}
                       // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
-                      // initialValue={statusEdit ? dataRow.description : ""}
+                      initialValue={statusEdit ? dataRow.description : ""}
                       rules={[
                         {
                           required: true,
@@ -423,7 +425,7 @@ const mapState = (state) => ({
   isDisplay: state.displayModal,
   statusCreateModal: state.displayModal,
   loading: state.country,
-  dataRow: state.country,
+  dataRow: state.place,
   statusEdit: state.country,
   dataCountry: state.country,
 });

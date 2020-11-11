@@ -13,6 +13,7 @@ export function* fetchPlaceInSaga(action) {
   try {
     const response = yield call(axios.get, apiUrl, null);
 
+
     if (response && response.status == 200) {
       yield put(fetchDataPlaceSucced(response.data));
     }

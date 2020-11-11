@@ -20,7 +20,7 @@ import countries from "../../../countries";
 import axios from "axios";
 const { Option } = Select;
 
-const Modal = (props) => {
+const ModalCountry = (props) => {
   const dispatch = useDispatch();
   const { isDisplay } = props.isDisplay;
   const { match } = props;
@@ -57,7 +57,6 @@ const Modal = (props) => {
   };
 
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
   };
 
   const waitUntilImageLoaded = (resolve) => {
@@ -166,7 +165,7 @@ const Modal = (props) => {
   // console.log('textareaItem', textareaItem)
 
   useEffect(() => {
-    console.log("useEffectModal");
+    // console.log("useEffectModal");
     // const id = match.params.id;
     // if (id == "8mt43q3kf6") {
     //   console.log("new");
@@ -337,4 +336,4 @@ const mapState = (state) => ({
  
 });
 
-export default connect(mapState)(Modal);
+export default connect(mapState)(ModalCountry);

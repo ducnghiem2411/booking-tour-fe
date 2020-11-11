@@ -78,7 +78,6 @@ const createPlaceRequest = (countryId, country, name, description) => {
   };
 };
 const createPlaceSucced = (data) => {
-  console.log('data', data)
   return {
     type: type.CREATE_PLACE_SUCCESSED,
     data,
@@ -157,6 +156,7 @@ const fetchDataPlaceFailed = (message) => {
 };
 
 
+
 const updateInfoCountryItemRequest = (id, body) => {
   return {
     type: type.UPDATE_DATA_COUNTRY_REQUESTED,
@@ -178,6 +178,37 @@ const updateInfoCountryItemFailed = (message) => {
     message,
   };
 };
+
+
+
+
+
+const updateInfoPlaceItemRequest = (id, body) => {
+  console.log('id', id)
+  console.log('body', body)
+  return {
+    type: type.UPDATE_DATA_PLACE_REQUESTED,
+    id,
+    body
+  };
+};
+
+const updateInfoPlaceItemSucced = (data) => {
+  return {
+    type: type.UPDATE_DATA_PLACE_SUCCED,
+    data,
+  };
+};
+
+const updateInfoPlaceItemFailed = (message) => {
+  return {
+    type: type.UPDATE_DATA_PLACE_FAILED,
+    message,
+  };
+};
+
+
+
 const deleteCountryItemRequest = (id) => {
   return {
     type: type.DELETE_COUNTRY_REQUESTED,
@@ -198,6 +229,35 @@ const deleteCountryItemFailed = (message) => {
     message,
   };
 };
+
+
+
+
+
+
+const deletePlaceItemRequest = (id) => {
+  return {
+    type: type.DELETE_PLACE_REQUESTED,
+    id,
+  };
+};
+
+const deletePlaceItemSucced = (id) => {
+  return {
+    type: type.DELETE_PLACE_SUCCESSED,
+    id,
+  };
+};
+
+const deletePlaceItemFailed = (message) => {
+  return {
+    type: type.DELETE_PLACE_FAILED,
+    message,
+  };
+};
+
+
+
 
 const registerSucced = () => {
   return {
@@ -285,9 +345,15 @@ export {
   fetchDataPlaceSucced,
   fetchDataPlaceFailed,
   loginFailed,
+  deletePlaceItemRequest,
+  deletePlaceItemSucced,
+  deletePlaceItemFailed,
   onLogout,
   deleteCountryItemRequest,
   deleteCountryItemSucced,
+  updateInfoPlaceItemRequest,
+  updateInfoPlaceItemSucced,
+  updateInfoPlaceItemFailed,
   changeStatusEdit,
   deleteCountryItemFailed,
   createCountryRequest,
