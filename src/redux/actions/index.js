@@ -1,5 +1,24 @@
 import * as type from "../TypeAction";
 
+const fetchDataPlaceInCountryRequest = (id) => {
+  return {
+    type: type.FETCH_DATA_PLACE_IN_COUNTRY_REQUESTED,
+    id,
+  };
+};
+
+const fetchDataPlaceInCountrySucced = (data) => {
+  return {
+    type: type.FETCH_DATA_PLACE_IN_COUNTRY_SUCCED,
+    data,
+  };
+};
+const fetchDataPlaceInCountryFailed = (message) => {
+  return {
+    type: type.FETCH_DATA_PLACE_IN_COUNTRY_FAILED,
+    message,
+  };
+};
 const loginRequest = (email, password) => {
   return {
     type: type.LOGIN_REQUESTED,
@@ -46,6 +65,31 @@ const registerRequest = (username, email, password) => {
 //     },
 //   };
 // };
+const createPlaceRequest = (countryId, country, name, description) => {
+  return {
+    type: type.CREATE_PLACE_REQUESTED,
+    payload: {
+      countryId: countryId,
+      country: country,
+      name: name,
+      description: description,
+      // image: image,
+    },
+  };
+};
+const createPlaceSucced = (data) => {
+  console.log('data', data)
+  return {
+    type: type.CREATE_PLACE_SUCCESSED,
+    data,
+  };
+};
+const createPlaceFailed = (message) => {
+  return {
+    type: type.CREATE_PLACE_FAILED,
+    message,
+  };
+};
 const createCountryRequest = (name, description) => {
   return {
     type: type.CREATE_COUNTRY_REQUESTED,
@@ -68,6 +112,8 @@ const createCountryFailed = (message) => {
     message,
   };
 };
+
+
 const fetchDataCountryRequest = () => {
   return {
     type: type.FETCH_COUNTRY_REQUEST,
@@ -87,18 +133,42 @@ const fetchDataCountryFailed = (message) => {
     message,
   };
 };
+
+
+
+const fetchDataPlaceRequest = () => {
+  return {
+    type: type.FETCH_PLACE_REQUEST,
+  };
+};
+
+const fetchDataPlaceSucced = (data) => {
+  return {
+    type: type.FETCH_PLACE_SUCCED,
+    data,
+  };
+};
+
+const fetchDataPlaceFailed = (message) => {
+  return {
+    type: type.FETCH_PLACE_FAILED,
+    message,
+  };
+};
+
+
 const updateInfoCountryItemRequest = (id, body) => {
   return {
     type: type.UPDATE_DATA_COUNTRY_REQUESTED,
     id,
-    body
+    body,
   };
 };
 
 const updateInfoCountryItemSucced = (data) => {
   return {
     type: type.UPDATE_DATA_COUNTRY_SUCCED,
-    data
+    data,
   };
 };
 
@@ -137,7 +207,7 @@ const registerSucced = () => {
 const getDataRowTableRequested = (id) => {
   return {
     type: type.GET_DATA_ROW_TABLE_REQUESTED,
-    id
+    id,
   };
 };
 const getDataRowTableSucced = (data) => {
@@ -199,19 +269,21 @@ const onLogout = () => {
 const sendDataRowIntoStore = (data) => {
   return {
     type: type.SEND_DATA_ROW_INTO_STORE,
-    data
+    data,
   };
 };
 const changeStatusEdit = () => {
   return {
     type: type.CHANGE_STATUS_EDIT,
-    
   };
 };
 
 export {
   loginRequest,
   loginSucced,
+  fetchDataPlaceRequest,
+  fetchDataPlaceSucced,
+  fetchDataPlaceFailed,
   loginFailed,
   onLogout,
   deleteCountryItemRequest,
@@ -225,15 +297,21 @@ export {
   fetchDataCountrySucced,
   fetchDataCountryFailed,
   updateInfoCountryItemSucced,
+  fetchDataPlaceInCountrySucced,
   updateInfoCountryItemFailed,
   updateInfoCountryItemRequest,
   getDataRowTableRequested,
   createCountrySucced,
+  createPlaceRequest,
   createCountryFailed,
   registerRequest,
+  createPlaceSucced,
+  createPlaceFailed,
   getDataRowTableSucced,
   registerSucced,
   showCreateAccModal,
+  fetchDataPlaceInCountryRequest,
+  fetchDataPlaceInCountryFailed,
   onChangeStatusCreateAccModal,
   registerFailed,
   onCloseModal,

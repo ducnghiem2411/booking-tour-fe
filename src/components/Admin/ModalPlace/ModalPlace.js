@@ -13,18 +13,21 @@ import { Spin } from "antd";
 import {
   createCountryRequest,
   fetchDataCountryRequest,
+  createPlaceRequest,
   changeStatusEdit,
+  fetchDataPlaceInCountryRequest,
   updateInfoCountryItemRequest,
 } from "../../../redux/actions/index";
-import countries from "./../../../countries";
+import countries from "../../../countries";
 import axios from "axios";
 const { Option } = Select;
 
-const Modal = (props) => {
+const ModalPlace = (props) => {
   const dispatch = useDispatch();
   const { isDisplay } = props.isDisplay;
   const { match } = props;
-  const { selectItem, setSelectItem } = useState("");
+  // console.log(" match.params.id", match && match.params && match.params.id);
+  const { selectedCountryName, setSelectedCountryName } = useState("");
   const { textareaItem, setTextAreaItem } = useState("");
 
   const [statusUpload, setStatusUpload] = useState(true);
@@ -34,8 +37,11 @@ const Modal = (props) => {
   const { loading } = props.loading;
   // const [inputDataRow, setInputDataRow] = useState(null);
   const { dataRow } = props.dataRow;
+  const { dataCountry } = props.dataCountry;
+  // console.log("dataCountry", dataCountry);
   const { statusEdit } = props.statusEdit;
-  
+  const [idCountry, setIdCountry] = useState("")
+
   const formRef = React.createRef();
   const [form] = Form.useForm();
 
@@ -44,7 +50,7 @@ const Modal = (props) => {
     // dispatch(onChangeStatusCreateAccModal(false));
     form.resetFields();
     dispatch(changeStatusEdit());
-    history && history.push("/admin/country");
+    history && history.push("/admin/place");
   };
   const onCreateAccModal = (e) => {
     e.preventDefault();
@@ -55,8 +61,28 @@ const Modal = (props) => {
     dispatch(onChangeStatusCreateAccModal(false));
   };
 
+  var getIdCountry = (dataCountry, countryName) => {
+    var result = -1
+    dataCountry.data.forEach((itemCountry, index) => {
+      if (itemCountry.name === countryName) {
+        result = itemCountry._id;
+      }
+    });
+
+    return result;
+  }
+
+  
+
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
+    // setSelectedCountryName( )
+
+    const id = getIdCountry(dataCountry, value)
+    setIdCountry(id)
+    // console.log('id', id)
+
+    
   };
 
   const waitUntilImageLoaded = (resolve) => {
@@ -91,7 +117,7 @@ const Modal = (props) => {
         /*......*/
         onError(err);
       });
-  };
+  };  
 
   const onReset = () => {
     form.resetFields();
@@ -103,7 +129,11 @@ const Modal = (props) => {
       dispatch(updateInfoCountryItemRequest(dataRow.key, values));
     } else {
       dispatch(
-        createCountryRequest(values.countryName, values.description
+        createPlaceRequest(
+          idCountry,
+          values.countryName,
+          values.placeName,
+          values.description
           // fileUpload ? fileUpload : ""
         )
       );
@@ -112,7 +142,7 @@ const Modal = (props) => {
     form.resetFields();
     closeModal();
     dispatch(changeStatusEdit());
-    history && history.push("/admin/country");
+    history && history.push("/admin/place");
   };
 
   const normFile = (e) => {
@@ -155,6 +185,11 @@ const Modal = (props) => {
   };
 
   const onChangeTextarea = (e) => {
+    // console.log('value area', e.target.value)
+    // setTextAreaItem(e.target.value)
+  };
+  const onChangePlaceName = (e) => {
+    // console.log('value place name', e.target.value)
     // setTextAreaItem(e.target.value)
   };
   const onChangeSelect = (e) => {
@@ -165,13 +200,16 @@ const Modal = (props) => {
   // console.log('textareaItem', textareaItem)
 
   useEffect(() => {
-    console.log("useEffectModal");
-    const id = match.params.id;
-    if (id == "8mt43q3kf6") {
-      console.log("new");
-    } else {
-      console.log("edit");
-    }
+    console.log("useEffectModalPlace");
+    console.log('dataCountry', dataCountry)
+    dispatch(fetchDataPlaceInCountryRequest());
+    // const id = match.params.id;
+    // console.log("match", match);
+    // if (match && id == "8mt43q3kf6") {
+    //   // console.log("new");
+    // } else {
+    //   // console.log("edit");
+    // }
   }, [dataRow]);
 
   return (
@@ -200,7 +238,7 @@ const Modal = (props) => {
                 >
                   ×
                 </button>
-                <h4 className="modal-title"> Create new country </h4>
+                <h4 className="modal-title"> Create new place </h4>
               </div>
               <div className="form-country">
                 <Spin spinning={loading}>
@@ -223,7 +261,16 @@ const Modal = (props) => {
                         // defaultValue= {dataRow && dataRow.name ? dataRow.name : 'name'}
                         allowClear
                       >
-                        {countries
+                        {dataCountry && dataCountry.data
+                          ? dataCountry.data.map((item, index) => {
+                              return (
+                                <Option value={item.name} key={item._id}>
+                                  {item.name}
+                                </Option>
+                              );
+                            })
+                          : []}
+                        {/* {countries
                           ? countries.map((item, index) => {
                               return (
                                 <Option value={item.name} key={index}>
@@ -231,16 +278,63 @@ const Modal = (props) => {
                                 </Option>
                               );
                             })
-                          : []}
+                          : []} */}
                       </Select>
                     </Form.Item>
+                    {/* <Form.Item
+                      name="placeName"
+                      label="Place name"
+                      // initialValue = {dataRow && dataRow.name ? dataRow.name : ''}
+                      initialValue={statusEdit ? dataRow.name : ""}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please select place name !",
+                        },
+                      ]}
+                    >
+                      <Select
+                        placeholder="Select place name pls"
+                        onChange={handleChange}
+                        // defaultValue= {dataRow && dataRow.name ? dataRow.name : 'name'}
+                        allowClear
+                      >
+                        <Option value="">
+                                test
+                                </Option>
+                        {/* {countries
+                          ? countries.map((item, index) => {
+                              return (
+                                <Option value={item.name} key={index}>
+                                  {item.name}
+                                </Option>
+                              );
+                            })
+                          : []} */}
+                      {/* </Select> */}
+                    {/* </Form.Item>  */}
 
+                    <Form.Item
+                      name="placeName"
+                      label="Place name"
+                      onChange={onChangePlaceName}
+                      // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
+                      // initialValue={statusEdit ? dataRow.description : ""}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please typing place name !",
+                        },
+                      ]}
+                    >
+                      <Input placeholder="Typing place name here..." maxLength={250} />
+                    </Form.Item>
                     <Form.Item
                       name="description"
                       label="Description"
                       onChange={onChangeTextarea}
                       // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
-                      initialValue={statusEdit ? dataRow.description : ""}
+                      // initialValue={statusEdit ? dataRow.description : ""}
                       rules={[
                         {
                           required: true,
@@ -331,7 +425,7 @@ const mapState = (state) => ({
   loading: state.country,
   dataRow: state.country,
   statusEdit: state.country,
- 
+  dataCountry: state.country,
 });
 
-export default connect(mapState)(Modal);
+export default connect(mapState)(ModalPlace);

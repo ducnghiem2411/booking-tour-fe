@@ -2,7 +2,8 @@ import React from 'react'
 import Country from './components/Admin/Components/Country/Country'
 import Place from './components/Admin/Components/Place/Place'
 import Tour from './components/Admin/Components/Tour/Tour'
-import Modal from './components/Admin/Modal/Modal'
+import ModalCountry from './components/Admin/ModalCountry/ModalCountry'
+import ModalPlace from './components/Admin/ModalPlace/ModalPlace'
 
 
 
@@ -14,7 +15,7 @@ const routes = [
     },
     {
         path : '/admin/place',
-        exact : false,
+        exact : true,
         main : () => <Place/>
     },
     {
@@ -23,14 +24,24 @@ const routes = [
         main : () => <Tour/>
     },
     {
-        path : '/admin/country/:id/add',
+        path : '/admin/country/add',
         exact : false,
-        main : ({match, history}) => <Modal match={match} history={history}/>
+        main : ({match, history}) => <ModalCountry match={match} history={history}/>
     },
     {
         path : '/admin/country/:id/edit',
         exact : false,
-        main : ({match, history}) => <Modal match={match} history={history}/>
+        main : ({match, history}) => <ModalCountry match={match} history={history}/>
+    },
+    {
+        path : '/admin/place/add',
+        exact : false,
+        main : ({match, history}) => <ModalPlace match={match} history={history}/>
+    },
+    {
+        path : '/admin/place/:id/edit',
+        exact : false,
+        main : ({match, history}) => <ModalPlace match={match} history={history}/>
     },
     // {
     //     path : '',

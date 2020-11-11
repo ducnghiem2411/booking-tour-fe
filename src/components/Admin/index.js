@@ -13,10 +13,6 @@ import routes from './../../routes'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
-import Place from "./Components/Place/Place";
-import Tour from "./Components/Tour/Tour";
-import Modal from "./Modal/Modal";
-
 // import './asse'
 
 const showContentMenu = (routes) => {

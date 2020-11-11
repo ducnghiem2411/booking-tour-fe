@@ -6,7 +6,7 @@ import { ColumnsType } from "antd/es/table";
 import { useDispatch, connect } from "react-redux";
 import { onShowModal } from "../../../../redux/actions";
 import axios from "axios";
-import Modal from "../../Modal/Modal";
+import ModalCountry from "../../ModalCountry/ModalCountry";
 import { Spin, Alert, Popconfirm ,notification} from "antd";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,6 +37,7 @@ const Country = (props) => {
   const { history } = props;
   const { isDisplay } = props.isDisplay;
   const { statusCreate } = props.statusCreate;
+  const { message } = props.message;
 
   const handleChange = (pagination, filters, sorter) => {
     // console.log('Various parameters', pagination, filters, sorter);
@@ -65,7 +66,7 @@ const Country = (props) => {
   const onChange = (pagination, filters, sorter, extra) => {};
 
   useEffect(() => {
-    console.log("useEffectCountry");
+    // console.log("useEffectCountry");
     dispatch(fetchDataCountryRequest());
     dispatch(onCloseModal(false));
     
@@ -170,12 +171,14 @@ const Country = (props) => {
     
   }
 
-  const idAdd = '8mt43q3kf6'
+  // const idAdd = '8mt43q3kf6'
 
   // toast.success("You succeeced")
 
 
   return (
+
+   
     <>
     {/* {statusCreate ? <ToastContainer success/> : '' } */}
     
@@ -186,8 +189,8 @@ const Country = (props) => {
       </div>
 
     </div> */}
-       {isDisplay ? <Modal dataRow={dataRow} /> : ""}
-      <Link to={`/admin/country/${idAdd}/add`} onClick={showModalAddNew} className="btn-create">
+       {isDisplay ? <ModalCountry dataRow={dataRow} /> : ""}
+      <Link to={`/admin/country/add`} onClick={showModalAddNew} className="btn-create">
         Create new country
       </Link>
 
@@ -232,6 +235,7 @@ const mapState = (state) => ({
   loading: state.country,
   isDisplay: state.displayModal,
   statusCreate: state.country,
+  message: state.country,
 });
 
 export default connect(mapState)(Country);

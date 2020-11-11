@@ -6,7 +6,7 @@ const initialState = {
   error: false,
   registerStatus: false,
   message: "",
-  dataCountry: [],
+  dataPlace: [],
   dataRow: null,
   statusEdit: false,
   statusCreate: false
@@ -14,8 +14,8 @@ const initialState = {
 
 var findIndex = (dataCountries, id) => {
   var result = -1;
-  dataCountries.forEach((dataCountry, index) => {
-    if (dataCountry._id === id) {
+  dataCountries.forEach((dataPlace, index) => {
+    if (dataPlace._id === id) {
       result = index;
     }
   });
@@ -26,19 +26,19 @@ var findIndex = (dataCountries, id) => {
 export default function countryReducer(state = initialState, action) {
   var index = -1
   switch (action.type) {
-    case type.CREATE_COUNTRY_REQUESTED:
+    case type.CREATE_PLACE_REQUESTED:
       return {
         ...state,
         loading: true,
       };
 
-    case type.CREATE_COUNTRY_SUCCESSED:
-      state.dataCountry.data.push(action.data);
+    case type.CREATE_PLACE_SUCCESSED:
+      state.dataPlace.data.push(action.data);
       state.loading = false;
       state.statusCreate = true;
       return { ...state };
 
-    case type.CREATE_COUNTRY_FAILED:
+    case type.CREATE_PLACE_FAILED:
       return {
         ...state,
         error: true,
@@ -54,7 +54,7 @@ export default function countryReducer(state = initialState, action) {
     case type.FETCH_COUNTRY_SUCCED:
       return {
         ...state,
-        dataCountry: action.data,
+        dataPlace: action.data,
         loading: false,
       };
 
@@ -70,8 +70,8 @@ export default function countryReducer(state = initialState, action) {
         loading: true,
       };
     case type.DELETE_COUNTRY_SUCCESSED:
-      index = findIndex(state.dataCountry.data, action.id);
-      state.dataCountry.data.splice(index, 1);
+      index = findIndex(state.dataPlace.data, action.id);
+      state.dataPlace.data.splice(index, 1);
       state.loading = false;
       return { ...state };
 
@@ -141,8 +141,8 @@ export default function countryReducer(state = initialState, action) {
       };
     case type.UPDATE_DATA_COUNTRY_SUCCED:
       // console.log('action.data', action.data)
-      index = findIndex(state.dataCountry.data, action.data._id);
-      state.dataCountry.data[index] = action.data;
+      index = findIndex(state.dataPlace.data, action.data._id);
+      state.dataPlace.data[index] = action.data;
       state.loading = false;
       return { ...state };
 
