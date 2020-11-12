@@ -46,7 +46,7 @@ const Place = (props) => {
   };
 
   const sendRecordToModal = (data) => {
-    console.log('data', data)
+    // console.log('data', data)
     dispatch(onShowModal(true));
 
     dispatch(sendDataRowIntoStore(data))
@@ -56,7 +56,7 @@ const Place = (props) => {
   };
 
   const openNotification = placement => {
-    console.log('toast')
+    // console.log('toast')
     notification.info({
       message: `Notification ${placement}`,
       description:

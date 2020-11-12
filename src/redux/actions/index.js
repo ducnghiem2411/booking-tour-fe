@@ -243,9 +243,10 @@ const updateInfoCountryItemFailed = (message) => {
   };
 };
 
+
+
+
 const updateInfoPlaceItemRequest = (id, body) => {
-  console.log('id', id)
-  console.log('body', body)
   return {
     type: type.UPDATE_DATA_PLACE_REQUESTED,
     id,
@@ -266,6 +267,41 @@ const updateInfoPlaceItemFailed = (message) => {
     message,
   };
 };
+
+
+
+
+
+
+
+const updateInfoTourItemRequest = (countryId, placeId, id, body) => {
+  console.log('body', body)
+  return {
+    type: type.UPDATE_DATA_TOUR_REQUESTED,
+    countryId,
+    placeId,
+    id,
+    body
+  };
+};
+
+const updateInfoTourItemSucced = (data) => {
+  
+  return {
+    type: type.UPDATE_DATA_TOUR_SUCCED,
+    data,
+  };
+};
+
+const updateInfoTourItemFailed = (message) => {
+  return {
+    type: type.UPDATE_DATA_TOUR_FAILED,
+    message,
+  };
+};
+
+
+
 
 const deleteCountryItemRequest = (id) => {
   return {
@@ -288,6 +324,9 @@ const deleteCountryItemFailed = (message) => {
   };
 };
 
+
+
+
 const deletePlaceItemRequest = (id) => {
   return {
     type: type.DELETE_PLACE_REQUESTED,
@@ -308,6 +347,36 @@ const deletePlaceItemFailed = (message) => {
     message,
   };
 };
+
+
+
+
+
+
+
+const deleteTourItemRequest = (id) => {
+  return {
+    type: type.DELETE_TOUR_REQUESTED,
+    id,
+  };
+};
+
+const deleteTourItemSucced = (id) => {
+  return {
+    type: type.DELETE_TOUR_SUCCESSED,
+    id,
+  };
+};
+
+const deleteTourItemFailed = (message) => {
+  return {
+    type: type.DELETE_TOUR_FAILED,
+    message,
+  };
+};
+
+
+
 
 const registerSucced = () => {
   return {
@@ -409,6 +478,9 @@ export {
   createCountryRequest,
   getDataRowTableFailed,
   fetchDataCountryRequest,
+  updateInfoTourItemRequest,
+  updateInfoTourItemSucced,
+  updateInfoTourItemFailed,
   sendDataRowIntoStore,
   fetchDataCountrySucced,
   fetchDataCountryFailed,
@@ -418,13 +490,16 @@ export {
   updateInfoCountryItemRequest,
   getDataRowTableRequested,
   createCountrySucced,
+  deleteTourItemSucced,
   createPlaceRequest,
   createCountryFailed,
   registerRequest,
   fetchDataTourRequest,
   fetchDataTourSucced,
   fetchDataTourFailed,
+  deleteTourItemFailed,
   createPlaceSucced,
+  deleteTourItemRequest,
   createTourRequest,
   createTourSucced,
   createTourFailed,

@@ -30,7 +30,6 @@ export function* createTourInSaga(action) {
     const response = yield call(axios.post, apiUrl, data);
 
     if (response) {
-      console.log("response", response);
 
       yield put(createTourSucced(response.data.data));
     }

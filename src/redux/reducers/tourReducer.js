@@ -8,13 +8,13 @@ const initialState = {
   dataTour: [],
   dataRow: null,
   statusEdit: false,
-  statusCreate: false
+  statusCreate: false,
 };
 
-var findIndex = (dataPlace, id) => {
+var findIndex = (dataTour, id) => {
   var result = -1;
-  dataPlace.forEach((itemPlace, index) => {
-    if (itemPlace._id === id) {
+  dataTour.forEach((itemTour, index) => {
+    if (itemTour._id === id) {
       result = index;
     }
   });
@@ -23,10 +23,8 @@ var findIndex = (dataPlace, id) => {
 };
 
 export default function tourReducer(state = initialState, action) {
-  var index = -1
+  var index = -1;
   switch (action.type) {
-
-
     case type.FETCH_TOUR_REQUEST:
       return {
         ...state,
@@ -47,7 +45,6 @@ export default function tourReducer(state = initialState, action) {
         message: action.message,
       };
 
-
     case type.CREATE_TOUR_REQUESTED:
       return {
         ...state,
@@ -67,19 +64,18 @@ export default function tourReducer(state = initialState, action) {
         message: action.message.data.message,
       };
 
-    
-    case type.DELETE_PLACE_REQUESTED:
+    case type.DELETE_TOUR_REQUESTED:
       return {
         ...state,
         loading: true,
       };
-    case type.DELETE_PLACE_SUCCESSED:
-      index = findIndex(state.dataPlace.data, action.id);
-      state.dataPlace.data.splice(index, 1);
+    case type.DELETE_TOUR_SUCCESSED:
+      index = findIndex(state.dataTour.data, action.id);
+      state.dataTour.data.splice(index, 1);
       state.loading = false;
       return { ...state };
 
-    case type.DELETE_PLACE_FAILED:
+    case type.DELETE_TOUR_FAILED:
       return {
         ...state,
         message: action.message,
@@ -136,23 +132,20 @@ export default function tourReducer(state = initialState, action) {
 
         statusEdit: false,
       };
-    case type.UPDATE_DATA_PLACE_REQUESTED:
-      // console.log('action.data', action.data)
+    case type.UPDATE_DATA_TOUR_REQUESTED:
+      console.log("action.data", action.data);
 
       return {
         ...state,
         loading: true,
       };
-    case type.UPDATE_DATA_PLACE_SUCCED:
-      // console.log('action.data', action.data)
-      index = findIndex(state.dataPlace.data, action.data._id);
-      state.dataPlace.data[index] = action.data;
+    case type.UPDATE_DATA_TOUR_SUCCED:
+      index = findIndex(state.dataTour.data, action.data._id);
+      state.dataTour.data[index] = action.data;
       state.loading = false;
       return { ...state };
 
-    case type.UPDATE_DATA_PLACE_FAILED:
-      // console.log('action.data', action.data)
-
+    case type.UPDATE_DATA_TOUR_FAILED:
       return {
         ...state,
         loading: false,

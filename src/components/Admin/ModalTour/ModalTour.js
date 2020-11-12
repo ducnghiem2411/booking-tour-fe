@@ -10,13 +10,14 @@ import { Form, Input, Button, Select, Upload, message } from "antd";
 import { FormInstance } from "antd/lib/form";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import { Spin, DatePicker, InputNumber } from "antd";
+import moment from 'moment';
 import {
   createCountryRequest,
   fetchDataCountryRequest,
   createTourRequest,
   changeStatusEdit,
   fetchDataPlaceRequest,
-  updateInfoPlaceItemRequest,
+  updateInfoTourItemRequest,
 } from "../../../redux/actions/index";
 import countries from "../../../countries";
 import axios from "axios";
@@ -43,12 +44,14 @@ const ModalTour = (props) => {
   const { statusEdit } = props.statusEdit;
   const [idCountry, setIdCountry] = useState("");
   const [idPlace, setIdPlace] = useState("");
-  const [dateString, setDateString] = useState([])
+  const [dateString, setDateString] = useState([]);
 
   const formRef = React.createRef();
   const [form] = Form.useForm();
+  const dateFormat = "YYYY-MM-DD";
 
-  // console.log('dataRow', dataRow)
+  console.log('dataRow', dataRow)
+
 
   const closeModal = () => {
     dispatch(onCloseModal(false));
@@ -136,15 +139,13 @@ const ModalTour = (props) => {
 
   // console.log("fileUpload", fileUpload);
   const onSubmit = (values) => {
-   
     values = {
-        ...values,
-        dateString
-
-    }
+      ...values,
+      dateString,
+    };
     // console.log("values", values);
     if (statusEdit) {
-      dispatch(updateInfoPlaceItemRequest(dataRow.key, values));
+      dispatch(updateInfoTourItemRequest( dataRow.countryId, dataRow.placeId, dataRow.key, values));
     } else {
       dispatch(
         createTourRequest(
@@ -153,10 +154,10 @@ const ModalTour = (props) => {
           idPlace,
           values.placeName,
           values.tourName,
-            values.dateString[0],
-            values.dateString[1],
-            values.price,
-            values.memNumber,
+          values.dateString[0],
+          values.dateString[1],
+          values.price,
+          values.memNumber,
           values.description
           // fileUpload ? fileUpload : ""
         )
@@ -243,9 +244,9 @@ const ModalTour = (props) => {
 
   const onChangeDate = (value, dateString) => {
     //   console.log('value', value)
-    console.log( dateString);
-    setDateString(dateString)
-  }
+    console.log(dateString);
+    setDateString(dateString);
+  };
 
   return (
     <>
@@ -376,7 +377,11 @@ const ModalTour = (props) => {
                       />
                     </Form.Item>
                     <Form.Item label="Member quantity">
-                      <Form.Item name="memNumber" noStyle>
+                      <Form.Item
+                        name="memNumber"
+                        noStyle
+                        initialValue={statusEdit ? dataRow.member : ""}
+                      >
                         <InputNumber min={1} max={10} />
                       </Form.Item>
                     </Form.Item>
@@ -384,9 +389,25 @@ const ModalTour = (props) => {
                       name="rangePicker"
                       label="Checkin - Checkout"
                       {...rangeConfig}
-                     
                     >
-                      <RangePicker   onChange={onChangeDate}/>
+                      <RangePicker
+                        onChange={onChangeDate}
+                        defaultValue = { statusEdit ? [
+                          moment(statusEdit ? dataRow.checkIn : "", dateFormat),
+                          moment(
+                            statusEdit ? dataRow.checkOut : "",
+                            dateFormat
+                          ),
+                        ] : [] }
+                        // defaultValue={[
+                        //   moment(statusEdit ? dataRow.checkIn : "", dateFormat),
+                        //   moment(
+                        //     statusEdit ? dataRow.checkOut : "",
+                        //     dateFormat
+                        //   ),
+                        // ]}
+                        format={dateFormat}
+                      />
                     </Form.Item>
                     <Form.Item
                       name="description"
@@ -482,7 +503,7 @@ const mapState = (state) => ({
   isDisplay: state.displayModal,
   statusCreateModal: state.displayModal,
   loading: state.country,
-  dataRow: state.place,
+  dataRow: state.tour,
   statusEdit: state.country,
   dataCountry: state.country,
   dataPlace: state.place,

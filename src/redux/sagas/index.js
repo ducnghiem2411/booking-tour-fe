@@ -12,6 +12,8 @@ import updateInfoCountrySaga from './updateInfoCountrySaga'
 import updateInfoPlaceSaga from './updateInfoPlaceSaga'
 import getDataRowSaga from './getDataRowSaga'
 import tourSaga from './tourSaga'
+import deleteTourSaga from './deleteTourSaga'
+import updateInfoTourSaga from './updateInfoTourSaga'
 
 export default function* rootSaga() {
     yield all([
@@ -25,8 +27,10 @@ export default function* rootSaga() {
         fetchTourSaga(),
         deleteCountrySaga(),
         deletePlaceSaga(),
+        deleteTourSaga(),
         updateInfoCountrySaga(),
         updateInfoPlaceSaga(),
+        updateInfoTourSaga(),
         getDataRowSaga()
         
     ])

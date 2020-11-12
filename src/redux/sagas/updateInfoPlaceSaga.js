@@ -14,11 +14,7 @@ export function* updateInfoPlaceInSaga(action) {
       name: action.body.placeName,
       description: action.body.description,
     });
-    // const response = yield call(
-    //   axios.get,
-    //   `http://localhost:8000/places/${action.id}`
-    // );
-    console.log('response', response)
+   
     if (response) {
       yield put(updateInfoPlaceItemSucced(response.data.data));
     }

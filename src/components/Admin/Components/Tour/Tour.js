@@ -21,7 +21,7 @@ import {
 
 import {
   fetchDataTourRequest,
-  deletePlaceItemRequest,
+  deleteTourItemRequest,
   sendDataRowIntoStore,
   onCloseModal,
   getDataRowTableRequested
@@ -44,11 +44,10 @@ const Tour = (props) => {
     setFilteredInfo(filters);
   };
 
-  console.log('dataTour', dataTour)
+  // console.log('dataTour', dataTour)
 
 
   const sendRecordToModal = (data) => {
-    console.log('data', data)
     dispatch(onShowModal(true));
 
     dispatch(sendDataRowIntoStore(data))
@@ -58,7 +57,7 @@ const Tour = (props) => {
   };
 
   const openNotification = placement => {
-    console.log('toast')
+    // console.log('toast')
     notification.info({
       message: `Notification ${placement}`,
       description:
@@ -107,7 +106,7 @@ const Tour = (props) => {
   }
 
   const onDelete = (id) => {
-    dispatch(deletePlaceItemRequest(id));
+    dispatch(deleteTourItemRequest(id));
   };
 
   const columns = [
@@ -191,7 +190,7 @@ const Tour = (props) => {
               <Link
                 type="button"
                 className="btn-delete btn-edit"
-                to={`/admin/place/${record.key}/edit`}
+                to={`/admin/tour/${record.key}/edit`}
                 onClick={() => sendRecordToModal(record)}
               >
                 Edit

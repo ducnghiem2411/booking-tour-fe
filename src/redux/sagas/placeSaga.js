@@ -18,7 +18,6 @@ export function* createPlaceInSaga(action) {
     const response = yield call(axios.post, apiUrl, data);
 
     if (response) {
-      console.log('response', response)
 
       yield put(createPlaceSucced(response.data.data));
     }

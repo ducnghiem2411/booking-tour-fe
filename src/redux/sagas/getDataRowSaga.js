@@ -16,11 +16,9 @@ export function* getDataRowInSaga(action) {
     const response = yield call(axios.get, apiUrl);
 
     if (response) {
-      console.log('response', response)
       yield put(getDataRowTableSucced(response.data.data));
     }
   } catch (error) {
-    console.log('error', error)
     yield put(getDataRowTableFailed(error));
   }
 }

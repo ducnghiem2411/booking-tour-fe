@@ -209,7 +209,7 @@ const ModalPlace = (props) => {
     //   // console.log("edit");
     // }
   }, [dataRow]);
-  console.log("dataRow", dataRow);
+  // console.log("dataRow", dataRow);
 
   return (
     <>
