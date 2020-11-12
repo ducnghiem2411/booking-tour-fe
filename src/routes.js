@@ -4,6 +4,7 @@ import Place from './components/Admin/Components/Place/Place'
 import Tour from './components/Admin/Components/Tour/Tour'
 import ModalCountry from './components/Admin/ModalCountry/ModalCountry'
 import ModalPlace from './components/Admin/ModalPlace/ModalPlace'
+import ModalTour from './components/Admin/ModalTour/ModalTour'
 
 
 
@@ -20,7 +21,7 @@ const routes = [
     },
     {
         path : '/admin/tour',
-        exact : false,
+        exact : true,
         main : () => <Tour/>
     },
     {
@@ -42,6 +43,16 @@ const routes = [
         path : '/admin/place/:id/edit',
         exact : false,
         main : ({match, history}) => <ModalPlace match={match} history={history}/>
+    },
+    {
+        path : '/admin/tour/add',
+        exact : false,
+        main : ({match, history}) => <ModalTour match={match} history={history}/>
+    },
+    {
+        path : '/admin/tour/:id/edit',
+        exact : false,
+        main : ({match, history}) => <ModalTour match={match} history={history}/>
     },
     // {
     //     path : '',

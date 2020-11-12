@@ -76,7 +76,6 @@ const Place = (props) => {
 
   const data = [];
 
-  console.log('dataPlace', dataPlace)
 
   if (dataPlace && dataPlace.data) {
     dataPlace.data.map((item, index) => {

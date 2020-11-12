@@ -55,6 +55,7 @@ const Header = () => {
             </div>
           </div>
           <div className="col-sm-5">
+            
             <div className="user-area dropdown float-right">
               <a
                 href="#"

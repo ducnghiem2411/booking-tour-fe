@@ -9,20 +9,16 @@ import {
 
 export function* updateInfoPlaceInSaga(action) {
   try {
-    console.log("action", action);
     const apiUrl = `http://localhost:8000/places/${action.id}`;
-    yield call(axios.put, apiUrl, { 
-      id: action.countryId,
-      countryId: action.countryId,
-      country: action.body.countryName,
+    const response  = yield call(axios.put, apiUrl, { 
       name: action.body.placeName,
       description: action.body.description,
     });
-    const response = yield call(
-      axios.get,
-      `http://localhost:8000/places/${action.id}`
-    );
-    console.log("response", response);
+    // const response = yield call(
+    //   axios.get,
+    //   `http://localhost:8000/places/${action.id}`
+    // );
+    console.log('response', response)
     if (response) {
       yield put(updateInfoPlaceItemSucced(response.data.data));
     }

@@ -1,4 +1,3 @@
-import { transpileModule } from "typescript";
 import * as type from "../TypeAction";
 
 const initialState = {
@@ -6,16 +5,16 @@ const initialState = {
   error: false,
   registerStatus: false,
   message: "",
-  dataCountry: [],
+  dataTour: [],
   dataRow: null,
   statusEdit: false,
   statusCreate: false
 };
 
-var findIndex = (dataCountries, id) => {
+var findIndex = (dataPlace, id) => {
   var result = -1;
-  dataCountries.forEach((dataCountry, index) => {
-    if (dataCountry._id === id) {
+  dataPlace.forEach((itemPlace, index) => {
+    if (itemPlace._id === id) {
       result = index;
     }
   });
@@ -23,61 +22,64 @@ var findIndex = (dataCountries, id) => {
   return result;
 };
 
-export default function countryReducer(state = initialState, action) {
+export default function tourReducer(state = initialState, action) {
   var index = -1
   switch (action.type) {
-    case type.CREATE_COUNTRY_REQUESTED:
+
+
+    case type.FETCH_TOUR_REQUEST:
       return {
         ...state,
         loading: true,
       };
 
-    case type.CREATE_COUNTRY_SUCCESSED:
-      // console.log('dataCountry', state.dataCountry)
-      // console.log('dataCountry2', state.dataCountry.data)
-      state.dataCountry.data.push(action.data);
+    case type.FETCH_TOUR_SUCCED:
+      return {
+        ...state,
+        dataTour: action.data,
+        loading: false,
+      };
+
+    case type.FETCH_TOUR_FAILED:
+      return {
+        ...state,
+        error: true,
+        message: action.message,
+      };
+
+
+    case type.CREATE_TOUR_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case type.CREATE_TOUR_SUCCESSED:
+      state.dataTour.data.push(action.data);
       state.loading = false;
       state.statusCreate = true;
       return { ...state };
 
-    case type.CREATE_COUNTRY_FAILED:
+    case type.CREATE_TOUR_FAILED:
       return {
         ...state,
         error: true,
         message: action.message.data.message,
       };
 
-    case type.FETCH_COUNTRY_REQUEST:
+    
+    case type.DELETE_PLACE_REQUESTED:
       return {
         ...state,
         loading: true,
       };
-
-    case type.FETCH_COUNTRY_SUCCED:
-      return {
-        ...state,
-        dataCountry: action.data,
-        loading: false,
-      };
-
-    case type.FETCH_COUNTRY_FAILED:
-      return {
-        ...state,
-        error: true,
-        message: action.message,
-      };
-    case type.DELETE_COUNTRY_REQUESTED:
-      return {
-        ...state,
-        loading: true,
-      };
-    case type.DELETE_COUNTRY_SUCCESSED:
-      index = findIndex(state.dataCountry.data, action.id);
-      state.dataCountry.data.splice(index, 1);
+    case type.DELETE_PLACE_SUCCESSED:
+      index = findIndex(state.dataPlace.data, action.id);
+      state.dataPlace.data.splice(index, 1);
       state.loading = false;
       return { ...state };
 
-    case type.DELETE_COUNTRY_FAILED:
+    case type.DELETE_PLACE_FAILED:
       return {
         ...state,
         message: action.message,
@@ -134,21 +136,21 @@ export default function countryReducer(state = initialState, action) {
 
         statusEdit: false,
       };
-    case type.UPDATE_DATA_COUNTRY_REQUESTED:
+    case type.UPDATE_DATA_PLACE_REQUESTED:
       // console.log('action.data', action.data)
 
       return {
         ...state,
         loading: true,
       };
-    case type.UPDATE_DATA_COUNTRY_SUCCED:
+    case type.UPDATE_DATA_PLACE_SUCCED:
       // console.log('action.data', action.data)
-      index = findIndex(state.dataCountry.data, action.data._id);
-      state.dataCountry.data[index] = action.data;
+      index = findIndex(state.dataPlace.data, action.data._id);
+      state.dataPlace.data[index] = action.data;
       state.loading = false;
       return { ...state };
 
-    case type.UPDATE_DATA_COUNTRY_FAILED:
+    case type.UPDATE_DATA_PLACE_FAILED:
       // console.log('action.data', action.data)
 
       return {

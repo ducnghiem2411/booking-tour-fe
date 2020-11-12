@@ -65,6 +65,9 @@ const registerRequest = (username, email, password) => {
 //     },
 //   };
 // };
+
+
+
 const createPlaceRequest = (countryId, country, name, description) => {
   return {
     type: type.CREATE_PLACE_REQUESTED,
@@ -89,6 +92,44 @@ const createPlaceFailed = (message) => {
     message,
   };
 };
+
+
+
+
+
+const createTourRequest = (countryId, countryName, placeId,  placeName, tourName, checkIn, checkOut, price, member, description) => {
+  return {
+    type: type.CREATE_TOUR_REQUESTED,
+    payload: {
+      countryId: countryId,
+      countryName: countryName,
+      placeId: placeId,
+      placeName: placeName,
+      tourName: tourName,
+      checkIn: checkIn,
+      checkOut: checkOut,
+      price: price,
+      member: member,
+      description: description,
+      // image: image,
+    },
+  };
+};
+const createTourSucced = (data) => {
+  return {
+    type: type.CREATE_TOUR_SUCCESSED,
+    data,
+  };
+};
+const createTourFailed = (message) => {
+  return {
+    type: type.CREATE_TOUR_FAILED,
+    message,
+  };
+};
+
+
+
 const createCountryRequest = (name, description) => {
   return {
     type: type.CREATE_COUNTRY_REQUESTED,
@@ -111,7 +152,6 @@ const createCountryFailed = (message) => {
     message,
   };
 };
-
 
 const fetchDataCountryRequest = () => {
   return {
@@ -157,6 +197,30 @@ const fetchDataPlaceFailed = (message) => {
 
 
 
+
+
+const fetchDataTourRequest = () => {
+  return {
+    type: type.FETCH_TOUR_REQUEST,
+  };
+};
+
+const fetchDataTourSucced = (data) => {
+  return {
+    type: type.FETCH_TOUR_SUCCED,
+    data,
+  };
+};
+
+const fetchDataTourFailed = (message) => {
+  return {
+    type: type.FETCH_TOUR_FAILED,
+    message,
+  };
+};
+
+
+
 const updateInfoCountryItemRequest = (id, body) => {
   return {
     type: type.UPDATE_DATA_COUNTRY_REQUESTED,
@@ -179,16 +243,11 @@ const updateInfoCountryItemFailed = (message) => {
   };
 };
 
-
-
-
-
-const updateInfoPlaceItemRequest = (countryId, id, body) => {
-  // console.log('id', id)
-  // console.log('body', body)
+const updateInfoPlaceItemRequest = (id, body) => {
+  console.log('id', id)
+  console.log('body', body)
   return {
     type: type.UPDATE_DATA_PLACE_REQUESTED,
-    countryId,
     id,
     body
   };
@@ -207,8 +266,6 @@ const updateInfoPlaceItemFailed = (message) => {
     message,
   };
 };
-
-
 
 const deleteCountryItemRequest = (id) => {
   return {
@@ -231,11 +288,6 @@ const deleteCountryItemFailed = (message) => {
   };
 };
 
-
-
-
-
-
 const deletePlaceItemRequest = (id) => {
   return {
     type: type.DELETE_PLACE_REQUESTED,
@@ -256,9 +308,6 @@ const deletePlaceItemFailed = (message) => {
     message,
   };
 };
-
-
-
 
 const registerSucced = () => {
   return {
@@ -372,7 +421,13 @@ export {
   createPlaceRequest,
   createCountryFailed,
   registerRequest,
+  fetchDataTourRequest,
+  fetchDataTourSucced,
+  fetchDataTourFailed,
   createPlaceSucced,
+  createTourRequest,
+  createTourSucced,
+  createTourFailed,
   createPlaceFailed,
   getDataRowTableSucced,
   registerSucced,

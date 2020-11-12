@@ -15,7 +15,8 @@ const Navigate = () => {
       <aside id="left-panel" className="left-panel">
         <nav className="navbar navbar-expand-sm navbar-default">
           <div className="navbar-header">
-            <p className="title-dash">Admin Dashboard</p>
+            <span className="icon"><i className="fa fa-paw"></i></span>
+            <span className="title-dash">Admin Dashboard</span>
           </div>
           <div id="main-menu" className="main-menu collapse navbar-collapse admin">
             <ul className="nav navbar-nav">

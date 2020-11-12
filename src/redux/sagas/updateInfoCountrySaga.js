@@ -10,11 +10,11 @@ import {
 export function* updateInfoCountryInSaga(action) {
   try {
     const apiUrl = `http://localhost:8000/countries/${action.id}`;
-    yield call(axios.put, apiUrl, {
+    const response = yield call(axios.put, apiUrl, {
       name: action.body.countryName,
       description: action.body.description,
     });
-    const response = yield call(axios.get, `http://localhost:8000/countries/${action.id}`)
+    // const response = yield call(axios.get, `http://localhost:8000/countries/${action.id}`)
     if(response){
       yield put(updateInfoCountryItemSucced(response.data.data))
     }

@@ -37,11 +37,10 @@ const ModalPlace = (props) => {
   const { loading } = props.loading;
   // const [inputDataRow, setInputDataRow] = useState(null);
   const { dataRow } = props.dataRow;
-  console.log('dataRow', dataRow)
   const { dataCountry } = props.dataCountry;
   // console.log("dataCountry", dataCountry);
   const { statusEdit } = props.statusEdit;
-  const [idCountry, setIdCountry] = useState("")
+  const [idCountry, setIdCountry] = useState("");
 
   const formRef = React.createRef();
   const [form] = Form.useForm();
@@ -65,7 +64,7 @@ const ModalPlace = (props) => {
   };
 
   var getIdCountry = (dataCountry, countryName) => {
-    var result = -1
+    var result = -1;
     dataCountry.data.forEach((itemCountry, index) => {
       if (itemCountry.name === countryName) {
         result = itemCountry._id;
@@ -73,19 +72,15 @@ const ModalPlace = (props) => {
     });
 
     return result;
-  }
-
-  
+  };
 
   const handleChange = (value) => {
     // console.log(`selected ${value}`);
     // setSelectedCountryName( )
 
-    const id = getIdCountry(dataCountry, value)
-    setIdCountry(id)
+    const id = getIdCountry(dataCountry, value);
+    setIdCountry(id);
     // console.log('id', id)
-
-    
   };
 
   const waitUntilImageLoaded = (resolve) => {
@@ -120,7 +115,7 @@ const ModalPlace = (props) => {
         /*......*/
         onError(err);
       });
-  };  
+  };
 
   const onReset = () => {
     form.resetFields();
@@ -129,7 +124,7 @@ const ModalPlace = (props) => {
   // console.log("fileUpload", fileUpload);
   const onSubmit = (values) => {
     if (statusEdit) {
-      dispatch(updateInfoPlaceItemRequest(dataRow.countryId, dataRow.key, values));
+      dispatch(updateInfoPlaceItemRequest(dataRow.key, values));
     } else {
       dispatch(
         createPlaceRequest(
@@ -214,6 +209,7 @@ const ModalPlace = (props) => {
     //   // console.log("edit");
     // }
   }, [dataRow]);
+  console.log("dataRow", dataRow);
 
   return (
     <>
@@ -261,6 +257,7 @@ const ModalPlace = (props) => {
                       <Select
                         placeholder="Select country name pls"
                         onChange={handleChange}
+                        disabled={statusEdit ? true : false}
                         // defaultValue= {dataRow && dataRow.name ? dataRow.name : 'name'}
                         allowClear
                       >
@@ -284,39 +281,7 @@ const ModalPlace = (props) => {
                           : []} */}
                       </Select>
                     </Form.Item>
-                    {/* <Form.Item
-                      name="placeName"
-                      label="Place name"
-                      // initialValue = {dataRow && dataRow.name ? dataRow.name : ''}
-                      initialValue={statusEdit ? dataRow.name : ""}
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please select place name !",
-                        },
-                      ]}
-                    >
-                      <Select
-                        placeholder="Select place name pls"
-                        onChange={handleChange}
-                        // defaultValue= {dataRow && dataRow.name ? dataRow.name : 'name'}
-                        allowClear
-                      >
-                        <Option value="">
-                                test
-                                </Option>
-                        {/* {countries
-                          ? countries.map((item, index) => {
-                              return (
-                                <Option value={item.name} key={index}>
-                                  {item.name}
-                                </Option>
-                              );
-                            })
-                          : []} */}
-                      {/* </Select> */}
-                    {/* </Form.Item>  */}
-
+                   
                     <Form.Item
                       name="placeName"
                       label="Place name"
@@ -330,7 +295,10 @@ const ModalPlace = (props) => {
                         },
                       ]}
                     >
-                      <Input placeholder="Typing place name here..." maxLength={250} />
+                      <Input
+                        placeholder="Typing place name here..."
+                        maxLength={250}
+                      />
                     </Form.Item>
                     <Form.Item
                       name="description"
