@@ -23,13 +23,13 @@ export default function loginReduder(state = initialState, action) {
       break
 
     case type.LOGIN_SUCCESSED:
-      localStorage.setItem("token", JSON.stringify(action.data));
+      localStorage.setItem("token", JSON.stringify(action.token));
 
       return {
         ...state,
         loading: false,
         loginStatus: true,
-        token: action.data,
+        token: action.token,
       };
       break
 

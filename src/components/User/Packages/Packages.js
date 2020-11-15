@@ -2,19 +2,18 @@ import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { fetchDataTourRequest } from "../../../redux/actions";
 import { Spin, Alert, Popconfirm ,notification} from "antd";
+import formatPrice from './../../../utilies/FormatNumber'
 
 const Packages = (props) => {
   const { dataTour } = props.dataTour;
   const { loading } = props.loading;
   const dispatch = useDispatch();
 
-  console.log("dataTour", dataTour);
-  console.log('loading', loading)
 
   useEffect(() => {
     dispatch(fetchDataTourRequest());
     // dispatch(fetchDataTourRequest());
-  }, [dataTour]);
+  }, []);
 
   return (
     <>
@@ -47,9 +46,12 @@ const Packages = (props) => {
                         /> */}
                         <div className="single-package-item-txt">
                           <h3>
-                            {itemTour ? itemTour.name : ""}{" "}
+                            <span>
+                               {itemTour ? itemTour.name : ""}
+                            </span>
+                           
                             <span className="pull-right">
-                              {itemTour ? itemTour.price : ""}
+                              {itemTour ? formatPrice(itemTour.price)  : ""} đ
                             </span>
                           </h3>
                           <div className="packages-para">

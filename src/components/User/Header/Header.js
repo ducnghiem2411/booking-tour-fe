@@ -1,22 +1,23 @@
-import React, {FormEvent} from "react";
-import {useDispatch} from 'react-redux'
-import {onShowModal} from '../../../redux/actions/index';
+import React, { FormEvent } from "react";
+import { connect, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { onShowModal } from "../../../redux/actions/index";
+import Login from "../Login/Login";
+import Modal from "../Modal/Modal";
 
-const Header = () => {
+const Header = (props) => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-
-
-
+  const { isDisplay } = props.isDisplay;
 
   const onShowLoginModal = (e) => {
-    dispatch(onShowModal(true))
-
-  }
+    dispatch(onShowModal(true));
+  };
   return (
     <>
       {/* main-menu Start */}
+      {/* {isDisplay ? <Modal /> : ""} */}
+      {isDisplay ? <Login /> : ""}
       <header className="top-area">
         <div
           id="sticky-wrapper"
@@ -77,12 +78,13 @@ const Header = () => {
                           <a href="#subs">subscription</a>
                         </li>
                         <li>
-                          <button
+                          <Link
+                            to={`/login`}
                             className="book-btn"
                             onClick={onShowLoginModal}
                           >
                             Login
-                          </button>
+                          </Link>
                         </li>
                         {/*/.project-btn*/}
                       </ul>
@@ -108,4 +110,7 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapState = (state) => ({
+  isDisplay: state.displayModal,
+});
+export default connect(mapState)(Header);

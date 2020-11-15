@@ -15,6 +15,8 @@ import {
   useParams
 } from "react-router-dom";
 import Country from './components/Admin/Components/Country/Country';
+import Modal from './components/User/Modal/Modal';
+import Login from './components/User/Login/Login';
 
 
 const App = () => {
@@ -26,7 +28,10 @@ const App = () => {
           <Route path="/" exact component={User} />
           <Route path="/admin" component={Admin} />
           <Route path="/country" component={Country} />
+          <Route path="/login" component={Login} />
+          
         </Switch>
+        
       </Router>
     </div>
     </>

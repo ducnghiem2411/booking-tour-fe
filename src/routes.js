@@ -5,10 +5,13 @@ import Tour from './components/Admin/Components/Tour/Tour'
 import ModalCountry from './components/Admin/ModalCountry/ModalCountry'
 import ModalPlace from './components/Admin/ModalPlace/ModalPlace'
 import ModalTour from './components/Admin/ModalTour/ModalTour'
+import Login from './components/User/Login/Login'
+import Modal from './components/User/Modal/Modal'
 
 
 
 const routes = [
+    
     {
         path : '/admin/country',
         exact : true,
@@ -54,6 +57,12 @@ const routes = [
         exact : false,
         main : ({match, history}) => <ModalTour match={match} history={history}/>
     },
+    {
+        path : '/login',
+        exact : true,
+        main : ({match, history}) => <Login match={match} history={history}/>
+    },
+    
     // {
     //     path : '',
     //     exact : false,

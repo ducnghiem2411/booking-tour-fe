@@ -39,18 +39,7 @@ const index = () => {
       <Navigate />
       <div id="right-panel" className="right-panel">
         <Header />
-        {/* <Route path="/admin/country">
-          <Country />
-        </Route>
-        <Route path="/admin/place">
-          <Place />
-        </Route>
-        <Route path="/admin/tour">
-          <Tour />
-        </Route>
-        <Route path="/admin/country/add">
-        <Modal />
-        </Route> */}
+      
         <Switch>{showContentMenu(routes)}</Switch>
       </div>
     </>

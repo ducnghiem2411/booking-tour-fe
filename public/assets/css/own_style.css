@@ -203,6 +203,9 @@ span.block.edit .btn-edit {
     font-size: 20px;
     letter-spacing: 1px;
 }
+.single-package-item h3 .pull-right {
+    text-transform: none;
+}
 .navbar .navbar-header .icon {
     color: white;
     font-size: 20px;
@@ -214,7 +217,9 @@ span.block.edit .btn-edit {
     border-radius: 50%;
     position: relative;
 }
-
+.ant-input-number {
+    width: 200px !important;
+}
 .navbar .navbar-header .icon i {
     position: absolute;
     top: 50%;
@@ -236,4 +241,18 @@ span.block.edit .btn-edit {
     width: 100%;
     height: 100%;
     display: block;
+}
+
+.login .social a{
+    padding: 0 !important;
+    width: 60px;
+    height: 60px;
+    position: relative;
+    margin: 0 10px !important;
+}
+.login .social a i{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

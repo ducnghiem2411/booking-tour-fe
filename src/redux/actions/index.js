@@ -29,10 +29,10 @@ const loginRequest = (email, password) => {
   };
 };
 
-const loginSucced = (data) => {
+const loginSucced = (token) => {
   return {
     type: type.LOGIN_SUCCESSED,
-    data,
+    token,
   };
 };
 const loginFailed = (message) => {
@@ -456,10 +456,22 @@ const changeStatusEdit = () => {
     type: type.CHANGE_STATUS_EDIT,
   };
 };
+// const registerRequest = () => {
+//   return {
+//     type: type.CHANGE_STATUS_EDIT,
+//   };
+// };
+
+
+
+
+
+
 
 export {
   loginRequest,
   loginSucced,
+  registerRequest,
   fetchDataPlaceRequest,
   fetchDataPlaceSucced,
   fetchDataPlaceFailed,
@@ -493,7 +505,6 @@ export {
   deleteTourItemSucced,
   createPlaceRequest,
   createCountryFailed,
-  registerRequest,
   fetchDataTourRequest,
   fetchDataTourSucced,
   fetchDataTourFailed,

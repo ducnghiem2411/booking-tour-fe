@@ -4,19 +4,20 @@ import axios from "axios";
 
 import { loginSucced, loginFailed } from "../actions/index";
 
-const apiUrl = "https://conduit.productionready.io/api/users/login";
+const apiUrl = "http://localhost:8000/users/login";
 
 export function* signInSaga(action) {
-  const data = {
-    user: {
+  
+    const user = {
       email: action.payload.email,
       password: action.payload.password,
-    },
+    
   };
   try {
-    const response = yield call(axios.post, apiUrl, data);
-    if (response.status == 200) {
-      yield put(loginSucced(response.data.user.token));
+    const response = yield call(axios.post, apiUrl, user);
+    if (response) {
+      console.log('response', response)
+      yield put(loginSucced(response.data.data));
     }
   } catch (error) {
     yield put(loginFailed(error.response.data))
