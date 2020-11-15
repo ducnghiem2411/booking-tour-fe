@@ -1,23 +1,43 @@
-import React, { FormEvent } from "react";
-import { connect, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { onShowModal } from "../../../redux/actions/index";
-import Login from "../Login/Login";
-import Modal from "../Modal/Modal";
+import React, {FormEvent,useEffect, useState} from "react";
+import {connect, useDispatch} from 'react-redux'
+import {onShowModal} from '../../../redux/actions/index';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 
 const Header = (props) => {
-  const dispatch = useDispatch();
 
-  const { isDisplay } = props.isDisplay;
+  const isToken = localStorage.getItem("token");
+
+  const {token}  = props.token
+
+  const dispatch = useDispatch()
+
+
+
+
 
   const onShowLoginModal = (e) => {
-    dispatch(onShowModal(true));
-  };
+    dispatch(onShowModal(true))
+
+  }
+
+  const onLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload(true);
+ 
+    
+    
+  }
+
+
   return (
     <>
       {/* main-menu Start */}
-      {/* {isDisplay ? <Modal /> : ""} */}
-      {isDisplay ? <Login /> : ""}
       <header className="top-area">
         <div
           id="sticky-wrapper"
@@ -78,13 +98,48 @@ const Header = (props) => {
                           <a href="#subs">subscription</a>
                         </li>
                         <li>
-                          <Link
+                          {
+                            isToken || token ? <div className="user-area dropdown float-right">
+                            <a
+                              href="#"
+                              className="dropdown-toggle"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <img
+                                className="user-avatar rounded-circle"
+                                src="/assets/images/admin/admin.jpg"
+                                alt="User Avatar"
+                              />
+                            </a>
+                            <div className="user-menu dropdown-menu">
+                              <a className="nav-link" href="#">
+                                <i className="fa fa-user" /> My Profile
+                              </a>
+                              <a className="nav-link" href="#">
+                                <i className="fa fa-user" /> Notifications{" "}
+                                <span className="count">13</span>
+                              </a>
+                              <a className="nav-link" href="#">
+                                <i className="fa fa-cog" /> Settings
+                              </a>
+                              <button className="nav-link btn-logout" onClick={onLogout}>
+                                <i className="fa fa-power-off" /> Logout
+                              </button>
+                            </div>
+                          </div>
+
+
+                            : <Link
                             to={`/login`}
-                            className="book-btn"
-                            onClick={onShowLoginModal}
-                          >
-                            Login
-                          </Link>
+                              className="book-btn"
+                              onClick={onShowLoginModal}
+                            >
+                              Login
+                            </Link>
+                          }
+                          
                         </li>
                         {/*/.project-btn*/}
                       </ul>
@@ -110,7 +165,9 @@ const Header = (props) => {
   );
 };
 
+
 const mapState = (state) => ({
-  isDisplay: state.displayModal,
+  token: state.login
+  
 });
-export default connect(mapState)(Header);
+export default connect(mapState) (Header);

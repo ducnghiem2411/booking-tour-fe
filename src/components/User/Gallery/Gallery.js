@@ -1,106 +1,68 @@
-import React from 'react';
+import React, { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
+import { fetchTopListDestinationRequest } from "../../../redux/actions";
 
+const Gallery = (props) => {
+  const dispatch = useDispatch();
 
-const Gallery = () => {
+  const { dataCountriesTop } = props.dataCountriesTop;
+  console.log("dataCountriesTop", dataCountriesTop);
 
-    return (
-        <>  
+  useEffect(() => {
+    dispatch(fetchTopListDestinationRequest());
+  }, []);
 
-        {/*galley start*/}
-<section id="gallery" className="gallery">
-  <div className="container">
-    <div className="gallery-details">
-      <div className="gallary-header text-center">
-        <h2>
-          top destination
-        </h2>
-        <p>
-          Duis aute irure dolor in  velit esse cillum dolore eu fugiat nulla.  
-        </p>
-      </div>{/*/.gallery-header*/}
-      <div className="gallery-box">
-        <div className="gallery-content">
-          <div className="filtr-container">
-            <div className="row">
-              <div className="col-md-6">
-                <div className="filtr-item">
-                  <img src="assets/images/gallary/g1.jpg" alt="portfolio image" />
-                  <div className="item-title">
-                    <a href="#">
-                      china
-                    </a>
-                    <p><span>20 tours</span><span>15 places</span></p>
-                  </div>{/* /.item-title */}
-                </div>{/* /.filtr-item */}
-              </div>{/* /.col */}
-              <div className="col-md-6">
-                <div className="filtr-item">
-                  <img src="assets/images/gallary/g2.jpg" alt="portfolio image" />
-                  <div className="item-title">
-                    <a href="#">
-                      venuzuala
-                    </a>
-                    <p><span>12 tours</span><span>9 places</span></p>
-                  </div> {/* /.item-title*/}
-                </div>{/* /.filtr-item */}
-              </div>{/* /.col */}
-              <div className="col-md-4">
-                <div className="filtr-item">
-                  <img src="assets/images/gallary/g3.jpg" alt="portfolio image" />
-                  <div className="item-title">
-                    <a href="#">
-                      brazil
-                    </a>
-                    <p><span>25 tours</span><span>10 places</span></p>
-                  </div>{/* /.item-title */}
-                </div>{/* /.filtr-item */}
-              </div>{/* /.col */}
-              <div className="col-md-4">
-                <div className="filtr-item">
-                  <img src="assets/images/gallary/g4.jpg" alt="portfolio image" />
-                  <div className="item-title">
-                    <a href="#">
-                      australia 
-                    </a>
-                    <p><span>18 tours</span><span>9 places</span></p>
-                  </div> {/* /.item-title*/}
-                </div>{/* /.filtr-item */}
-              </div>{/* /.col */}
-              <div className="col-md-4">
-                <div className="filtr-item">
-                  <img src="assets/images/gallary/g5.jpg" alt="portfolio image" />
-                  <div className="item-title">
-                    <a href="#">
-                      netharland
-                    </a>
-                    <p><span>14 tours</span><span>12 places</span></p>
-                  </div> {/* /.item-title*/}
-                </div>{/* /.filtr-item */}
-              </div>{/* /.col */}
-              <div className="col-md-8">
-                <div className="filtr-item">
-                  <img src="assets/images/gallary/g6.jpg" alt="portfolio image" />
-                  <div className="item-title">
-                    <a href="#">
-                      turkey
-                    </a>
-                    <p><span>14 tours</span><span>6 places</span></p>
-                  </div> {/* /.item-title*/}
-                </div>{/* /.filtr-item */}
-              </div>{/* /.col */}
-            </div>{/* /.row */}
-          </div>{/* /.filtr-container*/}
-        </div>{/* /.gallery-content */}
-      </div>{/*/.galley-box*/}
-    </div>{/*/.gallery-details*/}
-  </div>{/*/.container*/}
-</section>{/*/.gallery*/}
-{/*gallery end*/}
+  return (
+    <>
+      <section id="gallery" className="gallery">
+        <div className="container">
+          <div className="gallery-details">
+            <div className="gallary-header text-center">
+              <h2>top destination</h2>
+              <p>
+                Duis aute irure dolor in velit esse cillum dolore eu fugiat
+                nulla.
+              </p>
+            </div>
 
+            <div className="gallery-box">
+              <div className="gallery-content">
+                <div className="filtr-container">
+                  <div className="row">
+                    {dataCountriesTop &&
+                      dataCountriesTop.map((itemCountry, index) => {
+                        return (
+                          <div className="col-md-6" key= {index} >
+                            <div className="gallery-body">
+                              <div className="filtr-item">
+                                <img
+                                  className="placeholder"
+                                  src="https://via.placeholder.com/360x292"
+                                />
+                                <div className="item-title">
+                                  <a href="#"> {itemCountry.country} </a>
+                                  <p>
+                                    <span> {itemCountry.totalTour}  tours</span>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
 
-        
+const mapState = (state) => ({
+  dataCountriesTop: state.country,
+});
 
-        </>
-    )
-}
-export default Gallery
+export default connect(mapState)(Gallery);

@@ -143,6 +143,8 @@ html,body{
 }
 .wrapper {
     position: relative;
+    width: 100% !important;
+    height: 100% !important;
     /* z-index: -1; */
 }
 .header-area{

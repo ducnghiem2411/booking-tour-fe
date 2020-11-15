@@ -189,7 +189,7 @@ const Place = (props) => {
   return (
 
    
-    <>
+    <>  
     {/* {statusCreate ? <ToastContainer success/> : '' } */}
     
     {/* <div className="notify">
@@ -211,6 +211,7 @@ const Place = (props) => {
           dataSource={data}
           pagination={{ pageSize: 5 }}
           onChange={handleChange}
+          scroll={{ x: 'max-content'}}
           // onRow = { (record, rowIndex) => {
           //   return {
           //     onClick: e => {

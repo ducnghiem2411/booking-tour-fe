@@ -12,14 +12,14 @@
     padding: 5px 10px;
     border-radius: 5px;
 }
-.ant-table-wrapper{
+
+.ant-table-wrapper {
     padding: 0 20px 20px 20px;
 }
-.btn-create:hover {   
+
+.btn-create:hover {
     background: #1280a4;
 }
-
-
 
 .modal-dialog.login.animated.country {
     width: 600px;
@@ -36,16 +36,20 @@
     display: block;
     text-align: left;
 }
+
 .form-country .ant-row.ant-form-item {
     flex-flow: column;
 }
-.ant-form-item{
+
+.ant-form-item {
     margin-bottom: 5px;
 }
-.ant-form-item-label > label{
+
+.ant-form-item-label>label {
     font-size: 13px;
 }
-.modal-content.country .modal-header{
+
+.modal-content.country .modal-header {
     padding-left: 0;
 }
 
@@ -53,9 +57,11 @@ button.ant-btn.ant-btn-primary.btn-ant-modal-submit {
     display: inline-block;
     margin-right: 10px;
 }
-.action .block:last-child{
+
+.action .block:last-child {
     margin-right: 0;
 }
+
 .action .block .icon i {
     font-size: 18px;
 }
@@ -64,9 +70,11 @@ button.ant-btn.ant-btn-primary.btn-ant-modal-submit {
     display: inline-block;
     margin-right: 5px;
 }
+
 span.block.view .icon {
     color: #218cb0;
 }
+
 .btn-create:hover {
     background: #1280a4;
     color: white;
@@ -75,70 +83,81 @@ span.block.view .icon {
 .user-area .user-menu .nav-link:hover {
     background: #e5e5e5;
 }
+
 .header-left .dropdown .dropdown-menu p {
     font-size: 15px;
     margin: 0;
     padding: 5px 10px;
-  }
+}
 
 .header-left .dropdown .dropdown-menu .dropdown-item {
-  
     width: 100%;
-  }
-  .header-left .dropdown .dropdown-menu .dropdown-item:hover {
+}
+
+.header-left .dropdown .dropdown-menu .dropdown-item:hover {
     background: #e7e7e7;
 }
 
-.dropdown-menu{
+.dropdown-menu {
     min-width: 200px;
 }
+
 .user-area .user-menu .nav-link {
     color: #5a5555;
     padding: 5px 10px;
 }
+
 .for-notification .dropdown-menu .dropdown-item {
     padding: 5px 10px !important;
-  }
+}
 
 .user-area .user-menu {
     padding: 0;
 }
+
 span.block.view .btn-show {
     color: #218cb0;
 }
-.header-left .dropdown .dropdown-menu p{
+
+.header-left .dropdown .dropdown-menu p {
     font-size: 13px;
 }
-.for-notification .dropdown-menu .dropdown-item i{
+
+.for-notification .dropdown-menu .dropdown-item i {
     font-size: 13px;
 }
+
 .header-left .dropdown .dropdown-menu {
     background: #f9f9f9;
     border: none;
     border-radius: 0;
     box-shadow: none;
-    box-shadow: -5px -4px 33px -13px rgba(0,0,0,0.64);
+    box-shadow: -5px -4px 33px -13px rgba(0, 0, 0, 0.64);
     top: 49px !important;
-  }
+}
+
 span.block.edit .icon {
     color: #218cb0;
 }
+
 span.block.delete .icon {
     color: red;
 }
+
 .ant-table-filter-column-title {
     background: #454545;
     color: white;
     letter-spacing: 2px;
     font-size: 15px;
 }
-.ant-table-thead > tr > th {
+
+.ant-table-thead>tr>th {
     background: #454545 !important;
     color: white !important;
     letter-spacing: 2px;
     font-size: 15px;
-
 }
+
 span.block.edit .btn-edit {
     color: #218cb0;
 }
@@ -148,12 +167,13 @@ span.block.edit .btn-edit {
     margin: 0 35px 0 0;
     /* color: grey; */
 }
+
 .main-menu.admin .navi-link {
     display: block;
     margin-bottom: 20px;
 }
 
-.action .block  .btn-delete, .action .block  .btn-edit {
+.action .block .btn-delete, .action .block .btn-edit {
     color: red;
     font-weight: 600;
     display: inline-block;
@@ -163,9 +183,7 @@ span.block.edit .btn-edit {
     border: none;
 }
 
-
-
-.action .delete, .action .edit{
+.action .delete, .action .edit {
     display: inline-block;
 }
 
@@ -189,7 +207,18 @@ span.block.edit .btn-edit {
     display: inline-block;
     margin-right: 20px;
 }
-.main-menu.admin .navi-link li.menu-item:after {content: "";display: block;width: 60px;background: #d0d0d0;position: absolute;bottom: 0;left: 0;height: 2px;transition: .4s ease-in-out;}
+
+.main-menu.admin .navi-link li.menu-item:after {
+    content: "";
+    display: block;
+    width: 60px;
+    background: #d0d0d0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    transition: .4s ease-in-out;
+}
 
 .navbar .navbar-header {
     display: flex;
@@ -203,9 +232,11 @@ span.block.edit .btn-edit {
     font-size: 20px;
     letter-spacing: 1px;
 }
+
 .single-package-item h3 .pull-right {
     text-transform: none;
 }
+
 .navbar .navbar-header .icon {
     color: white;
     font-size: 20px;
@@ -217,9 +248,11 @@ span.block.edit .btn-edit {
     border-radius: 50%;
     position: relative;
 }
+
 .ant-input-number {
     width: 200px !important;
 }
+
 .navbar .navbar-header .icon i {
     position: absolute;
     top: 50%;
@@ -233,26 +266,101 @@ span.block.edit .btn-edit {
     display: block;
 }
 
-.single-package-item .tour-img .placeholder {
-    
-}
+.single-package-item .tour-img .placeholder {}
 
-.single-package-item img{
+.single-package-item img {
     width: 100%;
     height: 100%;
     display: block;
 }
 
-.login .social a{
+.login .social a {
     padding: 0 !important;
     width: 60px;
     height: 60px;
     position: relative;
     margin: 0 10px !important;
 }
-.login .social a i{
+
+.login .social a i {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.dropdown-toggle {
+    padding-bottom: 0 !important;
+}
+
+.main-menu .nav a :last-child :before {
+    width: 0 !important;
+}
+
+.about-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.about-btn .pull-right {
+    font-size: 16px;
+    color: #49480b;
+}
+
+.single-package-item-txt h3 span {
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    white-space: normal;
+    height: 45px;
+    overflow: hidden;
+}
+
+.packages-para p {
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    white-space: normal;
+    overflow: hidden;
+    height: 75px;
+}
+.user-area .user-menu .nav-link.btn-logout{
+    background: none !important;
+    border: none;
+}
+.gallery-content .gallery-body {
+    display: block;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.filtr-container .filtr-item {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.single-package-item h3 .title {
+    color: #565a5c;
+    font-weight: 600;
+}
+.single-package-item {
+    width: 100%;
+    
+}
+
+.single-package-item .package-img {
+    width: 100%;
+    height: 292px;
+    overflow: hidden;
+   
+}
+.single-package-item .package-img img {
+    transition: .4s ease-in-out;
+}
+
+.single-package-item .package-img:hover img {
+    transform: scale(1.5);
 }

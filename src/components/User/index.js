@@ -10,9 +10,11 @@ import Service from './Service/Service'
 import Subscribe from './Subscribe/Subscribe'
 import Testemonial from './Testemonial/Testemonial'
 import Box from './Travel_Box/Box'
-import { BrowserRouter as Router, Route, Switch , Link} from "react-router-dom";
-import routes from './../../routes'
 
+
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import routes from '../../routes'
 
 
 // import './asse'
@@ -35,15 +37,11 @@ const showContentMenu = (routes) => {
   return result;
 };
 
-
-
-
 const User = () => {
 
     return (
         <>
             {/* <Modal/> */}
-            <Link to='/login'>Login</Link>
             <Header />
             <About/>
             <Box/>
@@ -54,9 +52,7 @@ const User = () => {
             <Blog/>
             <Subscribe/>
             <Footer/>
-
-            
-            
+            <Switch>{showContentMenu(routes)}</Switch>
         </>
     )
 

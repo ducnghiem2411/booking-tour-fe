@@ -14,6 +14,7 @@ import getDataRowSaga from './getDataRowSaga'
 import tourSaga from './tourSaga'
 import deleteTourSaga from './deleteTourSaga'
 import updateInfoTourSaga from './updateInfoTourSaga'
+import fetchTopListDestinationSaga from './fetchTopListDestinationSaga'
 
 export default function* rootSaga() {
     yield all([
@@ -29,6 +30,7 @@ export default function* rootSaga() {
         deletePlaceSaga(),
         deleteTourSaga(),
         updateInfoCountrySaga(),
+        fetchTopListDestinationSaga(),
         updateInfoPlaceSaga(),
         updateInfoTourSaga(),
         getDataRowSaga()

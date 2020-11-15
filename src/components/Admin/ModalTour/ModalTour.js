@@ -507,10 +507,7 @@ const ModalTour = (props) => {
                       // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
                       initialValue={statusEdit ? dataRow.description : ""}
                       rules={[
-                         {
-                          pattern: /^[a-zA-Z]+$/,
-                          message: "Value should contain just string",
-                        },
+                        
                         {
                           required: true,
                           message: "Please typing description !",

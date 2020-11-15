@@ -248,6 +248,7 @@ const Tour = (props) => {
           dataSource={data}
           pagination={{ pageSize: 5 }}
           onChange={handleChange}
+          scroll={{ x: 'max-content'}}
           // onRow = { (record, rowIndex) => {
           //   return {
           //     onClick: e => {

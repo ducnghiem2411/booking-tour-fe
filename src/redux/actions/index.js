@@ -19,6 +19,23 @@ const fetchDataPlaceInCountryFailed = (message) => {
     message,
   };
 };
+const fetchTopListDestinationRequest = () => {
+  return {
+    type: type.FETCH_TOP_LIST_DESTINATION_REQUESTED,
+  };
+};
+const fetchTopListDestinationSucced = (data) => {
+  return {
+    type: type.FETCH_TOP_LIST_DESTINATION_SUCCED,
+    data
+  };
+};
+const fetchTopListDestinationFailed = (message) => {
+  return {
+    type: type.FETCH_TOP_LIST_DESTINATION_FAILED,
+    message
+  };
+};
 const loginRequest = (email, password) => {
   return {
     type: type.LOGIN_REQUESTED,
@@ -501,6 +518,8 @@ export {
   updateInfoCountryItemFailed,
   updateInfoCountryItemRequest,
   getDataRowTableRequested,
+  fetchTopListDestinationSucced,
+  fetchTopListDestinationFailed,
   createCountrySucced,
   deleteTourItemSucced,
   createPlaceRequest,
@@ -519,6 +538,7 @@ export {
   registerSucced,
   showCreateAccModal,
   fetchDataPlaceInCountryRequest,
+  fetchTopListDestinationRequest,
   fetchDataPlaceInCountryFailed,
   onChangeStatusCreateAccModal,
   registerFailed,

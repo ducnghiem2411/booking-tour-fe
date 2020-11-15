@@ -6,7 +6,7 @@ import ModalCountry from './components/Admin/ModalCountry/ModalCountry'
 import ModalPlace from './components/Admin/ModalPlace/ModalPlace'
 import ModalTour from './components/Admin/ModalTour/ModalTour'
 import Login from './components/User/Login/Login'
-import Modal from './components/User/Modal/Modal'
+
 
 
 
@@ -62,12 +62,6 @@ const routes = [
         exact : true,
         main : ({match, history}) => <Login match={match} history={history}/>
     },
-    
-    // {
-    //     path : '',
-    //     exact : false,
-    //     main : () => <NotFoundPage/>
-    // }
 
 
 ]

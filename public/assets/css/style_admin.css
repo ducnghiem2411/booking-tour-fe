@@ -5534,7 +5534,7 @@ header .form-inline .search-form.close {
 
 .user-area .user-avatar {
   float: right;
-  margin-top: 4px;
+  margin-top: -4px;
   width: 32px;
   border-radius: 50%;
 }

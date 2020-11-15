@@ -75,6 +75,7 @@ const Modal = (props) => {
     e.preventDefault()
     dispatch(loginRequest(emailLogin, passwordLogin));
     e.target.reset();
+    dispatch(onCloseModal(false));
 
     // dispatch(onCloseModal(false));
 

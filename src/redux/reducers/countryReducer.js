@@ -9,7 +9,8 @@ const initialState = {
   dataCountry: [],
   dataRow: null,
   statusEdit: false,
-  statusCreate: false
+  statusCreate: false,
+  dataCountriesTop: [],
 };
 
 var findIndex = (dataCountries, id) => {
@@ -61,6 +62,25 @@ export default function countryReducer(state = initialState, action) {
       };
 
     case type.FETCH_COUNTRY_FAILED:
+      return {
+        ...state,
+        error: true,
+        message: action.message,
+      };
+    case type.FETCH_TOP_LIST_DESTINATION_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case type.FETCH_TOP_LIST_DESTINATION_SUCCED:
+      return {
+        ...state,
+        dataCountriesTop: action.data,
+        loading: false,
+      };
+
+    case type.FETCH_TOP_LIST_DESTINATION_FAILED:
       return {
         ...state,
         error: true,
