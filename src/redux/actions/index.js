@@ -24,6 +24,12 @@ const fetchTopListDestinationRequest = () => {
     type: type.FETCH_TOP_LIST_DESTINATION_REQUESTED,
   };
 };
+const dataItemTourRequest = (itemTour) => {
+  return {
+    type: type.DATA_ITEM_TOUR_REQUESTED,
+    itemTour
+  };
+};
 const fetchTopListDestinationSucced = (data) => {
   return {
     type: type.FETCH_TOP_LIST_DESTINATION_SUCCED,
@@ -531,6 +537,7 @@ export {
   createPlaceSucced,
   deleteTourItemRequest,
   createTourRequest,
+  dataItemTourRequest,
   createTourSucced,
   createTourFailed,
   createPlaceFailed,

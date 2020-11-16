@@ -14,7 +14,7 @@ const Service = () => {
                 {/*/.service-img*/}
                 <div className="service-content">
                   <h2>
-                    <a href="#">amazing tour packages</a>
+                    <p>amazing tour packages</p>
                   </h2>
                   <p>
                     Duis aute irure dolor in velit esse cillum dolore eu fugiat
@@ -34,7 +34,7 @@ const Service = () => {
                 {/*/.service-img*/}
                 <div className="service-content">
                   <h2>
-                    <a href="#">book top class hotel</a>
+                    <p>book top class hotel</p>
                   </h2>
                   <p>
                     Duis aute irure dolor in velit esse cillum dolore eu fugiat
@@ -54,7 +54,7 @@ const Service = () => {
                 {/*/.service-img*/}
                 <div className="service-content">
                   <h2>
-                    <a href="#">online flight booking</a>
+                    <p>online flight booking</p>
                   </h2>
                   <p>
                     Duis aute irure dolor in velit esse cillum dolore eu fugiat

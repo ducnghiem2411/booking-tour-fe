@@ -5,6 +5,7 @@ import Tour from './components/Admin/Components/Tour/Tour'
 import ModalCountry from './components/Admin/ModalCountry/ModalCountry'
 import ModalPlace from './components/Admin/ModalPlace/ModalPlace'
 import ModalTour from './components/Admin/ModalTour/ModalTour'
+import Detail from './components/User/Detail.js/Detail'
 import Login from './components/User/Login/Login'
 
 
@@ -61,6 +62,11 @@ const routes = [
         path : '/login',
         exact : true,
         main : ({match, history}) => <Login match={match} history={history}/>
+    },
+    {
+        path : '/detail',
+        exact : true,
+        main : ({match, history}) => <Detail match={match} history={history}/>
     },
 
 

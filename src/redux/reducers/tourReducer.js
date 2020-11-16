@@ -9,6 +9,7 @@ const initialState = {
   dataRow: null,
   statusEdit: false,
   statusCreate: false,
+  itemTour: ''
 };
 
 var findIndex = (dataTour, id) => {
@@ -150,6 +151,11 @@ export default function tourReducer(state = initialState, action) {
         ...state,
         loading: false,
         message: action.message,
+      };
+    case type.DATA_ITEM_TOUR_REQUESTED:
+      return {
+        ...state,
+        itemTour: action.itemTour
       };
 
     default:

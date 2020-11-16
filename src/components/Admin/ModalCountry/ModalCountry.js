@@ -19,6 +19,7 @@ import {
 import countries from "../../../countries";
 import axios from "axios";
 const { Option } = Select;
+const { Dragger } = Upload;
 
 const ModalCountry = (props) => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const ModalCountry = (props) => {
   const { textareaItem, setTextAreaItem } = useState("");
 
   const [statusUpload, setStatusUpload] = useState(true);
+  const [image, setImage] = useState('')
 
   const [fileUpload, setFileUpload] = useState("");
   const { history } = props;
@@ -35,8 +37,7 @@ const ModalCountry = (props) => {
   // const [inputDataRow, setInputDataRow] = useState(null);
   const { dataRow } = props.dataRow;
   const { statusEdit } = props.statusEdit;
- 
-  
+
   const formRef = React.createRef();
   const [form] = Form.useForm();
 
@@ -56,42 +57,35 @@ const ModalCountry = (props) => {
     dispatch(onChangeStatusCreateAccModal(false));
   };
 
-  const handleChange = (value) => {
-  };
+  const handleChange = (value) => {};
 
-  const waitUntilImageLoaded = (resolve) => {
-    setTimeout(() => {
-      fileUpload
-        ? resolve() // from onChange method
-        : waitUntilImageLoaded(resolve);
-    }, 10);
-  };
+  
 
-  const customRequest = async (option) => {
-    const { onSuccess, onError, file, action, onProgress } = option;
-    const url = action;
+  // const customRequest = async (option) => {
+  //   const { onSuccess, onError, file, action, onProgress } = option;
+  //   const url = action;
 
-    await new Promise((resolve) => waitUntilImageLoaded(resolve)); //in the next section
+  //   await new Promise((resolve) => waitUntilImageLoaded(resolve)); //in the next section
 
-    const type = "image/png";
-    axios
-      .put("http://localhost:8000/countries", fileUpload, {
-        onUploadProgress: (e) => {
-          onProgress({ percent: (e.loaded / e.total) * 100 });
-        },
-        headers: {
-          "Content-Type": type,
-        },
-      })
-      .then((respones) => {
-        /*......*/
-        onSuccess(respones.body);
-      })
-      .catch((err) => {
-        /*......*/
-        onError(err);
-      });
-  };
+  //   const type = "image/png";
+  //   axios
+  //     .put("http://localhost:8000/countries", fileUpload, {
+  //       onUploadProgress: (e) => {
+  //         onProgress({ percent: (e.loaded / e.total) * 100 });
+  //       },
+  //       headers: {
+  //         "Content-Type": type,
+  //       },
+  //     })
+  //     .then((respones) => {
+  //       /*......*/
+  //       onSuccess(respones.body);
+  //     })
+  //     .catch((err) => {
+  //       /*......*/
+  //       onError(err);
+  //     });
+  // };
 
   const onReset = () => {
     form.resetFields();
@@ -103,7 +97,9 @@ const ModalCountry = (props) => {
       dispatch(updateInfoCountryItemRequest(dataRow.key, values));
     } else {
       dispatch(
-        createCountryRequest(values.countryName, values.description
+        createCountryRequest(
+          values.countryName,
+          values.description
           // fileUpload ? fileUpload : ""
         )
       );
@@ -174,9 +170,70 @@ const ModalCountry = (props) => {
     // }
   }, [dataRow]);
 
+  // const onChangeUpload = (info) => {
+  //   const { status } = info.file;
+  //   if (status !== "uploading") {
+  //     console.log(info.file, info.fileList);
+  //   }
+  //   if (status === "done") {
+  //     message.success(`${info.file.name} file uploaded successfully.`);
+  //   } else if (status === "error") {
+  //     message.error(`${info.file.name} file upload failed.`);
+  //   }
+  // }
+
+  var fileReader = new FileReader();
+
+
+  const onChangeUpload = (info) => {
+    if (!fileReader.onloadend) {
+      fileReader.onloadend = (obj) => {
+        setImage(obj.srcElement.result)
+       
+      };
+    // can be any other read function ( any reading function from
+    // previously created instance can be used )
+    fileReader.readAsArrayBuffer(info.file.originFileObj);
+    }
+  };
+
+  const customRequest = async option => {
+    const { onSuccess, onError, file, action, onProgress } = option;
+    const url = action;
+  
+    await new Promise(resolve => waitUntilImageLoaded(resolve)); //in the next section 
+    // const { image } = state; // from onChange function above
+    const type = 'image/png';
+    axios
+      .put(url, Image, {
+        onUploadProgress: e => {
+          onProgress({ percent: (e.loaded / e.total) * 100 });
+        },
+        headers: {
+          'Content-Type': type,
+        },
+      })
+      .then(respones => {
+        /*......*/
+        onSuccess(respones.body);
+      })
+      .catch(err => {
+        /*......*/
+        onError(err);
+      });
+  };
+
+  
+  
+   const waitUntilImageLoaded = resolve => {
+    setTimeout(() => {
+      image
+        ? resolve() // from onChange method
+        : waitUntilImageLoaded(resolve);
+    }, 10);
+  };
   return (
     <>
-   
       <div
         className={
           isDisplay ? "wrap-modal country active" : "wrap-modal country"
@@ -209,7 +266,6 @@ const ModalCountry = (props) => {
                     <Form.Item
                       name="countryName"
                       label="Country name"
-                     
                       // initialValue = {dataRow && dataRow.name ? dataRow.name : ''}
                       initialValue={statusEdit ? dataRow.name : ""}
                       rules={[
@@ -222,7 +278,7 @@ const ModalCountry = (props) => {
                       <Select
                         placeholder="Select country name pls"
                         onChange={handleChange}
-                        disabled = {statusEdit ? true : false}
+                        disabled={statusEdit ? true : false}
                         // defaultValue= {dataRow && dataRow.name ? dataRow.name : 'name'}
                         allowClear
                       >
@@ -253,55 +309,23 @@ const ModalCountry = (props) => {
                     >
                       <Input.TextArea maxLength={250} />
                     </Form.Item>
-                    {/* <Form.Item
-                      name="description"
-                      label="Description"
-                      onChange={onChangeTextarea}
-                      // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
-                      initialValue={statusEdit ? dataRow.description : ""}
-                      rules={[{ required: true }]}
-                    >
-                      {getFieldDecorator("de", {
-                        rules: [
-                          {
-                            required: true,
-                            pattern: new RegExp("^[0-9]*$"),
-                            message: "Wrong format!",
-                          },
-                        ],
-                      })(
-                        <Input
-                          className="form-control"
-                          type="text"
-                          placeholder="Phone number"
-                        />
-                      )}
-                    </Form.Item> */}
 
-                    {/* <Input
-                    name="description"
-                    label="Description"
-                    // defaultValue={dataRow ? dataRow.description : "abc"}
-                    value={dataRow ? dataRow.description : "desc"}
-                    onChange={onChangeTextarea}
-                  /> */}
-
-                    {/* <Form.Item
-                    name="image"
-                    label="Images"
-                    valuePropName="fileList"
-                    getValueFromEvent={normFile}
-                    showUploadList={statusUpload}
-                  >
-                    <Upload
-                      name="file"
-                      listType="picture"
-                      beforeUpload={beforeUpload}
-                      customRequest={customRequest}
+                    <Dragger
+                    onChange={onChangeUpload}
+                    customRequest={customRequest}
                     >
-                      <Button icon={<UploadOutlined />}>Click to upload</Button>
-                    </Upload>
-                  </Form.Item> */}
+                      <p className="ant-upload-drag-icon">
+                        <InboxOutlined />
+                      </p>
+                      <p className="ant-upload-text">
+                        Click or drag file to this area to upload
+                      </p>
+                      <p className="ant-upload-hint">
+                        Support for a single or bulk upload. Strictly prohibit
+                        from uploading company data or other band files
+                      </p>
+                    </Dragger>
+
                     <Form.Item>
                       <Button
                         type="primary"
@@ -334,8 +358,6 @@ const mapState = (state) => ({
   loading: state.country,
   dataRow: state.country,
   statusEdit: state.country,
-  
- 
 });
 
 export default connect(mapState)(ModalCountry);

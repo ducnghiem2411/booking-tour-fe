@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 
 const Header = (props) => {
+  // const [in]
 
   const isToken = localStorage.getItem("token");
 
@@ -36,9 +37,10 @@ const Header = (props) => {
 
 
   return (
+    
     <>
       {/* main-menu Start */}
-      <header className="top-area">
+      <header className="top-area detail">
         <div
           id="sticky-wrapper"
           className="sticky-wrapper is-sticky"
@@ -57,9 +59,9 @@ const Header = (props) => {
               <div className="row">
                 <div className="col-sm-2">
                   <div className="logo">
-                    <a href="index.html">
+                    <Link to = "/">
                       tour<span>Nest</span>
-                    </a>
+                    </Link>
                   </div>
                   {/* /.logo*/}
                 </div>

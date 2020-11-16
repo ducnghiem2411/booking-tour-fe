@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
-import { fetchDataTourRequest } from "../../../redux/actions";
+import { dataItemTourRequest, fetchDataTourRequest } from "../../../redux/actions";
 import { Spin, Alert, Popconfirm, notification } from "antd";
 import formatPrice from "./../../../utilies/FormatNumber";
 import Pagination from "./../Pagination/Pagination";
+import { Link } from "react-router-dom";
 
 const Packages = (props) => {
   const { dataTour } = props.dataTour;
@@ -27,7 +28,11 @@ const Packages = (props) => {
       : [];
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
+  // console.log('dataTour', dataTour)
+
+  const onGetDataTourItem = itemTour => {
+    dispatch(dataItemTourRequest(itemTour))
+  }
 
   return (
     <>
@@ -45,51 +50,47 @@ const Packages = (props) => {
                 // currentPosts.data &&
                 currentPosts.map((itemTour, index) => {
                   return (
-                   
-                      <div key={index} className="col-md-4 col-sm-6">
-                        <div className="single-package-item">
-                          <div className="package-img">
-                            <img
-                              className="placeholder"
-                              src="https://via.placeholder.com/360x292"
-                            />
-                          </div>
+                    <div key={index} className="col-md-4 col-sm-6">
+                      <div className="single-package-item">
+                        <div className="package-img">
+                          <img
+                            className="placeholder"
+                            src="https://via.placeholder.com/360x292"
+                          />
+                        </div>
+                        {/* onClick={onGetDataTourItem() */}
 
-                          <div className="single-package-item-txt">
-                            <h3>
-                              <a href="#" className="title">
-                                <span>{itemTour ? itemTour.name : ""}</span>
-                              </a>
-                            </h3>
-                            <div className="packages-para">
-                              <p>
-                                {itemTour && itemTour.description
-                                  ? itemTour.description
-                                  : ""}
-                              </p>
-                            </div>
-                            <div className="packages-review">
-                              <p>
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <i className="fa fa-star" />
-                                <span>2544 review</span>
-                              </p>
-                            </div>
-                            <div className="about-btn">
-                              <button className="about-view packages-btn">
-                                book now
-                              </button>
-                              <span className="pull-right">
-                                {itemTour ? formatPrice(itemTour.price) : ""} đ
-                              </span>
-                            </div>
+                        <div className="single-package-item-txt">
+                          <h3>
+                            <Link className="title" to={`/detail`}  onClick={ () => onGetDataTourItem(itemTour) } >
+                              <span>{itemTour ? itemTour.name : ""}</span>
+                            </Link>
+                          </h3>
+                          <div className="packages-para">
+                            <p>
+                              {itemTour && itemTour.description
+                                ? itemTour.description
+                                : ""}
+                            </p>
+                          </div>
+                          <p className="location">
+                            {" "}
+                            <span>
+                              <i className="fa fa-map-marker"></i>
+                            </span>{" "}
+                            {itemTour && itemTour.place}
+                          </p>
+                          <div className="about-btn">
+                            <button className="about-view packages-btn" href="#myModal" data-toggle="modal" >
+                              book now
+                            </button>
+                            <span className="pull-right">
+                              {itemTour ? formatPrice(itemTour.price) : ""} đ
+                            </span>
                           </div>
                         </div>
                       </div>
-                    
+                    </div>
                   );
                 })}
             </div>

@@ -32,12 +32,12 @@ const Gallery = (props) => {
                     {dataCountriesTop &&
                       dataCountriesTop.map((itemCountry, index) => {
                         return (
-                          <div className="col-md-6" key= {index} >
+                          <div className="col-md-4" key= {index} >
                             <div className="gallery-body">
                               <div className="filtr-item">
                                 <img
                                   className="placeholder"
-                                  src="https://via.placeholder.com/360x292"
+                                  src="https://via.placeholder.com/272x153"
                                 />
                                 <div className="item-title">
                                   <a href="#"> {itemCountry.country} </a>

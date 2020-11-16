@@ -17,6 +17,7 @@ import {
 } from "react-router-dom";
 import Country from "./components/Admin/Components/Country/Country";
 import Login from "./components/User/Login/Login";
+import Detail from "./components/User/Detail.js/Detail";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/admin" component={Admin} />
             <Route path="/country" component={Country} />
             <Route path="/login" component={Login} />
+            <Route path="/detail" component={Detail} />
           </Switch>
         </Router>
       </div>

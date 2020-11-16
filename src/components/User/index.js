@@ -15,6 +15,7 @@ import Box from './Travel_Box/Box'
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import routes from '../../routes'
+import SuccessBookModal from './Modal/SuccessBookModal'
 
 
 // import './asse'
@@ -42,6 +43,7 @@ const User = () => {
     return (
         <>
             {/* <Modal/> */}
+            <SuccessBookModal />
             <Header />
             <About/>
             <Box/>

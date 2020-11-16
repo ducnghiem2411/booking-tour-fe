@@ -29,10 +29,16 @@ const Login = (props) => {
 
   const onCreateAccModal = (e) => {
     e.preventDefault();
+    setEmailLogin("")
+    setPasswordLogin("")
     dispatch(showCreateAccModal(true));
   };
   const changeStatusCreateAccModal = (e) => {
     e.preventDefault();
+    setUsername("")
+    setEmail("")
+    setPassword("")
+    setRepassword("")
     dispatch(onChangeStatusCreateAccModal(false));
   };
 
@@ -139,6 +145,7 @@ const Login = (props) => {
                           name="email"
                           autoComplete="off"
                           onChange={onChangeEmailLogin}
+                          value={emailLogin}
                         />
                         <input
                           id="password"
@@ -149,6 +156,7 @@ const Login = (props) => {
                           name="password"
                           autoComplete="off"
                           onChange={onChangePasswordLogin}
+                          value={passwordLogin}
                         />
 
                         <button
@@ -181,6 +189,7 @@ const Login = (props) => {
                           name="username"
                           autoComplete="off"
                           onChange={onChangeUsername}
+                          value={userName}
                         />
                         <input
                           id="email"
@@ -191,6 +200,7 @@ const Login = (props) => {
                           name="email"
                           autoComplete="off"
                           onChange={onChangeEmail}
+                          value={email}
                         />
                         <input
                           id="password"
@@ -201,6 +211,7 @@ const Login = (props) => {
                           autoComplete="off"
                           name="password"
                           onChange={onChangePassword}
+                          value={password}
                         />
                         <input
                           id="password_confirmation"
@@ -211,6 +222,7 @@ const Login = (props) => {
                           name="password_confirmation"
                           autoComplete="off"
                           onChange={onChangeRepeatPassword}
+                          value={rePassword}
                         />
                         <button
                           type="submit"

@@ -13,6 +13,7 @@ const Box = () => {
                   <ul className="nav nav-tabs" role="tablist">
                     <li role="presentation" className="active">
                       <a
+                      className="box-link"
                         href="#tours"
                         aria-controls="tours"
                         role="tab"
@@ -24,6 +25,7 @@ const Box = () => {
                     </li>
                     <li role="presentation">
                       <a
+                      className="box-link"
                         href="#hotels"
                         aria-controls="hotels"
                         role="tab"
@@ -35,6 +37,7 @@ const Box = () => {
                     </li>
                     <li role="presentation">
                       <a
+                      className="box-link"
                         href="#flights"
                         aria-controls="flights"
                         role="tab"
