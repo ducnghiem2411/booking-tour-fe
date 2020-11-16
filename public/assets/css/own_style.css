@@ -534,3 +534,38 @@ nav.breadcumb ul li a:hover {
 .main-menu .nav li:last-child a:before{
     display: none;
 }
+
+.modal.status-user {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* transform: translate(-50%, -50%); */
+    z-index: 1000;
+    width: 100%;
+    bottom: 0;
+    height: 100%;
+    background: #00000070;
+}
+.modal.status-user.active{
+    display: block;
+}
+
+
+.modal.status-user .modal-dialog.modal-confirm.modal-status {
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    margin: 0;
+    transition: 1s ease-out;
+}
+.modal.status-user .modal-dialog.modal-confirm.modal-status.active{
+    left: 50%;
+    top: 50%;
+    opacity: 1;
+    
+    
+}

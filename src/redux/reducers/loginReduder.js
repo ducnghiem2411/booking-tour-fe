@@ -8,7 +8,7 @@ const initialState = {
   },
   error: false,
   token: "",
-  message: "",
+  messageLogin: "",
   loginStatus: false,
  
 };
@@ -38,7 +38,7 @@ export default function loginReduder(state = initialState, action) {
         ...state,
         loading: false,
         error: true,
-        message: action.message,
+        messageLogin: action.message.message,
       };
       break
 
