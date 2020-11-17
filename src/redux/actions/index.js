@@ -248,6 +248,43 @@ const fetchDataTourFailed = (message) => {
 
 
 
+
+
+
+
+const submitUserReviewRequest = (review, rate, tourId, placeId) => {
+  return {
+    type: type.SUBMIT_USER_REVIEW_REQUEST,
+    payload: {
+      review: review,
+      rate: rate,
+      tourId: tourId,
+      placeId: placeId
+    }
+    
+  };
+};
+
+const submitUserReviewSucced = (data) => {
+  return {
+    type: type.SUBMIT_USER_REVIEW_SUCCED,
+    data,
+  };
+};
+
+const submitUserReviewFailed = (message) => {
+  return {
+    type: type.SUBMIT_USER_REVIEW_FAILED,
+    message,
+  };
+};
+
+
+
+
+
+
+
 const bookingTourRequest = (id, name) => {
   return {
     type: type.BOOKING_TOUR_REQUEST,
@@ -598,6 +635,9 @@ export {
   createTourSucced,
   createTourFailed,
   createPlaceFailed,
+  submitUserReviewRequest,
+  submitUserReviewSucced,
+  submitUserReviewFailed,
   getDataRowTableSucced,
   registerSucced,
   showCreateAccModal,

@@ -4,10 +4,13 @@ import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SuccessBookModal from "../Modal/SuccessBookModal";
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Rate , Checkbox } from "antd";
+import Review from "../Review/Review";
 
 const Detail = (props) => {
   const { itemTour } = props.itemTour;
+
+  
 
   return (
     <>
@@ -58,34 +61,7 @@ const Detail = (props) => {
                       src="https://via.placeholder.com/150x150"
                     />
                     <h4>Reviews</h4>
-                    <div className="client-review">
-                      <Form
-                      
-                        onFinish={onFinish}
-                      >
-                        <Form.Item
-                          label="Username"
-                          name="username"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input your username!",
-                            },
-                          ]}
-                        >
-                          <Input />
-                        </Form.Item>
-
-                        
-
-
-                        <Form.Item>
-                          <Button type="primary" htmlType="submit">
-                            Submit
-                          </Button>
-                        </Form.Item>
-                      </Form>
-                    </div>
+                    <Review itemTour ={itemTour} />
 
                     <div className="list-review">
                       <div className="list-item">
