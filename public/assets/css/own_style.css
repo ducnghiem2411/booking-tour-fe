@@ -325,10 +325,12 @@ span.block.edit .btn-edit {
     overflow: hidden;
     height: 75px;
 }
-.user-area .user-menu .nav-link.btn-logout{
+
+.user-area .user-menu .nav-link.btn-logout {
     background: none !important;
     border: none;
 }
+
 .gallery-content .gallery-body {
     display: block;
     width: 100%;
@@ -342,21 +344,22 @@ span.block.edit .btn-edit {
     width: 100%;
     height: 100%;
 }
+
 .single-package-item h3 .title {
     color: #565a5c;
     font-weight: 600;
 }
+
 .single-package-item {
     width: 100%;
-    
 }
 
 .single-package-item .package-img {
     width: 100%;
     height: 292px;
     overflow: hidden;
-   
 }
+
 .single-package-item .package-img img {
     transition: .4s ease-in-out;
 }
@@ -364,7 +367,6 @@ span.block.edit .btn-edit {
 .single-package-item .package-img:hover img {
     transform: scale(1.5);
 }
-
 
 nav.breadcumb {
     display: block;
@@ -388,14 +390,13 @@ nav.breadcumb ul li a:hover {
     text-decoration: underline;
 }
 
-.nav-tabs>li> .box-link {
+.nav-tabs>li>.box-link {
     pointer-events: none;
 }
 
-.top-area.detail{
+.top-area.detail {
     position: relative;
 }
-
 
 .detail .side-bar {
     background: #dddddd;
@@ -421,103 +422,127 @@ nav.breadcumb ul li a:hover {
     font-size: 14px;
     color: #525252;
 }
+
 .detail .info .location span {
     font-size: 18px;
     color: #1879d3;
 }
+
 .detail .info .title .booking:hover {
     background: #0e569a;
 }
 
-
 /* success book modal */
 
-.modal-confirm {		
-	color: #434e65;
-	width: 525px;
+.modal-confirm {
+    color: #434e65;
+    width: 600px;
 }
+
 .modal-confirm .modal-content {
-	padding: 20px;
-	font-size: 16px;
-	border-radius: 5px;
-	border: none;
+    padding: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
 }
+
 .modal-confirm .modal-header {
-	background: #47c9a2;
-	border-bottom: none;   
-	position: relative;
-	text-align: center;
-	margin: -20px -20px 0;
-	border-radius: 5px 5px 0 0;
-	padding: 35px;
+    background: #47c9a2;
+    border-bottom: none;
+    position: relative;
+    text-align: center;
+    margin: -20px -20px 0;
+    border-radius: 5px 5px 0 0;
+    padding: 35px;
 }
+
+.modal-confirm .modal-header.success {
+    background: #47c9a2;
+}
+
+.modal-confirm .modal-header.fail {
+    background: red;
+}
+
 .modal-confirm h4 {
-	text-align: center;
-	font-size: 36px;
-	margin: 10px 0;
+    text-align: center;
+    font-size: 36px;
+    margin: 10px 0 20px 0;
 }
+
 .modal-confirm .form-control, .modal-confirm .btn {
-	min-height: 40px;
-	border-radius: 3px; 
+    min-height: 40px;
+    border-radius: 3px;
 }
+
 .modal-confirm .close {
-	position: absolute;
-	top: 15px;
-	right: 15px;
-	color: #fff;
-	text-shadow: none;
-	opacity: 0.5;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    text-shadow: none;
+    opacity: 0.5;
 }
+
 .modal-confirm .close:hover {
-	opacity: 0.8;
+    opacity: 0.8;
 }
+
 .modal-confirm .icon-box {
-	color: #fff;		
-	width: 95px;
-	height: 95px;
-	display: inline-block;
-	border-radius: 50%;
-	z-index: 9;
-	border: 5px solid #fff;
-	padding: 15px;
-	text-align: center;
+    color: #fff;
+    width: 95px;
+    height: 95px;
+    display: inline-block;
+    border-radius: 50%;
+    z-index: 9;
+    border: 5px solid #fff;
+    padding: 15px;
+    text-align: center;
 }
+
 .modal-confirm .icon-box i {
-	font-size: 64px;
-	margin: -4px 0 0 -4px;
+    font-size: 64px;
+    margin: -4px 0 0 -4px;
 }
+
 .modal-confirm.modal-dialog {
-	margin-top: 80px;
+    margin-top: 80px;
 }
+
 .modal-confirm .btn, .modal-confirm .btn:active {
-	color: #fff;
-	border-radius: 4px;
-	background: #eeb711 !important;
-	text-decoration: none;
-	transition: all 0.4s;
-	line-height: normal;
-	border-radius: 30px;
-	margin-top: 10px;
-	padding: 6px 20px;
-	border: none;
+    color: #fff;
+    border-radius: 4px;
+    background: #eeb711 !important;
+    text-decoration: none;
+    transition: all 0.4s;
+    line-height: normal;
+    border-radius: 30px;
+    margin-top: 10px;
+    padding: 6px 20px;
+    border: none;
 }
+
 .modal-confirm .btn:hover, .modal-confirm .btn:focus {
-	background: #eda645 !important;
-	outline: none;
+    background: #eda645 !important;
+    outline: none;
 }
+
 .modal-confirm .btn span {
-	margin: 1px 3px 0;
-	float: left;
+    margin: 1px 3px 0;
+    float: left;
 }
+
 .modal-confirm .btn i {
-	margin-left: 1px;
-	font-size: 20px;
-	float: right;
+    margin-left: 1px;
+    font-size: 20px;
+    float: right;
 }
+
 .trigger-btn {
-	display: inline-block;
-	margin: 100px auto;
+    display: inline-block;
+    margin: 100px auto;
 }
+
 .single-package-item-txt .location {
     font-weight: 300;
     font-size: 14px;
@@ -531,41 +556,127 @@ nav.breadcumb ul li a:hover {
     margin-right: 5px;
 }
 
-.main-menu .nav li:last-child a:before{
+.main-menu .nav li:last-child a:before {
     display: none;
 }
 
-.modal.status-user {
+.modal.status-user.login {
     display: none;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    /* transform: translate(-50%, -50%); */
-    z-index: 1000;
+    z-index: 100;
+    transition: 1s ease-in;
     width: 100%;
     bottom: 0;
     height: 100%;
     background: #00000070;
 }
-.modal.status-user.active{
+
+.modal.status-user.login.active {
     display: block;
 }
 
-
-.modal.status-user .modal-dialog.modal-confirm.modal-status {
-    position: fixed;
+.modal.status-user.login .modal-dialog.modal-confirm.modal-status {
+    position: absolute;
     top: -100%;
     left: 50%;
+    z-index: 110;
     transform: translate(-50%, -50%);
     opacity: 0;
     margin: 0;
-    transition: 1s ease-out;
+    transition: 1s ease-in-out;
 }
-.modal.status-user .modal-dialog.modal-confirm.modal-status.active{
+
+.modal.status-user.login .modal-dialog.modal-confirm.modal-status.active {
     left: 50%;
     top: 50%;
     opacity: 1;
-    
-    
+    animation: tranform .4s ease-in-out 0s;
+}
+
+.modal.status-user.register {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: 1s ease-in;
+    width: 100%;
+    bottom: 0;
+    height: 100%;
+    background: #00000070;
+}
+
+.modal.status-user.register.active {
+    display: block;
+}
+
+.modal.status-user.register .modal-dialog.modal-confirm.modal-status {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    z-index: 110;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    margin: 0;
+    transition: 1s ease-in-out;
+}
+
+.list-error {
+    display: block;
+    text-align: left;
+    margin: 0 auto;
+}
+
+.list-error li span {
+    color: red;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.list-error li .name {
+    color: grey;
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+.modal.status-user.register .modal-dialog.modal-confirm.modal-status.active {
+    left: 50%;
+    top: 50%;
+    opacity: 1;
+    animation: tranform .4s ease-in-out 0s;
+}
+
+@keyframes tranform {
+    0% {
+        left: 50%;
+        top: -100%;
+        opacity: 0;
+    }
+    100% {
+        left: 50%;
+        top: 50%;
+        opacity: 1;
+    }
+}
+
+.modal-content.login {
+    width: 100% !important;
+}
+
+.error {
+    text-align: center;
+}
+
+.error span {
+    color: red;
+    font-size: 14px;
+}
+
+.error .name {
+    color: grey;
+    margin-left: 5px;
 }

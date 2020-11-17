@@ -2,6 +2,8 @@ import * as type from "../TypeAction";
 
 const initialState = {
     isDisplay: false,
+    isDisplayLoginModal: false,
+    isDisplayRegisterModal: false,
     statusCreateModal: false
 };
 
@@ -13,10 +15,34 @@ export default function displayModalReducer(state = initialState, action) {
         isDisplay: action.status,
       };
       break;
+    case type.SHOW_MODAL_LOGIN:
+      return {
+        ...state,
+        isDisplayLoginModal: action.status,
+      };
+      break;
+    case type.SHOW_MODAL_REGISTER:
+      return {
+        ...state,
+        isDisplayRegisterModal: action.status,
+      };
+      break;
     case type.CLOSE_MODAL:
       return {
         ...state,
         isDisplay: action.status,
+      };
+      break;
+    case type.CLOSE_MODAL_LOGIN:
+      return {
+        ...state,
+        isDisplayLoginModal: action.status,
+      };
+      break;
+    case type.CLOSE_MODAL_REGISTER:
+      return {
+        ...state,
+        isDisplayRegisterModal: action.status,
       };
       break;
     case type.SHOW_CREATE_ACC_MODAL:

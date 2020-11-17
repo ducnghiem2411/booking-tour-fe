@@ -7,9 +7,12 @@ import {
   onChangeStatusCreateAccModal,
   registerRequest,
   loginRequest,
-  onShowModal
+  onShowModalLogin,
+  onShowModalRegister
 } from "../../../redux/actions/index";
-import StatusUserModal from "../Modal/StatusUserModal";
+import StatusUserModal from "../Modal/StatusUserLoginModal";
+import StatusUserLoginModal from "../Modal/StatusUserLoginModal";
+import StatusUserRegisterModal from "../Modal/StatusUserRegisterModal";
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -73,47 +76,53 @@ const Login = (props) => {
     e.preventDefault();
 
     dispatch(registerRequest(userName, email, password));
-    e.target.reset();
+    dispatch(onShowModalRegister(true))
 
+    // dispatch(onShowModal(true))
 
+    setUsername('')
+    setEmail('')
+    setPassword('')
+    setRepassword('')
   };
-
-
-
-
-
   const onLogin = e => {
     e.preventDefault()
     dispatch(loginRequest(emailLogin, passwordLogin));
-    dispatch(onShowModal(true))
+    dispatch(onShowModalLogin(true))
+
+
+
+
+    setEmailLogin("")
+    setPasswordLogin("")
 
     if (loginStatus) {
 
-      
-      // history.push('/')
+
     } else {
-      
+
 
     }
-    setEmailLogin("")
-    setPasswordLogin("")
-    
-
-
-
-
-
-
-
-    // dispatch(onCloseModal(false));
-
 
   }
+
+  useEffect(() => {
+    const isToken = localStorage.getItem("token");
+    if (isToken) {
+      setTimeout(() => {
+        history.push("/");
+
+      }, 2000)
+    }
+
+
+  }, [loginStatus])
 
   return (
 
     <>
-    <StatusUserModal/>
+      <StatusUserLoginModal />
+      <StatusUserRegisterModal />
       <div className="login-page">
         <div className="wrap-modal">
           <div

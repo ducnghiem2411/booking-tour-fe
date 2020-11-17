@@ -6,7 +6,6 @@ const Gallery = (props) => {
   const dispatch = useDispatch();
 
   const { dataCountriesTop } = props.dataCountriesTop;
-  console.log("dataCountriesTop", dataCountriesTop);
 
   useEffect(() => {
     dispatch(fetchTopListDestinationRequest());

@@ -31,6 +31,7 @@ const Packages = (props) => {
   // console.log('dataTour', dataTour)
 
   const onGetDataTourItem = itemTour => {
+    console.log('itemTour', itemTour)
     dispatch(dataItemTourRequest(itemTour))
   }
 

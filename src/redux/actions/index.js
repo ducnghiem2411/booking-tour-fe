@@ -443,9 +443,33 @@ const onShowModal = (status) => {
     status,
   };
 };
+const onShowModalLogin = (status) => {
+  return {
+    type: type.SHOW_MODAL_LOGIN,
+    status,
+  };
+};
+const onShowModalRegister = (status) => {
+  return {
+    type: type.SHOW_MODAL_REGISTER,
+    status,
+  };
+};
 const onCloseModal = (status) => {
   return {
     type: type.CLOSE_MODAL,
+    status,
+  };
+};
+const onCloseModalLogin = (status) => {
+  return {
+    type: type.CLOSE_MODAL_LOGIN,
+    status,
+  };
+};
+const onCloseModalRegister = (status) => {
+  return {
+    type: type.CLOSE_MODAL_REGISTER,
     status,
   };
 };
@@ -507,10 +531,14 @@ export {
   deleteCountryItemSucced,
   updateInfoPlaceItemRequest,
   updateInfoPlaceItemSucced,
+  onCloseModalRegister,
   updateInfoPlaceItemFailed,
   changeStatusEdit,
   deleteCountryItemFailed,
   createCountryRequest,
+  onCloseModalLogin,
+  onShowModalLogin,
+  onShowModalRegister,
   getDataRowTableFailed,
   fetchDataCountryRequest,
   updateInfoTourItemRequest,

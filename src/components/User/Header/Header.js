@@ -1,6 +1,6 @@
-import React, {FormEvent,useEffect, useState} from "react";
-import {connect, useDispatch} from 'react-redux'
-import {onShowModal} from '../../../redux/actions/index';
+import React, { FormEvent, useEffect, useState } from "react";
+import { connect, useDispatch } from 'react-redux'
+import { onShowModal, onLogout } from '../../../redux/actions/index';
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,34 +10,29 @@ import {
 } from "react-router-dom";
 
 const Header = (props) => {
-  // const [in]
 
-  const isToken = localStorage.getItem("token");
 
-  const {token}  = props.token
-
-  const dispatch = useDispatch()
+  const { loginStatus } = props.loginStatus
+  const token = localStorage.getItem("token");
 
 
 
 
 
-  const onShowLoginModal = (e) => {
-    dispatch(onShowModal(true))
 
-  }
 
   const onLogout = () => {
     localStorage.removeItem("token");
     window.location.reload(true);
- 
-    
-    
   }
 
 
+
+
+
+
   return (
-    
+
     <>
       {/* main-menu Start */}
       <header className="top-area detail">
@@ -59,7 +54,7 @@ const Header = (props) => {
               <div className="row">
                 <div className="col-sm-2">
                   <div className="logo">
-                    <Link to = "/">
+                    <Link to="/">
                       tour<span>Nest</span>
                     </Link>
                   </div>
@@ -101,47 +96,46 @@ const Header = (props) => {
                         </li>
                         <li>
                           {
-                            isToken || token ? <div className="user-area dropdown float-right">
-                            <a
-                              href="#"
-                              className="dropdown-toggle"
-                              data-toggle="dropdown"
-                              aria-haspopup="true"
-                              aria-expanded="false"
-                            >
-                              <img
-                                className="user-avatar rounded-circle"
-                                src="/assets/images/admin/admin.jpg"
-                                alt="User Avatar"
-                              />
-                            </a>
-                            <div className="user-menu dropdown-menu">
-                              <a className="nav-link" href="#">
-                                <i className="fa fa-user" /> My Profile
+                            loginStatus || token ? <div className="user-area dropdown float-right">
+                              <a
+                                href="#"
+                                className="dropdown-toggle"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                <img
+                                  className="user-avatar rounded-circle"
+                                  src="/assets/images/admin/admin.jpg"
+                                  alt="User Avatar"
+                                />
                               </a>
-                              <a className="nav-link" href="#">
-                                <i className="fa fa-user" /> Notifications{" "}
-                                <span className="count">13</span>
+                              <div className="user-menu dropdown-menu">
+                                <a className="nav-link" href="#">
+                                  <i className="fa fa-user" /> My Profile
                               </a>
-                              <a className="nav-link" href="#">
-                                <i className="fa fa-cog" /> Settings
+                                <a className="nav-link" href="#">
+                                  <i className="fa fa-user" /> Notifications{" "}
+                                  <span className="count">13</span>
+                                </a>
+                                <a className="nav-link" href="#">
+                                  <i className="fa fa-cog" /> Settings
                               </a>
-                              <button className="nav-link btn-logout" onClick={onLogout}>
-                                <i className="fa fa-power-off" /> Logout
+                                <button className="nav-link btn-logout" onClick={onLogout}>
+                                  <i className="fa fa-power-off" /> Logout
                               </button>
+                              </div>
                             </div>
-                          </div>
 
 
-                            : <Link
-                            to={`/login`}
-                              className="book-btn"
-                              onClick={onShowLoginModal}
-                            >
-                              Login
+                              : <Link
+                                to={`/login`}
+                                className="book-btn"
+                              >
+                                Login
                             </Link>
                           }
-                          
+
                         </li>
                         {/*/.project-btn*/}
                       </ul>
@@ -169,7 +163,8 @@ const Header = (props) => {
 
 
 const mapState = (state) => ({
-  token: state.login
-  
+  token: state.login,
+  loginStatus: state.login
+
 });
-export default connect(mapState) (Header);
+export default connect(mapState)(Header);

@@ -3,7 +3,7 @@ import * as type from "../TypeAction";
 const initialState = {
   loading: false,
   error: false,
-  registerStatus: false,
+  registerStatus: '',
   message: ""
   
 };
@@ -19,13 +19,16 @@ export default function registerReducer(state = initialState, action) {
     case type.REGISTER_SUCCESSED:
       return {
         registerStatus: true,
+        loading: false
       };
 
       break;
     case type.REGISTER_FAILED:
       return {
         error: true,
-        message: action.message
+        registerStatus: false,
+        loading: false,
+        message: action.message.message
       };
 
       break;
