@@ -244,6 +244,36 @@ const fetchDataTourFailed = (message) => {
 
 
 
+
+
+
+
+const bookingTourRequest = (id, name) => {
+  return {
+    type: type.BOOKING_TOUR_REQUEST,
+    payload : {
+      id: id,
+      name: name
+    }
+  };
+};
+
+const bookingTourSucced = (data) => {
+  return {
+    type: type.BOOKING_TOUR_SUCCED,
+    data,
+  };
+};
+
+const bookingTourFailed = (message) => {
+  return {
+    type: type.BOOKING_TOUR_FAILED,
+    message,
+  };
+};
+
+
+
 const updateInfoCountryItemRequest = (id, body) => {
   return {
     type: type.UPDATE_DATA_COUNTRY_REQUESTED,
@@ -298,7 +328,6 @@ const updateInfoPlaceItemFailed = (message) => {
 
 
 const updateInfoTourItemRequest = (countryId, placeId, id, body) => {
-  console.log('body', body)
   return {
     type: type.UPDATE_DATA_TOUR_REQUESTED,
     countryId,
@@ -572,6 +601,9 @@ export {
   getDataRowTableSucced,
   registerSucced,
   showCreateAccModal,
+  bookingTourRequest,
+  bookingTourSucced,
+  bookingTourFailed,
   fetchDataPlaceInCountryRequest,
   fetchTopListDestinationRequest,
   fetchDataPlaceInCountryFailed,

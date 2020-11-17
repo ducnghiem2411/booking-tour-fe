@@ -370,7 +370,10 @@ span.block.edit .btn-edit {
 
 nav.breadcumb {
     display: block;
-    margin: 10px 0;
+    margin-bottom: 10px;
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
 }
 
 nav.breadcumb ul li a {
@@ -379,10 +382,12 @@ nav.breadcumb ul li a {
     font-size: 15px;
     font-weight: 400px !important;
     margin-right: 10px;
+    color: white;
 }
 
 nav.breadcumb ul li span {
     display: inline-block;
+    color: white;
     margin-right: 10px;
 }
 
@@ -397,9 +402,17 @@ nav.breadcumb ul li a:hover {
 .top-area.detail {
     position: relative;
 }
+.detail{
+    background: rgb(245 245 245);
+    padding: 50px 0;
+}
 
 .detail .side-bar {
-    background: #dddddd;
+    background: white;
+}
+.detail .info{
+    background: white;
+    padding: 20px;
 }
 
 .detail .info .title {
@@ -407,6 +420,16 @@ nav.breadcumb ul li a:hover {
     justify-content: space-between;
     align-items: center;
 }
+.detail .info .title .name{
+    font-size: 23px;
+}
+.detail .info .desc {
+    font-size: 15px;
+}
+/* .detail{
+    background: rgb(245 245 245);
+} */
+
 
 .detail .info .title .booking {
     background: #2693f8;
@@ -419,7 +442,7 @@ nav.breadcumb ul li a:hover {
 
 .detail .info .location {
     font-weight: 300;
-    font-size: 14px;
+    font-size: 17px;
     color: #525252;
 }
 
@@ -679,4 +702,93 @@ nav.breadcumb ul li a:hover {
 .error .name {
     color: grey;
     margin-left: 5px;
+}
+
+
+.review h4 {
+    margin: 20px 0;
+}
+
+.list-review .list-item  .img {
+
+    display: block;
+    width: 50px;
+    height: 50px;
+    flex: none;
+    margin-right: 10px;
+}
+.list-review .list-item  .img img{
+    border-radius: 50%;
+    border: 2px solid #747474;
+}
+.list-review .list-item {
+    display: flex;
+  
+}
+
+.list-review .info .review-time p:first-child {
+    font-size: 12px;
+}
+
+
+.list-review .list-item .feedback .name {
+    color: black;
+    font-weight: 600;
+}
+
+.list-review .info .review-time p {
+    margin: 0;
+    padding: 0;
+}
+
+.list-review .info .review-time p {
+    margin: 0;
+    padding: 0;
+}
+
+.list-review .info .review-time p:first-child {
+    font-size: 13px;
+}
+
+.list-review .info .review-time .name {
+    color: black;
+}
+
+
+.list-review {
+    /* display: flex; */
+    /* align-items: center; */
+}
+
+.feedback .star span {
+    color: yellow;
+}
+
+.feedback .feedback-content {
+    font-size: 14px;
+    color: #575757;
+}
+
+.bread-bg {
+    display: block;
+    position: relative;
+    background-image: url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/nature-quotes-1557340276.jpg);
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding-top: 100px;
+}
+
+.bread-bg:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: rgba(0,122,207,.4);
 }

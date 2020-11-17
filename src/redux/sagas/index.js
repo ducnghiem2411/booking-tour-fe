@@ -14,6 +14,7 @@ import getDataRowSaga from './getDataRowSaga'
 import tourSaga from './tourSaga'
 import deleteTourSaga from './deleteTourSaga'
 import updateInfoTourSaga from './updateInfoTourSaga'
+import bookingTourSaga from './bookingTourSaga'
 import fetchTopListDestinationSaga from './fetchTopListDestinationSaga'
 
 export default function* rootSaga() {
@@ -33,7 +34,8 @@ export default function* rootSaga() {
         fetchTopListDestinationSaga(),
         updateInfoPlaceSaga(),
         updateInfoTourSaga(),
-        getDataRowSaga()
+        getDataRowSaga(),
+        bookingTourSaga()
         
     ])
 }

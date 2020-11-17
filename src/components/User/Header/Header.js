@@ -1,6 +1,6 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import { connect, useDispatch } from 'react-redux'
-import { onShowModal, onLogout } from '../../../redux/actions/index';
+import { connect, useDispatch } from "react-redux";
+import { onShowModal, onLogout } from "../../../redux/actions/index";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,32 +10,18 @@ import {
 } from "react-router-dom";
 
 const Header = (props) => {
-
-
-  const { loginStatus } = props.loginStatus
+  const { loginStatus } = props.loginStatus;
   const token = localStorage.getItem("token");
-
-
-
-
-
-
 
   const onLogout = () => {
     localStorage.removeItem("token");
     window.location.reload(true);
-  }
-
-
-
-
-
+  };
 
   return (
-
     <>
       {/* main-menu Start */}
-      <header className="top-area detail">
+      <header className="top-area">
         <div
           id="sticky-wrapper"
           className="sticky-wrapper is-sticky"
@@ -95,8 +81,8 @@ const Header = (props) => {
                           <a href="#subs">subscription</a>
                         </li>
                         <li>
-                          {
-                            loginStatus || token ? <div className="user-area dropdown float-right">
+                          {loginStatus || token ? (
+                            <div className="user-area dropdown float-right">
                               <a
                                 href="#"
                                 className="dropdown-toggle"
@@ -113,29 +99,27 @@ const Header = (props) => {
                               <div className="user-menu dropdown-menu">
                                 <a className="nav-link" href="#">
                                   <i className="fa fa-user" /> My Profile
-                              </a>
+                                </a>
                                 <a className="nav-link" href="#">
                                   <i className="fa fa-user" /> Notifications{" "}
                                   <span className="count">13</span>
                                 </a>
                                 <a className="nav-link" href="#">
                                   <i className="fa fa-cog" /> Settings
-                              </a>
-                                <button className="nav-link btn-logout" onClick={onLogout}>
+                                </a>
+                                <button
+                                  className="nav-link btn-logout"
+                                  onClick={onLogout}
+                                >
                                   <i className="fa fa-power-off" /> Logout
-                              </button>
+                                </button>
                               </div>
                             </div>
-
-
-                              : <Link
-                                to={`/login`}
-                                className="book-btn"
-                              >
-                                Login
+                          ) : (
+                            <Link to={`/login`} className="book-btn">
+                              Login
                             </Link>
-                          }
-
+                          )}
                         </li>
                         {/*/.project-btn*/}
                       </ul>
@@ -161,10 +145,8 @@ const Header = (props) => {
   );
 };
 
-
 const mapState = (state) => ({
   token: state.login,
-  loginStatus: state.login
-
+  loginStatus: state.login,
 });
 export default connect(mapState)(Header);

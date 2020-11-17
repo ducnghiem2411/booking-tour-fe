@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
-import { dataItemTourRequest, fetchDataTourRequest } from "../../../redux/actions";
+import { dataItemTourRequest, fetchDataTourRequest,bookingTourRequest } from "../../../redux/actions";
 import { Spin, Alert, Popconfirm, notification } from "antd";
 import formatPrice from "./../../../utilies/FormatNumber";
 import Pagination from "./../Pagination/Pagination";
@@ -33,6 +33,11 @@ const Packages = (props) => {
   const onGetDataTourItem = itemTour => {
     console.log('itemTour', itemTour)
     dispatch(dataItemTourRequest(itemTour))
+  }
+
+  const onBookingTour = (itemTour) => {
+    dispatch(bookingTourRequest(itemTour._id, itemTour.name))
+
   }
 
   return (
@@ -74,7 +79,7 @@ const Packages = (props) => {
                                 : ""}
                             </p>
                           </div>
-                          <p className="location">
+                          <p className="location">  
                             {" "}
                             <span>
                               <i className="fa fa-map-marker"></i>
@@ -82,7 +87,7 @@ const Packages = (props) => {
                             {itemTour && itemTour.place}
                           </p>
                           <div className="about-btn">
-                            <button className="about-view packages-btn" href="#myModal" data-toggle="modal" >
+                            <button className="about-view packages-btn" onClick={ () =>  onBookingTour(itemTour)}>
                               book now
                             </button>
                             <span className="pull-right">
