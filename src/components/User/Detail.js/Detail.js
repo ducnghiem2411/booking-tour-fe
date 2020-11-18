@@ -1,24 +1,31 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import SuccessBookModal from "../Modal/SuccessBookModal";
+import SuccessBookModal from "../Modal/StatusBookingTourModal";
 import { Form, Input, Button, Rate , Checkbox } from "antd";
 import Review from "../Review/Review";
+import {fetchInfoTourRequest} from './../../../redux/actions'
+import { useParams , useRouteMatch} from "react-router-dom";
+import ReviewsList from "../Review/ReviewsList";
 
 const Detail = (props) => {
   const { itemTour } = props.itemTour;
+ 
+
+
+
 
   
 
   return (
     <>
-      <SuccessBookModal />
+      {/* <SuccessBookModal /> */}
       <Header />
       <Breadcrumb />
 
-      <div className="detail">
+      <div className= "detail ">
         <div className="body">
           <div className="container">
             <div className="row">
@@ -63,29 +70,7 @@ const Detail = (props) => {
                     <h4>Reviews</h4>
                     <Review itemTour ={itemTour} />
 
-                    <div className="list-review">
-                      <div className="list-item">
-                        <div className="img">
-                          <img src="https://via.placeholder.com/50x50" />
-                        </div>
-                        <div className="feedback">
-                          <div className="name">Tom holand</div>
-                          <div className="star">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                          </div>
-                          <p className="feedback-content">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                    <ReviewsList/>
                   </div>
                 </div>
               </div>

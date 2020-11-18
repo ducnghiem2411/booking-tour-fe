@@ -10,7 +10,7 @@ const Review = props => {
     const dispatch = useDispatch()
 
 
-    const onFinish = (values) => {
+    const onSubmit = (values) => {
 
         dispatch(submitUserReviewRequest(values.review, values.rate, itemTour._id, itemTour.placeId))
         
@@ -20,7 +20,7 @@ const Review = props => {
 
         <>
     <div className="client-review">
-                      <Form onFinish={onFinish}>
+                      <Form onFinish={onSubmit}>
                         <Form.Item
                           label="Name"
                           name="username"

@@ -39,6 +39,8 @@ const Country = (props) => {
   const { statusCreate } = props.statusCreate;
   const { message } = props.message;
 
+ 
+
   const handleChange = (pagination, filters, sorter) => {
     // console.log('Various parameters', pagination, filters, sorter);
     setFilteredInfo(filters);

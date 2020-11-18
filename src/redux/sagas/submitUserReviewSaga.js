@@ -19,7 +19,14 @@ export function* submitUserReviewInSaga(action) {
    }
   
   try {
-    const response = yield call(axios.post, apiUrl, reviewUser);
+
+    const token = JSON.parse(localStorage.getItem('token'))
+    const headerAuth = {
+      headers: { Authorization: 'Bearer ' + token }
+  };
+
+
+    const response = yield call(axios.post, apiUrl, reviewUser, headerAuth);
 
     if (response) {
       console.log('response', response)

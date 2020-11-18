@@ -39,7 +39,7 @@ const Gallery = (props) => {
                                   src="https://via.placeholder.com/272x153"
                                 />
                                 <div className="item-title">
-                                  <a href="#"> {itemCountry.country} </a>
+                                  <a to={`/detail`}> {itemCountry.country} </a>
                                   <p>
                                     <span> {itemCountry.totalTour}  tours</span>
                                   </p>

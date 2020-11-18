@@ -4,7 +4,6 @@ import Blog from './Blog/Blog'
 import Footer from './Footer/Footer'
 import Gallery from './Gallery/Gallery'
 import Header from './Header/Header'
-import Modal from './Modal/Modal'
 import Packages from './Packages/Packages'
 import Service from './Service/Service'
 import Subscribe from './Subscribe/Subscribe'
@@ -15,7 +14,7 @@ import Box from './Travel_Box/Box'
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import routes from '../../routes'
-import SuccessBookModal from './Modal/SuccessBookModal'
+import SuccessBookModal from './Modal/StatusBookingTourModal'
 
 
 // import './asse'
@@ -43,7 +42,7 @@ const User = () => {
     return (
         <>
             {/* <Modal/> */}
-            <SuccessBookModal />
+            {/* <SuccessBookModal /> */}
             <Header />
             <About/>
             <Box/>
@@ -54,7 +53,9 @@ const User = () => {
             <Blog/>
             <Subscribe/>
             <Footer/>
-            <Switch>{showContentMenu(routes)}</Switch>
+           <Router >
+           <Switch>{showContentMenu(routes)}</Switch>
+           </Router>
         </>
     )
 

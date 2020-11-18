@@ -4,6 +4,7 @@ const initialState = {
     isDisplay: false,
     isDisplayLoginModal: false,
     isDisplayRegisterModal: false,
+    isDisplayBookingModal: false,
     statusCreateModal: false
 };
 
@@ -13,6 +14,7 @@ export default function displayModalReducer(state = initialState, action) {
       return {
         ...state,
         isDisplay: action.status,
+        isDisplayBookingModal: action.status,
       };
       break;
     case type.SHOW_MODAL_LOGIN:
@@ -31,6 +33,7 @@ export default function displayModalReducer(state = initialState, action) {
       return {
         ...state,
         isDisplay: action.status,
+        isDisplayBookingModal: action.status,
       };
       break;
     case type.CLOSE_MODAL_LOGIN:

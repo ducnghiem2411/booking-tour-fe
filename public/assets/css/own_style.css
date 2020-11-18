@@ -585,7 +585,7 @@ nav.breadcumb ul li a:hover {
 
 .modal.status-user.login {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -615,6 +615,7 @@ nav.breadcumb ul li a:hover {
 .modal.status-user.login .modal-dialog.modal-confirm.modal-status.active {
     left: 50%;
     top: 50%;
+    transform: translate(-50%, -50%);
     opacity: 1;
     animation: tranform .4s ease-in-out 0s;
 }

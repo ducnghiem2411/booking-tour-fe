@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
-import { dataItemTourRequest, fetchDataTourRequest,bookingTourRequest } from "../../../redux/actions";
+import {
+  dataItemTourRequest,
+  fetchDataTourRequest,
+  bookingTourRequest,
+  onShowModalLogin,
+  onShowModal,
+  onCloseModal,
+} from "../../../redux/actions";
 import { Spin, Alert, Popconfirm, notification } from "antd";
 import formatPrice from "./../../../utilies/FormatNumber";
 import Pagination from "./../Pagination/Pagination";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import StatusBookingTourModal from "../Modal/StatusBookingTourModal";
 
 const Packages = (props) => {
   const { dataTour } = props.dataTour;
+  const { loginStatus } = props.loginStatus;
   const { loading } = props.loading;
   const dispatch = useDispatch();
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(2);
+
+  const { bookingTourStatus } = props.bookingTourStatus;
+
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(fetchDataTourRequest());
@@ -30,18 +43,32 @@ const Packages = (props) => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   // console.log('dataTour', dataTour)
 
-  const onGetDataTourItem = itemTour => {
-    console.log('itemTour', itemTour)
-    dispatch(dataItemTourRequest(itemTour))
-  }
+  const onGetDataTourItem = (itemTour) => {
+    dispatch(dataItemTourRequest(itemTour));
+    // console.log('itemTour', itemTour)
+  };
 
   const onBookingTour = (itemTour) => {
-    dispatch(bookingTourRequest(itemTour._id, itemTour.name))
+    const token = localStorage.getItem("token");
 
-  }
+    if (!token) {
+      history.push("/login");
+    } else {
+      dispatch(bookingTourRequest(itemTour._id, itemTour.name));
+      dispatch(onShowModal(true));
+    }
+  };
 
   return (
     <>
+      <StatusBookingTourModal />
+
+      <script>
+        {
+        window.addEventListener("scroll", () => dispatch(onCloseModal(false)) )
+        }
+      </script>
+
       <section id="pack" className="packages">
         <div className="container">
           <div className="gallary-header text-center">
@@ -68,7 +95,11 @@ const Packages = (props) => {
 
                         <div className="single-package-item-txt">
                           <h3>
-                            <Link className="title" to={`/detail`}  onClick={ () => onGetDataTourItem(itemTour) } >
+                            <Link
+                              className="title"
+                              to={`/detail/${itemTour._id}`}
+                              onClick={() => onGetDataTourItem(itemTour)}
+                            >
                               <span>{itemTour ? itemTour.name : ""}</span>
                             </Link>
                           </h3>
@@ -79,7 +110,7 @@ const Packages = (props) => {
                                 : ""}
                             </p>
                           </div>
-                          <p className="location">  
+                          <p className="location">
                             {" "}
                             <span>
                               <i className="fa fa-map-marker"></i>
@@ -87,7 +118,10 @@ const Packages = (props) => {
                             {itemTour && itemTour.place}
                           </p>
                           <div className="about-btn">
-                            <button className="about-view packages-btn" onClick={ () =>  onBookingTour(itemTour)}>
+                            <button
+                              className="about-view packages-btn"
+                              onClick={() => onBookingTour(itemTour)}
+                            >
                               book now
                             </button>
                             <span className="pull-right">
@@ -115,6 +149,8 @@ const Packages = (props) => {
 const mapState = (state) => ({
   dataTour: state.tour,
   loading: state.tour,
+  loginStatus: state.login,
+  bookingTourStatus: state.tour,
 });
 
 export default connect(mapState)(Packages);

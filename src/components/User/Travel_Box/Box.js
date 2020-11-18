@@ -3,7 +3,6 @@ import React from "react";
 const Box = () => {
   return (
     <>
-      {/*travel-box start*/}
       <section className="travel-box">
         <div className="container">
           <div className="row">
@@ -48,7 +47,6 @@ const Box = () => {
                       </a>
                     </li>
                   </ul>
-                  {/* Tab panes */}
                   <div className="tab-content">
                     <div
                       role="tabpanel"
@@ -57,6 +55,7 @@ const Box = () => {
                     >
                       <div className="tab-para">
                         <div className="row">
+                          
                           <div className="col-lg-4 col-md-4 col-sm-12">
                             <div className="single-tab-select-box">
                               <h2>destination</h2>
@@ -65,25 +64,17 @@ const Box = () => {
                                   <option value="default">
                                     enter your destination country
                                   </option>
-                                  {/* /.option*/}
                                   <option value="turkey">turkey</option>
-                                  {/* /.option*/}
                                   <option value="russia">russia</option>
-                                  {/* /.option*/}
                                   <option value="egept">egypt</option>
-                                  {/* /.option*/}
                                 </select>
-                                {/* /.select*/}
                               </div>
-                              {/* /.travel-select-icon */}
                               <div className="travel-select-icon">
                                 <select className="form-control ">
                                   <option value="default">
                                     enter your destination location
                                   </option>
-                                  {/* /.option*/}
                                   <option value="istambul">istambul</option>
-                                  {/* /.option*/}
                                   <option value="mosko">mosko</option>
                                   {/* /.option*/}
                                   <option value="cairo">cairo</option>

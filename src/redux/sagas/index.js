@@ -17,6 +17,8 @@ import updateInfoTourSaga from './updateInfoTourSaga'
 import bookingTourSaga from './bookingTourSaga'
 import fetchTopListDestinationSaga from './fetchTopListDestinationSaga'
 import submitUserReviewSaga from './submitUserReviewSaga'
+import fetchInfoTourSaga from './fetchInfoTourSaga'
+import fetchReviewsListSaga from './fetchReviewsListSaga'
 
 export default function* rootSaga() {
     yield all([
@@ -35,9 +37,11 @@ export default function* rootSaga() {
         fetchTopListDestinationSaga(),
         updateInfoPlaceSaga(),
         updateInfoTourSaga(),
+        fetchInfoTourSaga(),
         getDataRowSaga(),
         bookingTourSaga(),
-        submitUserReviewSaga()
+        submitUserReviewSaga(),
+        fetchReviewsListSaga(),
         
     ])
 }

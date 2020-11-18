@@ -21,15 +21,19 @@ export function* bookingTourInSaga(action) {
     
 
   try {
+    const token = JSON.parse(localStorage.getItem('token'))
+    const headerAuth = {
+      headers: { Authorization: 'Bearer ' + token }
+  };
     
-    const response = yield call(axios.post, apiUrl, tour);
+    
+    const response = yield call(axios.post, apiUrl, tour, headerAuth);
 
-    if (response) {
-      console.log('response', response)
-      // yield put(bookingTourSucced(action.id));
+    if (response && response.data) {
+      yield put(bookingTourSucced());
     }
   } catch (error) {
-    yield put(bookingTourFailed(error));
+    yield put(bookingTourFailed(error.response.data.message));
   }
 }
 

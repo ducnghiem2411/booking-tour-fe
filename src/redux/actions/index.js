@@ -251,6 +251,68 @@ const fetchDataTourFailed = (message) => {
 
 
 
+const fetchInfoTourRequest = (id) => {
+  return {
+    type: type.FETCH_INFO_TOUR_REQUEST,
+    id
+  };
+};
+
+const fetchInfoTourSucced = (data) => {
+  return {
+    type: type.FETCH_INFO_TOUR_SUCCED,
+    data,
+  };
+};
+
+const fetchInfoTourFailed = (message) => {
+  return {
+    type: type.FETCH_INFO_TOUR_FAILED,
+    message,
+  };
+};
+
+
+
+
+
+
+
+
+
+
+
+
+const fetchReviewsListRequest = (id) => {
+  return {
+    type: type.FETCH_REVIEWS_LIST_REQUEST,
+    id
+  };
+};
+
+const fetchReviewsListSucced = (data) => {
+  return {
+    type: type.FETCH_REVIEWS_LIST_SUCCED,
+    data,
+  };
+};
+
+const fetchReviewsListFailed = (message) => {
+  return {
+    type: type.FETCH_REVIEWS_LIST_FAILED,
+    message,
+  };
+};
+
+
+
+
+
+
+
+
+
+
 
 const submitUserReviewRequest = (review, rate, tourId, placeId) => {
   return {
@@ -597,6 +659,9 @@ export {
   deleteCountryItemSucced,
   updateInfoPlaceItemRequest,
   updateInfoPlaceItemSucced,
+  fetchReviewsListRequest,
+  fetchReviewsListSucced,
+  fetchReviewsListFailed,
   onCloseModalRegister,
   updateInfoPlaceItemFailed,
   changeStatusEdit,
@@ -611,6 +676,10 @@ export {
   updateInfoTourItemSucced,
   updateInfoTourItemFailed,
   sendDataRowIntoStore,
+  fetchInfoTourRequest,
+  fetchInfoTourSucced,
+  fetchInfoTourFailed,
+
   fetchDataCountrySucced,
   fetchDataCountryFailed,
   updateInfoCountryItemSucced,
