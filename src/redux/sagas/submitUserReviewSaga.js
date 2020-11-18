@@ -2,7 +2,7 @@ import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import * as type from "../TypeAction";
 import axios from "axios";
 
-import { registerSucced, registerFailed, submitUserReviewFailed } from "../actions/index";
+import { registerSucced, registerFailed, submitUserReviewFailed, submitUserReviewSucced } from "../actions/index";
 
 const apiUrl = "http://localhost:8000/reviews";
 
@@ -29,11 +29,10 @@ export function* submitUserReviewInSaga(action) {
     const response = yield call(axios.post, apiUrl, reviewUser, headerAuth);
 
     if (response) {
-      console.log('response', response)
-      // yield put(submitUserReviewSucced());  
+      yield put(submitUserReviewSucced(response.data.data));  
     }
   } catch (error) {
-    yield put(submitUserReviewFailed(error.response.data));
+    yield put(submitUserReviewFailed(error));
     
     
   }

@@ -12,7 +12,7 @@ import ReviewsList from "../Review/ReviewsList";
 
 const Detail = (props) => {
   const { itemTour } = props.itemTour;
- 
+
 
 
 
@@ -70,7 +70,7 @@ const Detail = (props) => {
                     <h4>Reviews</h4>
                     <Review itemTour ={itemTour} />
 
-                    <ReviewsList/>
+                    <ReviewsList itemTour ={itemTour}/>
                   </div>
                 </div>
               </div>

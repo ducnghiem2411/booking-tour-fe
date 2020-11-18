@@ -15,7 +15,7 @@ import {
 
 export function* fetchReviewsListInSaga(action) {
 
-  const apiUrl = "http://localhost:8000/reviews"
+  const apiUrl = `http://localhost:8000/reviews/${action.id}`
 
   try {
     
@@ -23,8 +23,7 @@ export function* fetchReviewsListInSaga(action) {
 
 
     if (response) {
-      console.log('response', response)
-      // yield put(fetchReviewsListSucced(response.data));
+      yield put(fetchReviewsListSucced(response.data.data));
     }
   } catch (error) {
     yield put(fetchReviewsListFailed(error));

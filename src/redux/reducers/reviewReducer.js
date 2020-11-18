@@ -21,9 +21,9 @@ export default function reviewReducer(state = initialState, action) {
 
     case type.SUBMIT_USER_REVIEW_SUCCED:
      
-      state.dataCountry.data.push(action.data);
+      state.reviewsList.push(action.data);
       state.loading = false;
-      state.statusCreate = true;
+      
       return { ...state };
 
     case type.SUBMIT_USER_REVIEW_FAILED:
@@ -31,7 +31,29 @@ export default function reviewReducer(state = initialState, action) {
         ...state,
         error: true,
         loading: false,
-        message: action.message.data.message,
+        // message: action.message.data.message,
+      };
+
+    case type.FETCH_REVIEWS_LIST_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case type.FETCH_REVIEWS_LIST_SUCCED:
+      return {
+        ...state,
+        loading: false,
+        reviewsList: action.data
+      }
+     
+    
+    case type.FETCH_REVIEWS_LIST_FAILED:
+      return {
+        ...state,
+        error: true,
+        loading: false,
+        // message: action.message.data.message,
       };
 
 
