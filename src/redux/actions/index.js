@@ -42,6 +42,9 @@ const fetchTopListDestinationFailed = (message) => {
     message
   };
 };
+
+
+
 const loginRequest = (email, password) => {
   return {
     type: type.LOGIN_REQUESTED,
@@ -64,6 +67,32 @@ const loginFailed = (message) => {
     message,
   };
 };
+
+
+
+
+
+const updateLoginRequest = () => {
+  return {
+    type: type.UPDATE_LOGIN_REQUEST,
+    
+  };
+};
+
+const updateLoginSucced = (token) => {
+  return {
+    type: type.UPDATE_LOGIN_SUCCESS,
+    token,
+  };
+};
+const updateLoginFailed = (message) => {
+  return {
+    type: type.UPDATE_LOGIN_FAILED,
+    message,
+  };
+};
+
+
 
 const registerRequest = (username, email, password) => {
   return {
@@ -718,6 +747,9 @@ export {
   fetchDataPlaceInCountryFailed,
   onChangeStatusCreateAccModal,
   registerFailed,
+  updateLoginRequest,
+  updateLoginSucced,
+  updateLoginFailed,
   onCloseModal,
   onShowModal,
   onUpdateStatusError,

@@ -32,7 +32,7 @@ export function* submitUserReviewInSaga(action) {
       yield put(submitUserReviewSucced(response.data.data));  
     }
   } catch (error) {
-    yield put(submitUserReviewFailed(error));
+    yield put(submitUserReviewFailed(error.response.data.message));
     
     
   }

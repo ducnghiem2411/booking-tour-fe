@@ -1,6 +1,10 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
-import { onShowModal, onLogout } from "../../../redux/actions/index";
+import {
+  onShowModal,
+  onLogout,
+  updateLoginRequest,
+} from "../../../redux/actions/index";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,6 +15,7 @@ import {
 
 const Header = (props) => {
   const { loginStatus } = props.loginStatus;
+  const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
   const onLogout = () => {
@@ -18,12 +23,15 @@ const Header = (props) => {
     window.location.reload(true);
   };
 
+  useEffect(() => {
+    
+
+    if (token) {
+      dispatch(updateLoginRequest());
+    }
+  }, []);
   return (
     <>
-
-
-      
-
       {/* main-menu Start */}
       <header className="top-area">
         <div

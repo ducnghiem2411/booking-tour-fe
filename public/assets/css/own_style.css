@@ -709,7 +709,10 @@ nav.breadcumb ul li a:hover {
 }
 
 .review h4 {
-    margin: 20px 0;
+    /* margin: 20px 0; */
+}
+.ant-list-vertical .ant-list-item-meta-title{
+    margin: 0;
 }
 
 .list-review .list-item  .img {

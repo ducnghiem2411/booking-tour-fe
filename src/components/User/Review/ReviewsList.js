@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { fetchReviewsListRequest } from "../../../redux/actions";
-import { Rate } from 'antd';
+import { Rate, List, Avatar} from 'antd';
 
 const ReviewsList = (props) => {
   const { reviewsList } = props.reviewsList;
@@ -10,12 +10,40 @@ const ReviewsList = (props) => {
   const { itemTour } = props;
 
   useEffect(() => {
+    // console.log("Effect review list")
     dispatch(fetchReviewsListRequest(itemTour.placeId));
   }, []);
+  // console.log('reviewsList', reviewsList)
 
   return (
     <>
-      <div className="list-review">
+
+<List
+    itemLayout="vertical"
+    size="large"
+    pagination={{
+      onChange: (page) => {
+        console.log(page);
+      },
+      pageSize: 3
+    }}
+    dataSource={reviewsList}
+    renderItem={(item) => (
+      <List.Item key={item._id}>
+        <List.Item.Meta
+        avatar={<Avatar src="https://via.placeholder.com/50x50" />}
+        title={<div className="name">{item.username}</div>}
+        description={<Rate disabled  allowHalf defaultValue={item ? item.star : 1} />}
+        />
+          {item ? item.content : ""}
+      </List.Item>
+    )}
+  />
+
+
+    
+
+      {/* <div className="list-review">
         {reviewsList &&
           reviewsList.map((item, index) => {
             return (
@@ -31,7 +59,7 @@ const ReviewsList = (props) => {
               </div>
             );
           })}
-      </div>
+      </div> */}
     </>
   );
 };
