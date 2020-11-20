@@ -1,38 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import OwlCarousel from "react-owl-carousel";
 import { Carousel } from "antd";
+import { connect, useDispatch } from "react-redux";
+import index from "../../Admin";
+import { fetchReviewsListRequest } from "../../../redux/actions";
 
-const Testemonial = () => {
-  // const responsive = {
-  //   nav: true,
-  //   autoplay: true,
-  //   // breakpoint from 0 up
-  //   0: {
-  //     items: 1,
-  //   },
-  //   // breakpoint from 480 up
-  //   414: {
-  //     items: 1,
-  //   },
-  //   // breakpoint from 768 up
-  //   768: {
-  //     items: 2,
-  //   },
-  //   1024: {
-  //     items: 3,
-  //   },
-  // };
+const Testemonial = props => {
 
-  const contentStyle = {
-    height: "160px",
-    color: "#fff",
-    lineHeight: "160px",
-    textAlign: "center",
-    background: "#364d79"
-  };
-  
+  const dispatch = useDispatch()
+  const {allReviews} = props.allReviews
 
 
+
+  useEffect(() => {
+   dispatch(fetchReviewsListRequest())
+  }, [])
   return (
     <>
       <section className="testemonial">
@@ -43,30 +25,21 @@ const Testemonial = () => {
               Duis aute irure dolor in velit esse cillum dolore eu fugiat nulla.
             </p>
           </div>
-          <Carousel autoplay draggable={true} slidesPerRow={3}>
-            <div>
-              <h3 style={contentStyle}>1</h3>
-            </div>
-            <div>
-              <h3 style={contentStyle}>2</h3>
-            </div>
-            <div>
-              <h3 style={contentStyle}>3</h3>
-            </div>
-            <div>
-              <h3 style={contentStyle}>1</h3>
-            </div>
-            <div>
-              <h3 style={contentStyle}>2</h3>
-            </div>
-            <div>
-              <h3 style={contentStyle}>3</h3>
-            </div>
-            
-          </Carousel>
-          ,
-          {/* <OwlCarousel className="owl-theme" loop margin={10} responsive={responsive} >
-            <div className="home1-testm item">
+
+          <OwlCarousel
+            className="owl-theme"
+            loop
+            autoplay
+            nav
+            dots
+            margin={10}
+            // responsive={responsive}
+          >
+
+            {
+              allReviews && allReviews.map((item, index) => {
+                return (
+<div className="home1-testm item" key={item._id}>
               <div className="home1-testm-single text-center">
                 <div className="home1-testm-img">
                   <img src="assets/images/client/testimonial1.jpg" alt="img" />
@@ -76,22 +49,29 @@ const Testemonial = () => {
                     <i className="fa fa-quote-left" aria-hidden="true" />
                   </span>
                   <p>
-                    Lorem ipsum dolor sit amet, contur adip elit, sed do mod
-                    incid ut labore et dolore magna aliqua. Ut enim ad minim
-                    veniam.
+                    {item ? item.content : ''}
                   </p>
                   <h3>
-                    <a href="#">kevin watson</a>
+                    <a href="#"> {item.username} </a>
                   </h3>
-                  <h4>london, england</h4>
                 </div>
               </div>
             </div>
-          </OwlCarousel> */}
+                )
+              })
+            }
+            
+            
+           
+          </OwlCarousel>
         </div>
       </section>
     </>
   );
 };
 
-export default Testemonial;
+const mapState = state => ({
+  allReviews: state.review
+})
+
+export default connect(mapState) (Testemonial);

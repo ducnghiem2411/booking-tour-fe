@@ -1,5 +1,5 @@
 import * as type from "../TypeAction";
-import { Button, notification, Divider, Space } from 'antd';
+import { Button, notification, Divider, Space } from "antd";
 
 const fetchDataPlaceInCountryRequest = (id) => {
   return {
@@ -20,6 +20,25 @@ const fetchDataPlaceInCountryFailed = (message) => {
     message,
   };
 };
+
+const fetchReviewsRequest = () => {
+  return {
+    type: type.FETCH_REVIEWS_REQUEST,
+  };
+};
+
+const fetchReviewsSucced = (data) => {
+  return {
+    type: type.FETCH_REVIEWS_SUCCED,
+    data,
+  };
+};
+const fetchReviewsFailed = (message) => {
+  return {
+    type: type.FETCH_REVIEWS_FAILED,
+    message,
+  };
+};
 const fetchTopListDestinationRequest = () => {
   return {
     type: type.FETCH_TOP_LIST_DESTINATION_REQUESTED,
@@ -28,23 +47,21 @@ const fetchTopListDestinationRequest = () => {
 const dataItemTourRequest = (itemTour) => {
   return {
     type: type.DATA_ITEM_TOUR_REQUESTED,
-    itemTour
+    itemTour,
   };
 };
 const fetchTopListDestinationSucced = (data) => {
   return {
     type: type.FETCH_TOP_LIST_DESTINATION_SUCCED,
-    data
+    data,
   };
 };
 const fetchTopListDestinationFailed = (message) => {
   return {
     type: type.FETCH_TOP_LIST_DESTINATION_FAILED,
-    message
+    message,
   };
 };
-
-
 
 const loginRequest = (email, password) => {
   return {
@@ -69,14 +86,9 @@ const loginFailed = (message) => {
   };
 };
 
-
-
-
-
 const updateLoginRequest = () => {
   return {
     type: type.UPDATE_LOGIN_REQUEST,
-    
   };
 };
 
@@ -92,8 +104,6 @@ const updateLoginFailed = (message) => {
     message,
   };
 };
-
-
 
 const registerRequest = (username, email, password) => {
   return {
@@ -118,8 +128,6 @@ const registerRequest = (username, email, password) => {
 //     },
 //   };
 // };
-
-
 
 const createPlaceRequest = (countryId, country, name, description) => {
   return {
@@ -146,11 +154,18 @@ const createPlaceFailed = (message) => {
   };
 };
 
-
-
-
-
-const createTourRequest = (countryId, countryName, placeId,  placeName, tourName, checkIn, checkOut, price, member, description) => {
+const createTourRequest = (
+  countryId,
+  countryName,
+  placeId,
+  placeName,
+  tourName,
+  checkIn,
+  checkOut,
+  price,
+  member,
+  description
+) => {
   return {
     type: type.CREATE_TOUR_REQUESTED,
     payload: {
@@ -180,8 +195,6 @@ const createTourFailed = (message) => {
     message,
   };
 };
-
-
 
 const createCountryRequest = (name, description) => {
   return {
@@ -226,8 +239,6 @@ const fetchDataCountryFailed = (message) => {
   };
 };
 
-
-
 const fetchDataPlaceRequest = () => {
   return {
     type: type.FETCH_PLACE_REQUEST,
@@ -247,10 +258,6 @@ const fetchDataPlaceFailed = (message) => {
     message,
   };
 };
-
-
-
-
 
 const fetchDataTourRequest = () => {
   return {
@@ -272,19 +279,10 @@ const fetchDataTourFailed = (message) => {
   };
 };
 
-
-
-
-
-
-
-
-
-
 const fetchInfoTourRequest = (id) => {
   return {
     type: type.FETCH_INFO_TOUR_REQUEST,
-    id
+    id,
   };
 };
 
@@ -302,21 +300,10 @@ const fetchInfoTourFailed = (message) => {
   };
 };
 
-
-
-
-
-
-
-
-
-
-
-
 const fetchReviewsListRequest = (id) => {
   return {
     type: type.FETCH_REVIEWS_LIST_REQUEST,
-    id
+    id,
   };
 };
 
@@ -334,16 +321,6 @@ const fetchReviewsListFailed = (message) => {
   };
 };
 
-
-
-
-
-
-
-
-
-
-
 const submitUserReviewRequest = (review, rate, tourId, placeId) => {
   return {
     type: type.SUBMIT_USER_REVIEW_REQUEST,
@@ -351,9 +328,23 @@ const submitUserReviewRequest = (review, rate, tourId, placeId) => {
       review: review,
       rate: rate,
       tourId: tourId,
-      placeId: placeId
-    }
-    
+      placeId: placeId,
+    },
+  };
+};
+const resetStateInStore = () => {
+  return {
+    type: type.RESET_STATE_IN_STORE,
+  };
+};
+const resetStatusBookingTour = () => {
+  return {
+    type: type.RESET_STATUS_BOOKING_TOUR,
+  };
+};
+const resetLoginStatus = () => {
+  return {
+    type: type.RESET_LOGIN_STATUS,
   };
 };
 
@@ -371,19 +362,13 @@ const submitUserReviewFailed = (message) => {
   };
 };
 
-
-
-
-
-
-
 const bookingTourRequest = (id, name) => {
   return {
     type: type.BOOKING_TOUR_REQUEST,
-    payload : {
+    payload: {
       id: id,
-      name: name
-    }
+      name: name,
+    },
   };
 };
 
@@ -400,8 +385,6 @@ const bookingTourFailed = (message) => {
     message,
   };
 };
-
-
 
 const updateInfoCountryItemRequest = (id, body) => {
   return {
@@ -425,14 +408,11 @@ const updateInfoCountryItemFailed = (message) => {
   };
 };
 
-
-
-
 const updateInfoPlaceItemRequest = (id, body) => {
   return {
     type: type.UPDATE_DATA_PLACE_REQUESTED,
     id,
-    body
+    body,
   };
 };
 
@@ -450,24 +430,17 @@ const updateInfoPlaceItemFailed = (message) => {
   };
 };
 
-
-
-
-
-
-
 const updateInfoTourItemRequest = (countryId, placeId, id, body) => {
   return {
     type: type.UPDATE_DATA_TOUR_REQUESTED,
     countryId,
     placeId,
     id,
-    body
+    body,
   };
 };
 
 const updateInfoTourItemSucced = (data) => {
-  
   return {
     type: type.UPDATE_DATA_TOUR_SUCCED,
     data,
@@ -480,9 +453,6 @@ const updateInfoTourItemFailed = (message) => {
     message,
   };
 };
-
-
-
 
 const deleteCountryItemRequest = (id) => {
   return {
@@ -505,9 +475,6 @@ const deleteCountryItemFailed = (message) => {
   };
 };
 
-
-
-
 const deletePlaceItemRequest = (id) => {
   return {
     type: type.DELETE_PLACE_REQUESTED,
@@ -529,12 +496,6 @@ const deletePlaceItemFailed = (message) => {
   };
 };
 
-
-
-
-
-
-
 const deleteTourItemRequest = (id) => {
   return {
     type: type.DELETE_TOUR_REQUESTED,
@@ -555,9 +516,6 @@ const deleteTourItemFailed = (message) => {
     message,
   };
 };
-
-
-
 
 const registerSucced = () => {
   return {
@@ -667,28 +625,22 @@ const changeStatusEdit = () => {
 //   };
 // };
 
-const openNotification = statusSubmitReview => {
-  if(statusSubmitReview){
+const openNotification = (status, message, description) => {
+  if (status) {
     notification.success({
-      message: "Success",
-      description: 'Thanks for your review !'
-    })
-  }else{
+      message: message,
+      description: description,
+    });
+  } else {
     notification.error({
-      message: "Failed",
-      description: 'You reviewed this tour !'
-    })
+      message: message,
+      description: description,
+    });
   }
- 
 };
 
-
-
-
-
-
-
 export {
+  fetchReviewsFailed,
   loginRequest,
   openNotification,
   loginSucced,
@@ -697,10 +649,13 @@ export {
   fetchDataPlaceSucced,
   fetchDataPlaceFailed,
   loginFailed,
+  fetchReviewsSucced,
   deletePlaceItemRequest,
   deletePlaceItemSucced,
   deletePlaceItemFailed,
+  resetLoginStatus,
   onLogout,
+  // fetchReviewListFailed,
   deleteCountryItemRequest,
   deleteCountryItemSucced,
   updateInfoPlaceItemRequest,
@@ -711,7 +666,9 @@ export {
   onCloseModalRegister,
   updateInfoPlaceItemFailed,
   changeStatusEdit,
+  // fetchReviewListSucced,
   deleteCountryItemFailed,
+  resetStateInStore,
   createCountryRequest,
   onCloseModalLogin,
   onShowModalLogin,
@@ -720,13 +677,14 @@ export {
   fetchDataCountryRequest,
   updateInfoTourItemRequest,
   updateInfoTourItemSucced,
+  fetchReviewsRequest,
   updateInfoTourItemFailed,
   sendDataRowIntoStore,
   fetchInfoTourRequest,
   fetchInfoTourSucced,
   fetchInfoTourFailed,
-
   fetchDataCountrySucced,
+  resetStatusBookingTour,
   fetchDataCountryFailed,
   updateInfoCountryItemSucced,
   fetchDataPlaceInCountrySucced,

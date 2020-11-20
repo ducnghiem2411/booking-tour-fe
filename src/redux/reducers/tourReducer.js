@@ -10,8 +10,9 @@ const initialState = {
   statusEdit: false,
   statusCreate: false,
   itemTour: "",
+  messageBooking: '',
   bookingTourStatus: false,
-  messageBooking: ''
+  keyBookingTourStatus: 0
 };
 
 var findIndex = (dataTour, id) => {
@@ -83,44 +84,25 @@ export default function tourReducer(state = initialState, action) {
         ...state,
         message: action.message,
       };
-    // case type.GET_INFO_COUNTRY_ITEM_REQUEST:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-    // case type.GET_INFO_COUNTRY_ITEM_SUCCED:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //   };
-    // case type.GET_INFO_COUNTRY_ITEM_FAILED:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     message: action.message,
-    //   };
+    
     case type.GET_DATA_ROW_TABLE_REQUESTED:
-      // console.log('action.data', action.data)
       return {
         ...state,
         loading: true,
       };
     case type.GET_DATA_ROW_TABLE_SUCCED:
-      // console.log('action.data', action.data)
       return {
         ...state,
         loading: false,
         dataRow: action.data,
       };
     case type.GET_DATA_ROW_TABLE_FAILED:
-      // console.log('action.data', action.data)
       return {
         ...state,
         loading: false,
         message: action.message,
       };
     case type.SEND_DATA_ROW_INTO_STORE:
-      // console.log('action.data', action.data)
 
       return {
         ...state,
@@ -128,7 +110,6 @@ export default function tourReducer(state = initialState, action) {
         statusEdit: true,
       };
     case type.CHANGE_STATUS_EDIT:
-      // console.log('action.data', action.data)
 
       return {
         ...state,
@@ -136,7 +117,6 @@ export default function tourReducer(state = initialState, action) {
         statusEdit: false,
       };
     case type.UPDATE_DATA_TOUR_REQUESTED:
-      console.log("action.data", action.data);
 
       return {
         ...state,
@@ -169,6 +149,7 @@ export default function tourReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        keyBookingTourStatus : state.keyBookingTourStatus + 1,
         bookingTourStatus: true,
       };
     case type.BOOKING_TOUR_FAILED:
@@ -176,6 +157,14 @@ export default function tourReducer(state = initialState, action) {
         ...state,
         loading: false,
         messageBooking: action.message,
+        keyBookingTourStatus : state.keyBookingTourStatus + 1,
+        bookingTourStatus: false,
+      };
+    case type.RESET_STATUS_BOOKING_TOUR:
+      return {
+        ...state,
+       
+        keyBookingTourStatus : 0,
         bookingTourStatus: false,
       };
 

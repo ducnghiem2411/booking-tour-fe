@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Rate, notification } from "antd";
 import { connect, useDispatch } from "react-redux";
-import { openNotification, submitUserReviewRequest } from "../../../redux/actions";
+import { openNotification, resetStateInStore, submitUserReviewRequest } from "../../../redux/actions";
 
 const Review = (props) => {
   const { itemTour } = props;
@@ -24,13 +24,10 @@ const Review = (props) => {
     );
   };
 
-  const clearPropsToState = () => {
-    keyReview = 0
-    statusSubmitReview = false
-  }
+  
 
   useEffect(() => {
-    // clearPropsToState()
+    
     if (keyReview !== 0) {
       if (statusSubmitReview) {
         openNotification(statusSubmitReview)
@@ -38,6 +35,7 @@ const Review = (props) => {
         openNotification(statusSubmitReview)
       }
     }
+    dispatch(resetStateInStore())
   }, [statusSubmitReview, keyReview]);
 
   return (

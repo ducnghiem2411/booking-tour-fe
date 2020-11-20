@@ -41,7 +41,7 @@ const StatusUserRegisterModal = props => {
             </div>
             <div className="modal-body text-center">
               <h4> {registerStatus ? 'Happy!' : 'Sorry :('} </h4>
-              <p> {registerStatus ? 'You have been registed successfully' :  
+              <div> {registerStatus ? 'You have been registed successfully' :  
               <ul className="list-error">
                 {
                   message && message.map((item, index) => {
@@ -52,7 +52,7 @@ const StatusUserRegisterModal = props => {
                 }
                
               </ul> 
-              } </p>
+              } </div>
              
             </div>
           </div>

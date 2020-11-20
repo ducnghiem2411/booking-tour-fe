@@ -30,6 +30,8 @@ const App = () => {
             <Route path="/country" component={Country} />
             <Route path="/login" component={Login} />
             <Route path="/detail" component={Detail} />
+
+
           </Switch>
         </Router>
       </div>

@@ -9,7 +9,8 @@ const initialState = {
   error: false,
   token: "",
   messageLogin: "",
-  loginStatus: '',
+  loginStatus: false,
+  keyLogin: 0,
   updateLoginStatus: false,
 
 };
@@ -29,6 +30,7 @@ export default function loginReduder(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        keyLogin: state.keyLogin +1 ,
         loginStatus: true,
         token: action.token,
       };
@@ -40,6 +42,7 @@ export default function loginReduder(state = initialState, action) {
         loading: false,
         error: true,
         loginStatus: false,
+        keyLogin: state.keyLogin + 1 ,
         messageLogin: action.message.message,
       };
       break
@@ -75,6 +78,14 @@ export default function loginReduder(state = initialState, action) {
       return {
         error: action.data,
         loginStatus: action.data,
+      };
+
+      break;
+    case type.RESET_LOGIN_STATUS:
+      return {
+        ...state,
+        loginStatus: false,
+        keyLogin: 0
       };
 
       break;

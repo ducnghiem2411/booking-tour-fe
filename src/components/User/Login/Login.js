@@ -9,6 +9,8 @@ import {
   loginRequest,
   onShowModalLogin,
   onShowModalRegister,
+  openNotification,
+  resetLoginStatus,
 } from "../../../redux/actions/index";
 import StatusUserModal from "../Modal/StatusUserLoginModal";
 import StatusUserLoginModal from "../Modal/StatusUserLoginModal";
@@ -29,7 +31,7 @@ const Login = (props) => {
   const [rePassword, setRepassword] = useState("");
   const [disabledButton, setDisabledButton] = useState(false);
   const { registerStatus } = props.registerStatus;
-  const { error } = props.error;
+  const { keyLogin } = props.keyLogin;
   const { message } = props.message;
   const { history } = props;
 
@@ -96,6 +98,33 @@ const Login = (props) => {
   };
 
   useEffect(() => {
+
+    if (keyLogin !== 0) {
+      if (loginStatus) {
+        openNotification(
+          loginStatus,
+          "Success",
+          "Loggined in successfully !"
+        );
+      } else {
+        openNotification(loginStatus, "Failed", messageLogin);
+      }
+    }
+    dispatch(resetLoginStatus());
+    
+  }, [loginStatus, keyLogin])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if(token){
+      setTimeout(() => {
+        history.push("/");
+      }, 1000)
+    }
+    
+  }, [])
+
+  useEffect(() => {
     // const isToken = localStorage.getItem("token");
     if (loginStatus) {
       setTimeout(() => {
@@ -106,8 +135,7 @@ const Login = (props) => {
 
   return (
     <>
-      <StatusUserLoginModal />
-      <StatusUserRegisterModal />
+     
       <div className="login-page">
         <div className="wrap-modal">
           <div
@@ -306,6 +334,7 @@ const mapState = (state) => ({
   statusCreateModal: state.displayModal,
   registerStatus: state.register,
   loginStatus: state.login,
+  keyLogin : state.login,
   error: state.register,
   message: state.register,
   messageLogin: state.login,

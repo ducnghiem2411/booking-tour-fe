@@ -4,35 +4,25 @@ import {
   dataItemTourRequest,
   fetchDataTourRequest,
   bookingTourRequest,
-  onShowModalLogin,
-  onShowModal,
-  onCloseModal,
+  openNotification,
+  resetStatusBookingTour,
 } from "../../../redux/actions";
-import { Spin, Alert, Popconfirm, notification } from "antd";
 import formatPrice from "./../../../utilies/FormatNumber";
 import Pagination from "./../Pagination/Pagination";
 import { Link, useHistory } from "react-router-dom";
-import StatusBookingTourModal from "../Modal/StatusBookingTourModal";
 
 const Packages = (props) => {
   const { dataTour } = props.dataTour;
-  const { loginStatus } = props.loginStatus;
-  const { loading } = props.loading;
+  const { messageBooking } = props.messageBooking;
   const dispatch = useDispatch();
-  const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(2);
 
   const { bookingTourStatus } = props.bookingTourStatus;
+  const { keyBookingTourStatus } = props.keyBookingTourStatus;
 
   const history = useHistory();
 
-  useEffect(() => {
-    dispatch(fetchDataTourRequest());
-    // dispatch(fetchDataTourRequest());
-  }, []);
-
-  //get current tour
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts =
@@ -41,11 +31,9 @@ const Packages = (props) => {
       : [];
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  // console.log('dataTour', dataTour)
 
   const onGetDataTourItem = (itemTour) => {
     dispatch(dataItemTourRequest(itemTour));
-    // console.log('itemTour', itemTour)
   };
 
   const onBookingTour = (itemTour) => {
@@ -55,20 +43,28 @@ const Packages = (props) => {
       history.push("/login");
     } else {
       dispatch(bookingTourRequest(itemTour._id, itemTour.name));
-      dispatch(onShowModal(true));
     }
   };
 
+  useEffect(() => {
+    dispatch(fetchDataTourRequest());
+
+    if (keyBookingTourStatus !== 0) {
+      if (bookingTourStatus) {
+        openNotification(
+          bookingTourStatus,
+          "Success",
+          "Booking tour successfully !"
+        );
+      } else {
+        openNotification(bookingTourStatus, "Failed", messageBooking);
+      }
+    }
+    dispatch(resetStatusBookingTour());
+  }, [bookingTourStatus, keyBookingTourStatus]);
+
   return (
     <>
-      <StatusBookingTourModal />
-
-      <script>
-        {
-        window.addEventListener("scroll", () => dispatch(onCloseModal(false)) )
-        }
-      </script>
-
       <section id="pack" className="packages">
         <div className="container">
           <div className="gallary-header text-center">
@@ -80,7 +76,6 @@ const Packages = (props) => {
           <div className="packages-content">
             <div className="row">
               {currentPosts &&
-                // currentPosts.data &&
                 currentPosts.map((itemTour, index) => {
                   return (
                     <div key={index} className="col-md-4 col-sm-6">
@@ -91,7 +86,6 @@ const Packages = (props) => {
                             src="https://via.placeholder.com/360x292"
                           />
                         </div>
-                        {/* onClick={onGetDataTourItem() */}
 
                         <div className="single-package-item-txt">
                           <h3>
@@ -151,6 +145,8 @@ const mapState = (state) => ({
   loading: state.tour,
   loginStatus: state.login,
   bookingTourStatus: state.tour,
+  keyBookingTourStatus: state.tour,
+  messageBooking: state.tour,
 });
 
 export default connect(mapState)(Packages);

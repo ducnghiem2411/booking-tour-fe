@@ -20,6 +20,7 @@ import submitUserReviewSaga from './submitUserReviewSaga'
 import fetchInfoTourSaga from './fetchInfoTourSaga'
 import fetchReviewsListSaga from './fetchReviewsListSaga'
 import updateLoginSaga from './updateLoginSaga'
+import fetchReviewsSaga from './fetchReviewsSaga'
 
 export default function* rootSaga() {
     yield all([
@@ -44,6 +45,7 @@ export default function* rootSaga() {
         submitUserReviewSaga(),
         fetchReviewsListSaga(),
         updateLoginSaga(),
+        fetchReviewsSaga(),
         
     ])
 }
