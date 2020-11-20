@@ -67,7 +67,7 @@ const Detail = (props) => {
                       }}
                       src="https://via.placeholder.com/150x150"
                     />
-                    <h4>Reviews</h4>
+                    <h4 style={ { margin: '20px 0' } } >Reviews</h4>
                     <Review itemTour ={itemTour} />
 
                     <ReviewsList itemTour ={itemTour}/>

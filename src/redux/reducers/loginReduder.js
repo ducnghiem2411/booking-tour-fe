@@ -10,6 +10,7 @@ const initialState = {
   token: "",
   messageLogin: "",
   loginStatus: '',
+  updateLoginStatus: false,
 
 };
 
@@ -40,6 +41,32 @@ export default function loginReduder(state = initialState, action) {
         error: true,
         loginStatus: false,
         messageLogin: action.message.message,
+      };
+      break
+    case type.UPDATE_LOGIN_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+      break
+
+    case type.UPDATE_LOGIN_SUCCESS:
+      // localStorage.setItem("token", JSON.stringify(action.token.accessToken));
+
+      return {
+        ...state,
+        loading: false,
+        loginStatus: true,
+        updateLoginStatus: true,
+        token: action.token,
+      };
+      break
+
+    case type.UPDATE_LOGIN_FAILED:
+      return {
+        ...state,
+        loading: false,
+        updateLoginStatus: false,
       };
       break
     

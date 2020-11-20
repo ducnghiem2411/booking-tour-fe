@@ -8,7 +8,7 @@ import {
   registerRequest,
   loginRequest,
   onShowModalLogin,
-  onShowModalRegister
+  onShowModalRegister,
 } from "../../../redux/actions/index";
 import StatusUserModal from "../Modal/StatusUserLoginModal";
 import StatusUserLoginModal from "../Modal/StatusUserLoginModal";
@@ -31,21 +31,20 @@ const Login = (props) => {
   const { registerStatus } = props.registerStatus;
   const { error } = props.error;
   const { message } = props.message;
-  const { history } = props
-
+  const { history } = props;
 
   const onCreateAccModal = (e) => {
     e.preventDefault();
-    setEmailLogin("")
-    setPasswordLogin("")
+    setEmailLogin("");
+    setPasswordLogin("");
     dispatch(showCreateAccModal(true));
   };
   const changeStatusCreateAccModal = (e) => {
     e.preventDefault();
-    setUsername("")
-    setEmail("")
-    setPassword("")
-    setRepassword("")
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setRepassword("");
     dispatch(onChangeStatusCreateAccModal(false));
   };
 
@@ -76,63 +75,50 @@ const Login = (props) => {
     e.preventDefault();
 
     dispatch(registerRequest(userName, email, password));
-    dispatch(onShowModalRegister(true))
+    dispatch(onShowModalRegister(true));
 
     // dispatch(onShowModal(true))
 
-    setUsername('')
-    setEmail('')
-    setPassword('')
-    setRepassword('')
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setRepassword("");
   };
-  const onLogin = e => {
-    e.preventDefault()
+  const onLogin = (e) => {
+    e.preventDefault();
     dispatch(loginRequest(emailLogin, passwordLogin));
-    dispatch(onShowModalLogin(true))
+    dispatch(onShowModalLogin(true));
 
+    setEmailLogin("");
+    setPasswordLogin("");
 
-
-
-    setEmailLogin("")
-    setPasswordLogin("")
-
-    if (loginStatus) {
-
-
-    } else {
-
-
-    }
-
-  }
+    
+  };
 
   useEffect(() => {
-    const isToken = localStorage.getItem("token");
-    if (isToken) {
+    // const isToken = localStorage.getItem("token");
+    if (loginStatus) {
       setTimeout(() => {
         history.push("/");
-
       }, 2000)
     }
-
-
-  }, [loginStatus])
+  }, [loginStatus]);
 
   return (
-
     <>
       <StatusUserLoginModal />
       <StatusUserRegisterModal />
       <div className="login-page">
         <div className="wrap-modal">
           <div
-            className={isDisplay ? "modal-form login active" : "modal-form login"}
+            className={
+              isDisplay ? "modal-form login active" : "modal-form login"
+            }
             id="loginModal"
           >
             <div className="modal-dialog login animated">
               <div className="modal-content">
                 <div className="modal-header">
-
                   <h4 className="modal-title"> Login with</h4>
                 </div>
                 <div className="modal-body">
@@ -166,7 +152,11 @@ const Login = (props) => {
                             : "form loginBox"
                         }
                       >
-                        <form className="form-login" onSubmit={onLogin} method="POST">
+                        <form
+                          className="form-login"
+                          onSubmit={onLogin}
+                          method="POST"
+                        >
                           <input
                             id="email"
                             className="form-control"
@@ -195,7 +185,7 @@ const Login = (props) => {
                             className="btn btn-default btn-login"
                           >
                             Login
-                        </button>
+                          </button>
                         </form>
                       </div>
                     </div>
@@ -209,7 +199,11 @@ const Login = (props) => {
                   >
                     <div className="content registerBox">
                       <div className="form">
-                        <form className="form-register" onSubmit={onRegister} method="POST">
+                        <form
+                          className="form-register"
+                          onSubmit={onRegister}
+                          method="POST"
+                        >
                           <input
                             id="username"
                             className="form-control"
@@ -261,7 +255,7 @@ const Login = (props) => {
                             disabled={rePassword !== password ? true : false}
                           >
                             Create account
-                        </button>
+                          </button>
                         </form>
                       </div>
                     </div>
@@ -279,9 +273,9 @@ const Login = (props) => {
                       Looking to <span> </span>
                       <a href="" onClick={onCreateAccModal}>
                         create an account
-                    </a>
-                    ?
-                  </span>
+                      </a>
+                      ?
+                    </span>
                   </div>
                   <div
                     className={
@@ -294,8 +288,8 @@ const Login = (props) => {
                     <span> </span>
                     <a href="" onClick={changeStatusCreateAccModal}>
                       {" "}
-                    Login
-                  </a>
+                      Login
+                    </a>
                   </div>
                 </div>
               </div>

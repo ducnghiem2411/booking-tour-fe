@@ -15,6 +15,7 @@ import {
 
 const Header = (props) => {
   const { loginStatus } = props.loginStatus;
+  const { updateLoginStatus } = props.updateLoginStatus;
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
@@ -30,6 +31,15 @@ const Header = (props) => {
       dispatch(updateLoginRequest());
     }
   }, []);
+
+  useEffect(() => {
+    
+  }, [updateLoginStatus])
+
+
+
+  
+
   return (
     <>
       {/* main-menu Start */}
@@ -93,7 +103,59 @@ const Header = (props) => {
                           <a href="#subs">subscription</a>
                         </li>
                         <li>
-                          {loginStatus || token ? (
+                          {/* token 
+                           - updateLoginStatus && loginStatus ? active
+                           !updateLoginStatus ? none
+
+                          !token ? none */}
+
+
+                          {
+                            token ? (updateLoginStatus ? (
+                              <div className="user-area dropdown float-right">
+                                <a
+                                  href="#"
+                                  className="dropdown-toggle"
+                                  data-toggle="dropdown"
+                                  aria-haspopup="true"
+                                  aria-expanded="false"
+                                >
+                                  <img
+                                    className="user-avatar rounded-circle"
+                                    src="/assets/images/admin/admin.jpg"
+                                    alt="User Avatar"
+                                  />
+                                </a>
+                                <div className="user-menu dropdown-menu">
+                                  <a className="nav-link" href="#">
+                                    <i className="fa fa-user" /> My Profile
+                                  </a>
+                                  <a className="nav-link" href="#">
+                                    <i className="fa fa-user" /> Notifications{" "}
+                                    <span className="count">13</span>
+                                  </a>
+                                  <a className="nav-link" href="#">
+                                    <i className="fa fa-cog" /> Settings
+                                  </a>
+                                  <button
+                                    className="nav-link btn-logout"
+                                    onClick={onLogout}
+                                  >
+                                    <i className="fa fa-power-off" /> Logout
+                                  </button>
+                                </div>
+                              </div>
+                            ) : (
+                              <Link to={`/login`} className="book-btn">
+                                Login
+                              </Link>
+                            )) : (
+                              <Link to={`/login`} className="book-btn">
+                                Login
+                              </Link>
+                            )
+                          }
+                          {/* {loginStatus || token ? (
                             <div className="user-area dropdown float-right">
                               <a
                                 href="#"
@@ -131,7 +193,7 @@ const Header = (props) => {
                             <Link to={`/login`} className="book-btn">
                               Login
                             </Link>
-                          )}
+                          )} */}
                         </li>
                         {/*/.project-btn*/}
                       </ul>
@@ -160,5 +222,6 @@ const Header = (props) => {
 const mapState = (state) => ({
   token: state.login,
   loginStatus: state.login,
+  updateLoginStatus: state.login,
 });
 export default connect(mapState)(Header);

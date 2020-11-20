@@ -7,6 +7,7 @@ const initialState = {
   message: "",
   reviewsList: [],
   statusSubmitReview: false,
+  keyReview: 0
 };
 
 
@@ -25,6 +26,7 @@ export default function reviewReducer(state = initialState, action) {
       state.reviewsList.push(action.data);
       state.loading = false;
       state.statusSubmitReview = true
+      state.keyReview  ++
       
       return { ...state };
 
@@ -34,6 +36,7 @@ export default function reviewReducer(state = initialState, action) {
         error: true,
         loading: false,
         statusSubmitReview: false,
+        keyReview : state.keyReview + 1,
         message: action.message,
       };
 

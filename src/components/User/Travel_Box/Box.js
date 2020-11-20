@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { Row, Col, Form, Input, Button } from "antd";
 
 const Box = () => {
+  const [form] = Form.useForm();
+  const [formLayout, setFormLayout] = useState('vertical');
+
   return (
     <>
       <section className="travel-box">
@@ -12,7 +16,7 @@ const Box = () => {
                   <ul className="nav nav-tabs" role="tablist">
                     <li role="presentation" className="active">
                       <a
-                      className="box-link"
+                        className="box-link"
                         href="#tours"
                         aria-controls="tours"
                         role="tab"
@@ -24,7 +28,7 @@ const Box = () => {
                     </li>
                     <li role="presentation">
                       <a
-                      className="box-link"
+                        className="box-link"
                         href="#hotels"
                         aria-controls="hotels"
                         role="tab"
@@ -36,7 +40,7 @@ const Box = () => {
                     </li>
                     <li role="presentation">
                       <a
-                      className="box-link"
+                        className="box-link"
                         href="#flights"
                         aria-controls="flights"
                         role="tab"
@@ -54,190 +58,27 @@ const Box = () => {
                       id="tours"
                     >
                       <div className="tab-para">
-                        <div className="row">
-                          
-                          <div className="col-lg-4 col-md-4 col-sm-12">
-                            <div className="single-tab-select-box">
-                              <h2>destination</h2>
-                              <div className="travel-select-icon">
-                                <select className="form-control ">
-                                  <option value="default">
-                                    enter your destination country
-                                  </option>
-                                  <option value="turkey">turkey</option>
-                                  <option value="russia">russia</option>
-                                  <option value="egept">egypt</option>
-                                </select>
-                              </div>
-                              <div className="travel-select-icon">
-                                <select className="form-control ">
-                                  <option value="default">
-                                    enter your destination location
-                                  </option>
-                                  <option value="istambul">istambul</option>
-                                  <option value="mosko">mosko</option>
-                                  {/* /.option*/}
-                                  <option value="cairo">cairo</option>
-                                  {/* /.option*/}
-                                </select>
-                                {/* /.select*/}
-                              </div>
-                              {/* /.travel-select-icon */}
-                            </div>
-                            {/*/.single-tab-select-box*/}
-                          </div>
-                          {/*/.col*/}
-                          <div className="col-lg-2 col-md-3 col-sm-4">
-                            <div className="single-tab-select-box">
-                              <h2>check in</h2>
-                              <div className="travel-check-icon">
-                                <form action="#">
-                                  <input
-                                    type="text"
-                                    name="check_in"
-                                    className="form-control"
-                                    data-toggle="datepicker"
-                                    placeholder="12 -01 - 2017 "
-                                  />
-                                </form>
-                              </div>
-                              {/* /.travel-check-icon */}
-                            </div>
-                            {/*/.single-tab-select-box*/}
-                          </div>
-                          {/*/.col*/}
-                          <div className="col-lg-2 col-md-3 col-sm-4">
-                            <div className="single-tab-select-box">
-                              <h2>check out</h2>
-                              <div className="travel-check-icon">
-                                <form action="#">
-                                  <input
-                                    type="text"
-                                    name="check_out"
-                                    className="form-control"
-                                    data-toggle="datepicker"
-                                    placeholder="22 -01 - 2017 "
-                                  />
-                                </form>
-                              </div>
-                              {/* /.travel-check-icon */}
-                            </div>
-                            {/*/.single-tab-select-box*/}
-                          </div>
-                          {/*/.col*/}
-                          <div className="col-lg-2 col-md-1 col-sm-4">
-                            <div className="single-tab-select-box">
-                              <h2>duration</h2>
-                              <div className="travel-select-icon">
-                                <select className="form-control ">
-                                  <option value="default">5</option>
-                                  {/* /.option*/}
-                                  <option value={10}>10</option>
-                                  {/* /.option*/}
-                                  <option value={15}>15</option>
-                                  {/* /.option*/}
-                                  <option value={20}>20</option>
-                                  {/* /.option*/}
-                                </select>
-                                {/* /.select*/}
-                              </div>
-                              {/* /.travel-select-icon */}
-                            </div>
-                            {/*/.single-tab-select-box*/}
-                          </div>
-                          {/*/.col*/}
-                          <div className="col-lg-2 col-md-1 col-sm-4">
-                            <div className="single-tab-select-box">
-                              <h2>members</h2>
-                              <div className="travel-select-icon">
-                                <select className="form-control ">
-                                  <option value="default">1</option>
-                                  {/* /.option*/}
-                                  <option value={2}>2</option>
-                                  {/* /.option*/}
-                                  <option value={4}>4</option>
-                                  {/* /.option*/}
-                                  <option value={8}>8</option>
-                                  {/* /.option*/}
-                                </select>
-                                {/* /.select*/}
-                              </div>
-                              {/* /.travel-select-icon */}
-                            </div>
-                            {/*/.single-tab-select-box*/}
-                          </div>
-                          {/*/.col*/}
-                        </div>
-                        {/*/.row*/}
-                        <div className="row">
-                          <div className="col-sm-5">
-                            <div className="travel-budget">
-                              <div className="row">
-                                <div className="col-md-3 col-sm-4">
-                                  <h3>budget : </h3>
-                                </div>
-                                {/*/.col*/}
-                                <div className="co-md-9 col-sm-8">
-                                  <div className="travel-filter">
-                                    <div className="info_widget">
-                                      <div className="price_filter">
-                                        <div
-                                          id="slider-range"
-                                          className="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                                        >
-                                          <div
-                                            className="ui-slider-range ui-widget-header ui-corner-all"
-                                            style={{
-                                              left: "22.3083%",
-                                              width: "54.7%",
-                                            }}
-                                          />
-                                          <span
-                                            className="ui-slider-handle ui-state-default ui-corner-all"
-                                            tabIndex={0}
-                                            style={{ left: "22.3083%" }}
-                                          />
-                                          <span
-                                            className="ui-slider-handle ui-state-default ui-corner-all"
-                                            tabIndex={0}
-                                            style={{ left: "77.0083%" }}
-                                          />
-                                        </div>
-                                        {/*/.slider-range*/}
-                                        <div className="price_slider_amount">
-                                          <input
-                                            type="text"
-                                            id="amount"
-                                            name="price"
-                                            placeholder="Add Your Price"
-                                          />
-                                        </div>
-                                        {/*/.price_slider_amount*/}
-                                      </div>
-                                      {/*/.price-filter*/}
-                                    </div>
-                                    {/*/.info_widget*/}
-                                  </div>
-                                  {/*/.travel-filter*/}
-                                </div>
-                                {/*/.col*/}
-                              </div>
-                              {/*/.row*/}
-                            </div>
-                            {/*/.travel-budget*/}
-                          </div>
-                          {/*/.col*/}
-                          <div className="clo-sm-7">
-                            <div className="about-btn travel-mrt-0 pull-right">
-                              <button className="about-view travel-btn">
-                                search
-                              </button>
-                              {/*/.travel-btn*/}
-                            </div>
-                            {/*/.about-btn*/}
-                          </div>
-                          {/*/.col*/}
-                        </div>
+                        <Row>
+                          <Form
+                            // {...formItemLayout}
+                            layout={formLayout}
+                            form={form}
+                            initialValues={{
+                              layout: formLayout,
+                            }}
+
+                            // onValuesChange={onFormLayoutChange}
+                          >
+                            <Col span={8}>
+                              <Form.Item label="Field A">
+                                <Input placeholder="input placeholder" />
+                              </Form.Item>
+                            </Col>
+                            <Col span={8}>col-8</Col>
+                            <Col span={8}>col-8</Col>
+                          </Form>
+                        </Row>
+
                         {/*/.row*/}
                       </div>
                       {/*/.tab-para*/}
@@ -604,4 +445,4 @@ const Box = () => {
   );
 };
 
-export default Box
+export default Box;

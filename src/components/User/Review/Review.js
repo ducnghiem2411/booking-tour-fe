@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
-import { Form, Input, Button, Rate, Checkbox } from "antd";
+import React, { useEffect, useState } from "react";
+import { Form, Input, Button, Rate, notification } from "antd";
 import { connect, useDispatch } from "react-redux";
-import { submitUserReviewRequest } from "../../../redux/actions";
+import { openNotification, submitUserReviewRequest } from "../../../redux/actions";
 
 const Review = (props) => {
   const { itemTour } = props;
   const [form] = Form.useForm();
 
   const { message } = props.message;
-  const { statusSubmitReview } = props.statusSubmitReview;
+  var { statusSubmitReview } = props.statusSubmitReview;
+  var { keyReview } = props.keyReview;
 
   const dispatch = useDispatch();
 
@@ -21,12 +22,23 @@ const Review = (props) => {
         itemTour.placeId
       )
     );
-    form.resetFields();
   };
 
+  const clearPropsToState = () => {
+    keyReview = 0
+    statusSubmitReview = false
+  }
+
   useEffect(() => {
-   
-  }, [statusSubmitReview])
+    // clearPropsToState()
+    if (keyReview !== 0) {
+      if (statusSubmitReview) {
+        openNotification(statusSubmitReview)
+      } else {
+        openNotification(statusSubmitReview)
+      }
+    }
+  }, [statusSubmitReview, keyReview]);
 
   return (
     <>
@@ -68,23 +80,27 @@ const Review = (props) => {
               paddingLeft: "70px",
             }}
           >
-            <Button type="primary" htmlType="submit">
+            <Button
+              type="primary"
+              htmlType="submit"
+              // onClick={openNotification}
+            >
               Send
             </Button>
           </Form.Item>
         </Form>
         {/*  */}
-        <div
+        {/* <div
           className={
             !statusSubmitReview ? "alert-review active" : "alert-review"
           }
         >
           {" "}
           <span className="icon">
-            <i className="fas fa-exclamation-triangle"></i>
+          <i class="fa fa-warning"></i>
           </span>{" "}
-          <span></span>{" "}
-        </div>
+          <span> You reviewed this tour </span>{" "}
+        </div> */}
       </div>
     </>
   );
@@ -93,6 +109,7 @@ const Review = (props) => {
 const mapState = (state) => ({
   message: state.review,
   statusSubmitReview: state.review,
+  keyReview: state.review,
 });
 
 export default connect(mapState)(Review);

@@ -1,28 +1,38 @@
-
 import React from "react";
 import OwlCarousel from "react-owl-carousel";
+import { Carousel } from "antd";
 
 const Testemonial = () => {
+  // const responsive = {
+  //   nav: true,
+  //   autoplay: true,
+  //   // breakpoint from 0 up
+  //   0: {
+  //     items: 1,
+  //   },
+  //   // breakpoint from 480 up
+  //   414: {
+  //     items: 1,
+  //   },
+  //   // breakpoint from 768 up
+  //   768: {
+  //     items: 2,
+  //   },
+  //   1024: {
+  //     items: 3,
+  //   },
+  // };
 
-  const responsive = {
-    nav : true,
-    autoplay: true,
-    // breakpoint from 0 up
-    0 : {
-      items:1,
-    },
-    // breakpoint from 480 up
-    414 : {
-      items:1
-    },
-    // breakpoint from 768 up
-    768 : {
-      items:2
-    },
-    1024 : {
-      items:3
-    }
-}
+  const contentStyle = {
+    height: "160px",
+    color: "#fff",
+    lineHeight: "160px",
+    textAlign: "center",
+    background: "#364d79"
+  };
+  
+
+
   return (
     <>
       <section className="testemonial">
@@ -33,8 +43,29 @@ const Testemonial = () => {
               Duis aute irure dolor in velit esse cillum dolore eu fugiat nulla.
             </p>
           </div>
-
-          <OwlCarousel className="owl-theme" loop margin={10} responsive={responsive} >
+          <Carousel autoplay draggable={true} slidesPerRow={3}>
+            <div>
+              <h3 style={contentStyle}>1</h3>
+            </div>
+            <div>
+              <h3 style={contentStyle}>2</h3>
+            </div>
+            <div>
+              <h3 style={contentStyle}>3</h3>
+            </div>
+            <div>
+              <h3 style={contentStyle}>1</h3>
+            </div>
+            <div>
+              <h3 style={contentStyle}>2</h3>
+            </div>
+            <div>
+              <h3 style={contentStyle}>3</h3>
+            </div>
+            
+          </Carousel>
+          ,
+          {/* <OwlCarousel className="owl-theme" loop margin={10} responsive={responsive} >
             <div className="home1-testm item">
               <div className="home1-testm-single text-center">
                 <div className="home1-testm-img">
@@ -56,7 +87,7 @@ const Testemonial = () => {
                 </div>
               </div>
             </div>
-          </OwlCarousel>
+          </OwlCarousel> */}
         </div>
       </section>
     </>

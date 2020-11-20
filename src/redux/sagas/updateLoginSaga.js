@@ -19,11 +19,11 @@ export function* updateLoginInSaga(action) {
     };
     const response = yield call(axios.get, apiUrl, headerAuth);
     if (response) {
-      console.log("response", response);
-      // yield put(updateLoginSucced(response.data.data));
+      yield put(updateLoginSucced());
     }
   } catch (error) {
-    // yield put(updateLoginFailed(error.response.data))
+
+    yield put(updateLoginFailed())
   }
 }
 

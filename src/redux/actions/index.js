@@ -1,4 +1,5 @@
 import * as type from "../TypeAction";
+import { Button, notification, Divider, Space } from 'antd';
 
 const fetchDataPlaceInCountryRequest = (id) => {
   return {
@@ -666,6 +667,21 @@ const changeStatusEdit = () => {
 //   };
 // };
 
+const openNotification = statusSubmitReview => {
+  if(statusSubmitReview){
+    notification.success({
+      message: "Success",
+      description: 'Thanks for your review !'
+    })
+  }else{
+    notification.error({
+      message: "Failed",
+      description: 'You reviewed this tour !'
+    })
+  }
+ 
+};
+
 
 
 
@@ -674,6 +690,7 @@ const changeStatusEdit = () => {
 
 export {
   loginRequest,
+  openNotification,
   loginSucced,
   registerRequest,
   fetchDataPlaceRequest,
