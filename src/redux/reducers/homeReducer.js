@@ -2,6 +2,7 @@ import * as type from "../TypeAction";
 
 const initialState = {
   isAuthenticated: false,
+  // tokenStore : localStorage.getItem('token')
 };
 
 export default function homeReducer(state = initialState, action) {
@@ -13,9 +14,11 @@ export default function homeReducer(state = initialState, action) {
       };
       break;
     case type.LOGOUT:
+      // const tokenEmpty = localStorage.removeItem('token')
+      // console.log('tokenEmpty', tokenEmpty)
       return {
         ...state,
-        isAuthenticated: false,
+        // tokenStore: tokenEmpty
       };
       break;
     default:

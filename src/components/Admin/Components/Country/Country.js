@@ -42,7 +42,6 @@ const Country = (props) => {
  
 
   const handleChange = (pagination, filters, sorter) => {
-    // console.log('Various parameters', pagination, filters, sorter);
     setFilteredInfo(filters);
   };
 
@@ -68,7 +67,6 @@ const Country = (props) => {
   const onChange = (pagination, filters, sorter, extra) => {};
 
   useEffect(() => {
-    // console.log("useEffectCountry");
     dispatch(fetchDataCountryRequest());
     dispatch(onCloseModal(false));
     
@@ -83,15 +81,7 @@ const Country = (props) => {
         key: item._id,
         name: item.name,
         description: item.description,
-        // images: item.images && item.images.map((item, index) => {
-        //   return (
-        //     <span key={index}>
-
-        //     {item.name}
-        //     </span>
-        //   )
-        // })
-        // image: item.image
+       
       });
     });
   }
@@ -125,18 +115,7 @@ const Country = (props) => {
       render: (text, record) => (
         <>
           <div className="action">
-            <span className="block view">
-              <span className="icon">
-                <i className="fa fa-eye"></i>
-              </span>
-              <Link
-                type="button"
-                className="btn-delete btn-show"
-                to="/admin/country/"
-              >
-                Show
-              </Link>
-            </span>
+           
             <span className="block edit">
               <span className="icon">
                 <i className="fa fa-trash-o"></i>
@@ -173,24 +152,14 @@ const Country = (props) => {
     
   }
 
-  // const idAdd = '8mt43q3kf6'
 
-  // toast.success("You succeeced")
 
 
   return (
 
    
     <>
-    {/* {statusCreate ? <ToastContainer success/> : '' } */}
     
-    {/* <div className="notify">
-      <div className="body">
-        <p className="title">Notification</p>
-        <p className="desc">I will never close automatically. This is a purposely very very long description that has many many characters and words.</p>
-      </div>
-
-    </div> */}
        {isDisplay ? <ModalCountry dataRow={dataRow} /> : ""}
       <Link to={`/admin/country/add`} onClick={showModalAddNew} className="btn-create">
         Create new country
@@ -203,32 +172,15 @@ const Country = (props) => {
           pagination={{ pageSize: 5 }}
           onChange={handleChange}
           scroll={{ x: 'max-content'}}
-          // onRow = { (record, rowIndex) => {
-          //   return {
-          //     onClick: e => {
-          //       console.log('record', record)
-          //     }
-          //   }
-            
-          //   // setDataRow(record)
-
-          // }
-
-          // }
-        />
         
+        />
+        <Link className=" btn-back" to= {`/`} > <span className="icon arrowBack"> <i className="fa fa-angle-double-left "></i> </span> Back to home page</Link>
+       
       </Spin>
 
-      {/* {dataSource ? (
-        <Table
-          columns={columns}
-          dataSource={data}
-          pagination={{ pageSize: 5 }}
-          onChange={handleChange}
-        />
-      ) : (
-        "Loading..."
-      )} */}
+      
+
+    
     </>
   );
 };

@@ -347,6 +347,11 @@ const resetLoginStatus = () => {
     type: type.RESET_LOGIN_STATUS,
   };
 };
+const resetRegisterStatus = () => {
+  return {
+    type: type.RESET_REGISTER_STATUS,
+  };
+};
 
 const submitUserReviewSucced = (data) => {
   return {
@@ -625,6 +630,11 @@ const changeStatusEdit = () => {
 //   };
 // };
 
+notification.config({
+ 
+  duration: 1,
+});
+
 const openNotification = (status, message, description) => {
   if (status) {
     notification.success({
@@ -683,6 +693,7 @@ export {
   fetchInfoTourRequest,
   fetchInfoTourSucced,
   fetchInfoTourFailed,
+  resetRegisterStatus,
   fetchDataCountrySucced,
   resetStatusBookingTour,
   fetchDataCountryFailed,

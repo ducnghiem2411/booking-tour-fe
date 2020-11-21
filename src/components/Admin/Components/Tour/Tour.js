@@ -170,18 +170,7 @@ const Tour = (props) => {
       render: (text, record) => (
         <>
           <div className="action">
-            <span className="block view">
-              <span className="icon">
-                <i className="fa fa-eye"></i>
-              </span>
-              <Link
-                type="button"
-                className="btn-delete btn-show"
-                to="/admin/country/"
-              >
-                Show
-              </Link>
-            </span>
+           
             <span className="block edit">
               <span className="icon">
                 <i className="fa fa-trash-o"></i>
@@ -275,6 +264,8 @@ const Tour = (props) => {
       ) : (
         "Loading..."
       )} */}
+
+<Link className=" btn-back" to= {`/`} > <span className="icon arrowBack"> <i className="fa fa-angle-double-left "></i> </span> Back to home page</Link>
     </>
   );
 };

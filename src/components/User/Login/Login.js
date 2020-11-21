@@ -1,20 +1,14 @@
 import React, { FormEvent, useEffect, useState } from "react";
-// import { useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import {
-  onCloseModal,
   showCreateAccModal,
   onChangeStatusCreateAccModal,
   registerRequest,
   loginRequest,
-  onShowModalLogin,
-  onShowModalRegister,
   openNotification,
   resetLoginStatus,
+  resetRegisterStatus,
 } from "../../../redux/actions/index";
-import StatusUserModal from "../Modal/StatusUserLoginModal";
-import StatusUserLoginModal from "../Modal/StatusUserLoginModal";
-import StatusUserRegisterModal from "../Modal/StatusUserRegisterModal";
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -29,9 +23,10 @@ const Login = (props) => {
   const [passwordLogin, setPasswordLogin] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRepassword] = useState("");
-  const [disabledButton, setDisabledButton] = useState(false);
-  const { registerStatus } = props.registerStatus;
+
   const { keyLogin } = props.keyLogin;
+  const { keyRegister } = props.keyRegister;
+  const { registerStatus } = props.registerStatus;
   const { message } = props.message;
   const { history } = props;
 
@@ -67,75 +62,77 @@ const Login = (props) => {
   };
   const onChangeRepeatPassword = (e) => {
     setRepassword(e.target.value);
-
-    // if(rePassword !== password){
-    //   setDisabledButton(true)
-    // }
   };
 
   const onRegister = (e) => {
     e.preventDefault();
 
     dispatch(registerRequest(userName, email, password));
-    dispatch(onShowModalRegister(true));
-
-    // dispatch(onShowModal(true))
 
     setUsername("");
     setEmail("");
     setPassword("");
     setRepassword("");
   };
+
   const onLogin = (e) => {
+
     e.preventDefault();
     dispatch(loginRequest(emailLogin, passwordLogin));
-    dispatch(onShowModalLogin(true));
 
     setEmailLogin("");
     setPasswordLogin("");
-
-    
   };
 
   useEffect(() => {
-
     if (keyLogin !== 0) {
       if (loginStatus) {
-        openNotification(
-          loginStatus,
-          "Success",
-          "Loggined in successfully !"
-        );
+        openNotification(loginStatus, "Success", "Loggined in successfully !");
       } else {
         openNotification(loginStatus, "Failed", messageLogin);
       }
     }
     dispatch(resetLoginStatus());
-    
-  }, [loginStatus, keyLogin])
+  }, [loginStatus, keyLogin]);
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    if(token){
+    if (keyRegister !== 0) {
+      if (registerStatus) {
+        openNotification(
+          registerStatus,
+          "Success",
+          "Registered in successfully !"
+        );
+        setTimeout(() => {
+          dispatch(onChangeStatusCreateAccModal(false));
+        }, 1000);
+      } else {
+        openNotification(registerStatus, "Failed", message);
+      }
+    }
+
+    dispatch(resetRegisterStatus());
+  }, [registerStatus, keyRegister]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
       setTimeout(() => {
         history.push("/");
-      }, 1000)
+      }, 1000);
     }
-    
-  }, [])
+  }, []);
 
   useEffect(() => {
-    // const isToken = localStorage.getItem("token");
     if (loginStatus) {
       setTimeout(() => {
         history.push("/");
-      }, 2000)
+      }, 2000);
     }
   }, [loginStatus]);
 
   return (
     <>
-     
       <div className="login-page">
         <div className="wrap-modal">
           <div
@@ -334,7 +331,8 @@ const mapState = (state) => ({
   statusCreateModal: state.displayModal,
   registerStatus: state.register,
   loginStatus: state.login,
-  keyLogin : state.login,
+  keyLogin: state.login,
+  keyRegister: state.register,
   error: state.register,
   message: state.register,
   messageLogin: state.login,

@@ -33,7 +33,6 @@ export function* bookingTourInSaga(action) {
       yield put(bookingTourSucced());
     }
   } catch (error) {
-    console.log('error.response', error.response)
     yield put(bookingTourFailed(error.response.data.message));
   }
 }

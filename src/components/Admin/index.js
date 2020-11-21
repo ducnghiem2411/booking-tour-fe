@@ -8,10 +8,10 @@ import Navigate from "./Navigate/Navigate";
 import PostList from "./Components/PostList/PostList";
 import { Admin, Resource } from "react-admin";
 import restProvider from "ra-data-simple-rest";
-import routes from './../../routes'
+import routes from "./../../routes";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import Animation from "./Components/Animation/Animation";
 
 // import './asse'
 
@@ -36,11 +36,28 @@ const showContentMenu = (routes) => {
 const index = () => {
   return (
     <>
-      <Navigate />
-      <div id="right-panel" className="right-panel">
-        <Header />
-      
-        <Switch>{showContentMenu(routes)}</Switch>
+      <div className="admin">
+        <div className="body">
+          <div className="container container-admin">
+            <div className="dashboard">
+              <div className="row row-admin">
+                <div className="col-md-3 col-admin">
+                  <Navigate />
+                </div>
+                <div className="col-md-9">
+                  <div className="right-side">
+                    <Header />
+                   
+                    <div className="right-body">
+                       {/* <Animation/> */}
+                      <Switch>{showContentMenu(routes)}</Switch>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -84,6 +84,9 @@
 }
 .login .modal-dialog .modal-content {
     width: 450px;
+    max-height: 518px;
+    overflow-y: scroll;
+}
 }
 .login .modal-footer{
     border-top: 0;
@@ -289,6 +292,8 @@
     right: 0;
     left: 0;
     bottom: 0;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 .wrap-modal.country.active{
     display: flex;

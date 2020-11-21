@@ -1,7 +1,6 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import {
-  onShowModal,
   onLogout,
   updateLoginRequest,
 } from "../../../redux/actions/index";
@@ -16,33 +15,31 @@ import {
 const Header = (props) => {
   const { loginStatus } = props.loginStatus;
   const { updateLoginStatus } = props.updateLoginStatus;
+  const { tokenStore } = props.tokenStore;
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
-  const onLogout = () => {
+  const logout = () => {
+    // dispatch(onLogout())
     localStorage.removeItem("token");
     window.location.reload(true);
   };
 
-  useEffect(() => {
-    
+  // useEffect(() => {
 
+    
+  // }, [tokenStore])
+
+  useEffect(() => {
     if (token) {
       dispatch(updateLoginRequest());
     }
   }, []);
 
-  useEffect(() => {
-    
-  }, [updateLoginStatus])
-
-
-
-  
+  useEffect(() => {}, [updateLoginStatus]);
 
   return (
     <>
-      {/* main-menu Start */}
       <header className="top-area">
         <div
           id="sticky-wrapper"
@@ -103,15 +100,10 @@ const Header = (props) => {
                           <a href="#subs">subscription</a>
                         </li>
                         <li>
-                          {/* token 
-                           - updateLoginStatus && loginStatus ? active
-                           !updateLoginStatus ? none
+                       
 
-                          !token ? none */}
-
-
-                          {
-                            token ? (updateLoginStatus ? (
+                          {token ? (
+                            updateLoginStatus ? (
                               <div className="user-area dropdown float-right">
                                 <a
                                   href="#"
@@ -139,7 +131,7 @@ const Header = (props) => {
                                   </a>
                                   <button
                                     className="nav-link btn-logout"
-                                    onClick={onLogout}
+                                    onClick={logout}
                                   >
                                     <i className="fa fa-power-off" /> Logout
                                   </button>
@@ -149,72 +141,23 @@ const Header = (props) => {
                               <Link to={`/login`} className="book-btn">
                                 Login
                               </Link>
-                            )) : (
-                              <Link to={`/login`} className="book-btn">
-                                Login
-                              </Link>
                             )
-                          }
-                          {/* {loginStatus || token ? (
-                            <div className="user-area dropdown float-right">
-                              <a
-                                href="#"
-                                className="dropdown-toggle"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                <img
-                                  className="user-avatar rounded-circle"
-                                  src="/assets/images/admin/admin.jpg"
-                                  alt="User Avatar"
-                                />
-                              </a>
-                              <div className="user-menu dropdown-menu">
-                                <a className="nav-link" href="#">
-                                  <i className="fa fa-user" /> My Profile
-                                </a>
-                                <a className="nav-link" href="#">
-                                  <i className="fa fa-user" /> Notifications{" "}
-                                  <span className="count">13</span>
-                                </a>
-                                <a className="nav-link" href="#">
-                                  <i className="fa fa-cog" /> Settings
-                                </a>
-                                <button
-                                  className="nav-link btn-logout"
-                                  onClick={onLogout}
-                                >
-                                  <i className="fa fa-power-off" /> Logout
-                                </button>
-                              </div>
-                            </div>
                           ) : (
                             <Link to={`/login`} className="book-btn">
                               Login
                             </Link>
-                          )} */}
+                          )}
                         </li>
-                        {/*/.project-btn*/}
                       </ul>
                     </div>
-                    {/* /.navbar-collapse */}
                   </div>
-                  {/* /.main-menu*/}
                 </div>
-                {/* /.col*/}
               </div>
-              {/* /.row */}
               <div className="home-border" />
-              {/* /.home-border*/}
             </div>
-            {/* /.container*/}
           </div>
         </div>
-        {/* /.header-area */}
       </header>
-      {/* /.top-area*/}
-      {/* main-menu End */}
     </>
   );
 };
@@ -223,5 +166,6 @@ const mapState = (state) => ({
   token: state.login,
   loginStatus: state.login,
   updateLoginStatus: state.login,
+  tokenStore: state.home,
 });
 export default connect(mapState)(Header);

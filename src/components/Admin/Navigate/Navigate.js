@@ -12,38 +12,40 @@ import Country from "../Components/Country/Country";
 const Navigate = () => {
   return (
     <>
-      <aside id="left-panel" className="left-panel">
-        <nav className="navbar navbar-expand-sm navbar-default">
-          <div className="navbar-header">
-            <span className="icon"><i className="fa fa-paw"></i></span>
-            <span className="title-dash">Admin Dashboard</span>
-          </div>
-          <div id="main-menu" className="main-menu collapse navbar-collapse admin">
-            <ul className="nav navbar-nav">
-              <h3 className="menu-title">UI elements</h3>
-              {/* /.menu-title */}
+     
 
-              <ul>
-                <Link to="/admin/country" className="navi-link">
-                  <li className="menu-item">
-                    <span><i className="menu-icon fa fa-laptop"></i></span>  Country
-                  </li>
-                </Link>
-                <Link to="/admin/place" className="navi-link">
-                  <li className="menu-item">
-                    <span><i className="menu-icon fa fa-laptop"></i></span>  Place
-                  </li>
-                </Link>
-                <Link to="/admin/tour" className="navi-link">
-                  <li className="menu-item">
-                    <span><i className="menu-icon fa fa-laptop"></i></span>  Tour
-                  </li>
-                </Link>
-              </ul>
-            </ul>
+      <div className="navigation">
+        <header>
+          <div className="title">
+            <span className="icon"><img src="https://demos.creative-tim.com/light-bootstrap-dashboard-react/static/media/reactlogo.9b864b36.png" /></span>
+            <span>Creative time</span>
           </div>
-        </nav>
-      </aside>
+        </header>
+
+        <div className="list">
+          <ul>
+            <li>
+              <Link to="/admin" className="list-item active"> <span><i className="fa fa-dashboard"></i></span> <span>Dashboard</span></Link>
+            </li>
+            <li>
+              <Link to="/admin/country" className="list-item"> <span><i className="fa fa-map-marker"></i></span> <span>Country</span></Link>
+            </li>
+            <li>
+              <Link to="/admin/place" className="list-item"> <span><i className="fa fa-file-text"></i></span> <span>Place</span></Link>
+            </li>
+            <li>
+              <Link to="/admin/tour" className="list-item"> <span><i className="fa fa-anchor"></i></span> <span>Tour</span></Link>
+            </li>
+            <li>
+              <a className="list-item"> <span><i className="fa fa-bell"></i></span>  <span>Notifications</span> </a>
+            </li>
+            <li>
+              {/* <Link className="list-item" to={`/admin/tour`}>Notifications</Link> */}
+            </li>
+          </ul>
+        </div>
+
+      </div>
     </>
   );
 };

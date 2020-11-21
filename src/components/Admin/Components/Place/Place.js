@@ -133,18 +133,7 @@ const Place = (props) => {
       render: (text, record) => (
         <>
           <div className="action">
-            <span className="block view">
-              <span className="icon">
-                <i className="fa fa-eye"></i>
-              </span>
-              <Link
-                type="button"
-                className="btn-delete btn-show"
-                to="/admin/country/"
-              >
-                Show
-              </Link>
-            </span>
+           
             <span className="block edit">
               <span className="icon">
                 <i className="fa fa-trash-o"></i>
@@ -212,32 +201,13 @@ const Place = (props) => {
           pagination={{ pageSize: 5 }}
           onChange={handleChange}
           scroll={{ x: 'max-content'}}
-          // onRow = { (record, rowIndex) => {
-          //   return {
-          //     onClick: e => {
-          //       console.log('record', record)
-          //     }
-          //   }
-            
-          //   // setDataRow(record)
-
-          // }
-
-          // }
+         
         />
         
       </Spin>
+      <Link className=" btn-back" to= {`/`} > <span className="icon arrowBack"> <i className="fa fa-angle-double-left "></i> </span> Back to home page</Link>
 
-      {/* {dataSource ? (
-        <Table
-          columns={columns}
-          dataSource={data}
-          pagination={{ pageSize: 5 }}
-          onChange={handleChange}
-        />
-      ) : (
-        "Loading..."
-      )} */}
+     
     </>
   );
 };
