@@ -64,7 +64,7 @@ const routes = [
         main : ({match, history}) => <Login match={match} history={history}/>
     },
     {
-        path : '/detail/:uid',
+        path : '/detail/:id',
         exact : true,
         main : ({match, history}) => <Detail match={match} history={history}/>
     },

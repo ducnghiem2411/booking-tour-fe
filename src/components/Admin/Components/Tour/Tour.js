@@ -27,6 +27,7 @@ import {
   getDataRowTableRequested
 } from "../../../../redux/actions/index";
 import ModalTour from "../../ModalTour/ModalTour";
+import formatPrice from "../../../../utilies/FormatNumber";
 
 const Tour = (props) => {
   const dispatch = useDispatch();
@@ -89,18 +90,10 @@ const Tour = (props) => {
         tourName: item.name,
         checkIn: item.checkIn,
         checkOut: item.checkOut,
-        price: item.price,
+        price: formatPrice(item.price),
         member: item.member,
         description: item.description,
-        // images: item.images && item.images.map((item, index) => {
-        //   return (
-        //     <span key={index}>
-
-        //     {item.name}
-        //     </span>
-        //   )
-        // })
-        // image: item.image
+   
       });
     });
   }

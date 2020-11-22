@@ -30,13 +30,17 @@ const Review = (props) => {
     
     if (keyReview !== 0) {
       if (statusSubmitReview) {
-        openNotification(statusSubmitReview)
+        openNotification(statusSubmitReview, "Success", "You reviewed this tour successfully" )
       } else {
-        openNotification(statusSubmitReview)
+        openNotification(statusSubmitReview, "Failed", message)
       }
     }
     dispatch(resetStateInStore())
   }, [statusSubmitReview, keyReview]);
+
+  useEffect(() => {
+   
+  }, [itemTour])
 
   return (
     <>

@@ -44,12 +44,31 @@ const fetchTopListDestinationRequest = () => {
     type: type.FETCH_TOP_LIST_DESTINATION_REQUESTED,
   };
 };
-const dataItemTourRequest = (itemTour) => {
+
+
+
+
+const dataItemTourRequest = (id) => {
   return {
     type: type.DATA_ITEM_TOUR_REQUESTED,
-    itemTour,
+    id,
   };
 };
+const dataItemTourSucced = (data) => {
+  return {
+    type: type.DATA_ITEM_TOUR_SUCCED,
+    data,
+  };
+};
+const dataItemTourFailed = () => {
+  return {
+    type: type.DATA_ITEM_TOUR_FAILED,
+    
+  };
+};
+
+
+
 const fetchTopListDestinationSucced = (data) => {
   return {
     type: type.FETCH_TOP_LIST_DESTINATION_SUCCED,
@@ -259,9 +278,10 @@ const fetchDataPlaceFailed = (message) => {
   };
 };
 
-const fetchDataTourRequest = () => {
+const fetchDataTourRequest = (paramsString) => {
   return {
     type: type.FETCH_TOUR_REQUEST,
+    paramsString
   };
 };
 
@@ -435,11 +455,10 @@ const updateInfoPlaceItemFailed = (message) => {
   };
 };
 
-const updateInfoTourItemRequest = (countryId, placeId, id, body) => {
+const updateInfoTourItemRequest = (id, body) => {
   return {
     type: type.UPDATE_DATA_TOUR_REQUESTED,
-    countryId,
-    placeId,
+   
     id,
     body,
   };
@@ -682,10 +701,12 @@ export {
   createCountryRequest,
   onCloseModalLogin,
   onShowModalLogin,
+  dataItemTourFailed,
   onShowModalRegister,
   getDataRowTableFailed,
   fetchDataCountryRequest,
   updateInfoTourItemRequest,
+  dataItemTourSucced,
   updateInfoTourItemSucced,
   fetchReviewsRequest,
   updateInfoTourItemFailed,

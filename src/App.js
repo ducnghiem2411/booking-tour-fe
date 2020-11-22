@@ -29,7 +29,7 @@ const App = () => {
             <Route path="/admin" component={Admin} />
             <Route path="/country" component={Country} />
             <Route path="/login" component={Login} />
-            <Route path="/detail" component={Detail} />
+            <Route path="/detail/:id" component={Detail} />
 
 
           </Switch>

@@ -253,17 +253,7 @@ const ModalCountry = (props) => {
     name: 'file',
     multiple: false,
     action: 'http://localhost:8000/countries',
-    // onChange(info) {
-    //   const { status } = info.file;
-    //   if (status !== 'uploading') {
-    //     console.log(info.file, info.fileList);
-    //   }
-    //   if (status === 'done') {
-    //     message.success(`${info.file.name} file uploaded successfully.`);
-    //   } else if (status === 'error') {
-    //     message.error(`${info.file.name} file upload failed.`);
-    //   }
-    // },
+
     onChange: handleChangeUpload,
   };
 
@@ -304,7 +294,6 @@ const ModalCountry = (props) => {
                     <Form.Item
                       name="countryName"
                       label="Country name"
-                      // initialValue = {dataRow && dataRow.name ? dataRow.name : ''}
                       initialValue={statusEdit ? dataRow.name : ""}
                       rules={[
                         {
@@ -317,7 +306,6 @@ const ModalCountry = (props) => {
                         placeholder="Select country name pls"
                         onChange={handleChange}
                         disabled={statusEdit ? true : false}
-                        // defaultValue= {dataRow && dataRow.name ? dataRow.name : 'name'}
                         allowClear
                       >
                         {countries
@@ -336,7 +324,6 @@ const ModalCountry = (props) => {
                       name="description"
                       label="Description"
                       onChange={onChangeTextarea}
-                      // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
                       initialValue={statusEdit ? dataRow.description : ""}
                       rules={[
                         {

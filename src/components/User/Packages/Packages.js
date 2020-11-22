@@ -8,33 +8,45 @@ import {
   resetStatusBookingTour,
 } from "../../../redux/actions";
 import formatPrice from "./../../../utilies/FormatNumber";
-import Pagination from "./../Pagination/Pagination";
 import { Link, useHistory } from "react-router-dom";
+import { Rate, List, Spin } from "antd";
+import Pagination from "../Pagination/Paginate";
+import queryString from "query-string";
 
 const Packages = (props) => {
   const { dataTour } = props.dataTour;
   const { messageBooking } = props.messageBooking;
   const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(2);
 
   const { bookingTourStatus } = props.bookingTourStatus;
   const { keyBookingTourStatus } = props.keyBookingTourStatus;
+  const { loading } = props.loading;
 
   const history = useHistory();
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(6);
+  const total = dataTour && dataTour.data ? dataTour.data.totalTour : 0;
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts =
-    dataTour && dataTour.data
-      ? dataTour.data.slice(indexOfFirstPost, indexOfLastPost)
-      : [];
+  const [filters, setFilters] = useState({
+    limit: 6,
+    page: 1,
+  });
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const onGetDataTourItem = (itemTour) => {
-    dispatch(dataItemTourRequest(itemTour));
+  const handlePageChange = (activePage) => {
+    setFilters({
+      ...filters,
+      page: activePage,
+    });
   };
+
+  useEffect(() => {
+    const paramsString = queryString.stringify(filters);
+    dispatch(fetchDataTourRequest(paramsString));
+  }, [filters]);
+
+  // const onGetDataTourItem = (itemTour) => {
+  //   dispatch(dataItemTourRequest(itemTour));
+  // };
 
   const onBookingTour = (itemTour) => {
     const token = localStorage.getItem("token");
@@ -47,8 +59,6 @@ const Packages = (props) => {
   };
 
   useEffect(() => {
-    dispatch(fetchDataTourRequest());
-
     if (keyBookingTourStatus !== 0) {
       if (bookingTourStatus) {
         openNotification(
@@ -75,66 +85,74 @@ const Packages = (props) => {
           </div>
           <div className="packages-content">
             <div className="row">
-              {currentPosts &&
-                currentPosts.map((itemTour, index) => {
-                  return (
-                    <div key={index} className="col-md-4 col-sm-6">
-                      <div className="single-package-item">
-                        <div className="package-img">
-                          <img
-                            className="placeholder"
-                            src="https://via.placeholder.com/360x292"
-                          />
-                        </div>
+          
+              {dataTour && dataTour.data
+                ? dataTour.data.tours.map((itemTour, index) => {
+                    return (
+                      
+                        <div key={index} className="col-md-4 col-sm-6">
+                          <div className="single-package-item">
+                            <div className="package-img">
+                              <img
+                                className="placeholder"
+                                src="https://static.scientificamerican.com/sciam/cache/file/4E0744CD-793A-4EF8-B550B54F7F2C4406.jpg"
+                                // src="https://via.placeholder.com/360x292"
+                              />
+                            </div>
 
-                        <div className="single-package-item-txt">
-                          <h3>
-                            <Link
-                              className="title"
-                              to={`/detail/${itemTour._id}`}
-                              onClick={() => onGetDataTourItem(itemTour)}
-                            >
-                              <span>{itemTour ? itemTour.name : ""}</span>
-                            </Link>
-                          </h3>
-                          <div className="packages-para">
-                            <p>
-                              {itemTour && itemTour.description
-                                ? itemTour.description
-                                : ""}
-                            </p>
-                          </div>
-                          <p className="location">
-                            {" "}
-                            <span>
-                              <i className="fa fa-map-marker"></i>
-                            </span>{" "}
-                            {itemTour && itemTour.place}
-                          </p>
-                          <div className="about-btn">
-                            <button
-                              className="about-view packages-btn"
-                              onClick={() => onBookingTour(itemTour)}
-                            >
-                              book now
-                            </button>
-                            <span className="pull-right">
-                              {itemTour ? formatPrice(itemTour.price) : ""} đ
-                            </span>
+                            <div className="single-package-item-txt">
+                              <h3>
+                                <Link
+                                  className="title"
+                                  to={`/detail/${itemTour._id}`}
+                                  // onClick={() => onGetDataTourItem(itemTour)}
+                                >
+                                  <span>{itemTour ? itemTour.name : ""}</span>
+                                </Link>
+                              </h3>
+                              <div className="packages-para">
+                                <p>
+                                  {itemTour && itemTour.description
+                                    ? itemTour.description
+                                    : ""}
+                                </p>
+                              </div>
+                              <p className="location">
+                                {" "}
+                                <span>
+                                  <i className="fa fa-map-marker"></i>
+                                </span>{" "}
+                                {itemTour && itemTour.place}
+                              </p>
+                              <div className="about-btn">
+                                <button
+                                  className="about-view packages-btn"
+                                  onClick={() => onBookingTour(itemTour)}
+                                >
+                                  book now
+                                </button>
+                                <span className="pull-right">
+                                  {itemTour ? formatPrice(itemTour.price) : ""}{" "}
+                                  đ
+                                </span>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  );
-                })}
+                     
+                    );
+                  })
+                : []
+                }
+                
             </div>
           </div>
+          <Pagination
+            total={total}
+            limit={limit}
+            onPageChange={handlePageChange}
+          />
         </div>
-        <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={dataTour.length}
-          paginate={paginate}
-        />
       </section>
     </>
   );

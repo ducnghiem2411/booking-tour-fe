@@ -6,12 +6,21 @@ import Header from "../Header/Header";
 import SuccessBookModal from "../Modal/StatusBookingTourModal";
 import { Form, Input, Button, Rate , Checkbox } from "antd";
 import Review from "../Review/Review";
-import {fetchInfoTourRequest} from './../../../redux/actions'
+import {dataItemTourRequest} from './../../../redux/actions'
 import { useParams , useRouteMatch} from "react-router-dom";
 import ReviewsList from "../Review/ReviewsList";
 
 const Detail = (props) => {
   const { itemTour } = props.itemTour;
+  const dispatch = useDispatch()
+
+  const {match} = props
+
+
+  useEffect(() => {
+    dispatch(dataItemTourRequest(match.params.id))
+    
+  }, [])
 
 
 
@@ -68,7 +77,7 @@ const Detail = (props) => {
                       src="https://via.placeholder.com/150x150"
                     />
                     <h4 style={ { margin: '20px 0' } } >Reviews</h4>
-                    <Review itemTour ={itemTour} />
+                    <Review itemTour ={itemTour ? itemTour : [] } />
 
                     <ReviewsList itemTour ={itemTour}/>
                   </div>

@@ -134,16 +134,23 @@ export default function tourReducer(state = initialState, action) {
         loading: false,
         message: action.message,
       };
+   
     case type.DATA_ITEM_TOUR_REQUESTED:
       return {
         ...state,
-        itemTour: action.itemTour,
+        loading: true
       };
-
-    case type.BOOKING_TOUR_REQUEST:
+    case type.DATA_ITEM_TOUR_SUCCED:
       return {
         ...state,
-        loading: true,
+        loading: false,
+        itemTour: action.data,
+      };
+
+    case type.DATA_ITEM_TOUR_FAILED:
+      return {
+        ...state,
+        loading: false,
       };
     case type.BOOKING_TOUR_SUCCED:
       return {

@@ -7,10 +7,11 @@ import {
   fetchDataTourFailed,
 } from "../actions/index";
 
-const apiUrl = "http://localhost:8000/tours";
+
 
 export function* fetchTourInSaga(action) {
   try {
+    const apiUrl = `http://localhost:8000/tours?${action.paramsString}`;
     const response = yield call(axios.get, apiUrl, null);
 
 

@@ -11,6 +11,7 @@ import { FormInstance } from "antd/lib/form";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import { Spin, DatePicker, InputNumber } from "antd";
 import moment from "moment";
+import ReactNumeric from 'react-numeric';
 import {
   createCountryRequest,
   fetchDataCountryRequest,
@@ -39,6 +40,8 @@ const ModalTour = (props) => {
   const { loading } = props.loading;
   // const [inputDataRow, setInputDataRow] = useState(null);
   const { dataRow } = props.dataRow;
+
+  console.log('dataRow', dataRow)
   const { dataCountry } = props.dataCountry;
   const { dataPlace } = props.dataPlace;
   const { statusEdit } = props.statusEdit;
@@ -135,18 +138,16 @@ const ModalTour = (props) => {
     form.resetFields();
   };
 
-  // console.log("fileUpload", fileUpload);
   const onSubmit = (values) => {
     values = {
       ...values,
       dateString,
     };
-    // console.log("values", values);
     if (statusEdit) {
       dispatch(
         updateInfoTourItemRequest(
-          dataRow.countryId,
-          dataRow.placeId,
+          // dataRow.countryId,
+          // dataRow.placeId,
           dataRow.key,
           values
         )
@@ -164,7 +165,6 @@ const ModalTour = (props) => {
           values.price,
           values.memNumber,
           values.description
-          // fileUpload ? fileUpload : ""
         )
       );
     }
@@ -251,7 +251,10 @@ const ModalTour = (props) => {
   // };
 
   const onChangePrice = value => {
-    checkInputField(value);
+    // if(value > 10000000 ){
+    //   console.log("wrong")
+    // }
+    // checkInputField(value);
   };
 
   const onChangePlaceName = (e) => {
@@ -287,6 +290,10 @@ const ModalTour = (props) => {
 
   return (
     <>
+
+    <script>
+      
+    </script>
       <div
         className={
           isDisplay ? "wrap-modal country active" : "wrap-modal country"
@@ -319,7 +326,6 @@ const ModalTour = (props) => {
                     <Form.Item
                       name="countryName"
                       label="Country name"
-                      // initialValue = {dataRow && dataRow.name ? dataRow.name : ''}
                       initialValue={statusEdit ? dataRow.countryName : ""}
                       rules={[
                         {
@@ -332,7 +338,6 @@ const ModalTour = (props) => {
                         placeholder="Select country name pls"
                         onChange={handleChangeCountry}
                         disabled={statusEdit ? true : false}
-                        // defaultValue= {dataRow && dataRow.name ? dataRow.name : 'name'}
                         allowClear
                       >
                         {dataCountry && dataCountry.data
@@ -349,7 +354,6 @@ const ModalTour = (props) => {
                     <Form.Item
                       name="placeName"
                       label="Place name"
-                      // initialValue = {dataRow && dataRow.name ? dataRow.name : ''}
                       initialValue={statusEdit ? dataRow.placeName : ""}
                       rules={[
                         {
@@ -362,7 +366,6 @@ const ModalTour = (props) => {
                         placeholder="Select place name pls"
                         onChange={handleChangePlace}
                         disabled={statusEdit ? true : false}
-                        // defaultValue= {dataRow && dataRow.name ? dataRow.name : 'name'}
                         allowClear
                       >
                         {dataPlace && dataPlace.data
@@ -381,17 +384,13 @@ const ModalTour = (props) => {
                       name="tourName"
                       label="Tour name"
                       onChange={onChangePlaceName}
-                      // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
                       initialValue={statusEdit ? dataRow.tourName : ""}
                       rules={[
                         {
                           required: true,
                           message: "Please typing tour name !",
                         },
-                        // {
-                        //   pattern: /^[a-zA-Z]+$/,
-                        //   message: "Value should contain just string",
-                        // },
+                      
                       ]}
                     >
                       <Input
@@ -399,48 +398,27 @@ const ModalTour = (props) => {
                         maxLength={100}
                       />
                     </Form.Item>
-                    {/* <Form.Item
-                      name="price"
-                      label="Price"
-                      //   onChange={onChangePlaceName}
-                      // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
-                      initialValue={statusEdit ? dataRow.price : ""}
-                      rules={[
-                        {
-                          required: true,
-                          // min: 7,
-                         message:  "Tour price must be number, bigger than 1 milion && smaller than 10 milion !",
-                           
-                        },
-                      ]}
-                    >
-                      <Input
-                        placeholder="Typing tour price here..."
-                        onChange={onChangePrice}
-                        maxLength={8}
-                        minLength={7}
-                      />
-                    </Form.Item> */}
+                  
+                  
                     <Form.Item label="Price">
                       <Form.Item
                         name="price"
                         noStyle
                         initialValue={statusEdit ? dataRow.price : ""}
+                        
                         rules={[
                           {
                             pattern: /^(?:\d*)$/,
                             message: "Value should contain just number",
                           },
-                          {
-                            required: true,
-                            message:
-                            "Tour price must be number, bigger than 1 milion && smaller than 10 milion !",
-                          },
+                       
                         ]}
                       >
                         <InputNumber
-                          min={1000000}
-                          max={10000000}
+                        maxLength={10}
+                        formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                        parser={value => value.replace(/\$\s?|(,*)/g, '')}
+                         
                           onChange={onChangePrice}
                         />
                       </Form.Item>
@@ -490,13 +468,7 @@ const ModalTour = (props) => {
                               ]
                             : []
                         }
-                        // defaultValue={[
-                        //   moment(statusEdit ? dataRow.checkIn : "", dateFormat),
-                        //   moment(
-                        //     statusEdit ? dataRow.checkOut : "",
-                        //     dateFormat
-                        //   ),
-                        // ]}
+                     
                         format={dateFormat}
                       />
                     </Form.Item>
@@ -504,7 +476,6 @@ const ModalTour = (props) => {
                       name="description"
                       label="Description"
                       onChange={onChangeTextarea}
-                      // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
                       initialValue={statusEdit ? dataRow.description : ""}
                       rules={[
                         
@@ -516,55 +487,7 @@ const ModalTour = (props) => {
                     >
                       <Input.TextArea maxLength={250} />
                     </Form.Item>
-                    {/* <Form.Item
-                      name="description"
-                      label="Description"
-                      onChange={onChangeTextarea}
-                      // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
-                      initialValue={statusEdit ? dataRow.description : ""}
-                      rules={[{ required: true }]}
-                    >
-                      {getFieldDecorator("de", {
-                        rules: [
-                          {
-                            required: true,
-                            pattern: new RegExp("^[0-9]*$"),
-                            message: "Wrong format!",
-                          },
-                        ],
-                      })(
-                        <Input
-                          className="form-control"
-                          type="text"
-                          placeholder="Phone number"
-                        />
-                      )}
-                    </Form.Item> */}
-
-                    {/* <Input
-                    name="description"
-                    label="Description"
-                    // defaultValue={dataRow ? dataRow.description : "abc"}
-                    value={dataRow ? dataRow.description : "desc"}
-                    onChange={onChangeTextarea}
-                  /> */}
-
-                    {/* <Form.Item
-                    name="image"
-                    label="Images"
-                    valuePropName="fileList"
-                    getValueFromEvent={normFile}
-                    showUploadList={statusUpload}
-                  >
-                    <Upload
-                      name="file"
-                      listType="picture"
-                      beforeUpload={beforeUpload}
-                      customRequest={customRequest}
-                    >
-                      <Button icon={<UploadOutlined />}>Click to upload</Button>
-                    </Upload>
-                  </Form.Item> */}
+                    
                     <Form.Item>
                       <Button
                         type="primary"

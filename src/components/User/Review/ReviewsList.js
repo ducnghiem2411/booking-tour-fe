@@ -11,7 +11,7 @@ const ReviewsList = (props) => {
 
   useEffect(() => {
     dispatch(fetchReviewsListRequest(itemTour.placeId));
-  }, []);
+  }, [itemTour]);
 
   return (
     <>
@@ -34,7 +34,8 @@ const ReviewsList = (props) => {
                 <Rate disabled allowHalf defaultValue={item ? item.star : 1} />
               }
             />
-            {item ? item.content : ""}
+            <div className="review-content">{item ? item.content : ""}</div>
+            
           </List.Item>
         )}
       />
