@@ -1,5 +1,6 @@
 import React from 'react'
 import Country from './components/Admin/Components/Country/Country'
+import Dashboard from './components/Admin/Components/Dashboard/Dashboard'
 import Place from './components/Admin/Components/Place/Place'
 import Tour from './components/Admin/Components/Tour/Tour'
 import ModalCountry from './components/Admin/ModalCountry/ModalCountry'
@@ -17,6 +18,11 @@ const routes = [
         path : '/admin/country',
         exact : true,
         main : ({history,match}) => <Country history={history} match={match}/>
+    },
+    {
+        path : '/admin/dashboard',
+        exact : true,
+        main : ({history,match}) => <Dashboard history={history} match={match}/>
     },
     {
         path : '/admin/place',

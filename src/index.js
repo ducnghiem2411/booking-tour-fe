@@ -5,12 +5,14 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import store from './redux/store'
+import Upload from "./Upload";
 
 ReactDOM.render(
   
-    <Provider store={store}>
-      <App />
-    </Provider>,
+    // <Provider store={store}>
+    //   <App />
+    // </Provider>,
+    <Upload/>,
  
   document.getElementById("root")
 );

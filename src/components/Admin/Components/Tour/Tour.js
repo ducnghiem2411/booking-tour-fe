@@ -49,6 +49,7 @@ const Tour = (props) => {
 
 
   const sendRecordToModal = (data) => {
+    
     dispatch(onShowModal(true));
 
     dispatch(sendDataRowIntoStore(data))

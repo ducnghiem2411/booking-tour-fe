@@ -114,14 +114,14 @@ const Login = (props) => {
     dispatch(resetRegisterStatus());
   }, [registerStatus, keyRegister]);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setTimeout(() => {
-        history.push("/");
-      }, 1000);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     setTimeout(() => {
+  //       history.push("/");
+  //     }, 1000);
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (loginStatus) {

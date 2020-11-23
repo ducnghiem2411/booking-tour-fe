@@ -258,6 +258,10 @@ const fetchDataCountryFailed = (message) => {
   };
 };
 
+
+
+
+
 const fetchDataPlaceRequest = () => {
   return {
     type: type.FETCH_PLACE_REQUEST,
@@ -277,6 +281,45 @@ const fetchDataPlaceFailed = (message) => {
     message,
   };
 };
+
+
+
+
+
+
+
+
+const getFilterTourRequest = (country, place, member, min, max) => {
+  return {
+    type: type.GET_FILTER_TOUR_REQUEST,
+    payload: {
+      country,
+      place,
+      member,
+      min,
+      max
+    }
+   
+  };
+};
+
+const getFilterTourSucced = (data) => {
+  return {
+    type: type.GET_FILTER_TOUR_SUCCED,
+    data,
+  };
+};
+
+const getFilterTourFailed = (message) => {
+  return {
+    type: type.GET_FILTER_TOUR_FAILED,
+    message,
+  };
+};
+
+
+
+
 
 const fetchDataTourRequest = (paramsString) => {
   return {
@@ -691,6 +734,9 @@ export {
   updateInfoPlaceItemSucced,
   fetchReviewsListRequest,
   fetchReviewsListSucced,
+  getFilterTourRequest,
+  getFilterTourSucced,
+  getFilterTourFailed,
   fetchReviewsListFailed,
   onCloseModalRegister,
   updateInfoPlaceItemFailed,

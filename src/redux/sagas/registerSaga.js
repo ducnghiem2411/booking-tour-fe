@@ -19,7 +19,6 @@ export function* registerInSaga(action) {
     const response = yield call(axios.post, apiUrl, user);
 
     if (response) {
-      console.log('response', response)
       yield put(registerSucced());  
     }
   } catch (error) {

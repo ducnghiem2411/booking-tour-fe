@@ -1062,6 +1062,7 @@ nav.breadcumb ul li a:hover {
     width: 100%;
     height: 100%;
     background: hsl(240deg 7% 97%);
+    overflow: hidden;
     display: block;
 }
 
@@ -1070,8 +1071,10 @@ nav.breadcumb ul li a:hover {
 
 .main {
     position: relative;
-    width: 55vmax;
-    height: 45vmax;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: black;
     background-size: cover;
   }
   
@@ -1880,4 +1883,29 @@ nav.breadcumb ul li a:hover {
 }
 .pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover{
   color: #00d8ff;
+}
+.budget-range {
+  display: flex;
+  position: relative;
+  padding: 0 10px;
+  justify-content: space-between;
+}
+
+.budget-range div {
+  color: #acacac;
+  font-size: 15px;
+}
+.budget-range:before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 35px;
+  height: .5px;
+  background: #bcbcbc;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.ant-picker-input > input{
+  color: #aaa !important;
 }

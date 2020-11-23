@@ -21,7 +21,7 @@ export function* fetchInfoTourInSaga(action) {
 
 
     if (response) {
-      console.log('response', response)
+      // console.log('response', response)
       // yield put(fetchInfoTourSucced(response.data));
     }
   } catch (error) {

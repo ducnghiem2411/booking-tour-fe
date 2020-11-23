@@ -15,7 +15,7 @@ export function* fetchReviewsInSaga(action) {
     const response = yield call(axios.get, apiUrl, null);
 
     if (response) {
-      console.log('response', response)
+      // console.log('response', response)
       // yield put(fetchReviewsSucced(response.data));
     }
   } catch (error) {

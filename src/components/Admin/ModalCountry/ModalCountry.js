@@ -10,6 +10,7 @@ import { Form, Input, Button, Select, Upload, message } from "antd";
 import { FormInstance } from "antd/lib/form";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
+import axios, { post } from 'axios';
 import {
   createCountryRequest,
   fetchDataCountryRequest,
@@ -17,7 +18,7 @@ import {
   updateInfoCountryItemRequest,
 } from "../../../redux/actions/index";
 import countries from "../../../countries";
-import axios from "axios";
+import { useForm } from "antd/lib/form/Form";
 const { Option } = Select;
 const { Dragger } = Upload;
 
@@ -29,9 +30,9 @@ const ModalCountry = (props) => {
   const { textareaItem, setTextAreaItem } = useState("");
 
   const [statusUpload, setStatusUpload] = useState(true);
-  const [image, setImage] = useState("");
+ 
 
-  const [fileUpload, setFileUpload] = useState("");
+  // const [fileUpload, setFileUpload] = useState("");
   const { history } = props;
   const { loading } = props.loading;
   // const [inputDataRow, setInputDataRow] = useState(null);
@@ -39,9 +40,14 @@ const ModalCountry = (props) => {
   const { statusEdit } = props.statusEdit;
 
   const formRef = React.createRef();
+  // const [image, setImage] = useState(null)
   
   const [form] = Form.useForm();
-  const [fileList, setFileList] = useState([])
+  const {register} = useForm()
+  // const [fileList, setFileList] = useState([])
+
+  
+  
 
   const closeModal = () => {
     dispatch(onCloseModal(false));
@@ -61,32 +67,7 @@ const ModalCountry = (props) => {
 
   const handleChange = (value) => {};
 
-  // const customRequest = async (option) => {
-  //   const { onSuccess, onError, file, action, onProgress } = option;
-  //   const url = action;
-
-  //   await new Promise((resolve) => waitUntilImageLoaded(resolve)); //in the next section
-
-  //   const type = "image/png";
-  //   axios
-  //     .put("http://localhost:8000/countries", fileUpload, {
-  //       onUploadProgress: (e) => {
-  //         onProgress({ percent: (e.loaded / e.total) * 100 });
-  //       },
-  //       headers: {
-  //         "Content-Type": type,
-  //       },
-  //     })
-  //     .then((respones) => {
-  //       /*......*/
-  //       onSuccess(respones.body);
-  //     })
-  //     .catch((err) => {
-  //       /*......*/
-  //       onError(err);
-  //     });
-  // };
-
+  
   const onReset = () => {
     form.resetFields();
   };
@@ -111,16 +92,7 @@ const ModalCountry = (props) => {
     history && history.push("/admin/country");
   };
 
-  const normFile = (e) => {
-    // console.log("e", e);
-    setFileUpload(e.fileList[0].name);
-
-    if (e.fileList.length >= 2) {
-      // setStatusUpload(true)
-    } else {
-      // setStatusUpload(false)
-    }
-  };
+  
 
   const onBlur = () => {
     // console.log("blur");
@@ -157,107 +129,23 @@ const ModalCountry = (props) => {
     // setSelectItem(e && e.target.value)
   };
 
-  // console.log('selectItem', selectItem)
-  // console.log('textareaItem', textareaItem)
+ 
 
   useEffect(() => {
-    // console.log("useEffectModal");
-    // const id = match.params.id;
-    // if (id == "8mt43q3kf6") {
-    //   console.log("new");
-    // } else {
-    //   console.log("edit");
-    // }
+    
   }, [dataRow]);
 
-  // const onChangeUpload = (info) => {
-  //   const { status } = info.file;
-  //   if (status !== "uploading") {
-  //     console.log(info.file, info.fileList);
-  //   }
-  //   if (status === "done") {
-  //     message.success(`${info.file.name} file uploaded successfully.`);
-  //   } else if (status === "error") {
-  //     message.error(`${info.file.name} file upload failed.`);
-  //   }
-  // }
+  
 
-  var fileReader = new FileReader();
 
-  const onChangeUpload = (info) => {
-    if (!fileReader.onloadend) {
-      fileReader.onloadend = (obj) => {
-        setImage(obj.srcElement.result);
-      };
-      // can be any other read function ( any reading function from
-      // previously created instance can be used )
-      fileReader.readAsArrayBuffer(info.file.originFileObj);
-    }
-  };
 
-  const customRequest = async (option) => {
-    const { onSuccess, onError, file, action, onProgress } = option;
-    const url = action;
 
-    await new Promise((resolve) => waitUntilImageLoaded(resolve)); //in the next section
-    // const { image } = state; // from onChange function above
-    const type = "image/png";
-    axios
-      .put(url, Image, {
-        onUploadProgress: (e) => {
-          onProgress({ percent: (e.loaded / e.total) * 100 });
-        },
-        headers: {
-          "Content-Type": type,
-        },
-      })
-      .then((respones) => {
-        /*......*/
-        onSuccess(respones.body);
-      })
-      .catch((err) => {
-        /*......*/
-        onError(err);
-      });
-  };
 
-  const waitUntilImageLoaded = (resolve) => {
-    setTimeout(() => {
-      image
-        ? resolve() // from onChange method
-        : waitUntilImageLoaded(resolve);
-    }, 10);
-  };
 
-  const handleChangeUpload = info => {
-    let fileList = [...info.fileList];
 
-    // 1. Limit the number of uploaded files
-    // Only to show two recent uploaded files, and old ones will be replaced by the new
-    fileList = fileList.slice(-1);
 
-    // 2. Read from response and show file link
-    fileList = fileList.map(file => {
-      if (file.response) {
-        // Component will show file.url as link
-        file.url = file.response.url;
-      }
-      return file;
-    });
-    
 
-    setFileList(fileList)
-  };
 
-  const propsUpload = {
-    name: 'file',
-    multiple: false,
-    action: 'http://localhost:8000/countries',
-
-    onChange: handleChangeUpload,
-  };
-
-  console.log('fileList', fileList)
 
 
   return (
@@ -335,7 +223,11 @@ const ModalCountry = (props) => {
                       <Input.TextArea maxLength={250} />
                     </Form.Item>
 
-                    <Dragger {...propsUpload} fileList={fileList}>
+
+
+                    
+
+                    {/* <Dragger {...propsUpload} fileList={fileList}>
                       <p className="ant-upload-drag-icon">
                         <InboxOutlined />
                       </p>
@@ -346,7 +238,7 @@ const ModalCountry = (props) => {
                         Support for a single or bulk upload. Strictly prohibit
                         from uploading company data or other band files
                       </p>
-                    </Dragger>
+                    </Dragger> */}
                     <Form.Item>
                       <Button
                         type="primary"
@@ -370,6 +262,8 @@ const ModalCountry = (props) => {
           </div>
         </div>
       </div>
+
+      
     </>
   );
 };

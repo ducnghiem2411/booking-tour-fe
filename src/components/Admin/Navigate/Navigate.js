@@ -25,7 +25,7 @@ const Navigate = () => {
         <div className="list">
           <ul>
             <li>
-              <Link to="/admin" className="list-item active"> <span><i className="fa fa-dashboard"></i></span> <span>Dashboard</span></Link>
+              <Link to="/admin/dashboard" className="list-item active"> <span><i className="fa fa-dashboard"></i></span> <span>Dashboard</span></Link>
             </li>
             <li>
               <Link to="/admin/country" className="list-item"> <span><i className="fa fa-map-marker"></i></span> <span>Country</span></Link>

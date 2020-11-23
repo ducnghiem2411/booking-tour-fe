@@ -7,6 +7,7 @@ import { createCountrySucced, createCountryFailed } from "../actions/index";
 const apiUrl = "http://localhost:8000/countries";
 
 export function* createCountryInSaga(action) {
+
   const data = {
     name: action.payload.name,
     description: action.payload.description,

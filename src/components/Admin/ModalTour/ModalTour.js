@@ -41,7 +41,6 @@ const ModalTour = (props) => {
   // const [inputDataRow, setInputDataRow] = useState(null);
   const { dataRow } = props.dataRow;
 
-  console.log('dataRow', dataRow)
   const { dataCountry } = props.dataCountry;
   const { dataPlace } = props.dataPlace;
   const { statusEdit } = props.statusEdit;
