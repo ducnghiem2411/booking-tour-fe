@@ -1918,3 +1918,6 @@ nav.breadcumb ul li a:hover {
   margin-top: 10px;
   font-style: italic;
 }
+.ant-table-pagination.ant-pagination{
+  margin: 0 !important;
+}

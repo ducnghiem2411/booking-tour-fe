@@ -10,13 +10,17 @@ import {
 
 
 export function* fetchTourInSaga(action) {
+
+  const apiUrl = `http://localhost:8000/tours?${action.paramsString}`;
+
+
   try {
-    const apiUrl = `http://localhost:8000/tours?${action.paramsString}`;
+    
     const response = yield call(axios.get, apiUrl, null);
 
 
-    if (response && response.status == 200) {
-      yield put(fetchDataTourSucced(response.data));
+    if (response) {
+      yield put(fetchDataTourSucced(response.data.data));
     }
   } catch (error) {
     yield put(fetchDataTourFailed(error));

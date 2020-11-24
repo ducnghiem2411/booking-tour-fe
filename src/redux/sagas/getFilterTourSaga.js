@@ -18,7 +18,6 @@ export function* getFilterTourInSaga(action) {
 
 
     if (response) {
-      console.log('response', response)
       yield put(getFilterTourSucced(response.data.data));
     }
   } catch (error) {

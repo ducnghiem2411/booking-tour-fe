@@ -11,22 +11,24 @@ const Upload = (props) => {
   };
   const uploadFile = async (e) => {
     const fd = new FormData();
-    fd.append("file", file);
+    fd.append("image", file);
+    fd.append("name", "nam aasdase");
+    fd.append("description", "desc");
 
 
 
 
-    const data = {
-      name: "name",
-      description: "desc",
-      image: fd,
-    };
+    // const data = {
+    //   name: "name",
+    //   description: "desc",
+    //   image: fd,
+    // };
     const config = {
       headers: {
         "content-type": "multipart/form-data"
       },
     };
-    await axios.post("http://localhost:8000/countries", data, config).then((res) => {
+    await axios.post("http://localhost:8000/countries", fd, config).then((res) => {
       console.log(res);
     });
 

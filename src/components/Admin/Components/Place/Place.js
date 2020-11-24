@@ -4,12 +4,16 @@ import ReactDOM from "react-dom";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useDispatch, connect } from "react-redux";
-import { onShowModal, openNotification, resetStatusAdmin } from "../../../../redux/actions";
+import {
+  onShowModal,
+  openNotification,
+  resetStatusAdmin,
+} from "../../../../redux/actions";
 import axios from "axios";
 import ModalPlace from "../../ModalPlace/ModalPlace";
-import { Spin, Alert, Popconfirm ,notification} from "antd";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Spin, Alert, Popconfirm, notification } from "antd";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Spinner from "./../Spin/Spin";
 import {
   BrowserRouter as Router,
@@ -24,12 +28,12 @@ import {
   deletePlaceItemRequest,
   sendDataRowIntoStore,
   onCloseModal,
-  getDataRowTableRequested
+  getDataRowTableRequested,
 } from "../../../../redux/actions/index";
 
 const Place = (props) => {
   const dispatch = useDispatch();
-  const {dataPlace} = props.dataPlace;
+  const { dataPlace } = props.dataPlace;
   // console.log('dataPlace', dataPlace)
   // console.log('dataCountry', dataCountry)
   const { loading } = props.loading;
@@ -49,25 +53,17 @@ const Place = (props) => {
   const sendRecordToModal = (data) => {
     dispatch(onShowModal(true));
 
-    dispatch(sendDataRowIntoStore(data))
-
-
-   
+    dispatch(sendDataRowIntoStore(data));
   };
-
- 
 
   const onChange = (pagination, filters, sorter, extra) => {};
 
   useEffect(() => {
     dispatch(fetchDataPlaceRequest());
     dispatch(onCloseModal(false));
-    
-
   }, []);
 
   const data = [];
-
 
   if (dataPlace && dataPlace.data) {
     dataPlace.data.map((item, index) => {
@@ -77,7 +73,6 @@ const Place = (props) => {
         countryName: item.country,
         placeName: item.name,
         description: item.description,
-     
       });
     });
   }
@@ -91,13 +86,11 @@ const Place = (props) => {
       title: "Country name",
       dataIndex: "countryName",
       width: 200,
-      
     },
     {
       title: "Place name",
       dataIndex: "placeName",
       width: 200,
-      
     },
     {
       title: "Description",
@@ -117,12 +110,11 @@ const Place = (props) => {
       render: (text, record) => (
         <>
           <div className="action">
-           
             <span className="block edit">
               <span className="icon">
                 <i className="fa fa-trash-o"></i>
               </span>
-             
+
               <Link
                 type="button"
                 className="btn-delete btn-edit"
@@ -151,45 +143,39 @@ const Place = (props) => {
 
   const showModalAddNew = () => {
     dispatch(onShowModal(true));
-    
-  }
+  };
 
   useEffect(() => {
     if (keyAdminModal !== 0) {
       if (statusAdmin) {
-        openNotification(
-          statusAdmin,
-          "Success",
-          message
-        );
+        openNotification(statusAdmin, "Success", message);
       } else {
         openNotification(statusAdmin, "Failed", message);
       }
     }
     dispatch(resetStatusAdmin());
   }, [statusAdmin, keyAdminModal]);
-  
 
   // toast.success("You succeeced")
 
-
-
   return (
+    <>
+      {/* {statusCreate ? <ToastContainer success/> : '' } */}
 
-   
-    <>  
-    {/* {statusCreate ? <ToastContainer success/> : '' } */}
-    
-    {/* <div className="notify">
+      {/* <div className="notify">
       <div className="body">
         <p className="title">Notification</p>
         <p className="desc">I will never close automatically. This is a purposely very very long description that has many many characters and words.</p>
       </div>
 
     </div> */}
-       {isDisplay ? <ModalPlace dataRow={dataRow} /> : ""}
-       {/* {isDisplay ? <ModalPlace /> : ""} */}
-      <Link to={`/admin/place/add`} onClick={showModalAddNew} className="btn-create">
+      {isDisplay ? <ModalPlace dataRow={dataRow} /> : ""}
+      {/* {isDisplay ? <ModalPlace /> : ""} */}
+      <Link
+        to={`/admin/place/add`}
+        onClick={showModalAddNew}
+        className="btn-create"
+      >
         Create new place
       </Link>
 
@@ -199,14 +185,17 @@ const Place = (props) => {
           dataSource={data}
           pagination={{ pageSize: 5 }}
           onChange={handleChange}
-          scroll={{ x: 'max-content'}}
-         
+          scroll={{ x: "max-content" }}
         />
-        
       </Spin>
-      <Link className=" btn-back" to= {`/`} > <span className="icon arrowBack"> <i className="fa fa-angle-double-left "></i> </span> Back to home page</Link>
-
-     
+      <Link className=" btn-back" to={`/`}>
+        {" "}
+        <span className="icon arrowBack">
+          {" "}
+          <i className="fa fa-angle-double-left "></i>{" "}
+        </span>{" "}
+        Back to home page
+      </Link>
     </>
   );
 };
@@ -222,4 +211,3 @@ const mapState = (state) => ({
 });
 
 export default connect(mapState)(Place);
-

@@ -1,0 +1,19 @@
+<h1>File Upload</h1>
+
+<input type="file" onchange="change"  />
+<button type="submit" onClick="{uploadFile}">Upload</button>
+<script>
+    
+              const fd = new FormData();
+            const change =  (e) => {
+              fd.append("file", e.target.files[0]); 
+            }; 
+              const config = {
+                headers: {
+                  "content-type": "multipart/form-data"
+                },
+              };
+              fetch("http://localhost:8000/countries", fd, config).then((res) => {
+                console.log(res);
+              }); 
+</script>

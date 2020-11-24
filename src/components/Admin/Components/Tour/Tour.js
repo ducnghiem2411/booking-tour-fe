@@ -4,12 +4,16 @@ import ReactDOM from "react-dom";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useDispatch, connect } from "react-redux";
-import { onShowModal, openNotification, resetStatusAdmin } from "../../../../redux/actions";
+import {
+  onShowModal,
+  openNotification,
+  resetStatusAdmin,
+} from "../../../../redux/actions";
 import axios from "axios";
 import ModalPlace from "../../ModalPlace/ModalPlace";
-import { Spin, Alert, Popconfirm ,notification} from "antd";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Spin, Alert, Popconfirm, notification } from "antd";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Spinner from "./../Spin/Spin";
 import {
   BrowserRouter as Router,
@@ -24,15 +28,14 @@ import {
   deleteTourItemRequest,
   sendDataRowIntoStore,
   onCloseModal,
-  getDataRowTableRequested
+  getDataRowTableRequested,
 } from "../../../../redux/actions/index";
 import ModalTour from "../../ModalTour/ModalTour";
 import formatPrice from "../../../../utilies/FormatNumber";
 
 const Tour = (props) => {
   const dispatch = useDispatch();
-  const {dataTour} = props.dataTour;
-  console.log('dataTour', dataTour)
+  const { dataTour } = props.dataTour;
   const { loading } = props.loading;
   const [dataRow, setDataRow] = useState(null);
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -43,8 +46,6 @@ const Tour = (props) => {
   const { keyAdminModal } = props.keyAdminModal;
   const { statusAdmin } = props.statusAdmin;
 
-  
-
   const handleChange = (pagination, filters, sorter) => {
     // console.log('Various parameters', pagination, filters, sorter);
     setFilteredInfo(filters);
@@ -52,66 +53,38 @@ const Tour = (props) => {
 
   // console.log('dataTour', dataTour)
 
-
   const sendRecordToModal = (data) => {
-    
     dispatch(onShowModal(true));
 
-    dispatch(sendDataRowIntoStore(data))
-
-
-   
+    dispatch(sendDataRowIntoStore(data));
   };
-
-
 
   const onChange = (pagination, filters, sorter, extra) => {};
 
   useEffect(() => {
     dispatch(fetchDataTourRequest());
     dispatch(onCloseModal(false));
-    
-
   }, []);
 
   const data = [];
 
-  
-  dataTour && dataTour.data ? dataTour.data.map((item, index) => {
-    data.push({
-      key: item._id,
-      countryId: item.countryId,
-      countryName: item.country,
-      placeId: item.placeId,
-      placeName: item.place,
-      tourName: item.name,
-      checkIn: item.checkIn,
-      checkOut: item.checkOut,
-      price: formatPrice(item.price),
-      member: item.member,
-      description: item.description,
- 
+  if (dataTour && dataTour.data) {
+    dataTour.data.map((item, index) => {
+      data.push({
+        key: item._id,
+        countryId: item.countryId,
+        countryName: item.country,
+        placeId: item.placeId,
+        placeName: item.place,
+        tourName: item.name,
+        checkIn: item.checkIn,
+        checkOut: item.checkOut,
+        price: formatPrice(item.price),
+        member: item.member,
+        description: item.description,
+      });
     });
-  }) : []
-
-  // if (dataTour && dataTour.data) {
-  //   dataTour.data.map((item, index) => {
-  //     data.push({
-  //       key: item._id,
-  //       countryId: item.countryId,
-  //       countryName: item.country,
-  //       placeId: item.placeId,
-  //       placeName: item.place,
-  //       tourName: item.name,
-  //       checkIn: item.checkIn,
-  //       checkOut: item.checkOut,
-  //       price: formatPrice(item.price),
-  //       member: item.member,
-  //       description: item.description,
-   
-  //     });
-  //   });
-  // }
+  }
 
   const onDelete = (id) => {
     dispatch(deleteTourItemRequest(id));
@@ -122,43 +95,36 @@ const Tour = (props) => {
       title: "Country name",
       dataIndex: "countryName",
       width: 300,
-      
     },
     {
       title: "Place name",
       dataIndex: "placeName",
       width: 300,
-      
     },
     {
       title: "Tour name",
       dataIndex: "tourName",
       width: 300,
-      
     },
     {
       title: "Checkin day",
       dataIndex: "checkIn",
       width: 300,
-      
     },
     {
       title: "Checkout day",
       dataIndex: "checkOut",
       width: 300,
-      
     },
     {
       title: "Price",
       dataIndex: "price",
       width: 300,
-      
     },
     {
       title: "Member quantity",
       dataIndex: "member",
       width: 300,
-      
     },
     {
       title: "Description",
@@ -178,12 +144,11 @@ const Tour = (props) => {
       render: (text, record) => (
         <>
           <div className="action">
-           
             <span className="block edit">
               <span className="icon">
                 <i className="fa fa-trash-o"></i>
               </span>
-             
+
               <Link
                 type="button"
                 className="btn-delete btn-edit"
@@ -212,17 +177,12 @@ const Tour = (props) => {
 
   const showModalAddNew = () => {
     dispatch(onShowModal(true));
-    
-  }
+  };
 
   useEffect(() => {
     if (keyAdminModal !== 0) {
       if (statusAdmin) {
-        openNotification(
-          statusAdmin,
-          "Success",
-          message
-        );
+        openNotification(statusAdmin, "Success", message);
       } else {
         openNotification(statusAdmin, "Failed", message);
       }
@@ -230,27 +190,26 @@ const Tour = (props) => {
     dispatch(resetStatusAdmin());
   }, [statusAdmin, keyAdminModal]);
 
-  
-
   // toast.success("You succeeced")
 
-
   return (
-
-   
     <>
-    {/* {statusCreate ? <ToastContainer success/> : '' } */}
-    
-    {/* <div className="notify">
+      {/* {statusCreate ? <ToastContainer success/> : '' } */}
+
+      {/* <div className="notify">
       <div className="body">
         <p className="title">Notification</p>
         <p className="desc">I will never close automatically. This is a purposely very very long description that has many many characters and words.</p>
       </div>
 
     </div> */}
-       {isDisplay ? <ModalTour dataRow={dataRow} /> : ""}
-       {/* {isDisplay ? <ModalPlace /> : ""} */}
-      <Link to={`/admin/tour/add`} onClick={showModalAddNew} className="btn-create">
+      {isDisplay ? <ModalTour dataRow={dataRow} /> : ""}
+      {/* {isDisplay ? <ModalPlace /> : ""} */}
+      <Link
+        to={`/admin/tour/add`}
+        onClick={showModalAddNew}
+        className="btn-create"
+      >
         Create new tour
       </Link>
 
@@ -258,23 +217,22 @@ const Tour = (props) => {
         <Table
           columns={columns}
           dataSource={data}
-          pagination={{ pageSize: 5 }}
+          pagination={{ pageSize: 4 }}
           onChange={handleChange}
-          scroll={{ x: 'max-content'}}
+          scroll={{ x: "max-content" }}
           // onRow = { (record, rowIndex) => {
           //   return {
           //     onClick: e => {
           //       console.log('record', record)
           //     }
           //   }
-            
+
           //   // setDataRow(record)
 
           // }
 
           // }
         />
-        
       </Spin>
 
       {/* {dataSource ? (
@@ -288,7 +246,14 @@ const Tour = (props) => {
         "Loading..."
       )} */}
 
-<Link className=" btn-back" to= {`/`} > <span className="icon arrowBack"> <i className="fa fa-angle-double-left "></i> </span> Back to home page</Link>
+      <Link className=" btn-back" to={`/`}>
+        {" "}
+        <span className="icon arrowBack">
+          {" "}
+          <i className="fa fa-angle-double-left "></i>{" "}
+        </span>{" "}
+        Back to home page
+      </Link>
     </>
   );
 };
@@ -304,4 +269,3 @@ const mapState = (state) => ({
 });
 
 export default connect(mapState)(Tour);
-

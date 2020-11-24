@@ -52,6 +52,7 @@ export default function tourReducer(state = initialState, action) {
       return {
         ...state,
         error: true,
+        loading: false,
         message: action.message,
       };
 

@@ -15,7 +15,6 @@ import queryString from "query-string";
 
 const Packages = (props) => {
   const { dataTour } = props.dataTour;
-  // console.log('dataTour', dataTour)
   const { messageBooking } = props.messageBooking;
   const dispatch = useDispatch();
 
@@ -26,7 +25,7 @@ const Packages = (props) => {
   const history = useHistory();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(6);
-  const total = dataTour && dataTour.data ? dataTour.data.totalTour : 0;
+  const total = dataTour && dataTour.totalTour
 
   const [filters, setFilters] = useState({
     limit: 6,
@@ -45,9 +44,7 @@ const Packages = (props) => {
     dispatch(fetchDataTourRequest(paramsString));
   }, [filters]);
 
-  // const onGetDataTourItem = (itemTour) => {
-  //   dispatch(dataItemTourRequest(itemTour));
-  // };
+
 
   const onBookingTour = (itemTour) => {
     const token = localStorage.getItem("token");
@@ -87,8 +84,8 @@ const Packages = (props) => {
           <div className="packages-content">
             <div className="row">
           
-              {dataTour && dataTour.data && dataTour.data.tours
-                ? dataTour.data.tours.map((itemTour, index) => {
+              {dataTour && dataTour.tours 
+                ? dataTour.tours.map((itemTour, index) => {
                     return (
                       
                         <div key={index} className="col-md-4 col-sm-6">
@@ -97,7 +94,6 @@ const Packages = (props) => {
                               <img
                                 className="placeholder"
                                 src="https://static.scientificamerican.com/sciam/cache/file/4E0744CD-793A-4EF8-B550B54F7F2C4406.jpg"
-                                // src="https://via.placeholder.com/360x292"
                               />
                             </div>
 
