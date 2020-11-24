@@ -5,6 +5,7 @@ import moment from "moment";
 import countries from "./../../../countries";
 import { fetchDataPlaceRequest, getFilterTourRequest } from "../../../redux/actions";
 import { connect, useDispatch } from "react-redux";
+import queryString from "query-string";
 
 const Box = (props) => {
   // const [form] = Form.useForm();
@@ -30,12 +31,12 @@ const Box = (props) => {
   const onChangeCountry = (value) => {
     // setCountry(e.target.value);
   };
-  const onChangePlace = (e) => {
-    setPlace(e.target.value);
-  };
-  const onChangeMember = (e) => {
-    setMemNumber(e.target.value);
-  };
+  // const onChangePlace = (e) => {
+  //   setPlace(e.target.value);
+  // };
+  // const onChangeMember = (e) => {
+  //   setMemNumber(e.target.value);
+  // };
   const onChangeBudget = (value) => {
     setMinBudget(value[0]*100000);
     setMaxBudget(value[1] * 100000);
@@ -45,7 +46,17 @@ const Box = (props) => {
   };
 
   const onSubmit = (values) => {
-    dispatch(getFilterTourRequest(values.countryName, values.placeName, values.memNumber,minBudget,maxBudget))
+    
+    const filters = {
+      country: values.countryName,
+      place: values.placeName,
+      member: values.memNumber,
+      minprice: minBudget,
+      maxprice: maxBudget,
+    }
+    const paramsString = queryString.stringify(filters);
+
+    dispatch(getFilterTourRequest(paramsString))
    
 
   };

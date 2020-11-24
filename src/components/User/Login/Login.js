@@ -1,5 +1,6 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   showCreateAccModal,
   onChangeStatusCreateAccModal,
@@ -301,6 +302,9 @@ const Login = (props) => {
                       </a>
                       ?
                     </span>
+                    <div className="forgot-pass">
+                      <Link className="forgot">Forgot password?</Link>
+                    </div>
                   </div>
                   <div
                     className={

@@ -15,6 +15,7 @@ import queryString from "query-string";
 
 const Packages = (props) => {
   const { dataTour } = props.dataTour;
+  // console.log('dataTour', dataTour)
   const { messageBooking } = props.messageBooking;
   const dispatch = useDispatch();
 
@@ -86,7 +87,7 @@ const Packages = (props) => {
           <div className="packages-content">
             <div className="row">
           
-              {dataTour && dataTour.data
+              {dataTour && dataTour.data && dataTour.data.tours
                 ? dataTour.data.tours.map((itemTour, index) => {
                     return (
                       

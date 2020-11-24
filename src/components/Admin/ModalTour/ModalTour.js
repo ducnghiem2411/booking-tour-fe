@@ -5,6 +5,8 @@ import {
   onCloseModal,
   showCreateAccModal,
   onChangeStatusCreateAccModal,
+  openNotification,
+  resetStatusAdmin,
 } from "../../../redux/actions/index";
 import { Form, Input, Button, Select, Upload, message } from "antd";
 import { FormInstance } from "antd/lib/form";
@@ -53,6 +55,10 @@ const ModalTour = (props) => {
   const [form] = Form.useForm();
   const dateFormat = "YYYY-MM-DD";
 
+  const { statusAdmin } = props.statusAdmin;
+  const { keyAdminModal } = props.keyAdminModal;
+  const { message } = props.message;
+
   const closeModal = () => {
     dispatch(onCloseModal(false));
     // dispatch(onChangeStatusCreateAccModal(false));
@@ -99,39 +105,6 @@ const ModalTour = (props) => {
     setIdPlace(id);
   };
 
-  const waitUntilImageLoaded = (resolve) => {
-    setTimeout(() => {
-      fileUpload
-        ? resolve() // from onChange method
-        : waitUntilImageLoaded(resolve);
-    }, 10);
-  };
-
-  const customRequest = async (option) => {
-    const { onSuccess, onError, file, action, onProgress } = option;
-    const url = action;
-
-    await new Promise((resolve) => waitUntilImageLoaded(resolve)); //in the next section
-
-    const type = "image/png";
-    axios
-      .put("http://localhost:8000/countries", fileUpload, {
-        onUploadProgress: (e) => {
-          onProgress({ percent: (e.loaded / e.total) * 100 });
-        },
-        headers: {
-          "Content-Type": type,
-        },
-      })
-      .then((respones) => {
-        /*......*/
-        onSuccess(respones.body);
-      })
-      .catch((err) => {
-        /*......*/
-        onError(err);
-      });
-  };
 
   const onReset = () => {
     form.resetFields();
@@ -168,11 +141,23 @@ const ModalTour = (props) => {
       );
     }
 
-    form.resetFields();
-    closeModal();
-    dispatch(changeStatusEdit());
-    history && history.push("/admin/tour");
+   
   };
+
+  useEffect(() => {
+    if (keyAdminModal !== 0) {
+      if (statusAdmin) {
+        openNotification(statusAdmin, "Success", message);
+        closeModal();
+      } else {
+        openNotification(statusAdmin, "Failed", message);
+        form.resetFields();
+        dispatch(changeStatusEdit());
+      }
+    }
+    dispatch(resetStatusAdmin());
+  }, [statusAdmin, keyAdminModal]);
+
 
   const rangeConfig = {
     rules: [{ type: "array", required: true, message: "Please select time!" }],
@@ -201,21 +186,7 @@ const ModalTour = (props) => {
     // console.log("search:", val);
   };
 
-  const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-      setStatusUpload(false);
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-      setStatusUpload(false);
-    }
-    if (isJpgOrPng && isLt2M) {
-      setStatusUpload(true);
-    }
-  };
+  
 
   const onChangeTextarea = (e) => {
     // console.log('value area', e.target.value)
@@ -521,6 +492,9 @@ const mapState = (state) => ({
   statusEdit: state.country,
   dataCountry: state.country,
   dataPlace: state.place,
+  statusAdmin: state.tour,
+  keyAdminModal: state.tour,
+  message: state.tour,
 });
 
 export default connect(mapState)(ModalTour);

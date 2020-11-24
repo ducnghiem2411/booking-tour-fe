@@ -1909,3 +1909,12 @@ nav.breadcumb ul li a:hover {
 .ant-picker-input > input{
   color: #aaa !important;
 }
+
+.forgot-pass .forgot {
+  font-weight: normal;
+  color: #1890ff;
+  font-size: 13px;
+  display: block;
+  margin-top: 10px;
+  font-style: italic;
+}

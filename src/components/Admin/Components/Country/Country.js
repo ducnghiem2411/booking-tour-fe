@@ -4,12 +4,12 @@ import ReactDOM from "react-dom";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useDispatch, connect } from "react-redux";
-import { onShowModal } from "../../../../redux/actions";
+import { onShowModal,resetStatusAdmin,openNotification } from "../../../../redux/actions";
 import axios from "axios";
 import ModalCountry from "../../ModalCountry/ModalCountry";
-import { Spin, Alert, Popconfirm ,notification} from "antd";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Spin, Alert, Popconfirm, notification } from "antd";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Spinner from "./../Spin/Spin";
 import {
   BrowserRouter as Router,
@@ -24,13 +24,12 @@ import {
   deleteCountryItemRequest,
   sendDataRowIntoStore,
   onCloseModal,
-  getDataRowTableRequested
+  getDataRowTableRequested,
 } from "../../../../redux/actions/index";
 
 const Country = (props) => {
   const dispatch = useDispatch();
-  const dataCountry = props.dataCountry.dataCountry;
-  // console.log('dataCountry', dataCountry)
+  const { dataCountry } = props.dataCountry;
   const { loading } = props.loading;
   const [dataRow, setDataRow] = useState(null);
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -38,8 +37,9 @@ const Country = (props) => {
   const { isDisplay } = props.isDisplay;
   const { statusCreate } = props.statusCreate;
   const { message } = props.message;
+  const { keyAdminModal } = props.keyAdminModal;
+  const { statusAdmin } = props.statusAdmin;
 
- 
 
   const handleChange = (pagination, filters, sorter) => {
     setFilteredInfo(filters);
@@ -48,29 +48,15 @@ const Country = (props) => {
   const sendRecordToModal = (data) => {
     dispatch(onShowModal(true));
 
-    dispatch(sendDataRowIntoStore(data))
-
-
-   
+    dispatch(sendDataRowIntoStore(data));
   };
 
-  const openNotification = placement => {
-    console.log('toast')
-    notification.info({
-      message: `Notification ${placement}`,
-      description:
-        'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-      placement,
-    });
-  };
 
   const onChange = (pagination, filters, sorter, extra) => {};
 
   useEffect(() => {
     dispatch(fetchDataCountryRequest());
     dispatch(onCloseModal(false));
-    
-
   }, []);
 
   const data = [];
@@ -81,7 +67,6 @@ const Country = (props) => {
         key: item._id,
         name: item.name,
         description: item.description,
-       
       });
     });
   }
@@ -95,7 +80,6 @@ const Country = (props) => {
       title: "Name",
       dataIndex: "name",
       width: 150,
-      
     },
     {
       title: "Description",
@@ -115,12 +99,11 @@ const Country = (props) => {
       render: (text, record) => (
         <>
           <div className="action">
-           
             <span className="block edit">
               <span className="icon">
                 <i className="fa fa-trash-o"></i>
               </span>
-             
+
               <Link
                 type="button"
                 className="btn-delete btn-edit"
@@ -149,19 +132,32 @@ const Country = (props) => {
 
   const showModalAddNew = () => {
     dispatch(onShowModal(true));
-    
-  }
+  };
+ 
 
-
-
+  useEffect(() => {
+    if (keyAdminModal !== 0) {
+      if (statusAdmin) {
+        openNotification(
+          statusAdmin,
+          "Success",
+          message
+        );
+      } else {
+        openNotification(statusAdmin, "Failed", message);
+      }
+    }
+    dispatch(resetStatusAdmin());
+  }, [statusAdmin, keyAdminModal]);
 
   return (
-
-   
     <>
-    
-       {isDisplay ? <ModalCountry dataRow={dataRow} /> : ""}
-      <Link to={`/admin/country/add`} onClick={showModalAddNew} className="btn-create">
+      {isDisplay ? <ModalCountry dataRow={dataRow} /> : ""}
+      <Link
+        to={`/admin/country/add`}
+        onClick={showModalAddNew}
+        className="btn-create"
+      >
         Create new country
       </Link>
 
@@ -171,16 +167,17 @@ const Country = (props) => {
           dataSource={data}
           pagination={{ pageSize: 5 }}
           onChange={handleChange}
-          scroll={{ x: 'max-content'}}
-        
+          scroll={{ x: "max-content" }}
         />
-        <Link className=" btn-back" to= {`/`} > <span className="icon arrowBack"> <i className="fa fa-angle-double-left "></i> </span> Back to home page</Link>
-       
+        <Link className=" btn-back" to={`/`}>
+          {" "}
+          <span className="icon arrowBack">
+            {" "}
+            <i className="fa fa-angle-double-left "></i>{" "}
+          </span>{" "}
+          Back to home page
+        </Link>
       </Spin>
-
-      
-
-    
     </>
   );
 };
@@ -191,6 +188,8 @@ const mapState = (state) => ({
   isDisplay: state.displayModal,
   statusCreate: state.country,
   message: state.country,
+  statusAdmin: state.country,
+  keyAdminModal: state.country,
 });
 
 export default connect(mapState)(Country);

@@ -3,37 +3,26 @@ import * as type from "../TypeAction";
 import axios from "axios";
 
 import {
-  fetchDataPlaceSucced,
-  fetchDataPlaceFailed,
+  getFilterTourSucced,
+  getFilterTourFailed,
 } from "../actions/index";
 
 
 
 export function* getFilterTourInSaga(action) {
 
-  const apiUrl = "http://localhost:8000/tours";
-  const filter = {
-    country: action.payload.country,
-    place: action.payload.place,
-    member: action.payload.member,
-    minprice: action.payload.min,
-    maxprice: action.payload.max,
-
-  }
-
-
-
-
+  const apiUrl = `http://localhost:8000/tours?${action.paramsString}`;
+ 
   try {
-    const response = yield call(axios.get, apiUrl, filter);
+    const response = yield call(axios.get, apiUrl, null);
 
 
     if (response) {
       console.log('response', response)
-      // yield put(getFilterTourSucced(response.data));
+      yield put(getFilterTourSucced(response.data.data));
     }
   } catch (error) {
-    // yield put(getFilterTourFailed(error));
+    yield put(getFilterTourFailed(error.response.data));
   }
 }
 

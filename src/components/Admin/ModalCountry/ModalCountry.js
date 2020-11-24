@@ -3,150 +3,66 @@ import React, { FormEvent, useEffect, useState, useRef } from "react";
 import { connect, useDispatch } from "react-redux";
 import {
   onCloseModal,
-  showCreateAccModal,
-  onChangeStatusCreateAccModal,
+  openNotification,
+  resetStatusAdmin,
 } from "../../../redux/actions/index";
-import { Form, Input, Button, Select, Upload, message } from "antd";
-import { FormInstance } from "antd/lib/form";
-import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Select } from "antd";
 import { Spin } from "antd";
-import axios, { post } from 'axios';
 import {
   createCountryRequest,
-  fetchDataCountryRequest,
   changeStatusEdit,
   updateInfoCountryItemRequest,
 } from "../../../redux/actions/index";
 import countries from "../../../countries";
-import { useForm } from "antd/lib/form/Form";
 const { Option } = Select;
-const { Dragger } = Upload;
 
 const ModalCountry = (props) => {
   const dispatch = useDispatch();
   const { isDisplay } = props.isDisplay;
-  const { match } = props;
-  const { selectItem, setSelectItem } = useState("");
-  const { textareaItem, setTextAreaItem } = useState("");
 
-  const [statusUpload, setStatusUpload] = useState(true);
- 
-
-  // const [fileUpload, setFileUpload] = useState("");
   const { history } = props;
   const { loading } = props.loading;
-  // const [inputDataRow, setInputDataRow] = useState(null);
   const { dataRow } = props.dataRow;
   const { statusEdit } = props.statusEdit;
 
-  const formRef = React.createRef();
-  // const [image, setImage] = useState(null)
-  
-  const [form] = Form.useForm();
-  const {register} = useForm()
-  // const [fileList, setFileList] = useState([])
+  const { statusAdmin } = props.statusAdmin;
+  const { keyAdminModal } = props.keyAdminModal;
+  const { message } = props.message;
 
-  
-  
+  const [form] = Form.useForm();
 
   const closeModal = () => {
     dispatch(onCloseModal(false));
-    // dispatch(onChangeStatusCreateAccModal(false));
     form.resetFields();
     dispatch(changeStatusEdit());
     history && history.push("/admin/country");
-  };
-  const onCreateAccModal = (e) => {
-    e.preventDefault();
-    dispatch(showCreateAccModal(true));
-  };
-  const changeStatusCreateAccModal = (e) => {
-    e.preventDefault();
-    dispatch(onChangeStatusCreateAccModal(false));
   };
 
   const handleChange = (value) => {};
 
-  
-  const onReset = () => {
-    form.resetFields();
-  };
-
-  // console.log("fileUpload", fileUpload);
   const onSubmit = (values) => {
     if (statusEdit) {
       dispatch(updateInfoCountryItemRequest(dataRow.key, values));
     } else {
-      dispatch(
-        createCountryRequest(
-          values.countryName,
-          values.description
-          // fileUpload ? fileUpload : ""
-        )
-      );
-    }
-
-    form.resetFields();
-    closeModal();
-    dispatch(changeStatusEdit());
-    history && history.push("/admin/country");
-  };
-
-  
-
-  const onBlur = () => {
-    // console.log("blur");
-  };
-
-  const onFocus = () => {
-    // console.log("focus");
-  };
-
-  const onSearch = (val) => {
-    // console.log("search:", val);
-  };
-
-  const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-      setStatusUpload(false);
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-      setStatusUpload(false);
-    }
-    if (isJpgOrPng && isLt2M) {
-      setStatusUpload(true);
+      dispatch(createCountryRequest(values.countryName, values.description));
     }
   };
-
-  const onChangeTextarea = (e) => {
-    // setTextAreaItem(e.target.value)
-  };
-  const onChangeSelect = (e) => {
-    // setSelectItem(e && e.target.value)
-  };
-
- 
 
   useEffect(() => {
-    
-  }, [dataRow]);
+    if (keyAdminModal !== 0) {
+      if (statusAdmin) {
+        openNotification(statusAdmin, "Success", message);
+        closeModal();
+      } else {
+        openNotification(statusAdmin, "Failed", message);
+        form.resetFields();
+        dispatch(changeStatusEdit());
+      }
+    }
+    dispatch(resetStatusAdmin());
+  }, [statusAdmin, keyAdminModal]);
 
-  
-
-
-
-
-
-
-
-
-
-
-
+  useEffect(() => {}, [dataRow]);
 
   return (
     <>
@@ -211,7 +127,6 @@ const ModalCountry = (props) => {
                     <Form.Item
                       name="description"
                       label="Description"
-                      onChange={onChangeTextarea}
                       initialValue={statusEdit ? dataRow.description : ""}
                       rules={[
                         {
@@ -223,22 +138,6 @@ const ModalCountry = (props) => {
                       <Input.TextArea maxLength={250} />
                     </Form.Item>
 
-
-
-                    
-
-                    {/* <Dragger {...propsUpload} fileList={fileList}>
-                      <p className="ant-upload-drag-icon">
-                        <InboxOutlined />
-                      </p>
-                      <p className="ant-upload-text">
-                        Click or drag file to this area to upload
-                      </p>
-                      <p className="ant-upload-hint">
-                        Support for a single or bulk upload. Strictly prohibit
-                        from uploading company data or other band files
-                      </p>
-                    </Dragger> */}
                     <Form.Item>
                       <Button
                         type="primary"
@@ -262,8 +161,6 @@ const ModalCountry = (props) => {
           </div>
         </div>
       </div>
-
-      
     </>
   );
 };
@@ -274,6 +171,9 @@ const mapState = (state) => ({
   loading: state.country,
   dataRow: state.country,
   statusEdit: state.country,
+  statusAdmin: state.country,
+  keyAdminModal: state.country,
+  message: state.country,
 });
 
 export default connect(mapState)(ModalCountry);

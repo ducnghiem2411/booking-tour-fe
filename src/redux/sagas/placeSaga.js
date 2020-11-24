@@ -22,7 +22,7 @@ export function* createPlaceInSaga(action) {
       yield put(createPlaceSucced(response.data.data));
     }
   } catch (error) {
-    yield put(createPlaceFailed(error.response));
+    yield put(createPlaceFailed(error.response.data.message));
   }
 }
 

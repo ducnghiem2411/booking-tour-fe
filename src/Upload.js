@@ -1,47 +1,55 @@
-import React, {useState} from 'react'
-import axios, { post } from 'axios';
+import React, { useEffect, useState } from "react";
+import axios, { post } from "axios";
+import ImageUploader from 'react-images-upload';
 
-const Upload = props => {
+const Upload = (props) => {
+  const [file, setFile] = useState(null);
 
-    const [file, setFile] = useState(null);
-    const onChangeImg = (e)  => {
-        setFile( e.target.files[0])
-      }
-      const fileUpload = (file) => {
-        const url = 'http://localhost:8000/countries';
-        const formData = new FormData();
-        formData.append('file',file)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
-        return post(url, formData,config)
-      }
+  const onChangeImg =  (e) => {
+    setFile( e.target.files[0])
     
-      const onFormSubmit = e => {
-        e.preventDefault() // Stop form submit
-        fileUpload(file).then((response)=>{
-          console.log(response.data);
-        })
-      }
+  };
+  const uploadFile = async (e) => {
+    const fd = new FormData();
+    fd.append("file", file);
 
 
-    return (
 
 
-        <>
+    const data = {
+      name: "name",
+      description: "desc",
+      image: fd,
+    };
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data"
+      },
+    };
+    await axios.post("http://localhost:8000/countries", data, config).then((res) => {
+      console.log(res);
+    });
 
-<form onSubmit={onFormSubmit}>
-        <h1>File Upload</h1>
-        <input type="file" onChange={onChangeImg} />
-        <button type="submit">Upload</button>
-      </form>
-
-
-        </>
-    )
 }
+    
 
 
-export default Upload
+  useEffect(() => {
+    
+  }, [file])
+
+
+  return (
+    <>
+      <h1>File Upload</h1>
+
+      <input type="file" onChange={onChangeImg} />
+      <button type="submit" onClick={uploadFile}>
+        Upload
+      </button>
+     
+    </>
+  );
+};
+
+export default Upload;

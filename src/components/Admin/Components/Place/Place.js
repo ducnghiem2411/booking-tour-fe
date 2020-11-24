@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useDispatch, connect } from "react-redux";
-import { onShowModal } from "../../../../redux/actions";
+import { onShowModal, openNotification, resetStatusAdmin } from "../../../../redux/actions";
 import axios from "axios";
 import ModalPlace from "../../ModalPlace/ModalPlace";
 import { Spin, Alert, Popconfirm ,notification} from "antd";
@@ -39,14 +39,14 @@ const Place = (props) => {
   const { isDisplay } = props.isDisplay;
   const { statusCreate } = props.statusCreate;
   const { message } = props.message;
+  const { keyAdminModal } = props.keyAdminModal;
+  const { statusAdmin } = props.statusAdmin;
 
   const handleChange = (pagination, filters, sorter) => {
-    // console.log('Various parameters', pagination, filters, sorter);
     setFilteredInfo(filters);
   };
 
   const sendRecordToModal = (data) => {
-    // console.log('data', data)
     dispatch(onShowModal(true));
 
     dispatch(sendDataRowIntoStore(data))
@@ -55,15 +55,7 @@ const Place = (props) => {
    
   };
 
-  const openNotification = placement => {
-    // console.log('toast')
-    notification.info({
-      message: `Notification ${placement}`,
-      description:
-        'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-      placement,
-    });
-  };
+ 
 
   const onChange = (pagination, filters, sorter, extra) => {};
 
@@ -85,15 +77,7 @@ const Place = (props) => {
         countryName: item.country,
         placeName: item.name,
         description: item.description,
-        // images: item.images && item.images.map((item, index) => {
-        //   return (
-        //     <span key={index}>
-
-        //     {item.name}
-        //     </span>
-        //   )
-        // })
-        // image: item.image
+     
       });
     });
   }
@@ -170,9 +154,24 @@ const Place = (props) => {
     
   }
 
+  useEffect(() => {
+    if (keyAdminModal !== 0) {
+      if (statusAdmin) {
+        openNotification(
+          statusAdmin,
+          "Success",
+          message
+        );
+      } else {
+        openNotification(statusAdmin, "Failed", message);
+      }
+    }
+    dispatch(resetStatusAdmin());
+  }, [statusAdmin, keyAdminModal]);
   
 
   // toast.success("You succeeced")
+
 
 
   return (
@@ -217,7 +216,9 @@ const mapState = (state) => ({
   loading: state.country,
   isDisplay: state.displayModal,
   statusCreate: state.country,
-  message: state.country,
+  message: state.place,
+  statusAdmin: state.place,
+  keyAdminModal: state.place,
 });
 
 export default connect(mapState)(Place);

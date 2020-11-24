@@ -19,7 +19,7 @@ export function* updateInfoCountryInSaga(action) {
       yield put(updateInfoCountryItemSucced(response.data.data))
     }
   } catch (error) {
-    yield put(updateInfoCountryItemFailed(error));
+    yield put(updateInfoCountryItemFailed(error.response.data.message));
   }
 }
 

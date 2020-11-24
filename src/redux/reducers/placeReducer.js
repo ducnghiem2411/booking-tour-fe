@@ -8,7 +8,9 @@ const initialState = {
   dataPlace: [],
   dataRow: null,
   statusEdit: false,
-  statusCreate: false
+  statusCreate: false,
+  statusAdmin: false,
+  keyAdminModal: 0,
 };
 
 var findIndex = (dataPlace, id) => {
@@ -23,6 +25,9 @@ var findIndex = (dataPlace, id) => {
 };
 
 export default function placeReducer(state = initialState, action) {
+  const messageCreate = "Created place successfully !"
+  const messageUpdate = "Updated place successfully !"
+  const messageDelete = "Deleted place successfully !"
   var index = -1
   switch (action.type) {
 
@@ -58,13 +63,25 @@ export default function placeReducer(state = initialState, action) {
       state.dataPlace.data.push(action.data);
       state.loading = false;
       state.statusCreate = true;
+      state.statusAdmin = true;
+      state.keyAdminModal++;
+      state.message = messageCreate;
       return { ...state };
 
     case type.CREATE_PLACE_FAILED:
       return {
         ...state,
         error: true,
-        message: action.message.data.message,
+        message: action.message,
+        statusAdmin: false,
+        keyAdminModal: state.keyAdminModal + 1,
+      };
+      case type.RESET_STATUS_ADMIN:
+      return {
+        ...state,
+
+        statusAdmin: false,
+        keyAdminModal: 0,
       };
 
     
@@ -77,11 +94,17 @@ export default function placeReducer(state = initialState, action) {
       index = findIndex(state.dataPlace.data, action.id);
       state.dataPlace.data.splice(index, 1);
       state.loading = false;
+      state.statusAdmin = true;
+      state.keyAdminModal++;
+      state.message = messageDelete;
       return { ...state };
 
     case type.DELETE_PLACE_FAILED:
       return {
         ...state,
+        loading: false,
+        statusAdmin: false,
+        keyAdminModal: state.keyAdminModal + 1,
         message: action.message,
       };
     // case type.GET_INFO_COUNTRY_ITEM_REQUEST:
@@ -137,7 +160,6 @@ export default function placeReducer(state = initialState, action) {
         statusEdit: false,
       };
     case type.UPDATE_DATA_PLACE_REQUESTED:
-      // console.log('action.data', action.data)
 
       return {
         ...state,
@@ -148,6 +170,9 @@ export default function placeReducer(state = initialState, action) {
       index = findIndex(state.dataPlace.data, action.data._id);
       state.dataPlace.data[index] = action.data;
       state.loading = false;
+      state.message = messageUpdate;
+      state.statusAdmin = true;
+      state.keyAdminModal++;
       return { ...state };
 
     case type.UPDATE_DATA_PLACE_FAILED:
@@ -157,6 +182,8 @@ export default function placeReducer(state = initialState, action) {
         ...state,
         loading: false,
         message: action.message,
+        statusAdmin: false,
+        keyAdminModal: state.keyAdminModal + 1,
       };
 
     default:

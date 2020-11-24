@@ -21,7 +21,7 @@ export function* createCountryInSaga(action) {
       yield put(createCountrySucced(response.data.data));
     }
   } catch (error) {
-    yield put(createCountryFailed(error.response));
+    yield put(createCountryFailed(error.response.data.message));
   }
 }
 

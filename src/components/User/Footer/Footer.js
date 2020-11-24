@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -116,6 +117,9 @@ const Footer = () => {
               © 2017 <a href="https://www.themesine.com">BHSoft-B4Team</a>. All
               Right Reserved
             </p>
+            <div className="to-admin">
+              <Link to="/admin">Go to admin dashboard</Link>
+            </div>
           </div>
           {/*/.foot-icons*/}
           <div id="scroll-Top"></div>

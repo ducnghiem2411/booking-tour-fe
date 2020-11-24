@@ -289,16 +289,10 @@ const fetchDataPlaceFailed = (message) => {
 
 
 
-const getFilterTourRequest = (country, place, member, min, max) => {
+const getFilterTourRequest = (paramsString) => {
   return {
     type: type.GET_FILTER_TOUR_REQUEST,
-    payload: {
-      country,
-      place,
-      member,
-      min,
-      max
-    }
+    paramsString
    
   };
 };
@@ -413,6 +407,11 @@ const resetLoginStatus = () => {
 const resetRegisterStatus = () => {
   return {
     type: type.RESET_REGISTER_STATUS,
+  };
+};
+const resetStatusAdmin = () => {
+  return {
+    type: type.RESET_STATUS_ADMIN,
   };
 };
 
@@ -736,6 +735,7 @@ export {
   fetchReviewsListSucced,
   getFilterTourRequest,
   getFilterTourSucced,
+  resetStatusAdmin,
   getFilterTourFailed,
   fetchReviewsListFailed,
   onCloseModalRegister,

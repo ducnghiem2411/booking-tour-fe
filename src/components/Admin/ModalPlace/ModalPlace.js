@@ -5,6 +5,8 @@ import {
   onCloseModal,
   showCreateAccModal,
   onChangeStatusCreateAccModal,
+  openNotification,
+  resetStatusAdmin,
 } from "../../../redux/actions/index";
 import { Form, Input, Button, Select, Upload, message } from "antd";
 import { FormInstance } from "antd/lib/form";
@@ -35,21 +37,21 @@ const ModalPlace = (props) => {
   const [fileUpload, setFileUpload] = useState("");
   const { history } = props;
   const { loading } = props.loading;
-  // const [inputDataRow, setInputDataRow] = useState(null);
   const { dataRow } = props.dataRow;
   const { dataCountry } = props.dataCountry;
   // console.log("dataCountry", dataCountry);
   const { statusEdit } = props.statusEdit;
   const [idCountry, setIdCountry] = useState("");
 
-  const formRef = React.createRef();
-  const [form] = Form.useForm();
+  const { statusAdmin } = props.statusAdmin;
+  const { keyAdminModal } = props.keyAdminModal;
+  const { message } = props.message;
 
-  // console.log('dataRow', dataRow)
+  
+  const [form] = Form.useForm();
 
   const closeModal = () => {
     dispatch(onCloseModal(false));
-    // dispatch(onChangeStatusCreateAccModal(false));
     form.resetFields();
     dispatch(changeStatusEdit());
     history && history.push("/admin/place");
@@ -75,12 +77,8 @@ const ModalPlace = (props) => {
   };
 
   const handleChange = (value) => {
-    // console.log(`selected ${value}`);
-    // setSelectedCountryName( )
-
     const id = getIdCountry(dataCountry, value);
     setIdCountry(id);
-    // console.log('id', id)
   };
 
   const waitUntilImageLoaded = (resolve) => {
@@ -117,11 +115,7 @@ const ModalPlace = (props) => {
       });
   };
 
-  const onReset = () => {
-    form.resetFields();
-  };
-
-  // console.log("fileUpload", fileUpload);
+ 
   const onSubmit = (values) => {
     if (statusEdit) {
       dispatch(updateInfoPlaceItemRequest(dataRow.key, values));
@@ -132,84 +126,43 @@ const ModalPlace = (props) => {
           values.countryName,
           values.placeName,
           values.description
-          // fileUpload ? fileUpload : ""
         )
       );
     }
 
-    form.resetFields();
-    closeModal();
-    dispatch(changeStatusEdit());
-    history && history.push("/admin/place");
+   
   };
-
-  const normFile = (e) => {
-    // console.log("e", e);
-    setFileUpload(e.fileList[0].name);
-
-    if (e.fileList.length >= 2) {
-      // setStatusUpload(true)
-    } else {
-      // setStatusUpload(false)
-    }
-  };
-
-  const onBlur = () => {
-    // console.log("blur");
-  };
-
-  const onFocus = () => {
-    // console.log("focus");
-  };
-
-  const onSearch = (val) => {
-    // console.log("search:", val);
-  };
-
-  const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-      setStatusUpload(false);
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-      setStatusUpload(false);
-    }
-    if (isJpgOrPng && isLt2M) {
-      setStatusUpload(true);
-    }
-  };
-
-  const onChangeTextarea = (e) => {
-    // console.log('value area', e.target.value)
-    // setTextAreaItem(e.target.value)
-  };
-  const onChangePlaceName = (e) => {
-    // console.log('value place name', e.target.value)
-    // setTextAreaItem(e.target.value)
-  };
-  const onChangeSelect = (e) => {
-    // setSelectItem(e && e.target.value)
-  };
-
-  // console.log('selectItem', selectItem)
-  // console.log('textareaItem', textareaItem)
 
   useEffect(() => {
-    // console.log("useEffectModalPlace");
-    // console.log('dataCountry', dataCountry)
+    if (keyAdminModal !== 0) {
+      if (statusAdmin) {
+        openNotification(statusAdmin, "Success", message);
+        closeModal();
+      } else {
+        openNotification(statusAdmin, "Failed", message);
+        form.resetFields();
+        dispatch(changeStatusEdit());
+      }
+    }
+    dispatch(resetStatusAdmin());
+  }, [statusAdmin, keyAdminModal]);
+
+ 
+
+  const onBlur = () => {};
+
+  const onFocus = () => {};
+
+  const onSearch = (val) => {};
+
+
+  const onChangeTextarea = (e) => {};
+  const onChangePlaceName = (e) => {};
+  const onChangeSelect = (e) => {};
+
+  useEffect(() => {
     dispatch(fetchDataCountryRequest());
-    // const id = match.params.id;
-    // console.log("match", match);
-    // if (match && id == "8mt43q3kf6") {
-    //   // console.log("new");
-    // } else {
-    //   // console.log("edit");
-    // }
   }, [dataRow]);
-  // console.log("dataRow", dataRow);
 
   return (
     <>
@@ -281,7 +234,7 @@ const ModalPlace = (props) => {
                           : []} */}
                       </Select>
                     </Form.Item>
-                   
+
                     <Form.Item
                       name="placeName"
                       label="Place name"
@@ -304,7 +257,6 @@ const ModalPlace = (props) => {
                       name="description"
                       label="Description"
                       onChange={onChangeTextarea}
-                      // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
                       initialValue={statusEdit ? dataRow.description : ""}
                       rules={[
                         {
@@ -315,55 +267,7 @@ const ModalPlace = (props) => {
                     >
                       <Input.TextArea maxLength={250} />
                     </Form.Item>
-                    {/* <Form.Item
-                      name="description"
-                      label="Description"
-                      onChange={onChangeTextarea}
-                      // initialValue=  {dataRow && dataRow.description ? dataRow.description : ''}
-                      initialValue={statusEdit ? dataRow.description : ""}
-                      rules={[{ required: true }]}
-                    >
-                      {getFieldDecorator("de", {
-                        rules: [
-                          {
-                            required: true,
-                            pattern: new RegExp("^[0-9]*$"),
-                            message: "Wrong format!",
-                          },
-                        ],
-                      })(
-                        <Input
-                          className="form-control"
-                          type="text"
-                          placeholder="Phone number"
-                        />
-                      )}
-                    </Form.Item> */}
-
-                    {/* <Input
-                    name="description"
-                    label="Description"
-                    // defaultValue={dataRow ? dataRow.description : "abc"}
-                    value={dataRow ? dataRow.description : "desc"}
-                    onChange={onChangeTextarea}
-                  /> */}
-
-                    {/* <Form.Item
-                    name="image"
-                    label="Images"
-                    valuePropName="fileList"
-                    getValueFromEvent={normFile}
-                    showUploadList={statusUpload}
-                  >
-                    <Upload
-                      name="file"
-                      listType="picture"
-                      beforeUpload={beforeUpload}
-                      customRequest={customRequest}
-                    >
-                      <Button icon={<UploadOutlined />}>Click to upload</Button>
-                    </Upload>
-                  </Form.Item> */}
+                   
                     <Form.Item>
                       <Button
                         type="primary"
@@ -397,6 +301,9 @@ const mapState = (state) => ({
   dataRow: state.place,
   statusEdit: state.country,
   dataCountry: state.country,
+  statusAdmin: state.place,
+  keyAdminModal: state.place,
+  message: state.place,
 });
 
 export default connect(mapState)(ModalPlace);

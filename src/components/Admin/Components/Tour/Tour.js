@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useDispatch, connect } from "react-redux";
-import { onShowModal } from "../../../../redux/actions";
+import { onShowModal, openNotification, resetStatusAdmin } from "../../../../redux/actions";
 import axios from "axios";
 import ModalPlace from "../../ModalPlace/ModalPlace";
 import { Spin, Alert, Popconfirm ,notification} from "antd";
@@ -32,6 +32,7 @@ import formatPrice from "../../../../utilies/FormatNumber";
 const Tour = (props) => {
   const dispatch = useDispatch();
   const {dataTour} = props.dataTour;
+  console.log('dataTour', dataTour)
   const { loading } = props.loading;
   const [dataRow, setDataRow] = useState(null);
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -39,6 +40,10 @@ const Tour = (props) => {
   const { isDisplay } = props.isDisplay;
   const { statusCreate } = props.statusCreate;
   const { message } = props.message;
+  const { keyAdminModal } = props.keyAdminModal;
+  const { statusAdmin } = props.statusAdmin;
+
+  
 
   const handleChange = (pagination, filters, sorter) => {
     // console.log('Various parameters', pagination, filters, sorter);
@@ -58,15 +63,7 @@ const Tour = (props) => {
    
   };
 
-  const openNotification = placement => {
-    // console.log('toast')
-    notification.info({
-      message: `Notification ${placement}`,
-      description:
-        'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-      placement,
-    });
-  };
+
 
   const onChange = (pagination, filters, sorter, extra) => {};
 
@@ -79,25 +76,42 @@ const Tour = (props) => {
 
   const data = [];
 
-
-  if (dataTour && dataTour.data) {
-    dataTour.data.map((item, index) => {
-      data.push({
-        key: item._id,
-        countryId: item.countryId,
-        countryName: item.country,
-        placeId: item.placeId,
-        placeName: item.place,
-        tourName: item.name,
-        checkIn: item.checkIn,
-        checkOut: item.checkOut,
-        price: formatPrice(item.price),
-        member: item.member,
-        description: item.description,
-   
-      });
+  
+  dataTour && dataTour.data ? dataTour.data.map((item, index) => {
+    data.push({
+      key: item._id,
+      countryId: item.countryId,
+      countryName: item.country,
+      placeId: item.placeId,
+      placeName: item.place,
+      tourName: item.name,
+      checkIn: item.checkIn,
+      checkOut: item.checkOut,
+      price: formatPrice(item.price),
+      member: item.member,
+      description: item.description,
+ 
     });
-  }
+  }) : []
+
+  // if (dataTour && dataTour.data) {
+  //   dataTour.data.map((item, index) => {
+  //     data.push({
+  //       key: item._id,
+  //       countryId: item.countryId,
+  //       countryName: item.country,
+  //       placeId: item.placeId,
+  //       placeName: item.place,
+  //       tourName: item.name,
+  //       checkIn: item.checkIn,
+  //       checkOut: item.checkOut,
+  //       price: formatPrice(item.price),
+  //       member: item.member,
+  //       description: item.description,
+   
+  //     });
+  //   });
+  // }
 
   const onDelete = (id) => {
     dispatch(deleteTourItemRequest(id));
@@ -201,6 +215,21 @@ const Tour = (props) => {
     
   }
 
+  useEffect(() => {
+    if (keyAdminModal !== 0) {
+      if (statusAdmin) {
+        openNotification(
+          statusAdmin,
+          "Success",
+          message
+        );
+      } else {
+        openNotification(statusAdmin, "Failed", message);
+      }
+    }
+    dispatch(resetStatusAdmin());
+  }, [statusAdmin, keyAdminModal]);
+
   
 
   // toast.success("You succeeced")
@@ -269,7 +298,9 @@ const mapState = (state) => ({
   loading: state.country,
   isDisplay: state.displayModal,
   statusCreate: state.country,
-  message: state.country,
+  message: state.tour,
+  statusAdmin: state.tour,
+  keyAdminModal: state.tour,
 });
 
 export default connect(mapState)(Tour);

@@ -12,7 +12,10 @@ const initialState = {
   itemTour: "",
   messageBooking: '',
   bookingTourStatus: false,
-  keyBookingTourStatus: 0
+  keyBookingTourStatus: 0,
+  dataFilter: [],
+  statusAdmin: false,
+  keyAdminModal: 0,
 };
 
 var findIndex = (dataTour, id) => {
@@ -27,6 +30,9 @@ var findIndex = (dataTour, id) => {
 };
 
 export default function tourReducer(state = initialState, action) {
+  const messageCreate = "Created tour successfully !"
+  const messageDelete = "Deleted tour successfully !"
+  const messageUpdate = "Updated tour successfully !"
   var index = -1;
   switch (action.type) {
     case type.FETCH_TOUR_REQUEST:
@@ -59,14 +65,27 @@ export default function tourReducer(state = initialState, action) {
       state.dataTour.data.push(action.data);
       state.loading = false;
       state.statusCreate = true;
+      state.statusAdmin = true;
+      state.keyAdminModal++;
+      state.message = messageCreate;
       return { ...state };
 
     case type.CREATE_TOUR_FAILED:
       return {
         ...state,
         error: true,
+        statusAdmin: false,
+        keyAdminModal: state.keyAdminModal + 1,
         message: action.message.data.message,
       };
+
+      case type.RESET_STATUS_ADMIN:
+        return {
+          ...state,
+  
+          statusAdmin: false,
+          keyAdminModal: 0,
+        };
 
     case type.DELETE_TOUR_REQUESTED:
       return {
@@ -77,14 +96,22 @@ export default function tourReducer(state = initialState, action) {
       index = findIndex(state.dataTour.data, action.id);
       state.dataTour.data.splice(index, 1);
       state.loading = false;
+      state.statusAdmin = true;
+      state.keyAdminModal++;
+      state.message = messageDelete;
       return { ...state };
 
     case type.DELETE_TOUR_FAILED:
       return {
         ...state,
+        loading: false,
+        statusAdmin: false,
+        keyAdminModal: state.keyAdminModal + 1,
         message: action.message,
       };
     
+
+
     case type.GET_DATA_ROW_TABLE_REQUESTED:
       return {
         ...state,
@@ -102,6 +129,34 @@ export default function tourReducer(state = initialState, action) {
         loading: false,
         message: action.message,
       };
+
+
+
+      
+    
+
+
+    case type.GET_FILTER_TOUR_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case type.GET_FILTER_TOUR_SUCCED:
+      return {
+        ...state,
+        loading: false,
+        dataFilter: action.data,
+      };
+    case type.GET_FILTER_TOUR_FAILED:
+      return {
+        ...state,
+        loading: false,
+        message: action.message,
+      };
+
+
+
+
     case type.SEND_DATA_ROW_INTO_STORE:
 
       return {
@@ -126,6 +181,9 @@ export default function tourReducer(state = initialState, action) {
       index = findIndex(state.dataTour.data, action.data._id);
       state.dataTour.data[index] = action.data;
       state.loading = false;
+      state.message = messageUpdate;
+      state.statusAdmin = true;
+      state.keyAdminModal++;
       return { ...state };
 
     case type.UPDATE_DATA_TOUR_FAILED:
@@ -133,6 +191,8 @@ export default function tourReducer(state = initialState, action) {
         ...state,
         loading: false,
         message: action.message,
+        statusAdmin: false,
+        keyAdminModal: state.keyAdminModal + 1,
       };
    
     case type.DATA_ITEM_TOUR_REQUESTED:

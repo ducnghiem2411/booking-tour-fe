@@ -9,10 +9,10 @@ import Upload from "./Upload";
 
 ReactDOM.render(
   
-    // <Provider store={store}>
-    //   <App />
-    // </Provider>,
-    <Upload/>,
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    // <Upload/>,
  
   document.getElementById("root")
 );
