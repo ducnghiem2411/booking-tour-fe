@@ -68,8 +68,8 @@ const Tour = (props) => {
 
   const data = [];
 
-  if (dataTour && dataTour.data) {
-    dataTour.data.map((item, index) => {
+  if (dataTour) {
+    dataTour.map((item, index) => {
       data.push({
         key: item._id,
         countryId: item.countryId,

@@ -12,7 +12,6 @@ const Filter = props => {
     const history = useHistory();
 
     const {dataFilter} = props.dataFilter
-    console.log('dataFilter', dataFilter)
 
 
     const onBookingTour = (itemTour) => {
@@ -30,6 +29,7 @@ const Filter = props => {
         <>
 
         <div className="filtered-tours">
+        <div className="packages">
             <div className="container">
                 <div className="row">
                 {dataFilter
@@ -93,6 +93,7 @@ const Filter = props => {
             
             
 
+        </div>
         </div>
 
         

@@ -45,9 +45,6 @@ const fetchTopListDestinationRequest = () => {
   };
 };
 
-
-
-
 const dataItemTourRequest = (id) => {
   return {
     type: type.DATA_ITEM_TOUR_REQUESTED,
@@ -63,11 +60,8 @@ const dataItemTourSucced = (data) => {
 const dataItemTourFailed = () => {
   return {
     type: type.DATA_ITEM_TOUR_FAILED,
-    
   };
 };
-
-
 
 const fetchTopListDestinationSucced = (data) => {
   return {
@@ -215,13 +209,13 @@ const createTourFailed = (message) => {
   };
 };
 
-const createCountryRequest = (name, description) => {
+const createCountryRequest = (name, description, image) => {
   return {
     type: type.CREATE_COUNTRY_REQUESTED,
     payload: {
       name: name,
       description: description,
-      // image: image,
+      image: image,
     },
   };
 };
@@ -258,10 +252,6 @@ const fetchDataCountryFailed = (message) => {
   };
 };
 
-
-
-
-
 const fetchDataPlaceRequest = () => {
   return {
     type: type.FETCH_PLACE_REQUEST,
@@ -282,18 +272,10 @@ const fetchDataPlaceFailed = (message) => {
   };
 };
 
-
-
-
-
-
-
-
 const getFilterTourRequest = (paramsString) => {
   return {
     type: type.GET_FILTER_TOUR_REQUEST,
-    paramsString
-   
+    paramsString,
   };
 };
 
@@ -311,14 +293,10 @@ const getFilterTourFailed = (message) => {
   };
 };
 
-
-
-
-
 const fetchDataTourRequest = (paramsString) => {
   return {
     type: type.FETCH_TOUR_REQUEST,
-    paramsString
+    paramsString,
   };
 };
 
@@ -500,7 +478,7 @@ const updateInfoPlaceItemFailed = (message) => {
 const updateInfoTourItemRequest = (id, body) => {
   return {
     type: type.UPDATE_DATA_TOUR_REQUESTED,
-   
+
     id,
     body,
   };
@@ -692,7 +670,6 @@ const changeStatusEdit = () => {
 // };
 
 notification.config({
- 
   duration: 1,
 });
 

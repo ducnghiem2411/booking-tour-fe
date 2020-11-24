@@ -13,7 +13,7 @@ export function* fetchCountryInSaga(action) {
   try {
     const response = yield call(axios.get, apiUrl, null);
 
-    if (response && response.status == 200) {
+    if (response) {
       yield put(fetchDataCountrySucced(response.data));
     }
   } catch (error) {

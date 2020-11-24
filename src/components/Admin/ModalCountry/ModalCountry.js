@@ -19,6 +19,7 @@ const { Option } = Select;
 const ModalCountry = (props) => {
   const dispatch = useDispatch();
   const { isDisplay } = props.isDisplay;
+  const [file, setFileImage] = useState('')
 
   const { history } = props;
   const { loading } = props.loading;
@@ -30,6 +31,10 @@ const ModalCountry = (props) => {
   const { message } = props.message;
 
   const [form] = Form.useForm();
+
+  const onChangeImg = e => {
+    setFileImage(e.target.files[0])
+  }
 
   const closeModal = () => {
     dispatch(onCloseModal(false));
@@ -44,7 +49,7 @@ const ModalCountry = (props) => {
     if (statusEdit) {
       dispatch(updateInfoCountryItemRequest(dataRow.key, values));
     } else {
-      dispatch(createCountryRequest(values.countryName, values.description));
+      dispatch(createCountryRequest(values.countryName, values.description, file));
     }
   };
 
@@ -137,6 +142,8 @@ const ModalCountry = (props) => {
                     >
                       <Input.TextArea maxLength={250} />
                     </Form.Item>
+
+                    <input type="file" onChange={onChangeImg} />
 
                     <Form.Item>
                       <Button

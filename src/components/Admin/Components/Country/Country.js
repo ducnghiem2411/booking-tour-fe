@@ -67,6 +67,7 @@ const Country = (props) => {
         key: item._id,
         name: item.name,
         description: item.description,
+        image: item.image
       });
     });
   }

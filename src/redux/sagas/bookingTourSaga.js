@@ -29,7 +29,7 @@ export function* bookingTourInSaga(action) {
     
     const response = yield call(axios.post, apiUrl, tour, headerAuth);
 
-    if (response && response.data) {
+    if (response) {
       yield put(bookingTourSucced());
     }
   } catch (error) {

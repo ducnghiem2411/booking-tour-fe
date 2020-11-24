@@ -13,8 +13,6 @@ const apiUrl = "http://localhost:8000/tours";
 
 export function* createTourInSaga(action) {
   const data = {
-    
-    // image: action.payload.image,
     countryId: action.payload.countryId,
     country: action.payload.countryName,
     placeId: action.payload.placeId,
@@ -30,11 +28,10 @@ export function* createTourInSaga(action) {
     const response = yield call(axios.post, apiUrl, data);
 
     if (response) {
-
       yield put(createTourSucced(response.data.data));
     }
   } catch (error) {
-    yield put(createTourFailed(error.response));
+    yield put(createTourFailed(error.response.data && error.response.data.message));
   }
 }
 

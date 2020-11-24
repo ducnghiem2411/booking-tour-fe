@@ -14,7 +14,7 @@ export function* fetchPlaceInSaga(action) {
     const response = yield call(axios.get, apiUrl, null);
 
 
-    if (response && response.status == 200) {
+    if (response ) {
       yield put(fetchDataPlaceSucced(response.data));
     }
   } catch (error) {

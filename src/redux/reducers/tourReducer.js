@@ -76,8 +76,9 @@ export default function tourReducer(state = initialState, action) {
         ...state,
         error: true,
         statusAdmin: false,
+        loading: false,
         keyAdminModal: state.keyAdminModal + 1,
-        message: action.message.data.message,
+        message: action.message,
       };
 
       case type.RESET_STATUS_ADMIN:

@@ -8,15 +8,23 @@ const apiUrl = "http://localhost:8000/countries";
 
 export function* createCountryInSaga(action) {
 
-  const data = {
-    name: action.payload.name,
-    description: action.payload.description,
-    // image: action.payload.image,
+  const config = {
+    headers: {
+      "content-type": "multipart/form-data"
+    },
   };
+
+
   try {
-    const response = yield call(axios.post, apiUrl, data);
+    const formData = new FormData();
+    
+    formData.append("name",  action.payload.name );
+    formData.append("description", action.payload.description);
+    formData.append("image", action.payload.image);
+    const response = yield call(axios.post,apiUrl, formData, config);
 
     if (response) {
+      // console.log('response', response)
 
       yield put(createCountrySucced(response.data.data));
     }

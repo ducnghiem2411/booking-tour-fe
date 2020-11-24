@@ -468,6 +468,7 @@ const ModalTour = (props) => {
                       </Button>
                       <Button
                         htmlType="button"
+                        className="btn-ant-reset"
                         onClick={() => form.resetFields()}
                       >
                         Reset

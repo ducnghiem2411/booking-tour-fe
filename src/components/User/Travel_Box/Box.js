@@ -53,6 +53,7 @@ const Box = (props) => {
       member: values.memNumber,
       minprice: minBudget,
       maxprice: maxBudget,
+      
     }
     const paramsString = queryString.stringify(filters);
 
