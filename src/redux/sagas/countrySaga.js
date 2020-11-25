@@ -24,7 +24,6 @@ export function* createCountryInSaga(action) {
     const response = yield call(axios.post,apiUrl, formData, config);
 
     if (response) {
-      // console.log('response', response)
 
       yield put(createCountrySucced(response.data.data));
     }

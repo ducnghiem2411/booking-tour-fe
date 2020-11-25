@@ -50,6 +50,7 @@ const ModalTour = (props) => {
   const [idPlace, setIdPlace] = useState("");
   const [dateString, setDateString] = useState([]);
   const [tourPrice, setPriceTour] = useState('')
+  const [file, setFileImage] = useState('')
 
   const formRef = React.createRef();
   const [form] = Form.useForm();
@@ -58,6 +59,12 @@ const ModalTour = (props) => {
   const { statusAdmin } = props.statusAdmin;
   const { keyAdminModal } = props.keyAdminModal;
   const { message } = props.message;
+
+
+
+  const onChangeImg = e => {
+    setFileImage(e.target.files[0])
+  }
 
   const closeModal = () => {
     dispatch(onCloseModal(false));
@@ -136,7 +143,8 @@ const ModalTour = (props) => {
           values.dateString[1],
           values.price,
           values.memNumber,
-          values.description
+          values.description,
+          file
         )
       );
     }
@@ -424,7 +432,7 @@ const ModalTour = (props) => {
                     >
                       <RangePicker
                         onChange={onChangeDate}
-                        defaultValue={
+                        initialValue={
                           statusEdit
                             ? [
                                 moment(
@@ -455,8 +463,10 @@ const ModalTour = (props) => {
                         },
                       ]}
                     >
-                      <Input.TextArea maxLength={250} />
+                      <Input.TextArea maxLength={250}  />
                     </Form.Item>
+
+                    <input type="file" onChange={onChangeImg} multiple />
                     
                     <Form.Item>
                       <Button

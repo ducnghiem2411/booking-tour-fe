@@ -9,29 +9,37 @@ import {
   createTourSucced,
 } from "../actions/index";
 
-const apiUrl = "http://localhost:8000/tours";
-
 export function* createTourInSaga(action) {
-  const data = {
-    countryId: action.payload.countryId,
-    country: action.payload.countryName,
-    placeId: action.payload.placeId,
-    place: action.payload.placeName,
-    name: action.payload.tourName,
-    checkIn: action.payload.checkIn,
-    checkOut: action.payload.checkOut,
-    price: action.payload.price,
-    member: action.payload.member,
-    description: action.payload.description,
-  };
   try {
-    const response = yield call(axios.post, apiUrl, data);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+
+    const apiUrl = "http://localhost:8000/tours";
+    const formData = new FormData();
+    formData.append("countryId", action.payload.countryId);
+    formData.append("country", action.payload.countryName);
+    formData.append("placeId", action.payload.placeId);
+    formData.append("place", action.payload.placeName);
+    formData.append("name", action.payload.tourName);
+    formData.append("checkIn", action.payload.checkIn);
+    formData.append("checkOut", action.payload.checkOut);
+    formData.append("price", action.payload.price);
+    formData.append("member", action.payload.member);
+    formData.append("description", action.payload.description);
+    // formData.append("images",  action.payload.images );
+
+    const response = yield call(axios.post, apiUrl, formData, config);
 
     if (response) {
       yield put(createTourSucced(response.data.data));
     }
   } catch (error) {
-    yield put(createTourFailed(error.response.data && error.response.data.message));
+    yield put(
+      createTourFailed(error.response.data && error.response.data.message)
+    );
   }
 }
 

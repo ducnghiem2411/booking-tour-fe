@@ -23,6 +23,7 @@ import updateLoginSaga from './updateLoginSaga'
 import fetchReviewsSaga from './fetchReviewsSaga'
 import fetchDataItemTourSaga from './fetchDataItemTourSaga'
 import getFilterTourSaga from './getFilterTourSaga'
+import fetchAllToursSaga from './fetchAllToursSaga'
 
 export default function* rootSaga() {
     yield all([
@@ -49,7 +50,8 @@ export default function* rootSaga() {
         updateLoginSaga(),
         fetchReviewsSaga(),
         fetchDataItemTourSaga(),
-        getFilterTourSaga()
+        getFilterTourSaga(),
+        fetchAllToursSaga()
         
     ])
 }

@@ -16,6 +16,7 @@ const initialState = {
   dataFilter: [],
   statusAdmin: false,
   keyAdminModal: 0,
+  dataAllTours: []
 };
 
 var findIndex = (dataTour, id) => {
@@ -55,6 +56,26 @@ export default function tourReducer(state = initialState, action) {
         loading: false,
         message: action.message,
       };
+    case type.FETCH_ALL_TOURS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case type.FETCH_ALL_TOURS_SUCCED:
+      return {
+        ...state,
+        dataAllTours: action.data,
+        loading: false,
+      };
+
+    case type.FETCH_ALL_TOURS_FAILED:
+      return {
+        ...state,
+        error: true,
+        loading: false,
+        message: action.message,
+      };
 
     case type.CREATE_TOUR_REQUESTED:
       return {
@@ -63,7 +84,8 @@ export default function tourReducer(state = initialState, action) {
       };
 
     case type.CREATE_TOUR_SUCCESSED:
-      state.dataTour.data.push(action.data);
+     
+      state.dataTour.push(action.data);
       state.loading = false;
       state.statusCreate = true;
       state.statusAdmin = true;
@@ -95,8 +117,8 @@ export default function tourReducer(state = initialState, action) {
         loading: true,
       };
     case type.DELETE_TOUR_SUCCESSED:
-      index = findIndex(state.dataTour.data, action.id);
-      state.dataTour.data.splice(index, 1);
+      index = findIndex(state.dataAllTours, action.id);
+      state.dataAllTours.splice(index, 1);
       state.loading = false;
       state.statusAdmin = true;
       state.keyAdminModal++;
@@ -180,8 +202,8 @@ export default function tourReducer(state = initialState, action) {
         loading: true,
       };
     case type.UPDATE_DATA_TOUR_SUCCED:
-      index = findIndex(state.dataTour.data, action.data._id);
-      state.dataTour.data[index] = action.data;
+      index = findIndex(state.dataAllTours, action.data._id);
+      state.dataAllTours[index] = action.data;
       state.loading = false;
       state.message = messageUpdate;
       state.statusAdmin = true;

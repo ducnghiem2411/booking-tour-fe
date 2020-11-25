@@ -5,6 +5,7 @@ import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useDispatch, connect } from "react-redux";
 import {
+  fetchAllToursRequest,
   onShowModal,
   openNotification,
   resetStatusAdmin,
@@ -35,7 +36,7 @@ import formatPrice from "../../../../utilies/FormatNumber";
 
 const Tour = (props) => {
   const dispatch = useDispatch();
-  const { dataTour } = props.dataTour;
+  const { dataAllTours } = props.dataAllTours;
   const { loading } = props.loading;
   const [dataRow, setDataRow] = useState(null);
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -51,7 +52,7 @@ const Tour = (props) => {
     setFilteredInfo(filters);
   };
 
-  // console.log('dataTour', dataTour)
+
 
   const sendRecordToModal = (data) => {
     dispatch(onShowModal(true));
@@ -62,14 +63,14 @@ const Tour = (props) => {
   const onChange = (pagination, filters, sorter, extra) => {};
 
   useEffect(() => {
-    dispatch(fetchDataTourRequest());
+    dispatch(fetchAllToursRequest());
     dispatch(onCloseModal(false));
   }, []);
 
   const data = [];
 
-  if (dataTour) {
-    dataTour.map((item, index) => {
+  if (dataAllTours && dataAllTours) {
+    dataAllTours.map((item, index) => {
       data.push({
         key: item._id,
         countryId: item.countryId,
@@ -259,7 +260,7 @@ const Tour = (props) => {
 };
 
 const mapState = (state) => ({
-  dataTour: state.tour,
+  dataAllTours: state.tour,
   loading: state.country,
   isDisplay: state.displayModal,
   statusCreate: state.country,

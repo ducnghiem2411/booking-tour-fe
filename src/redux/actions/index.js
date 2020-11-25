@@ -177,7 +177,8 @@ const createTourRequest = (
   checkOut,
   price,
   member,
-  description
+  description,  
+  images
 ) => {
   return {
     type: type.CREATE_TOUR_REQUESTED,
@@ -192,7 +193,7 @@ const createTourRequest = (
       price: price,
       member: member,
       description: description,
-      // image: image,
+      images: images,
     },
   };
 };
@@ -293,6 +294,8 @@ const getFilterTourFailed = (message) => {
   };
 };
 
+
+
 const fetchDataTourRequest = (paramsString) => {
   return {
     type: type.FETCH_TOUR_REQUEST,
@@ -313,6 +316,33 @@ const fetchDataTourFailed = (message) => {
     message,
   };
 };
+
+
+
+
+
+const fetchAllToursRequest = () => {
+  return {
+    type: type.FETCH_ALL_TOURS_REQUEST,
+
+  };
+};
+
+const fetchAllToursSucced = (data) => {
+  return {
+    type: type.FETCH_ALL_TOURS_SUCCED,
+    data,
+  };
+};
+
+const fetchAllToursFailed = (message) => {
+  return {
+    type: type.FETCH_ALL_TOURS_FAILED,
+    message,
+  };
+};
+
+
 
 const fetchInfoTourRequest = (id) => {
   return {
@@ -692,6 +722,7 @@ export {
   loginRequest,
   openNotification,
   loginSucced,
+  fetchAllToursSucced,
   registerRequest,
   fetchDataPlaceRequest,
   fetchDataPlaceSucced,
@@ -701,6 +732,7 @@ export {
   deletePlaceItemRequest,
   deletePlaceItemSucced,
   deletePlaceItemFailed,
+  fetchAllToursFailed,
   resetLoginStatus,
   onLogout,
   // fetchReviewListFailed,
@@ -738,6 +770,7 @@ export {
   fetchInfoTourSucced,
   fetchInfoTourFailed,
   resetRegisterStatus,
+  fetchAllToursRequest,
   fetchDataCountrySucced,
   resetStatusBookingTour,
   fetchDataCountryFailed,
