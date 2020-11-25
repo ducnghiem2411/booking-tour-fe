@@ -36,7 +36,7 @@ const Gallery = (props) => {
                               <div className="filtr-item">
                                 <img
                                   className="placeholder"
-                                  src="https://via.placeholder.com/272x153"
+                                  src= {itemCountry ? itemCountry.image : "https://via.placeholder.com/272x153"} 
                                 />
                                 <div className="item-title">
                                   <a to={`/detail`}> {itemCountry.country} </a>

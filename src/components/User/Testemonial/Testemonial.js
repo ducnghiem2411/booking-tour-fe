@@ -3,18 +3,16 @@ import OwlCarousel from "react-owl-carousel";
 import { Carousel } from "antd";
 import { connect, useDispatch } from "react-redux";
 import index from "../../Admin";
-import { fetchReviewsListRequest } from "../../../redux/actions";
+import { fetchAllReviewsRequest } from "../../../redux/actions";
 
-const Testemonial = props => {
-
-  const dispatch = useDispatch()
-  const {allReviews} = props.allReviews
-
-
+const Testemonial = (props) => {
+  const dispatch = useDispatch();
+  const { allReviews } = props.allReviews;
+  console.log("allReviews", allReviews);
 
   useEffect(() => {
-   dispatch(fetchReviewsListRequest())
-  }, [])
+    dispatch(fetchAllReviewsRequest());
+  }, []);
   return (
     <>
       <section className="testemonial">
@@ -26,7 +24,49 @@ const Testemonial = props => {
             </p>
           </div>
 
-          <OwlCarousel
+          <Carousel autoplay  slidesToShow={3} draggable>
+            {allReviews && allReviews.length > 0
+              ? allReviews.map((item, index) => {
+                  return (
+                    <div
+                      className="home1-testm item"
+                      key={item._id}
+                      id="testemonial-carousel"
+                    >
+                      <div className="home1-testm-single text-center">
+                        <div className="home1-testm-img text-center">
+                          <div className="img">
+                          <img
+                          style={{
+                            display: 'block',
+                            borderRadius: '50%'
+                          }}
+                            src="assets/images/client/testimonial1.jpg"
+                            alt="img"
+                          />
+                          </div>
+                         
+                        </div>
+                        <div className="home1-testm-txt">
+                          <span className="icon section-icon">
+                            <i
+                              className="fa fa-quote-left"
+                              aria-hidden="true"
+                            />
+                          </span>
+                          <p>{item ? item.content : ""}</p>
+                          <h3>
+                            <a href="#"> {item.username} </a>
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              : []}
+          </Carousel>
+
+          {/* <OwlCarousel
             className="owl-theme"
             loop
             autoplay
@@ -35,43 +75,40 @@ const Testemonial = props => {
             margin={10}
             // responsive={responsive}
           >
-
-            {
-              allReviews && allReviews.map((item, index) => {
+            {allReviews && allReviews.length >0 ?
+              allReviews.map((item, index) => {
                 return (
-<div className="home1-testm item" key={item._id}>
-              <div className="home1-testm-single text-center">
-                <div className="home1-testm-img">
-                  <img src="assets/images/client/testimonial1.jpg" alt="img" />
-                </div>
-                <div className="home1-testm-txt">
-                  <span className="icon section-icon">
-                    <i className="fa fa-quote-left" aria-hidden="true" />
-                  </span>
-                  <p>
-                    {item ? item.content : ''}
-                  </p>
-                  <h3>
-                    <a href="#"> {item.username} </a>
-                  </h3>
-                </div>
-              </div>
-            </div>
-                )
-              })
+                  <div className="home1-testm item" key={item._id}>
+                    <div className="home1-testm-single text-center">
+                      <div className="home1-testm-img">
+                        <img
+                          src="assets/images/client/testimonial1.jpg"
+                          alt="img"
+                        />
+                      </div>
+                      <div className="home1-testm-txt">
+                        <span className="icon section-icon">
+                          <i className="fa fa-quote-left" aria-hidden="true" />
+                        </span>
+                        <p>{item ? item.content : ""}</p>
+                        <h3>
+                          <a href="#"> {item.username} </a>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }) : []
             }
-            
-            
-           
-          </OwlCarousel>
+          </OwlCarousel> */}
         </div>
       </section>
     </>
   );
 };
 
-const mapState = state => ({
-  allReviews: state.review
-})
+const mapState = (state) => ({
+  allReviews: state.review,
+});
 
-export default connect(mapState) (Testemonial);
+export default connect(mapState)(Testemonial);

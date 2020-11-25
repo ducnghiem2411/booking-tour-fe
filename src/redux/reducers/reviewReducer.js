@@ -81,6 +81,26 @@ export default function reviewReducer(state = initialState, action) {
         loading: false,
         message: ''
       };
+    case type.FETCH_ALL_REVIEWS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case type.FETCH_ALL_REVIEWS_SUCCED:
+      return {
+        ...state,
+        loading: false,
+        allReviews: action.data
+      }
+     
+    
+    case type.FETCH_ALL_REVIEWS_FAILED:
+      return {
+        ...state,
+        loading: false,
+        message: ''
+      };
     case type.RESET_STATE_IN_STORE:
       return {
         ...state,

@@ -34,7 +34,7 @@ import {
 const Place = (props) => {
   const dispatch = useDispatch();
   const { dataPlace } = props.dataPlace;
-  // console.log('dataPlace', dataPlace)
+  console.log('dataPlace', dataPlace)
   // console.log('dataCountry', dataCountry)
   const { loading } = props.loading;
   const [dataRow, setDataRow] = useState(null);
@@ -73,6 +73,7 @@ const Place = (props) => {
         countryName: item.country,
         placeName: item.name,
         description: item.description,
+        image: item.image,
       });
     });
   }

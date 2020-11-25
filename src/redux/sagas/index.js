@@ -24,6 +24,7 @@ import fetchReviewsSaga from './fetchReviewsSaga'
 import fetchDataItemTourSaga from './fetchDataItemTourSaga'
 import getFilterTourSaga from './getFilterTourSaga'
 import fetchAllToursSaga from './fetchAllToursSaga'
+import fetchAllReviewsSaga from './fetchAllReviewsSaga'
 
 export default function* rootSaga() {
     yield all([
@@ -51,7 +52,8 @@ export default function* rootSaga() {
         fetchReviewsSaga(),
         fetchDataItemTourSaga(),
         getFilterTourSaga(),
-        fetchAllToursSaga()
+        fetchAllToursSaga(),
+        fetchAllReviewsSaga()
         
     ])
 }

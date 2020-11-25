@@ -46,9 +46,15 @@ const ModalPlace = (props) => {
   const { statusAdmin } = props.statusAdmin;
   const { keyAdminModal } = props.keyAdminModal;
   const { message } = props.message;
+  const [file, setFileImage] = useState('')
 
   
   const [form] = Form.useForm();
+
+
+  const onChangeImg = e => {
+    setFileImage(e.target.files[0])
+  }
 
   const closeModal = () => {
     dispatch(onCloseModal(false));
@@ -125,7 +131,8 @@ const ModalPlace = (props) => {
           idCountry,
           values.countryName,
           values.placeName,
-          values.description
+          values.description,
+          file
         )
       );
     }
@@ -267,6 +274,8 @@ const ModalPlace = (props) => {
                     >
                       <Input.TextArea maxLength={250} />
                     </Form.Item>
+
+                    <input type="file" onChange={onChangeImg} />
                    
                     <Form.Item>
                       <Button

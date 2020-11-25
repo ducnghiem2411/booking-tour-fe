@@ -142,7 +142,7 @@ const registerRequest = (username, email, password) => {
 //   };
 // };
 
-const createPlaceRequest = (countryId, country, name, description) => {
+const createPlaceRequest = (countryId, country, name, description,image) => {
   return {
     type: type.CREATE_PLACE_REQUESTED,
     payload: {
@@ -150,7 +150,7 @@ const createPlaceRequest = (countryId, country, name, description) => {
       country: country,
       name: name,
       description: description,
-      // image: image,
+      image: image,
     },
   };
 };
@@ -338,6 +338,30 @@ const fetchAllToursSucced = (data) => {
 const fetchAllToursFailed = (message) => {
   return {
     type: type.FETCH_ALL_TOURS_FAILED,
+    message,
+  };
+};
+
+
+
+
+const fetchAllReviewsRequest = () => {
+  return {
+    type: type.FETCH_ALL_REVIEWS_REQUEST,
+
+  };
+};
+
+const fetchAllReviewsSucced = (data) => {
+  return {
+    type: type.FETCH_ALL_REVIEWS_SUCCED,
+    data,
+  };
+};
+
+const fetchAllReviewsFailed = (message) => {
+  return {
+    type: type.FETCH_ALL_REVIEWS_FAILED,
     message,
   };
 };
@@ -747,6 +771,7 @@ export {
   resetStatusAdmin,
   getFilterTourFailed,
   fetchReviewsListFailed,
+  fetchAllReviewsFailed,
   onCloseModalRegister,
   updateInfoPlaceItemFailed,
   changeStatusEdit,
@@ -796,6 +821,7 @@ export {
   createTourSucced,
   createTourFailed,
   createPlaceFailed,
+  fetchAllReviewsRequest,
   submitUserReviewRequest,
   submitUserReviewSucced,
   submitUserReviewFailed,
@@ -807,6 +833,7 @@ export {
   bookingTourFailed,
   fetchDataPlaceInCountryRequest,
   fetchTopListDestinationRequest,
+  fetchAllReviewsSucced,
   fetchDataPlaceInCountryFailed,
   onChangeStatusCreateAccModal,
   registerFailed,

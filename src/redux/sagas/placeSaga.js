@@ -7,15 +7,29 @@ import { createPlaceSucced, createPlaceFailed,fetchDataCountryRequest } from "..
 const apiUrl = "http://localhost:8000/places";
 
 export function* createPlaceInSaga(action) {
-  const data = {
-      countryId: action.payload.countryId,
-      country: action.payload.country,
-      name: action.payload.name,
-      description: action.payload.description,
-    // image: action.payload.image,
+
+  const config = {
+    headers: {
+      "content-type": "multipart/form-data"
+    },
   };
+
+
   try {
-    const response = yield call(axios.post, apiUrl, data);
+
+    const formData = new FormData();
+    
+    formData.append("countryId",  action.payload.countryId );
+    formData.append("country",  action.payload.country );
+    formData.append("name",  action.payload.name );
+    formData.append("description",  action.payload.description );
+    formData.append("image",  action.payload.image );
+
+
+
+
+
+    const response = yield call(axios.post, apiUrl,formData, config);
 
     if (response) {
 
