@@ -126,9 +126,9 @@ const Header = (props) => {
                                     <i className="fa fa-user" /> Notifications{" "}
                                     <span className="count">13</span>
                                   </a>
-                                  <a className="nav-link" href="#">
+                                  <Link className="nav-link" to='/setting'>
                                     <i className="fa fa-cog" /> Settings
-                                  </a>
+                                  </Link>
                                   <button
                                     className="nav-link btn-logout"
                                     onClick={logout}

@@ -19,6 +19,7 @@ const Detail = (props) => {
 
   useEffect(() => {
     dispatch(dataItemTourRequest(match.params.id))
+    window.scrollTo(0, 0)
     
   }, [])
 

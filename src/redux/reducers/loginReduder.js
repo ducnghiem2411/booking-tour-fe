@@ -10,8 +10,11 @@ const initialState = {
   token: "",
   messageLogin: "",
   loginStatus: false,
+  resetStatus: false,
   keyLogin: 0,
+  keyReset: 0,
   updateLoginStatus: false,
+  messageReset: ''
 
 };
 
@@ -44,6 +47,36 @@ export default function loginReduder(state = initialState, action) {
         loginStatus: false,
         keyLogin: state.keyLogin + 1 ,
         messageLogin: action.message.message,
+      };
+      break
+    case type.RESET_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+      break
+
+    case type.RESET_PASSWORD_SUCCED:
+    
+
+      return {
+        ...state,
+        loading: false,
+        keyReset: state.keyReset +1 ,
+        resetStatus: true,
+        messageReset: action.message
+      };
+      break
+
+    case type.RESET_PASSWORD_FAILED:
+      
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        resetStatus: false,
+        keyReset: state.keyReset + 1 ,
+        messageReset: action.message
       };
       break
     case type.UPDATE_LOGIN_REQUEST:

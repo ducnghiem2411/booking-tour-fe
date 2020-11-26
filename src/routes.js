@@ -8,6 +8,8 @@ import ModalPlace from './components/Admin/ModalPlace/ModalPlace'
 import ModalTour from './components/Admin/ModalTour/ModalTour'
 import Detail from './components/User/Detail.js/Detail'
 import Login from './components/User/Login/Login'
+import ResetAccount from './components/User/ResetAccount/ResetAccount'
+import Setting from './components/User/Setting/Setting'
 
 
 
@@ -68,6 +70,16 @@ const routes = [
         path : '/login',
         exact : true,
         main : ({match, history}) => <Login match={match} history={history}/>
+    },
+    {
+        path : '/setting',
+        exact : true,
+        main : ({match, history}) => <Setting match={match} history={history}/>
+    },
+    {
+        path : '/reset',
+        exact : true,
+        main : ({match, history}) => <ResetAccount match={match} history={history}/>
     },
     {
         path : '/detail/:id',

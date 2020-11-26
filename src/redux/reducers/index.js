@@ -7,6 +7,7 @@ import countryReducer from "./countryReducer";
 import placeReducer from "./placeReducer";
 import tourReducer from "./tourReducer";
 import reviewReducer from "./reviewReducer";
+import resetReducer from "./resetReducer";
 
 const rootReducers = combineReducers({
   login: loginReduder,
@@ -17,6 +18,7 @@ const rootReducers = combineReducers({
   place: placeReducer,
   tour: tourReducer,
   review: reviewReducer,
+  reset: resetReducer,
 });
 
 export default rootReducers;

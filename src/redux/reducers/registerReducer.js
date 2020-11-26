@@ -23,7 +23,8 @@ export default function registerReducer(state = initialState, action) {
         ...state,
         registerStatus: true,
         keyRegister: state.keyRegister + 1 ,
-        loading: false
+        loading: false,
+        message: action.message
       };
 
       break;

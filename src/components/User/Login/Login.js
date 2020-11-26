@@ -1,6 +1,7 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { Button, notification, Divider, Space } from "antd";
 import {
   showCreateAccModal,
   onChangeStatusCreateAccModal,
@@ -8,7 +9,10 @@ import {
   loginRequest,
   openNotification,
   resetLoginStatus,
+  resetStatusReset,
   resetRegisterStatus,
+  showResetModal,
+  resetPasswordRequest,
 } from "../../../redux/actions/index";
 
 const Login = (props) => {
@@ -21,15 +25,22 @@ const Login = (props) => {
   const [userName, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [emailLogin, setEmailLogin] = useState("");
+  const [emailReset, setEmailReset] = useState("");
   const [passwordLogin, setPasswordLogin] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRepassword] = useState("");
 
   const { keyLogin } = props.keyLogin;
   const { keyRegister } = props.keyRegister;
+  const { keyReset } = props.keyReset;
   const { registerStatus } = props.registerStatus;
+  const { resetStatus } = props.resetStatus;
   const { message } = props.message;
+  const { messageReset } = props.messageReset;
+  const { statusResetModal } = props.statusResetModal;
   const { history } = props;
+
+  
 
   const onCreateAccModal = (e) => {
     e.preventDefault();
@@ -37,6 +48,12 @@ const Login = (props) => {
     setPasswordLogin("");
     dispatch(showCreateAccModal(true));
   };
+  const onShowResetModal = e => {
+    e.preventDefault();
+    setEmailLogin("");
+    setPasswordLogin("");
+    dispatch(showResetModal(true))
+  }
   const changeStatusCreateAccModal = (e) => {
     e.preventDefault();
     setUsername("");
@@ -57,6 +74,9 @@ const Login = (props) => {
   };
   const onChangePasswordLogin = (e) => {
     setPasswordLogin(e.target.value);
+  };
+  const onChangeEmailReset = (e) => {
+    setEmailReset(e.target.value);
   };
   const onChangePassword = (e) => {
     setPassword(e.target.value);
@@ -84,6 +104,10 @@ const Login = (props) => {
     setEmailLogin("");
     setPasswordLogin("");
   };
+  const onResetPassword = e => {
+    e.preventDefault();
+    dispatch(resetPasswordRequest(emailReset))
+  }
 
   useEffect(() => {
     if (keyLogin !== 0) {
@@ -96,13 +120,20 @@ const Login = (props) => {
     dispatch(resetLoginStatus());
   }, [loginStatus, keyLogin]);
 
+
+  
+
+
   useEffect(() => {
     if (keyRegister !== 0) {
       if (registerStatus) {
         openNotification(
           registerStatus,
           "Success",
-          "Registered in successfully !"
+          message,
+          notification.config({
+            duration: 10,
+          })
         );
         setTimeout(() => {
           dispatch(onChangeStatusCreateAccModal(false));
@@ -114,6 +145,20 @@ const Login = (props) => {
 
     dispatch(resetRegisterStatus());
   }, [registerStatus, keyRegister]);
+
+  useEffect(() => {
+    if (keyReset !== 0) {
+      if (resetStatus) {
+        openNotification(resetStatus, "Success", messageReset,notification.config({
+          duration: 5,
+        }));
+      } else {
+        openNotification(resetStatus, "Failed", messageReset);
+      }
+    }
+    dispatch(resetStatusReset());
+  }, [resetStatus, keyReset]);
+
 
   // useEffect(() => {
   //   const token = localStorage.getItem("token");
@@ -167,13 +212,13 @@ const Login = (props) => {
                       </div>
                       <div className="division">
                         <div className="line l" />
-                        <span>or</span>
+                        <span className="option"> {statusResetModal ? " Enter your email address and we'll send you a link to reset your password" : "or"}</span>
                         <div className="line r" />
                       </div>
                       <div className="error" />
                       <div
                         className={
-                          statusCreateModal
+                          statusCreateModal || statusResetModal
                             ? "form loginBox hidden"
                             : "form loginBox"
                         }
@@ -214,6 +259,41 @@ const Login = (props) => {
                           </button>
                         </form>
                       </div>
+                      <div
+                        className={
+                          statusResetModal 
+                            ? "form resetBox"
+                            : "form resetBox hidden"
+                        }
+                      >
+                        <form
+                          className="form-login"
+                          // onSubmit={onLogin}
+                          method="POST"
+                          onSubmit={onResetPassword}
+                        >
+                          <input
+                            id="email"
+                            className="form-control"
+                            type="text"
+                            required
+                            placeholder="Email"
+                            name="email"
+                            autoComplete="off"
+                            onChange={onChangeEmailReset}
+                          />
+                         
+
+                          <button
+                            type="submit"
+                            className="btn btn-default btn-login"
+                            
+                          >
+                            Send
+                          </button>
+                        </form>
+                      </div>
+
                     </div>
                   </div>
                   <div
@@ -290,7 +370,7 @@ const Login = (props) => {
                 <div className="modal-footer">
                   <div
                     className={
-                      statusCreateModal
+                      statusCreateModal || statusResetModal
                         ? "forgot login-footer hidden"
                         : "forgot login-footer"
                     }
@@ -303,7 +383,7 @@ const Login = (props) => {
                       ?
                     </span>
                     <div className="forgot-pass">
-                      <Link className="forgot">Forgot password?</Link>
+                      <a href="" className="forgot" onClick={onShowResetModal}>Forgot password?</a>
                     </div>
                   </div>
                   <div
@@ -319,6 +399,15 @@ const Login = (props) => {
                       {" "}
                       Login
                     </a>
+                  </div>
+                  <div
+                    className={
+                      statusResetModal
+                        ? "forgot reset-footer active"
+                        : "forgot reset-footer"
+                    }
+                  >
+                   
                   </div>
                 </div>
               </div>
@@ -339,7 +428,11 @@ const mapState = (state) => ({
   keyRegister: state.register,
   error: state.register,
   message: state.register,
+  messageReset: state.reset,
   messageLogin: state.login,
+  resetStatus: state.reset,
+  keyReset: state.reset,
+  statusResetModal: state.displayModal,
 });
 
 export default connect(mapState)(Login);

@@ -130,7 +130,7 @@
     width: 100%;
 }
 .login .division .line {
-    border-top: 1px solid #DFDFDF;
+    /* border-top: 1px solid #DFDFDF; */
     position: absolute;
     top: 10px;
     width: 34%;
@@ -143,7 +143,6 @@
 }
 .login .division span {
     color: #424242;
-    font-size: 17px;
 }
 .login .box .social {
     float: none;
@@ -271,6 +270,12 @@
 .form.loginBox.hidden{
     display: none;
 }
+.form.resetBox{
+    display: block;
+}
+.form.resetBox.hidden{
+    display: none;
+}
 .forgot.register-footer{
     display: none;
 }
@@ -279,6 +284,12 @@
 }
 .forgot.login-footer.hidden{
     display: none;
+}
+.forgot.reset-footer{
+    display: none;
+}
+.forgot.reset-footer.active{
+    display: block;
 }
 
 .wrap-modal.country {

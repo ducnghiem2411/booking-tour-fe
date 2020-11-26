@@ -20,6 +20,7 @@ import { useHistory } from "react-router-dom";
 import Country from "./components/Admin/Components/Country/Country";
 import Login from "./components/User/Login/Login";
 import Detail from "./components/User/Detail.js/Detail";
+import Setting from "./components/User/Setting/Setting";
 
 const App = () => {
 
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/admin" component={Admin} />
             <Route path="/country" component={Country} />
             <Route path="/login" component={Login} />
+            <Route path="/setting" component={Setting} />
             <Route path="/detail/:id" component={Detail} />
             
 
