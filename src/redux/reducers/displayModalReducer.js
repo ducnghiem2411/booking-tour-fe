@@ -66,7 +66,7 @@ export default function displayModalReducer(state = initialState, action) {
       return {
         ...state,
         statusCreateModal: false,
-        statusResetModal: true
+        statusResetModal: action.status
       };
       break;
    

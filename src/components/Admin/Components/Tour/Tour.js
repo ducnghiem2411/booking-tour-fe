@@ -55,6 +55,7 @@ const Tour = (props) => {
 
 
   const sendRecordToModal = (data) => {
+    console.log('data', data)
     dispatch(onShowModal(true));
 
     dispatch(sendDataRowIntoStore(data));
@@ -143,6 +144,7 @@ const Tour = (props) => {
       width: 400,
 
       render: (text, record) => (
+        
         <>
           <div className="action">
             <span className="block edit">

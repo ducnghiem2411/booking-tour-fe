@@ -116,12 +116,20 @@ const ModalTour = (props) => {
   const onReset = () => {
     form.resetFields();
   };
+  
+  const onChangeDate = (value, dateString) => {
+    //   console.log('value', value)
+    console.log(dateString);
+    setDateString(dateString);
+  };
 
   const onSubmit = (values) => {
-    values = {
-      ...values,
-      dateString,
-    };
+    
+    // values = {
+    //   ...values,
+    //   dateString,
+    // };
+    
     if (statusEdit) {
       dispatch(
         updateInfoTourItemRequest(
@@ -139,8 +147,8 @@ const ModalTour = (props) => {
           idPlace,
           values.placeName,
           values.tourName,
-          values.dateString[0],
-          values.dateString[1],
+          dateString[0],
+          dateString[1],
           values.price,
           values.memNumber,
           values.description,
@@ -260,11 +268,6 @@ const ModalTour = (props) => {
     // }
   }, [dataRow]);
 
-  const onChangeDate = (value, dateString) => {
-    //   console.log('value', value)
-    console.log(dateString);
-    setDateString(dateString);
-  };
 
   return (
     <>

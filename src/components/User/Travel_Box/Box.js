@@ -3,7 +3,7 @@ import { Button, Select, Form, DatePicker, Slider } from "antd";
 import formatPrice from "./../../../utilies/FormatNumber";
 import moment from "moment";
 import countries from "./../../../countries";
-import { fetchDataPlaceRequest, getFilterTourRequest } from "../../../redux/actions";
+import { fetchDataPlaceRequest, getFilterTourRequest, setStatusFilteredTours,increaseKeyFilter } from "../../../redux/actions";
 import { connect, useDispatch } from "react-redux";
 import queryString from "query-string";
 
@@ -25,7 +25,7 @@ const Box = (props) => {
   const [dateString, setDateString] = useState([]);
 
   const rangeConfig = {
-    rules: [{ type: "array", required: true, message: "Please select time!" }],
+    rules: [{ type: "array", required: false, message: "Please select time!" }],
   };
 
   const onChangeCountry = (value) => {
@@ -58,6 +58,9 @@ const Box = (props) => {
     const paramsString = queryString.stringify(filters);
 
     dispatch(getFilterTourRequest(paramsString))
+
+    dispatch(setStatusFilteredTours())
+    dispatch(increaseKeyFilter())
    
 
   };

@@ -832,6 +832,9 @@ nav.breadcumb ul li a:hover {
   background: none;
   color: #919191;
 }
+.btn-back.setting {
+  margin-left: 0;
+}
 
 .btn-back:hover {
   background: none;
@@ -847,6 +850,7 @@ nav.breadcumb ul li a:hover {
   animation: slide 1s ease-in-out infinite;
   margin-left: 9px;
 }
+
 
 @keyframes slide {
   0%, 100% {
@@ -1055,7 +1059,7 @@ nav.breadcumb ul li a:hover {
   /* z-index: 2; */
 }
 
-.admin .dashboard .right-side header .body-header .account .img {
+.admin .dashboard .right-side header .body-header .account-admin .img {
   display: inline-block;
   width: 35px;
   height: 35px;
@@ -1070,7 +1074,7 @@ nav.breadcumb ul li a:hover {
   /* border-top-right-radius: 25px; */
 }
 
-.admin .dashboard .right-side header .body-header .account .img img {
+.admin .dashboard .right-side header .body-header .account-admin .img img {
   border-radius: 50%;
 }
 
@@ -2069,6 +2073,7 @@ nav.breadcumb ul li a:hover {
   width: 85px;
   height: 85px;
 }
+
 .wrapper .account {
   width: 100%;
   height: 100%;
@@ -2103,7 +2108,7 @@ nav.breadcumb ul li a:hover {
   z-index: 5;
   width: 800px;
   /* background: white; */
-  height: 500px;
+  height: 550px;
 }
 
 .wrapper .account .body .container-account .navigate {
@@ -2117,7 +2122,12 @@ nav.breadcumb ul li a:hover {
   padding: 0;
 }
 
-.wrapper .account .body .container-account .col-navi .navigate header {text-align: center;padding: 30px 20px;background: #23ccff6e;border-top-left-radius: 25px;}
+.wrapper .account .body .container-account .col-navi .navigate header {
+  text-align: center;
+  padding: 30px 20px;
+  background: #23ccff6e;
+  border-top-left-radius: 25px;
+}
 
 .wrapper .account .body .container-account .col-navi .navigate header .img {
   display: inline-block;
@@ -2152,6 +2162,7 @@ nav.breadcumb ul li a:hover {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
 .wrapper .account .body .container-account .col-setting .body-setting {
   width: 100%;
   height: 100%;
@@ -2172,4 +2183,63 @@ nav.breadcumb ul li a:hover {
   /* color: black; */
   letter-spacing: 1px;
   /* font-weight: 500; */
+}
+
+.filtered-tours {
+  opacity: 0;
+}
+
+.filtered-tours.active {
+  animation: fadeIn 700ms ease-in-out 1s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+}
+
+.search-failed {
+  text-align: center;
+}
+
+.search-failed img {
+  width: 100px;
+  opacity: .6;
+  height: auto;
+  animation-iteration-count: infinite;
+  animation-name: float-ani;
+  animation-duration: 3s;
+  animation-timing-function: ease;
+}
+
+@keyframes float-ani {
+  0% {
+    transform: translateY(10%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10%);
+  }
+}
+.donut.multi{
+  width: 23px;
+  height: 23px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 3px solid #00bbff;
+  border-top-color: #ffffff;
+  animation: .5s spin infinite linear;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

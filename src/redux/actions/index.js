@@ -300,6 +300,20 @@ const getFilterTourRequest = (paramsString) => {
   };
 };
 
+const setStatusFilteredTours = () => {
+  return {
+    type: type.SET_STATUS_FILTERED_TOURS,
+    
+  };
+};
+
+const increaseKeyFilter = () => {
+  return {
+    type: type.INCREASE_KEY_FILTER,
+    
+  };
+};
+
 const getFilterTourSucced = (data) => {
   return {
     type: type.GET_FILTER_TOUR_SUCCED,
@@ -719,9 +733,10 @@ const showCreateAccModal = (status) => {
     status,
   };
 };
-const showResetModal = () => {
+const showResetModal = (status) => {
   return {
     type: type.SHOW_RESET_MODAL,
+    status
     
   };
 };
@@ -797,6 +812,7 @@ export {
   // fetchReviewListFailed,
   deleteCountryItemRequest,
   deleteCountryItemSucced,
+  setStatusFilteredTours,
   updateInfoPlaceItemRequest,
   updateInfoPlaceItemSucced,
   fetchReviewsListRequest,
@@ -810,6 +826,7 @@ export {
   onCloseModalRegister,
   updateInfoPlaceItemFailed,
   changeStatusEdit,
+  increaseKeyFilter,
   // fetchReviewListSucced,
   deleteCountryItemFailed,
   resetStateInStore,

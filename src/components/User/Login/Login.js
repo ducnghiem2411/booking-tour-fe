@@ -39,6 +39,9 @@ const Login = (props) => {
   const { messageReset } = props.messageReset;
   const { statusResetModal } = props.statusResetModal;
   const { history } = props;
+  const {loading} = props.loading
+
+
 
   
 
@@ -61,6 +64,7 @@ const Login = (props) => {
     setPassword("");
     setRepassword("");
     dispatch(onChangeStatusCreateAccModal(false));
+    dispatch(showResetModal(false))
   };
 
   const onChangeUsername = (e) => {
@@ -160,14 +164,7 @@ const Login = (props) => {
   }, [resetStatus, keyReset]);
 
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     setTimeout(() => {
-  //       history.push("/");
-  //     }, 1000);
-  //   }
-  // }, []);
+
 
   useEffect(() => {
     if (loginStatus) {
@@ -254,8 +251,9 @@ const Login = (props) => {
                           <button
                             type="submit"
                             className="btn btn-default btn-login"
+                            
                           >
-                            Login
+                             Login
                           </button>
                         </form>
                       </div>
@@ -287,9 +285,9 @@ const Login = (props) => {
                           <button
                             type="submit"
                             className="btn btn-default btn-login"
-                            
+                            disabled = {loading ? true: false}
                           >
-                            Send
+                             {loading ? <div className="donut multi"></div> : 'Send'}
                           </button>
                         </form>
                       </div>
@@ -388,7 +386,7 @@ const Login = (props) => {
                   </div>
                   <div
                     className={
-                      statusCreateModal
+                      statusCreateModal || statusResetModal
                         ? "forgot register-footer active"
                         : "forgot register-footer"
                     }
@@ -433,6 +431,9 @@ const mapState = (state) => ({
   resetStatus: state.reset,
   keyReset: state.reset,
   statusResetModal: state.displayModal,
+  loading: state.login,
+  loading: state.register,
+  loading: state.reset,
 });
 
 export default connect(mapState)(Login);

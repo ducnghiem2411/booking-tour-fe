@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Input, Button, Select } from 'antd';
+import { Link } from "react-router-dom";
 
 const Setting = (props) => {
 
     const [form] = Form.useForm();
+    const [formLayout, setFormLayout] = useState('vertical');
 
     const onSubmit = (values) => {
         console.log(values);
@@ -49,7 +51,7 @@ const Setting = (props) => {
                 <div className="body-setting">
                   <p className="title"> Account Settings </p>
                   <div className="form">
-                    <Form form={form} name="control-hooks" onFinish={onSubmit}>
+                    <Form form={form} name="control-hooks" onFinish={onSubmit}  layout={formLayout}>
                       <Form.Item
                         name="name"
                         label="Name"
@@ -62,14 +64,14 @@ const Setting = (props) => {
                         label="Email"
                        
                       >
-                        <Input/>
+                        <Input placeholder="Your email..."/>
                       </Form.Item>
                       <Form.Item
                         name="phone"
                         label="Phone"
                        
                       >
-                        <Input/>
+                        <Input placeholder="Phone number..."/>
                       </Form.Item>
                       <Form.Item
                         name="website"
@@ -91,6 +93,7 @@ const Setting = (props) => {
                       </Form.Item>
                     </Form>
                   </div>
+                  <Link to="/" class="btn-back setting" href="/"> <span class="icon arrowBack"> <i class="fa fa-angle-double-left "></i> </span> Back to home page</Link>
                 </div>
               </div>
             </div>

@@ -11,7 +11,7 @@ const Header = () => {
             <span className="notify"></span>
           </div>
 
-          <div className="account">
+          <div className="account-admin">
             <span className="img">
               <img src="https://pbs.twimg.com/profile_images/633782900077408256/F541mrSs.jpg" />
             </span>

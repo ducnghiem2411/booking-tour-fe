@@ -10,13 +10,15 @@ const initialState = {
   statusEdit: false,
   statusCreate: false,
   itemTour: "",
-  messageBooking: '',
+  messageBooking: "",
   bookingTourStatus: false,
   keyBookingTourStatus: 0,
   dataFilter: [],
   statusAdmin: false,
   keyAdminModal: 0,
-  dataAllTours: []
+  dataAllTours: [],
+  statusFilteredTours: false,
+  keyFilter: 0,
 };
 
 var findIndex = (dataTour, id) => {
@@ -31,9 +33,9 @@ var findIndex = (dataTour, id) => {
 };
 
 export default function tourReducer(state = initialState, action) {
-  const messageCreate = "Created tour successfully !"
-  const messageDelete = "Deleted tour successfully !"
-  const messageUpdate = "Updated tour successfully !"
+  const messageCreate = "Created tour successfully !";
+  const messageDelete = "Deleted tour successfully !";
+  const messageUpdate = "Updated tour successfully !";
   var index = -1;
   switch (action.type) {
     case type.FETCH_TOUR_REQUEST:
@@ -84,7 +86,6 @@ export default function tourReducer(state = initialState, action) {
       };
 
     case type.CREATE_TOUR_SUCCESSED:
-     
       state.dataTour.push(action.data);
       state.loading = false;
       state.statusCreate = true;
@@ -103,13 +104,13 @@ export default function tourReducer(state = initialState, action) {
         message: action.message,
       };
 
-      case type.RESET_STATUS_ADMIN:
-        return {
-          ...state,
-  
-          statusAdmin: false,
-          keyAdminModal: 0,
-        };
+    case type.RESET_STATUS_ADMIN:
+      return {
+        ...state,
+
+        statusAdmin: false,
+        keyAdminModal: 0,
+      };
 
     case type.DELETE_TOUR_REQUESTED:
       return {
@@ -133,8 +134,6 @@ export default function tourReducer(state = initialState, action) {
         keyAdminModal: state.keyAdminModal + 1,
         message: action.message,
       };
-    
-
 
     case type.GET_DATA_ROW_TABLE_REQUESTED:
       return {
@@ -154,12 +153,6 @@ export default function tourReducer(state = initialState, action) {
         message: action.message,
       };
 
-
-
-      
-    
-
-
     case type.GET_FILTER_TOUR_REQUEST:
       return {
         ...state,
@@ -177,26 +170,25 @@ export default function tourReducer(state = initialState, action) {
         loading: false,
         message: action.message,
       };
-
-
-
+    case type.SET_STATUS_FILTERED_TOURS:
+      return {
+        ...state,
+        statusFilteredTours: true,
+      };
 
     case type.SEND_DATA_ROW_INTO_STORE:
-
       return {
         ...state,
         dataRow: action.data,
         statusEdit: true,
       };
     case type.CHANGE_STATUS_EDIT:
-
       return {
         ...state,
 
         statusEdit: false,
       };
     case type.UPDATE_DATA_TOUR_REQUESTED:
-
       return {
         ...state,
         loading: true,
@@ -218,11 +210,11 @@ export default function tourReducer(state = initialState, action) {
         statusAdmin: false,
         keyAdminModal: state.keyAdminModal + 1,
       };
-   
+
     case type.DATA_ITEM_TOUR_REQUESTED:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case type.DATA_ITEM_TOUR_SUCCED:
       return {
@@ -240,7 +232,7 @@ export default function tourReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        keyBookingTourStatus : state.keyBookingTourStatus + 1,
+        keyBookingTourStatus: state.keyBookingTourStatus + 1,
         bookingTourStatus: true,
       };
     case type.BOOKING_TOUR_FAILED:
@@ -248,14 +240,19 @@ export default function tourReducer(state = initialState, action) {
         ...state,
         loading: false,
         messageBooking: action.message,
-        keyBookingTourStatus : state.keyBookingTourStatus + 1,
+        keyBookingTourStatus: state.keyBookingTourStatus + 1,
         bookingTourStatus: false,
+      };
+    case type.INCREASE_KEY_FILTER:
+      return {
+        ...state,
+        keyFilter: state.keyFilter + 1,
       };
     case type.RESET_STATUS_BOOKING_TOUR:
       return {
         ...state,
-       
-        keyBookingTourStatus : 0,
+
+        keyBookingTourStatus: 0,
         bookingTourStatus: false,
       };
 

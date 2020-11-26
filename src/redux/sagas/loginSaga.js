@@ -16,6 +16,7 @@ export function* signInSaga(action) {
   try {
     const response = yield call(axios.post, apiUrl, user);
     if (response) {
+      console.log('response', response)
       yield put(loginSucced(response.data.data));
     }
   } catch (error) {

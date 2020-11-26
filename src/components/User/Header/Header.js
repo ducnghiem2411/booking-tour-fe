@@ -11,6 +11,7 @@ import {
   Link,
   useParams,
 } from "react-router-dom";
+import Axios from "axios";
 
 const Header = (props) => {
   const { loginStatus } = props.loginStatus;
@@ -35,6 +36,13 @@ const Header = (props) => {
       dispatch(updateLoginRequest());
     }
   }, []);
+
+  useEffect(() => {
+    Axios.get('http://localhost:8000/users').then(res => {
+      console.log('res', res)
+    })
+    
+  }, [])
 
   useEffect(() => {}, [updateLoginStatus]);
 
