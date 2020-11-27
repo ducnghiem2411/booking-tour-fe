@@ -8,14 +8,18 @@ import {
 
 const Setting = (props) => {
   const dispatch = useDispatch();
+  const { dataUser } = props.dataUser;
   const [phone, setPhone] = useState("");
   const [bio, setBio] = useState("");
   const [image, setImage] = useState("");
 
   const { match } = props;
-  const { dataUser } = props.dataUser;
 
-  console.log("dataUser", dataUser);
+  const { loading } = props.loading;
+
+  useEffect(() => {
+    dispatch(getInfoUserRequest(match.params.token));
+  }, []);
   const onChangePhone = (e) => {
     setPhone(e.target.value);
   };
@@ -27,13 +31,21 @@ const Setting = (props) => {
   };
 
   const onSubmit = (e) => {
+    console.log("phone", phone);
+    console.log("bio", bio);
+    console.log("image", image);
     e.preventDefault();
     dispatch(updateInfoUserRequest(phone, bio, image, dataUser.username));
   };
 
   useEffect(() => {
-    dispatch(getInfoUserRequest(match.params.token));
-  }, []);
+    if (dataUser) {
+      console.log("dataUser", dataUser);
+      setPhone(dataUser.phone);
+      setBio(dataUser && dataUser.bio)
+      setImage(dataUser && dataUser.image)
+    }
+  }, [dataUser]);
 
   return (
     <>
@@ -44,18 +56,30 @@ const Setting = (props) => {
               <div className="col-md-4 col-navi">
                 <div className="navigate">
                   <header>
-                    <div className="img">
-                      <img src="https://via.placeholder.com/75x75" />
+                    <div className="img-user">
+                      <img
+                        src={
+                          dataUser
+                            ? dataUser.image
+                            : "https://via.placeholder.com/75x75"
+                        }
+                      />
                     </div>
-                    <p className="name">
+                    <p
+                      className="name"
+                      style={{
+                        marginBottom: "5px",
+                      }}
+                    >
                       {" "}
                       {dataUser && dataUser.username
                         ? dataUser.username
                         : ""}{" "}
                     </p>
                     <p className="bio">
-                      Adding an image file extension will render the image in
-                      the correct format.
+                      {dataUser
+                        ? dataUser.bio
+                        : "Nothing is impossible if you always try hard"}
                     </p>
                   </header>
                   <div className="list">
@@ -131,7 +155,11 @@ const Setting = (props) => {
                           type="submit"
                           className="btn btn-primary btn-setting"
                         >
-                          Save
+                          {loading ? (
+                            <div className="donut multi"></div>
+                          ) : (
+                            "Save"
+                          )}
                         </button>
                       </div>
                     </form>
@@ -156,5 +184,6 @@ const Setting = (props) => {
 
 const mapState = (state) => ({
   dataUser: state.user,
+  loading: state.user,
 });
 export default connect(mapState)(Setting);

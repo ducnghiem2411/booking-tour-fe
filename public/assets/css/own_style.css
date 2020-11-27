@@ -2254,8 +2254,9 @@ nav.breadcumb ul li a:hover {
   background: #4ad2ff;
   outline: none !important;
   border: none;
-  padding: 8px 20px;
   letter-spacing: 1px;
+  width: 100px;
+  height: 40px;
   transition: .4s ease-in-out;
   border-radius: 5px;
 }
@@ -2265,4 +2266,20 @@ nav.breadcumb ul li a:hover {
 .wrap-btn-setting .btn-setting:active:focus{
   background: #4ad2ff;
   border-color: #4ad2ff;
+}
+.img-user {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    text-align: center;
+    border: 2px solid #c2c2c2;
+    border-radius: 50%;
+}
+
+.img-user img {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }

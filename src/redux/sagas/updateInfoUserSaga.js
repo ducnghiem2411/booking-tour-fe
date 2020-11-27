@@ -5,18 +5,23 @@ import axios from "axios";
 import { updateInfoUserSucced, updateInfoUserFailed } from "../actions/index";
 
 export function* updateInfoUserInSaga(action) {
+   
+    
+  
+  const token = JSON.parse(localStorage.getItem('token'))
+
   const config = {
     headers: {
       "content-type": "multipart/form-data",
-      
+      "Authorization": `Bearer ${token}`
     },
   };
-  const token = JSON.parse(localStorage.getItem('token'))
-  const headerAuth = {
-    headers: { Authorization: 'Bearer ' + token }
-};
+  // const headers = {
+  //   "content-type": "multipart/form-data",
+  //   "Authorization": `Bearer + ${token}`
+    
+  // }
 
-  // const apiUrl = 'http://localhost:8000/users/profile/{username}';
   const apiUrl = `http://localhost:8000/users/profile/${action.payload.username}`;
 
   try {
@@ -25,13 +30,12 @@ export function* updateInfoUserInSaga(action) {
     formData.append("phone", action.payload.phone);
     formData.append("image", action.payload.image);
 
-    const response = yield call(axios.put, apiUrl, formData, config, headerAuth);
+    const response = yield call(axios.put, apiUrl, formData, config );
     if (response) {
-      console.log("response", response);
-      // yield put(updateInfoUserSucced(response.data.data))
+      yield put(updateInfoUserSucced(response.data.data))
     }
   } catch (error) {
-    // yield put(updateInfoUserFailed(error.response.data.message));
+    yield put(updateInfoUserFailed(error.response.data.message));
   }
 }
 
