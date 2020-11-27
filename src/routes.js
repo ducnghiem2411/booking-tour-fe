@@ -72,7 +72,7 @@ const routes = [
         main : ({match, history}) => <Login match={match} history={history}/>
     },
     {
-        path : '/setting',
+        path : '/setting/:token',
         exact : true,
         main : ({match, history}) => <Setting match={match} history={history}/>
     },

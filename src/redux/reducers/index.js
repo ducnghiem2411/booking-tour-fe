@@ -8,6 +8,7 @@ import placeReducer from "./placeReducer";
 import tourReducer from "./tourReducer";
 import reviewReducer from "./reviewReducer";
 import resetReducer from "./resetReducer";
+import userReducer from "./userReducer";
 
 const rootReducers = combineReducers({
   login: loginReduder,
@@ -19,6 +20,7 @@ const rootReducers = combineReducers({
   tour: tourReducer,
   review: reviewReducer,
   reset: resetReducer,
+  user: userReducer,
 });
 
 export default rootReducers;

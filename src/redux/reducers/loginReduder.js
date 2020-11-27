@@ -2,10 +2,10 @@ import * as type from "../TypeAction";
 
 const initialState = {
   loading: false,
-  userData: {
-    username: null,
-    password: null,
-  },
+  // userData: {
+  //   username: null,
+  //   password: null,
+  // },
   error: false,
   token: "",
   messageLogin: "",
@@ -14,7 +14,9 @@ const initialState = {
   keyLogin: 0,
   keyReset: 0,
   updateLoginStatus: false,
-  messageReset: ''
+  messageReset: '',
+  accessToken:'',
+  loadingLogin: false
 
 };
 
@@ -23,7 +25,7 @@ export default function loginReduder(state = initialState, action) {
     case type.LOGIN_REQUESTED:
       return {
         ...state,
-        loading: true,
+        loadingLogin: true,
       };
       break
 
@@ -32,7 +34,7 @@ export default function loginReduder(state = initialState, action) {
 
       return {
         ...state,
-        loading: false,
+        loadingLogin: false,
         keyLogin: state.keyLogin +1 ,
         loginStatus: true,
         token: action.token,
@@ -42,7 +44,7 @@ export default function loginReduder(state = initialState, action) {
     case type.LOGIN_FAILED:
       return {
         ...state,
-        loading: false,
+        loadingLogin: false,
         error: true,
         loginStatus: false,
         keyLogin: state.keyLogin + 1 ,
@@ -87,14 +89,13 @@ export default function loginReduder(state = initialState, action) {
       break
 
     case type.UPDATE_LOGIN_SUCCESS:
-      // localStorage.setItem("token", JSON.stringify(action.token.accessToken));
-
       return {
         ...state,
         loading: false,
         loginStatus: true,
         updateLoginStatus: true,
-        token: action.token,
+        // token: action.token,
+        accessToken: action.accessToken
       };
       break
 

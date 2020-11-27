@@ -2243,3 +2243,26 @@ nav.breadcumb ul li a:hover {
     transform: rotate(360deg);
   }
 }
+.wrap-btn-setting {
+  display: block;
+  margin: 20px 0;
+  text-align: right;
+}
+
+.wrap-btn-setting .btn-setting {
+  display: inline-block;
+  background: #4ad2ff;
+  outline: none !important;
+  border: none;
+  padding: 8px 20px;
+  letter-spacing: 1px;
+  transition: .4s ease-in-out;
+  border-radius: 5px;
+}
+.wrap-btn-setting .btn-setting:hover {
+  background: #1892ba;
+}
+.wrap-btn-setting .btn-setting:active:focus{
+  background: #4ad2ff;
+  border-color: #4ad2ff;
+}

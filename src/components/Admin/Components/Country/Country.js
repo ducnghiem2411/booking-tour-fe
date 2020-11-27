@@ -30,6 +30,7 @@ import {
 const Country = (props) => {
   const dispatch = useDispatch();
   const { dataCountry } = props.dataCountry;
+  console.log('dataCountry', dataCountry)
   const { loading } = props.loading;
   const [dataRow, setDataRow] = useState(null);
   const [filteredInfo, setFilteredInfo] = useState({});

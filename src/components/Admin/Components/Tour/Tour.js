@@ -37,6 +37,7 @@ import formatPrice from "../../../../utilies/FormatNumber";
 const Tour = (props) => {
   const dispatch = useDispatch();
   const { dataAllTours } = props.dataAllTours;
+  console.log('dataAllTours', dataAllTours)
   const { loading } = props.loading;
   const [dataRow, setDataRow] = useState(null);
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -84,6 +85,7 @@ const Tour = (props) => {
         price: formatPrice(item.price),
         member: item.member,
         description: item.description,
+        // images: 
       });
     });
   }
@@ -137,6 +139,11 @@ const Tour = (props) => {
       title: "Image",
       dataIndex: "image",
       width: 300,
+      // render : record =>{
+      //   return record.map((v,i)=>{
+      //     return 
+      //   })
+      // }
     },
     {
       title: "",

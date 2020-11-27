@@ -36,7 +36,7 @@ const App = () => {
             <Route path="/admin" component={Admin} />
             <Route path="/country" component={Country} />
             <Route path="/login" component={Login} />
-            <Route path="/setting" component={Setting} />
+            <Route path="/setting/:token" component={Setting} />
             <Route path="/detail/:id" component={Detail} />
             
 

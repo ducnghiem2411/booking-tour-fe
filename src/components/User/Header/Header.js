@@ -17,32 +17,23 @@ const Header = (props) => {
   const { loginStatus } = props.loginStatus;
   const { updateLoginStatus } = props.updateLoginStatus;
   const { tokenStore } = props.tokenStore;
+  const { accessToken } = props.accessToken;
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
   const logout = () => {
-    // dispatch(onLogout())
     localStorage.removeItem("token");
     window.location.reload(true);
   };
 
-  // useEffect(() => {
-
-    
-  // }, [tokenStore])
-
+ 
   useEffect(() => {
     if (token) {
       dispatch(updateLoginRequest());
     }
   }, []);
 
-  useEffect(() => {
-    Axios.get('http://localhost:8000/users').then(res => {
-      console.log('res', res)
-    })
-    
-  }, [])
+  
 
   useEffect(() => {}, [updateLoginStatus]);
 
@@ -134,7 +125,7 @@ const Header = (props) => {
                                     <i className="fa fa-user" /> Notifications{" "}
                                     <span className="count">13</span>
                                   </a>
-                                  <Link className="nav-link" to='/setting'>
+                                  <Link className="nav-link" to= {`/setting/${accessToken}`} >
                                     <i className="fa fa-cog" /> Settings
                                   </Link>
                                   <button
@@ -174,6 +165,7 @@ const mapState = (state) => ({
   token: state.login,
   loginStatus: state.login,
   updateLoginStatus: state.login,
+  accessToken: state.login,
   tokenStore: state.home,
 });
 export default connect(mapState)(Header);

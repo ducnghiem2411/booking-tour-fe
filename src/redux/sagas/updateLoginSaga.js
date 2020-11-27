@@ -19,7 +19,7 @@ export function* updateLoginInSaga(action) {
     };
     const response = yield call(axios.get, apiUrl, headerAuth);
     if (response) {
-      yield put(updateLoginSucced());
+      yield put(updateLoginSucced(response.data.data.accessToken));
     }
   } catch (error) {
 

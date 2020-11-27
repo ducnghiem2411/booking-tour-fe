@@ -10,6 +10,11 @@ import {
 } from "../actions/index";
 
 export function* createTourInSaga(action) {
+  // console.log('action.payload', action.payload.images)
+
+  // for(let i = 0;i < action.payload.images.length; i++){
+  //   console.log('action.payload.images[i]', action.payload.images[i])
+  // }
   try {
     const config = {
       headers: {
@@ -29,6 +34,12 @@ export function* createTourInSaga(action) {
     formData.append("price", action.payload.price);
     formData.append("member", action.payload.member);
     formData.append("description", action.payload.description);
+    for(let i = 0;i < action.payload.images.length; i++){
+      formData.append("images", action.payload.images[i]);
+    }
+
+
+    
     // formData.append("images",  action.payload.images );
 
     const response = yield call(axios.post, apiUrl, formData, config);

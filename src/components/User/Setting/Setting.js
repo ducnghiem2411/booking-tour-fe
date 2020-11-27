@@ -1,29 +1,58 @@
-import React, { useState } from "react";
-import { Form, Input, Button, Select } from 'antd';
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { connect, useDispatch } from "react-redux";
+import {
+  getInfoUserRequest,
+  updateInfoUserRequest,
+} from "./../../../redux/actions";
 
 const Setting = (props) => {
+  const dispatch = useDispatch();
+  const [phone, setPhone] = useState("");
+  const [bio, setBio] = useState("");
+  const [image, setImage] = useState("");
 
-    const [form] = Form.useForm();
-    const [formLayout, setFormLayout] = useState('vertical');
+  const { match } = props;
+  const { dataUser } = props.dataUser;
 
-    const onSubmit = (values) => {
-        console.log(values);
-      };
-    
+  console.log("dataUser", dataUser);
+  const onChangePhone = (e) => {
+    setPhone(e.target.value);
+  };
+  const onChangeBio = (e) => {
+    setBio(e.target.value);
+  };
+  const onChangeImage = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateInfoUserRequest(phone, bio, image, dataUser.username));
+  };
+
+  useEffect(() => {
+    dispatch(getInfoUserRequest(match.params.token));
+  }, []);
+
   return (
     <>
       <div className="account">
         <div className="body">
           <div className="container container-account">
-            <div className="row" style={{height: '100%'}}>
+            <div className="row" style={{ height: "100%" }}>
               <div className="col-md-4 col-navi">
                 <div className="navigate">
                   <header>
                     <div className="img">
                       <img src="https://via.placeholder.com/75x75" />
                     </div>
-                    <p className="name">Lauren Clifford</p>
+                    <p className="name">
+                      {" "}
+                      {dataUser && dataUser.username
+                        ? dataUser.username
+                        : ""}{" "}
+                    </p>
                     <p className="bio">
                       Adding an image file extension will render the image in
                       the correct format.
@@ -50,50 +79,71 @@ const Setting = (props) => {
               <div className="col-md-8 col-setting">
                 <div className="body-setting">
                   <p className="title"> Account Settings </p>
-                  <div className="form">
-                    <Form form={form} name="control-hooks" onFinish={onSubmit}  layout={formLayout}>
-                      <Form.Item
-                        name="name"
-                        label="Name"
-                       
-                      >
-                        <Input placeholder="Your name..." />
-                      </Form.Item>
-                      <Form.Item
-                        name="emai"
-                        label="Email"
-                       
-                      >
-                        <Input placeholder="Your email..."/>
-                      </Form.Item>
-                      <Form.Item
-                        name="phone"
-                        label="Phone"
-                       
-                      >
-                        <Input placeholder="Phone number..."/>
-                      </Form.Item>
-                      <Form.Item
-                        name="website"
-                        label="Webiste"
-                       
-                      >
-                        <Input/>
-                      </Form.Item>
-
-                      <Form.Item>
-                        <Button
-                          type="primary"
-                          htmlType="submit"
-                          className="btn-ant-modal-submit"
+                  <div className="form" onSubmit={onSubmit}>
+                    <form>
+                      <div className="form-group">
+                        <label>Username</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          defaultValue={dataUser && dataUser.username}
+                          disabled
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Email</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          defaultValue={dataUser && dataUser.email}
+                          disabled
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Phone</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          defaultValue={dataUser && dataUser.phone}
+                          onChange={onChangePhone}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Bio</label>
+                        <textarea
+                          className="form-control"
+                          type="text"
+                          maxlength="100"
+                          defaultValue={dataUser && dataUser.bio}
+                          onChange={onChangeBio}
+                        ></textarea>
+                      </div>
+                      <div className="form-group">
+                        <label>Avatar</label>
+                        <input
+                          type="file"
+                          defaultValue={dataUser && dataUser.image}
+                          onChange={onChangeImage}
+                        />
+                      </div>
+                      <div className="wrap-btn-setting">
+                        <button
+                          type="submit"
+                          className="btn btn-primary btn-setting"
                         >
                           Save
-                        </Button>
-                       
-                      </Form.Item>
-                    </Form>
+                        </button>
+                      </div>
+                    </form>
                   </div>
-                  <Link to="/" class="btn-back setting" href="/"> <span class="icon arrowBack"> <i class="fa fa-angle-double-left "></i> </span> Back to home page</Link>
+                  <Link to="/" className="btn-back setting" href="/">
+                    {" "}
+                    <span className="icon arrowBack">
+                      {" "}
+                      <i className="fa fa-angle-double-left "></i>{" "}
+                    </span>{" "}
+                    Back to home page
+                  </Link>
                 </div>
               </div>
             </div>
@@ -104,4 +154,7 @@ const Setting = (props) => {
   );
 };
 
-export default Setting;
+const mapState = (state) => ({
+  dataUser: state.user,
+});
+export default connect(mapState)(Setting);

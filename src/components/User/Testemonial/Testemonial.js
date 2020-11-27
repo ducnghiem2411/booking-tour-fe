@@ -8,7 +8,6 @@ import { fetchAllReviewsRequest } from "../../../redux/actions";
 const Testemonial = (props) => {
   const dispatch = useDispatch();
   const { allReviews } = props.allReviews;
-  console.log("allReviews", allReviews);
 
   useEffect(() => {
     dispatch(fetchAllReviewsRequest());

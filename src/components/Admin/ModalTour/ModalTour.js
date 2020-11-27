@@ -50,7 +50,7 @@ const ModalTour = (props) => {
   const [idPlace, setIdPlace] = useState("");
   const [dateString, setDateString] = useState([]);
   const [tourPrice, setPriceTour] = useState('')
-  const [file, setFileImage] = useState('')
+  const [fileImageTour, setFileImage] = useState([])
 
   const formRef = React.createRef();
   const [form] = Form.useForm();
@@ -63,7 +63,10 @@ const ModalTour = (props) => {
 
 
   const onChangeImg = e => {
-    setFileImage(e.target.files[0])
+    // for(let i =0;i < e.target.files.length; i++){
+    //   fileImageTour.push(e.target.files[i])
+    // }
+    setFileImage(e.target.files)
   }
 
   const closeModal = () => {
@@ -123,6 +126,7 @@ const ModalTour = (props) => {
     setDateString(dateString);
   };
 
+  console.log('fileImageTour', fileImageTour)
   const onSubmit = (values) => {
     
     // values = {
@@ -152,7 +156,7 @@ const ModalTour = (props) => {
           values.price,
           values.memNumber,
           values.description,
-          file
+          fileImageTour
         )
       );
     }

@@ -26,6 +26,8 @@ import getFilterTourSaga from './getFilterTourSaga'
 import fetchAllToursSaga from './fetchAllToursSaga'
 import fetchAllReviewsSaga from './fetchAllReviewsSaga'
 import resetPasswordSaga from './resetPasswordSaga'
+import getInfoUserSaga from './getInfoUserSaga'
+import updateInfoUserSaga from './updateInfoUserSaga'
 
 export default function* rootSaga() {
     yield all([
@@ -55,7 +57,9 @@ export default function* rootSaga() {
         getFilterTourSaga(),
         fetchAllToursSaga(),
         fetchAllReviewsSaga(),
-        resetPasswordSaga()
+        resetPasswordSaga(),
+        getInfoUserSaga(),
+        updateInfoUserSaga()
         
     ])
 }

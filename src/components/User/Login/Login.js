@@ -40,6 +40,8 @@ const Login = (props) => {
   const { statusResetModal } = props.statusResetModal;
   const { history } = props;
   const {loading} = props.loading
+  const {loadingLogin} = props.loadingLogin
+  const {loadingRegister} = props.loadingRegister
 
 
 
@@ -253,7 +255,7 @@ const Login = (props) => {
                             className="btn btn-default btn-login"
                             
                           >
-                             Login
+                             { loadingLogin ?  <div className="donut multi"></div> :  'Login'}
                           </button>
                         </form>
                       </div>
@@ -358,7 +360,7 @@ const Login = (props) => {
                             className="btn btn-default btn-register"
                             disabled={rePassword !== password ? true : false}
                           >
-                            Create account
+                           { loadingRegister ?   <div className="donut multi"></div>  : ' Create account'}
                           </button>
                         </form>
                       </div>
@@ -431,8 +433,8 @@ const mapState = (state) => ({
   resetStatus: state.reset,
   keyReset: state.reset,
   statusResetModal: state.displayModal,
-  loading: state.login,
-  loading: state.register,
+  loadingLogin: state.login,
+  loadingRegister: state.register,
   loading: state.reset,
 });
 

@@ -105,12 +105,68 @@ const updateLoginRequest = () => {
   };
 };
 
-const updateLoginSucced = (token) => {
+
+const getInfoUserRequest = (token) => {
   return {
-    type: type.UPDATE_LOGIN_SUCCESS,
-    token,
+    type: type.GET_INFO_USER_REQUEST,
+    token
   };
 };
+const getInfoUserSucced = (data) => {
+  return {
+    type: type.GET_INFO_USER_SUCCED,
+    data
+  };
+};
+const getInfoUserFailed = (message) => {
+  return {
+    type: type.GET_INFO_USER_FAILED,
+    message
+  };
+};
+
+
+
+
+const updateInfoUserRequest = (phone, bio, image, username) => {
+  return {
+    type: type.UPDATE_INFO_USER_REQUEST,
+    payload: {
+      phone,
+      bio,
+      image,
+      username
+    }
+    
+  };
+};
+const updateInfoUserSucced = (data) => {
+  return {
+    type: type.UPDATE_INFO_USER_SUCCED,
+    data
+  };
+};
+const updateInfoUserFailed = (message) => {
+  return {
+    type: type.UPDATE_INFO_USER_FAILED,
+    message
+  };
+};
+
+
+
+const updateLoginSucced = (accessToken) => {
+  return {
+    type: type.UPDATE_LOGIN_SUCCESS,
+    accessToken,
+  };
+};
+// const updateLoginSucced = (token) => {
+//   return {
+//     type: type.UPDATE_LOGIN_SUCCESS,
+//     token,
+//   };
+// };
 const updateLoginFailed = (message) => {
   return {
     type: type.UPDATE_LOGIN_FAILED,
@@ -805,6 +861,7 @@ export {
   // resetStatus,
   deletePlaceItemSucced,
   deletePlaceItemFailed,
+  updateInfoUserFailed,
   resetPasswordRequest,
   fetchAllToursFailed,
   resetLoginStatus,
@@ -818,6 +875,9 @@ export {
   fetchReviewsListRequest,
   fetchReviewsListSucced,
   getFilterTourRequest,
+  updateInfoUserRequest,
+  updateInfoUserSucced,
+
   getFilterTourSucced,
   resetStatusAdmin,
   getFilterTourFailed,
@@ -831,6 +891,7 @@ export {
   deleteCountryItemFailed,
   resetStateInStore,
   createCountryRequest,
+  getInfoUserSucced,
   onCloseModalLogin,
   onShowModalLogin,
   dataItemTourFailed,
@@ -872,6 +933,7 @@ export {
   deleteTourItemRequest,
   createTourRequest,
   dataItemTourRequest,
+  getInfoUserFailed,
   createTourSucced,
   createTourFailed,
   createPlaceFailed,
@@ -888,6 +950,7 @@ export {
   fetchDataPlaceInCountryRequest,
   fetchTopListDestinationRequest,
   fetchAllReviewsSucced,
+  getInfoUserRequest,
   fetchDataPlaceInCountryFailed,
   showResetModal,
   onChangeStatusCreateAccModal,

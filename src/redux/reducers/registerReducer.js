@@ -5,7 +5,8 @@ const initialState = {
   error: false,
   registerStatus: false,
   keyRegister: 0,
-  message: ""
+  message: "",
+  loadingRegister: false
   
 };
 
@@ -14,7 +15,7 @@ export default function registerReducer(state = initialState, action) {
     case type.REGISTER_REQUEST:
       return {
         ...state,
-        loading: true,
+        loadingRegister: true,
       };
 
       break;
@@ -23,7 +24,7 @@ export default function registerReducer(state = initialState, action) {
         ...state,
         registerStatus: true,
         keyRegister: state.keyRegister + 1 ,
-        loading: false,
+        loadingRegister: false,
         message: action.message
       };
 
@@ -34,7 +35,7 @@ export default function registerReducer(state = initialState, action) {
         error: true,
         registerStatus: false,
         keyRegister: state.keyRegister + 1,
-        loading: false,
+        loadingRegister: false,
         message: action.message.message
       };
 
