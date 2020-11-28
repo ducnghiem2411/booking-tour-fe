@@ -118,7 +118,7 @@ const Footer = () => {
               Right Reserved
             </p>
             <div className="to-admin">
-              <Link to="/admin">Go to admin dashboard</Link>
+              <Link to="/admin" style={{color: '#00d8ff'}}>Go to admin dashboard</Link>
             </div>
           </div>
           {/*/.foot-icons*/}

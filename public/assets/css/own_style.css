@@ -315,11 +315,12 @@ span.block.edit .btn-edit {
 }
 
 .single-package-item-txt h3 span {
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   display: -webkit-box;
   white-space: normal;
-  height: 45px;
+  height: 65px;
+  line-height: 1.4;
   overflow: hidden;
 }
 
@@ -350,14 +351,31 @@ span.block.edit .btn-edit {
   width: 100%;
   height: 100%;
 }
+.single-package-item h3{
+  font-size: 17px;
+  padding: 20px 0 5px 0;
+}
 
 .single-package-item h3 .title {
   color: #565a5c;
   font-weight: 600;
+  transition: .2s ease-in-out;
 }
 
 .single-package-item {
   width: 100%;
+  position: relative;
+  top: 0;
+  transition: .2s ease-in-out;
+}
+.packages-para{
+  padding-top: 10px;
+}
+.single-package-item:hover{
+  top: -10px;
+}
+.single-package-item:hover h3 .title{
+  color: #00d8ff;
 }
 
 .single-package-item .package-img {
@@ -366,6 +384,9 @@ span.block.edit .btn-edit {
   overflow: hidden;
   position: relative;
   transition: .4s ease-in-out;
+}
+.single-package-item .package-img.similar{
+  height: 180px;
 }
 
 /* .single-package-item .package-img:before {
@@ -2108,7 +2129,7 @@ nav.breadcumb ul li a:hover {
   z-index: 5;
   width: 800px;
   /* background: white; */
-  height: 550px;
+  height: 585px;
 }
 
 .wrapper .account .body .container-account .navigate {
@@ -2282,4 +2303,54 @@ nav.breadcumb ul li a:hover {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+}
+.ant-carousel .slick-dots li button {
+  width: 15px !important;
+  height: 15px !important;
+  background: grey !important;
+  border-radius: 50% !important;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+  background: #00d8ff !important;
+}
+.ant-carousel .slick-dots li.slick-active{
+  width: 15px !important;
+}
+.ant-carousel .slick-dots-bottom{
+  bottom: 0 !important;
+}
+.single-package-item.similar h3 {
+  font-size: 15px;
+}
+.packages-para.similar p{
+  font-size: 13px;
+}
+.detail .similar-tours {
+  margin: 50px 0 0 0;
+  padding-top: 15px;
+  background: white;
+}
+.ant-carousel .slick-dots{
+  z-index: 4 !important;
+}
+.album{
+  margin-bottom: 30px;
+}
+
+.album .package-img {
+  height: 450px;
+  overflow: hidden;
+}
+.album .package-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.album .ant-carousel .slick-dots {
+  bottom: 10px !important;
+}
+.about-view.packages-btn.similar{
+  width: 85px;
+  height: 30px;
 }

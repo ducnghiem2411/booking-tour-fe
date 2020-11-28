@@ -49,7 +49,7 @@ export function* createTourInSaga(action) {
     }
   } catch (error) {
     yield put(
-      createTourFailed(error.response.data && error.response.data.message)
+      // createTourFailed(error.response.data && error.response.data.message)
     );
   }
 }

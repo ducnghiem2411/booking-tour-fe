@@ -56,7 +56,6 @@ const Tour = (props) => {
 
 
   const sendRecordToModal = (data) => {
-    console.log('data', data)
     dispatch(onShowModal(true));
 
     dispatch(sendDataRowIntoStore(data));
@@ -70,6 +69,7 @@ const Tour = (props) => {
   }, []);
 
   const data = [];
+  console.log('dataAllTours', dataAllTours)
 
   if (dataAllTours && dataAllTours) {
     dataAllTours.map((item, index) => {
@@ -85,6 +85,7 @@ const Tour = (props) => {
         price: formatPrice(item.price),
         member: item.member,
         description: item.description,
+        image: item.images,
         // images: 
       });
     });
@@ -139,11 +140,17 @@ const Tour = (props) => {
       title: "Image",
       dataIndex: "image",
       width: 300,
-      // render : record =>{
-      //   return record.map((v,i)=>{
-      //     return 
-      //   })
-      // }
+      render: image => (
+        <span>
+          {
+            image.map((item, index) => {
+              return (
+                <small key={index}> {item} </small>
+              )
+            })
+          }
+        </span>
+      )
     },
     {
       title: "",
@@ -227,7 +234,7 @@ const Tour = (props) => {
         <Table
           columns={columns}
           dataSource={data}
-          pagination={{ pageSize: 4 }}
+          pagination={{ pageSize: 1 }}
           onChange={handleChange}
           scroll={{ x: "max-content" }}
           // onRow = { (record, rowIndex) => {

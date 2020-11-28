@@ -8,18 +8,36 @@ import {
 } from "../actions/index";
 
 export function* updateInfoPlaceInSaga(action) {
+
+  const config = {
+    headers: {
+      "content-type": "multipart/form-data"
+    },
+  };
+
+
   try {
     const apiUrl = `http://localhost:8000/places/${action.id}`;
-    const response  = yield call(axios.put, apiUrl, { 
-      name: action.body.placeName,
-      description: action.body.description,
-    });
+
+    const formData = new FormData();
+    
+    formData.append("name",  action.body.placeName );
+    formData.append("description", action.body.description);
+    formData.append("image", action.image);
+
+    // { 
+    //   name: action.body.placeName,
+    //   description: action.body.description,
+    // }
+
+
+    const response  = yield call(axios.put, apiUrl, formData, config );
    
     if (response) {
       yield put(updateInfoPlaceItemSucced(response.data.data));
     }
   } catch (error) {
-    yield put(updateInfoPlaceItemFailed(error));
+    yield put(updateInfoPlaceItemFailed(error.response.data.message));
   }
 }
 

@@ -105,28 +105,24 @@ const updateLoginRequest = () => {
   };
 };
 
-
 const getInfoUserRequest = (token) => {
   return {
     type: type.GET_INFO_USER_REQUEST,
-    token
+    token,
   };
 };
 const getInfoUserSucced = (data) => {
   return {
     type: type.GET_INFO_USER_SUCCED,
-    data
+    data,
   };
 };
 const getInfoUserFailed = (message) => {
   return {
     type: type.GET_INFO_USER_FAILED,
-    message
+    message,
   };
 };
-
-
-
 
 const updateInfoUserRequest = (phone, bio, image, username) => {
   return {
@@ -135,25 +131,22 @@ const updateInfoUserRequest = (phone, bio, image, username) => {
       phone,
       bio,
       image,
-      username
-    }
-    
+      username,
+    },
   };
 };
 const updateInfoUserSucced = (data) => {
   return {
     type: type.UPDATE_INFO_USER_SUCCED,
-    data
+    data,
   };
 };
 const updateInfoUserFailed = (message) => {
   return {
     type: type.UPDATE_INFO_USER_FAILED,
-    message
+    message,
   };
 };
-
-
 
 const updateLoginSucced = (accessToken) => {
   return {
@@ -177,8 +170,8 @@ const resetPasswordRequest = (email) => {
   return {
     type: type.RESET_PASSWORD_REQUEST,
     payload: {
-      email: email
-    }
+      email: email,
+    },
   };
 };
 const resetPasswordSucced = (message) => {
@@ -218,7 +211,7 @@ const registerRequest = (username, email, password) => {
 //   };
 // };
 
-const createPlaceRequest = (countryId, country, name, description,image) => {
+const createPlaceRequest = (countryId, country, name, description, image) => {
   return {
     type: type.CREATE_PLACE_REQUESTED,
     payload: {
@@ -253,7 +246,7 @@ const createTourRequest = (
   checkOut,
   price,
   member,
-  description,  
+  description,
   images
 ) => {
   return {
@@ -359,14 +352,12 @@ const getFilterTourRequest = (paramsString) => {
 const setStatusFilteredTours = () => {
   return {
     type: type.SET_STATUS_FILTERED_TOURS,
-    
   };
 };
 
 const increaseKeyFilter = () => {
   return {
     type: type.INCREASE_KEY_FILTER,
-    
   };
 };
 
@@ -383,8 +374,6 @@ const getFilterTourFailed = (message) => {
     message,
   };
 };
-
-
 
 const fetchDataTourRequest = (paramsString) => {
   return {
@@ -407,14 +396,9 @@ const fetchDataTourFailed = (message) => {
   };
 };
 
-
-
-
-
 const fetchAllToursRequest = () => {
   return {
     type: type.FETCH_ALL_TOURS_REQUEST,
-
   };
 };
 
@@ -432,13 +416,9 @@ const fetchAllToursFailed = (message) => {
   };
 };
 
-
-
-
 const fetchAllReviewsRequest = () => {
   return {
     type: type.FETCH_ALL_REVIEWS_REQUEST,
-
   };
 };
 
@@ -455,8 +435,6 @@ const fetchAllReviewsFailed = (message) => {
     message,
   };
 };
-
-
 
 const fetchInfoTourRequest = (id) => {
   return {
@@ -526,6 +504,11 @@ const resetLoginStatus = () => {
     type: type.RESET_LOGIN_STATUS,
   };
 };
+const resetSettingStatus = () => {
+  return {
+    type: type.RESET_SETTING_STATUS,
+  };
+};
 const resetStatusReset = () => {
   return {
     type: type.RESET_STATUS_RESET,
@@ -580,11 +563,12 @@ const bookingTourFailed = (message) => {
   };
 };
 
-const updateInfoCountryItemRequest = (id, body) => {
+const updateInfoCountryItemRequest = (id, body, image) => {
   return {
     type: type.UPDATE_DATA_COUNTRY_REQUESTED,
     id,
     body,
+    image,
   };
 };
 
@@ -602,11 +586,12 @@ const updateInfoCountryItemFailed = (message) => {
   };
 };
 
-const updateInfoPlaceItemRequest = (id, body) => {
+const updateInfoPlaceItemRequest = (id, body, image) => {
   return {
     type: type.UPDATE_DATA_PLACE_REQUESTED,
     id,
     body,
+    image,
   };
 };
 
@@ -624,12 +609,12 @@ const updateInfoPlaceItemFailed = (message) => {
   };
 };
 
-const updateInfoTourItemRequest = (id, body) => {
+const updateInfoTourItemRequest = (id, body, images) => {
   return {
     type: type.UPDATE_DATA_TOUR_REQUESTED,
-
     id,
     body,
+    images,
   };
 };
 
@@ -713,7 +698,7 @@ const deleteTourItemFailed = (message) => {
 const registerSucced = (message) => {
   return {
     type: type.REGISTER_SUCCESSED,
-    message
+    message,
   };
 };
 const getDataRowTableRequested = (id) => {
@@ -792,8 +777,7 @@ const showCreateAccModal = (status) => {
 const showResetModal = (status) => {
   return {
     type: type.SHOW_RESET_MODAL,
-    status
-    
+    status,
   };
 };
 const onChangeStatusCreateAccModal = (status) => {
@@ -861,6 +845,7 @@ export {
   // resetStatus,
   deletePlaceItemSucced,
   deletePlaceItemFailed,
+  resetSettingStatus,
   updateInfoUserFailed,
   resetPasswordRequest,
   fetchAllToursFailed,
@@ -877,7 +862,6 @@ export {
   getFilterTourRequest,
   updateInfoUserRequest,
   updateInfoUserSucced,
-
   getFilterTourSucced,
   resetStatusAdmin,
   getFilterTourFailed,

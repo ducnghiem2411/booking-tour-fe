@@ -8,13 +8,27 @@ import {
 } from "../actions/index";
 
 export function* updateInfoCountryInSaga(action) {
+
+  const config = {
+    headers: {
+      "content-type": "multipart/form-data"
+    },
+  };
+
+
+  const apiUrl = `http://localhost:8000/countries/${action.id}`;
+
+  
   try {
-    const apiUrl = `http://localhost:8000/countries/${action.id}`;
-    const response = yield call(axios.put, apiUrl, {
-      name: action.body.countryName,
-      description: action.body.description,
-    });
-    // const response = yield call(axios.get, `http://localhost:8000/countries/${action.id}`)
+
+    const formData = new FormData();
+    
+    formData.append("name",  action.body.countryName );
+    formData.append("description", action.body.description);
+    formData.append("image", action.image);
+
+    
+    const response = yield call(axios.put, apiUrl, formData, config );
     if(response){
       yield put(updateInfoCountryItemSucced(response.data.data))
     }

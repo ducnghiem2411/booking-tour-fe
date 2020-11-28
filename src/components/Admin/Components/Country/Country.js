@@ -167,7 +167,7 @@ const Country = (props) => {
         <Table
           columns={columns}
           dataSource={data}
-          pagination={{ pageSize: 5 }}
+          pagination={{ pageSize: 1 }}
           onChange={handleChange}
           scroll={{ x: "max-content" }}
         />

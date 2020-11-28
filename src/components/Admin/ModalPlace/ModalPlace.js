@@ -87,44 +87,12 @@ const ModalPlace = (props) => {
     setIdCountry(id);
   };
 
-  const waitUntilImageLoaded = (resolve) => {
-    setTimeout(() => {
-      fileUpload
-        ? resolve() // from onChange method
-        : waitUntilImageLoaded(resolve);
-    }, 10);
-  };
 
-  const customRequest = async (option) => {
-    const { onSuccess, onError, file, action, onProgress } = option;
-    const url = action;
-
-    await new Promise((resolve) => waitUntilImageLoaded(resolve)); //in the next section
-
-    const type = "image/png";
-    axios
-      .put("http://localhost:8000/countries", fileUpload, {
-        onUploadProgress: (e) => {
-          onProgress({ percent: (e.loaded / e.total) * 100 });
-        },
-        headers: {
-          "Content-Type": type,
-        },
-      })
-      .then((respones) => {
-        /*......*/
-        onSuccess(respones.body);
-      })
-      .catch((err) => {
-        /*......*/
-        onError(err);
-      });
-  };
 
  
   const onSubmit = (values) => {
     if (statusEdit) {
-      dispatch(updateInfoPlaceItemRequest(dataRow.key, values));
+      dispatch(updateInfoPlaceItemRequest(dataRow.key, values, file));
     } else {
       dispatch(
         createPlaceRequest(
@@ -147,8 +115,8 @@ const ModalPlace = (props) => {
         closeModal();
       } else {
         openNotification(statusAdmin, "Failed", message);
-        form.resetFields();
-        dispatch(changeStatusEdit());
+        // form.resetFields();
+        // dispatch(changeStatusEdit());
       }
     }
     dispatch(resetStatusAdmin());

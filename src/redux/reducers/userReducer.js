@@ -5,6 +5,9 @@ const initialState = {
   loading: false,
   message: "",
   dataUser: null,
+  keySetting: 0,
+  settingStatus: false,
+
 };
 
 export default function countryReducer(state = initialState, action) {
@@ -39,6 +42,8 @@ export default function countryReducer(state = initialState, action) {
         ...state,
         loading: false,
         dataUser: action.data,
+        keySetting: state.settingStatus +1,
+        settingStatus: true,
       };
 
     case type.UPDATE_INFO_USER_FAILED:
@@ -46,8 +51,16 @@ export default function countryReducer(state = initialState, action) {
         ...state,
         loading: false,
         message: action.message,
+        keySetting: state.settingStatus +1,
+        settingStatus: false,
       };
 
+      case type.RESET_SETTING_STATUS:
+      return {
+        ...state,
+        settingStatus: false,
+        keySetting: 0
+      };
     default:
       return state;
   }

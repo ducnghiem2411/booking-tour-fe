@@ -140,7 +140,8 @@ const ModalTour = (props) => {
           // dataRow.countryId,
           // dataRow.placeId,
           dataRow.key,
-          values
+          values,
+          fileImageTour
         )
       );
     } else {
@@ -171,8 +172,8 @@ const ModalTour = (props) => {
         closeModal();
       } else {
         openNotification(statusAdmin, "Failed", message);
-        form.resetFields();
-        dispatch(changeStatusEdit());
+        // form.resetFields();
+        // dispatch(changeStatusEdit());
       }
     }
     dispatch(resetStatusAdmin());
@@ -470,7 +471,7 @@ const ModalTour = (props) => {
                         },
                       ]}
                     >
-                      <Input.TextArea maxLength={250}  />
+                      <Input.TextArea maxLength={500}  />
                     </Form.Item>
 
                     <input type="file" onChange={onChangeImg} multiple />

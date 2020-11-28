@@ -23,7 +23,7 @@ const Testemonial = (props) => {
             </p>
           </div>
 
-          <Carousel autoplay  slidesToShow={3} draggable>
+          <Carousel slidesToShow={3} draggable dots={true} autoplay>
             {allReviews && allReviews.length > 0
               ? allReviews.map((item, index) => {
                   return (

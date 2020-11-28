@@ -15,6 +15,7 @@ import queryString from "query-string";
 
 const Packages = (props) => {
   const { dataTour } = props.dataTour;
+  console.log('dataTour', dataTour)
   const { messageBooking } = props.messageBooking;
   const dispatch = useDispatch();
 
@@ -93,7 +94,7 @@ const Packages = (props) => {
                             <div className="package-img">
                               <img
                                 className="placeholder"
-                                src="https://static.scientificamerican.com/sciam/cache/file/4E0744CD-793A-4EF8-B550B54F7F2C4406.jpg"
+                                src= {itemTour && itemTour.images[0] ? itemTour.images[0] : "https://static.scientificamerican.com/sciam/cache/file/4E0744CD-793A-4EF8-B550B54F7F2C4406.jpg" }   
                               />
                             </div>
 

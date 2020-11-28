@@ -4,38 +4,31 @@ import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SuccessBookModal from "../Modal/StatusBookingTourModal";
-import { Form, Input, Button, Rate , Checkbox } from "antd";
+import { Form, Input, Button, Rate, Checkbox, Carousel } from "antd";
 import Review from "../Review/Review";
-import {dataItemTourRequest} from './../../../redux/actions'
-import { useParams , useRouteMatch} from "react-router-dom";
+import { dataItemTourRequest } from "./../../../redux/actions";
+import { useParams, useRouteMatch } from "react-router-dom";
 import ReviewsList from "../Review/ReviewsList";
+import SimilarTours from "../SimilarTours/SimilarTours";
 
 const Detail = (props) => {
   const { itemTour } = props.itemTour;
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const {match} = props
-
+  const { match } = props;
 
   useEffect(() => {
-    dispatch(dataItemTourRequest(match.params.id))
-    window.scrollTo(0, 0)
-    
-  }, [])
-
-
-
-
-
-  
+    dispatch(dataItemTourRequest(match.params.id));
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
       {/* <SuccessBookModal /> */}
       <Header />
-      <Breadcrumb />
+      <Breadcrumb match={match} />
 
-      <div className= "detail ">
+      <div className="detail ">
         <div className="body">
           <div className="container">
             <div className="row">
@@ -49,14 +42,14 @@ const Detail = (props) => {
                 <div className="info">
                   <div className="title">
                     <h4 className="name"> {itemTour && itemTour.name} </h4>
-                    <button
+                    {/* <button
                       href="#myModal"
                       data-toggle="modal"
                       className="booking"
                     >
                       {" "}
                       Book now
-                    </button>
+                    </button> */}
                   </div>
                   <p className="location">
                     {" "}
@@ -65,24 +58,58 @@ const Detail = (props) => {
                     </span>{" "}
                     {itemTour && itemTour.place}
                   </p>
+
+                  <div className="album">
+                    <Carousel
+                      slidesToShow={1}
+                      draggable
+                      dots={true}
+                      infinite={false}
+                    >
+                      {itemTour && itemTour.images
+                        ? itemTour.images.map((item, index) => {
+                            
+                              return (
+                                <div className="package-img">
+                                  <img
+                                    className="placeholder"
+                                    src={
+                                      item 
+                                        ? item
+                                        : "https://static.scientificamerican.com/sciam/cache/file/4E0744CD-793A-4EF8-B550B54F7F2C4406.jpg"
+                                    }
+                                  />
+                                </div>
+                              );
+                            
+                          })
+                        : []}
+                    </Carousel>
+                  </div>
+
                   <p className="desc">{itemTour && itemTour.description}</p>
 
                   <div className="review">
-                    <h3> Tour reviews </h3>
-                    <img
+                    {/* <h3> Tour reviews </h3> */}
+                    {/* <img
                       style={{
                         display: "block",
                         width: "100%",
                         height: "150px",
                       }}
                       src="https://via.placeholder.com/150x150"
-                    />
-                    <h4 style={ { margin: '20px 0' } } >Reviews</h4>
-                    <Review itemTour ={itemTour ? itemTour : [] } />
+                    /> */}
+                    <h4 style={{ margin: "20px 0" }}>Reviews</h4>
+                    <Review itemTour={itemTour ? itemTour : []} />
 
-                    <ReviewsList itemTour ={itemTour}/>
+                    <ReviewsList itemTour={itemTour} />
                   </div>
                 </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="similar-tours">
+                <SimilarTours />
               </div>
             </div>
           </div>

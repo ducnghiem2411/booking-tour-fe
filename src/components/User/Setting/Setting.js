@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import {
   getInfoUserRequest,
+  openNotification,
+  resetSettingStatus,
   updateInfoUserRequest,
 } from "./../../../redux/actions";
 
@@ -16,6 +18,8 @@ const Setting = (props) => {
   const { match } = props;
 
   const { loading } = props.loading;
+  const { settingStatus } = props.settingStatus;
+  const { keySetting } = props.keySetting;
 
   useEffect(() => {
     dispatch(getInfoUserRequest(match.params.token));
@@ -31,24 +35,35 @@ const Setting = (props) => {
   };
 
   const onSubmit = (e) => {
-    console.log("phone", phone);
-    console.log("bio", bio);
-    console.log("image", image);
+    
     e.preventDefault();
     dispatch(updateInfoUserRequest(phone, bio, image, dataUser.username));
   };
 
   useEffect(() => {
     if (dataUser) {
-      console.log("dataUser", dataUser);
       setPhone(dataUser.phone);
       setBio(dataUser && dataUser.bio)
       setImage(dataUser && dataUser.image)
     }
   }, [dataUser]);
 
+  useEffect(() => {
+    if (keySetting !== 0) {
+      if (settingStatus) {
+        openNotification(settingStatus, "Success", "Updated profile successfully !");
+      } else {
+        openNotification(settingStatus, "Failed", );
+      }
+    }
+    dispatch(resetSettingStatus());
+  }, [settingStatus, keySetting]);
+
+
+
   return (
     <>
+    
       <div className="account">
         <div className="body">
           <div className="container container-account">
@@ -142,6 +157,9 @@ const Setting = (props) => {
                           onChange={onChangeBio}
                         ></textarea>
                       </div>
+
+
+
                       <div className="form-group">
                         <label>Avatar</label>
                         <input
@@ -185,5 +203,7 @@ const Setting = (props) => {
 const mapState = (state) => ({
   dataUser: state.user,
   loading: state.user,
+  settingStatus: state.user,
+  keySetting: state.user,
 });
 export default connect(mapState)(Setting);

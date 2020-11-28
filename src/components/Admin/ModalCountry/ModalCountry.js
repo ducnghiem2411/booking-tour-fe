@@ -47,7 +47,7 @@ const ModalCountry = (props) => {
 
   const onSubmit = (values) => {
     if (statusEdit) {
-      dispatch(updateInfoCountryItemRequest(dataRow.key, values));
+      dispatch(updateInfoCountryItemRequest(dataRow.key, values, file));
     } else {
       dispatch(createCountryRequest(values.countryName, values.description, file));
     }
@@ -60,8 +60,8 @@ const ModalCountry = (props) => {
         closeModal();
       } else {
         openNotification(statusAdmin, "Failed", message);
-        form.resetFields();
-        dispatch(changeStatusEdit());
+        // form.resetFields();
+        // dispatch(changeStatusEdit());
       }
     }
     dispatch(resetStatusAdmin());
