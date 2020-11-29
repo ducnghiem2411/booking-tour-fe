@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import Footer from "../Footer/Footer";
@@ -14,13 +14,16 @@ import SimilarTours from "../SimilarTours/SimilarTours";
 const Detail = (props) => {
   const { itemTour } = props.itemTour;
   const dispatch = useDispatch();
+  const {statusShowDetailTour} = props.statusShowDetailTour
+
+
 
   const { match } = props;
 
   useEffect(() => {
     dispatch(dataItemTourRequest(match.params.id));
     window.scrollTo(0, 0);
-  }, []);
+  }, [statusShowDetailTour]);
 
   return (
     <>
@@ -63,14 +66,16 @@ const Detail = (props) => {
                     <Carousel
                       slidesToShow={1}
                       draggable
+                      infinite
                       dots={true}
+                      autoplay
                       infinite={false}
                     >
                       {itemTour && itemTour.images
                         ? itemTour.images.map((item, index) => {
                             
                               return (
-                                <div className="package-img">
+                                <div className="package-img" key={index}>
                                   <img
                                     className="placeholder"
                                     src={
@@ -108,6 +113,7 @@ const Detail = (props) => {
               </div>
             </div>
             <div className="row">
+             
               <div className="similar-tours">
                 <SimilarTours />
               </div>
@@ -122,6 +128,7 @@ const Detail = (props) => {
 
 const mapState = (state) => ({
   itemTour: state.tour,
+  statusShowDetailTour: state.tour,
 });
 
 export default connect(mapState)(Detail);

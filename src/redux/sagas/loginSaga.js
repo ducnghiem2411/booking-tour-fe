@@ -26,3 +26,5 @@ export function* signInSaga(action) {
 export default function* loginSaga() {
   yield takeLatest(type.LOGIN_REQUESTED, signInSaga);
 }
+
+

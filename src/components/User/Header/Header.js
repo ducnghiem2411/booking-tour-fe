@@ -20,7 +20,7 @@ const Header = (props) => {
   const { tokenStore } = props.tokenStore;
   const { accessToken } = props.accessToken;
   const { dataUser } = props.dataUser;
-  console.log('dataUser', dataUser)
+  // console.log('dataUser', dataUser)
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const tokenUser = JSON.parse(localStorage.getItem('token'))

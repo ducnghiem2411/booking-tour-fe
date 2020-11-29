@@ -19,6 +19,7 @@ const initialState = {
   dataAllTours: [],
   statusFilteredTours: false,
   keyFilter: 0,
+  statusShowDetailTour: false
 };
 
 var findIndex = (dataTour, id) => {
@@ -247,6 +248,11 @@ export default function tourReducer(state = initialState, action) {
       return {
         ...state,
         keyFilter: state.keyFilter + 1,
+      };
+    case type.CHANGE_STATUS_TO_SHOW_DETAIL_TOUR:
+      return {
+        ...state,
+        statusShowDetailTour: !state.statusShowDetailTour
       };
     case type.RESET_STATUS_BOOKING_TOUR:
       return {

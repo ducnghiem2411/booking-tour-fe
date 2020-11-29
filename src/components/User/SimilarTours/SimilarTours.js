@@ -3,6 +3,7 @@ import { Carousel } from "antd";
 import { connect, useDispatch } from "react-redux";
 import {
   bookingTourRequest,
+  changeStatusToShowDetailTour,
   fetchAllToursRequest,
 } from "../../../redux/actions";
 import { Link, useHistory } from "react-router-dom";
@@ -30,70 +31,70 @@ const SimilarTours = (props) => {
 
   return (
     <>
-
-<h3 style={{textAlign:'center',margin: '10px 0 30px 0'}}> Similar Tours </h3>
+      <h3 style={{ textAlign: "center", margin: "10px 0 30px 0" }}>
+        {" "}
+        Similar Tours{" "}
+      </h3>
       <Carousel slidesToShow={4} draggable dots={false} infinite={false}>
         {dataAllTours
           ? dataAllTours.map((itemTour, index) => {
-              if(index < 5){
-              return (
-                <div key={index} className="col-md-3 col-sm-6">
-                  <div className="single-package-item similar">
-                    <div className="package-img similar">
-                      <img
-                        className="placeholder"
-                        src={
-                          itemTour && itemTour.images[0]
-                            ? itemTour.images[0]
-                            : "https://static.scientificamerican.com/sciam/cache/file/4E0744CD-793A-4EF8-B550B54F7F2C4406.jpg"
-                        }
-                      />
-                    </div>
-
-                    <div className="single-package-item-txt similar">
-                      <h3>
-                        <Link
-                          className="title"
-                          to={`/detail/${itemTour._id}`}
-                          // onClick={() => onGetDataTourItem(itemTour)}
-                        >
-                          <span>{itemTour ? itemTour.name : ""}</span>
-                        </Link>
-                      </h3>
-                      <div className="packages-para similar">
-                        <p>
-                          {itemTour && itemTour.description
-                            ? itemTour.description
-                            : ""}
-                        </p>
+              if (index < 5) {
+                return (
+                  <div key={index} className="col-md-3 col-sm-6">
+                    <div className="single-package-item similar">
+                      <div className="package-img similar">
+                        <img
+                          className="placeholder"
+                          src={
+                            itemTour && itemTour.images[0]
+                              ? itemTour.images[0]
+                              : "https://static.scientificamerican.com/sciam/cache/file/4E0744CD-793A-4EF8-B550B54F7F2C4406.jpg"
+                          }
+                        />
                       </div>
-                      <p className="location">
-                        {" "}
-                        <span>
-                          <i className="fa fa-map-marker"></i>
-                        </span>{" "}
-                        {itemTour && itemTour.place}
-                      </p>
-                      <div className="about-btn">
-                        <button
-                          className="about-view packages-btn similar"
-                          onClick={() => onBookingTour(itemTour)}
-                        >
-                          book now
-                        </button>
-                        <span className="pull-right">
-                          {itemTour ? formatPrice(itemTour.price) : ""} đ
-                        </span>
+
+                      <div className="single-package-item-txt similar">
+                        <h3>
+                          <Link
+                            className="title"
+                            to={`/detail/${itemTour._id}`}
+                            onClick = { () => dispatch(changeStatusToShowDetailTour())}
+                          >
+                            <span>{itemTour ? itemTour.name : ""}</span>
+                          </Link>
+                        </h3>
+                        <div className="packages-para similar">
+                          <p>
+                            {itemTour && itemTour.description
+                              ? itemTour.description
+                              : ""}
+                          </p>
+                        </div>
+                        <p className="location">
+                          {" "}
+                          <span>
+                            <i className="fa fa-map-marker"></i>
+                          </span>{" "}
+                          {itemTour && itemTour.place}
+                        </p>
+                        <div className="about-btn">
+                          <button
+                            className="about-view packages-btn similar"
+                            onClick={() => onBookingTour(itemTour)}
+                          >
+                            book now
+                          </button>
+                          <span className="pull-right">
+                            {itemTour ? formatPrice(itemTour.price) : ""} đ
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            }}
-            )
-          : []
-        
-        }
+                );
+              }
+            })
+          : []}
       </Carousel>
     </>
   );

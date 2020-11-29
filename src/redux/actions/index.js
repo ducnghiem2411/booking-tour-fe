@@ -85,6 +85,12 @@ const loginRequest = (email, password) => {
     },
   };
 };
+const changeStatusToShowDetailTour = () => {
+  return {
+    type: type.CHANGE_STATUS_TO_SHOW_DETAIL_TOUR,
+    
+  };
+};
 
 const loginSucced = (token) => {
   return {
@@ -889,6 +895,7 @@ export {
   fetchDataCountryRequest,
   updateInfoTourItemRequest,
   loginGoogleRequest,
+  changeStatusToShowDetailTour,
   dataItemTourSucced,
   updateInfoTourItemSucced,
   fetchReviewsRequest,
