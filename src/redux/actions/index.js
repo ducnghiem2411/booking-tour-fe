@@ -514,6 +514,11 @@ const resetStatusReset = () => {
     type: type.RESET_STATUS_RESET,
   };
 };
+const loginGoogleRequest = () => {
+  return {
+    type: type.LOGIN_GOOGLE_REQUEST,
+  };
+};
 const resetRegisterStatus = () => {
   return {
     type: type.RESET_REGISTER_STATUS,
@@ -883,6 +888,7 @@ export {
   getDataRowTableFailed,
   fetchDataCountryRequest,
   updateInfoTourItemRequest,
+  loginGoogleRequest,
   dataItemTourSucced,
   updateInfoTourItemSucced,
   fetchReviewsRequest,

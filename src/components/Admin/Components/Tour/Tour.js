@@ -37,7 +37,7 @@ import formatPrice from "../../../../utilies/FormatNumber";
 const Tour = (props) => {
   const dispatch = useDispatch();
   const { dataAllTours } = props.dataAllTours;
-  console.log('dataAllTours', dataAllTours)
+  // console.log('dataAllTours', dataAllTours)
   const { loading } = props.loading;
   const [dataRow, setDataRow] = useState(null);
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -69,7 +69,7 @@ const Tour = (props) => {
   }, []);
 
   const data = [];
-  console.log('dataAllTours', dataAllTours)
+  // console.log('dataAllTours', dataAllTours)
 
   if (dataAllTours && dataAllTours) {
     dataAllTours.map((item, index) => {

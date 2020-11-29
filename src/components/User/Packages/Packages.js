@@ -15,7 +15,7 @@ import queryString from "query-string";
 
 const Packages = (props) => {
   const { dataTour } = props.dataTour;
-  console.log('dataTour', dataTour)
+  // console.log('dataTour', dataTour)
   const { messageBooking } = props.messageBooking;
   const dispatch = useDispatch();
 

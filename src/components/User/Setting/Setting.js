@@ -164,7 +164,7 @@ const Setting = (props) => {
                         <label>Avatar</label>
                         <input
                           type="file"
-                          defaultValue={dataUser && dataUser.image}
+                          // defaultValue={dataUser && dataUser.image}
                           onChange={onChangeImage}
                         />
                       </div>

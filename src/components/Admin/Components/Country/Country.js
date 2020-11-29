@@ -30,7 +30,7 @@ import {
 const Country = (props) => {
   const dispatch = useDispatch();
   const { dataCountry } = props.dataCountry;
-  console.log('dataCountry', dataCountry)
+  // console.log('dataCountry', dataCountry)
   const { loading } = props.loading;
   const [dataRow, setDataRow] = useState(null);
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -47,6 +47,7 @@ const Country = (props) => {
   };
 
   const sendRecordToModal = (data) => {
+    // console.log('data', data)
     dispatch(onShowModal(true));
 
     dispatch(sendDataRowIntoStore(data));

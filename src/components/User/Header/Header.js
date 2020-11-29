@@ -1,6 +1,7 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import {
+  getInfoUserRequest,
   onLogout,
   updateLoginRequest,
 } from "../../../redux/actions/index";
@@ -18,8 +19,11 @@ const Header = (props) => {
   const { updateLoginStatus } = props.updateLoginStatus;
   const { tokenStore } = props.tokenStore;
   const { accessToken } = props.accessToken;
+  const { dataUser } = props.dataUser;
+  console.log('dataUser', dataUser)
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
+  const tokenUser = JSON.parse(localStorage.getItem('token'))
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -36,6 +40,10 @@ const Header = (props) => {
   
 
   useEffect(() => {}, [updateLoginStatus]);
+
+  useEffect(() => {
+    dispatch(getInfoUserRequest(tokenUser));
+  }, []);
 
   return (
     <>
@@ -113,7 +121,7 @@ const Header = (props) => {
                                 >
                                   <img
                                     className="user-avatar rounded-circle"
-                                    src="/assets/images/admin/admin.jpg"
+                                    src= {dataUser ? dataUser.image : "/assets/images/admin/admin.jpg" }  
                                     alt="User Avatar"
                                   />
                                 </a>
@@ -167,5 +175,6 @@ const mapState = (state) => ({
   updateLoginStatus: state.login,
   accessToken: state.login,
   tokenStore: state.home,
+  dataUser: state.user,
 });
 export default connect(mapState)(Header);

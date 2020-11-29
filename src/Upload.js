@@ -29,7 +29,7 @@ const Upload = (props) => {
       },
     };
     await axios.post("http://localhost:8000/countries", fd, config).then((res) => {
-      console.log(res);
+      // console.log(res);
     });
 
 }

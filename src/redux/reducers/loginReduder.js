@@ -51,6 +51,14 @@ export default function loginReduder(state = initialState, action) {
         messageLogin: action.message.message,
       };
       break
+    // case type.LOGIN_GOOGLE_REQUEST:
+    //   localStorage.setItem("token", JSON.stringify(action.token.accessToken));
+
+    //   return {
+    //     ...state,
+        
+    //   };
+    //   break
     case type.RESET_PASSWORD_REQUEST:
       return {
         ...state,

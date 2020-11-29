@@ -2,6 +2,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, notification, Divider, Space } from "antd";
+import GoogleLogin from "react-google-login";
 import {
   showCreateAccModal,
   onChangeStatusCreateAccModal,
@@ -39,13 +40,9 @@ const Login = (props) => {
   const { messageReset } = props.messageReset;
   const { statusResetModal } = props.statusResetModal;
   const { history } = props;
-  const {loading} = props.loading
-  const {loadingLogin} = props.loadingLogin
-  const {loadingRegister} = props.loadingRegister
-
-
-
-  
+  const { loading } = props.loading;
+  const { loadingLogin } = props.loadingLogin;
+  const { loadingRegister } = props.loadingRegister;
 
   const onCreateAccModal = (e) => {
     e.preventDefault();
@@ -53,12 +50,12 @@ const Login = (props) => {
     setPasswordLogin("");
     dispatch(showCreateAccModal(true));
   };
-  const onShowResetModal = e => {
+  const onShowResetModal = (e) => {
     e.preventDefault();
     setEmailLogin("");
     setPasswordLogin("");
-    dispatch(showResetModal(true))
-  }
+    dispatch(showResetModal(true));
+  };
   const changeStatusCreateAccModal = (e) => {
     e.preventDefault();
     setUsername("");
@@ -66,7 +63,7 @@ const Login = (props) => {
     setPassword("");
     setRepassword("");
     dispatch(onChangeStatusCreateAccModal(false));
-    dispatch(showResetModal(false))
+    dispatch(showResetModal(false));
   };
 
   const onChangeUsername = (e) => {
@@ -103,17 +100,16 @@ const Login = (props) => {
   };
 
   const onLogin = (e) => {
-
     e.preventDefault();
     dispatch(loginRequest(emailLogin, passwordLogin));
 
     setEmailLogin("");
     setPasswordLogin("");
   };
-  const onResetPassword = e => {
+  const onResetPassword = (e) => {
     e.preventDefault();
-    dispatch(resetPasswordRequest(emailReset))
-  }
+    dispatch(resetPasswordRequest(emailReset));
+  };
 
   useEffect(() => {
     if (keyLogin !== 0) {
@@ -125,10 +121,6 @@ const Login = (props) => {
     }
     dispatch(resetLoginStatus());
   }, [loginStatus, keyLogin]);
-
-
-  
-
 
   useEffect(() => {
     if (keyRegister !== 0) {
@@ -155,18 +147,20 @@ const Login = (props) => {
   useEffect(() => {
     if (keyReset !== 0) {
       if (resetStatus) {
-        openNotification(resetStatus, "Success", messageReset,notification.config({
-          duration: 5,
-        }));
+        openNotification(
+          resetStatus,
+          "Success",
+          messageReset,
+          notification.config({
+            duration: 5,
+          })
+        );
       } else {
         openNotification(resetStatus, "Failed", messageReset);
       }
     }
     dispatch(resetStatusReset());
   }, [resetStatus, keyReset]);
-
-
-
 
   useEffect(() => {
     if (loginStatus) {
@@ -175,6 +169,13 @@ const Login = (props) => {
       }, 2000);
     }
   }, [loginStatus]);
+
+  const responseGoogle = (response) => {
+    if(response.accessToken){
+      // dispatch(loginGoogleRequest())
+    }
+    // console.log(response);
+  };
 
   return (
     <>
@@ -201,6 +202,13 @@ const Login = (props) => {
                         <a id="google_login" className="circle google" href="#">
                           <i className="fa fa-google-plus fa-fw" />
                         </a>
+                        {/* <GoogleLogin
+                          clientId="388356051193-2o77ddjb3i1v4nd4fn7v5g566gph0415.apps.googleusercontent.com"
+                          buttonText="Login"
+                          onSuccess={responseGoogle}
+                          onFailure={responseGoogle}
+                          cookiePolicy={"single_host_origin"}
+                        /> */}
                         <a
                           id="facebook_login"
                           className="circle facebook"
@@ -211,7 +219,12 @@ const Login = (props) => {
                       </div>
                       <div className="division">
                         <div className="line l" />
-                        <span className="option"> {statusResetModal ? " Enter your email address and we'll send you a link to reset your password" : "or"}</span>
+                        <span className="option">
+                          {" "}
+                          {statusResetModal
+                            ? " Enter your email address and we'll send you a link to reset your password"
+                            : "or"}
+                        </span>
                         <div className="line r" />
                       </div>
                       <div className="error" />
@@ -253,15 +266,18 @@ const Login = (props) => {
                           <button
                             type="submit"
                             className="btn btn-default btn-login"
-                            
                           >
-                             { loadingLogin ?  <div className="donut multi"></div> :  'Login'}
+                            {loadingLogin ? (
+                              <div className="donut multi"></div>
+                            ) : (
+                              "Login"
+                            )}
                           </button>
                         </form>
                       </div>
                       <div
                         className={
-                          statusResetModal 
+                          statusResetModal
                             ? "form resetBox"
                             : "form resetBox hidden"
                         }
@@ -282,18 +298,20 @@ const Login = (props) => {
                             autoComplete="off"
                             onChange={onChangeEmailReset}
                           />
-                         
 
                           <button
                             type="submit"
                             className="btn btn-default btn-login"
-                            disabled = {loading ? true: false}
+                            disabled={loading ? true : false}
                           >
-                             {loading ? <div className="donut multi"></div> : 'Send'}
+                            {loading ? (
+                              <div className="donut multi"></div>
+                            ) : (
+                              "Send"
+                            )}
                           </button>
                         </form>
                       </div>
-
                     </div>
                   </div>
                   <div
@@ -360,7 +378,11 @@ const Login = (props) => {
                             className="btn btn-default btn-register"
                             disabled={rePassword !== password ? true : false}
                           >
-                           { loadingRegister ?   <div className="donut multi"></div>  : ' Create account'}
+                            {loadingRegister ? (
+                              <div className="donut multi"></div>
+                            ) : (
+                              " Create account"
+                            )}
                           </button>
                         </form>
                       </div>
@@ -383,7 +405,9 @@ const Login = (props) => {
                       ?
                     </span>
                     <div className="forgot-pass">
-                      <a href="" className="forgot" onClick={onShowResetModal}>Forgot password?</a>
+                      <a href="" className="forgot" onClick={onShowResetModal}>
+                        Forgot password?
+                      </a>
                     </div>
                   </div>
                   <div
@@ -406,9 +430,7 @@ const Login = (props) => {
                         ? "forgot reset-footer active"
                         : "forgot reset-footer"
                     }
-                  >
-                   
-                  </div>
+                  ></div>
                 </div>
               </div>
             </div>

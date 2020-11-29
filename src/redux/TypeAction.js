@@ -186,6 +186,10 @@ export const RESET_STATUS_RESET = 'RESET_STATUS_RESET'
 
 
 
+export const LOGIN_GOOGLE_REQUEST = 'LOGIN_GOOGLE_REQUEST'
+
+
+
 
 
 
