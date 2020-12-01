@@ -100,6 +100,12 @@ const Setting = (props) => {
                   <div className="list">
                     <ul>
                       <li>
+                        <a>profile information</a>
+                      </li>
+                      <li>
+                        <a>security</a>
+                      </li>
+                      {/* <li>
                         <a>account setting</a>
                       </li>
                       <li>
@@ -110,7 +116,8 @@ const Setting = (props) => {
                       </li>
                       <li>
                         <a>account setting</a>
-                      </li>
+                      </li> */}
+                     
                     </ul>
                   </div>
                 </div>

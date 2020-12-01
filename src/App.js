@@ -4,6 +4,8 @@ import React from "react";
 import "./App.scss";
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+// import "~slick-carousel/slick/slick.css"; 
+// import "~slick-carousel/slick/slick-theme.css";
 
 import User from "./components/User";
 import Admin from "./components/Admin";

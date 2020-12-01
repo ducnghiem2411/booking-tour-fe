@@ -19,7 +19,10 @@ const initialState = {
   dataAllTours: [],
   statusFilteredTours: false,
   keyFilter: 0,
-  statusShowDetailTour: false
+  statusShowDetailTour: false,
+  messageSubscribe: "",
+  keySubscribe: 0,
+  statusSubscribe: false,
 };
 
 var findIndex = (dataTour, id) => {
@@ -229,6 +232,11 @@ export default function tourReducer(state = initialState, action) {
         ...state,
         loading: false,
       };
+    case type.BOOKING_TOUR_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
     case type.BOOKING_TOUR_SUCCED:
       return {
         ...state,
@@ -244,6 +252,27 @@ export default function tourReducer(state = initialState, action) {
         keyBookingTourStatus: state.keyBookingTourStatus + 1,
         bookingTourStatus: false,
       };
+    case type.SUBSCRIBE_EMAIL_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case type.SUBSCRIBE_EMAIL_SUCCED:
+      return {
+        ...state,
+        loading: false,
+        messageSubscribe: action.message,
+        keySubscribe: state.keySubscribe + 1,
+        statusSubscribe: true,
+      };
+    case type.SUBSCRIBE_EMAIL_FAILED:
+      return {
+        ...state,
+        loading: false,
+        messageSubscribe: action.message,
+        keySubscribe: state.keySubscribe + 1,
+        statusSubscribe: false,
+      };
     case type.INCREASE_KEY_FILTER:
       return {
         ...state,
@@ -252,7 +281,7 @@ export default function tourReducer(state = initialState, action) {
     case type.CHANGE_STATUS_TO_SHOW_DETAIL_TOUR:
       return {
         ...state,
-        statusShowDetailTour: !state.statusShowDetailTour
+        statusShowDetailTour: !state.statusShowDetailTour,
       };
     case type.RESET_STATUS_BOOKING_TOUR:
       return {
@@ -260,6 +289,13 @@ export default function tourReducer(state = initialState, action) {
 
         keyBookingTourStatus: 0,
         bookingTourStatus: false,
+      };
+    case type.RESET_STATUS_SUBSCRIBE_MAIL:
+      return {
+        ...state,
+
+        keySubscribe: 0,
+        statusSubscribe: false,
       };
 
     default:

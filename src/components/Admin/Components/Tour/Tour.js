@@ -16,6 +16,7 @@ import { Spin, Alert, Popconfirm, notification } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "./../Spin/Spin";
+import moment from "moment";
 import {
   BrowserRouter as Router,
   Switch,
@@ -47,6 +48,7 @@ const Tour = (props) => {
   const { message } = props.message;
   const { keyAdminModal } = props.keyAdminModal;
   const { statusAdmin } = props.statusAdmin;
+  const dateFormat = "YYYY-MM-DD";
 
   const handleChange = (pagination, filters, sorter) => {
     // console.log('Various parameters', pagination, filters, sorter);
@@ -80,8 +82,8 @@ const Tour = (props) => {
         placeId: item.placeId,
         placeName: item.place,
         tourName: item.name,
-        checkIn: item.checkIn,
-        checkOut: item.checkOut,
+        checkIn: item.checkIn, dateFormat ,
+        checkOut: item.checkOut, dateFormat,
         price: formatPrice(item.price),
         member: item.member,
         description: item.description,
@@ -115,6 +117,7 @@ const Tour = (props) => {
       title: "Checkin day",
       dataIndex: "checkIn",
       width: 300,
+
     },
     {
       title: "Checkout day",

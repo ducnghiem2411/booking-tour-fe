@@ -126,9 +126,9 @@ const Header = (props) => {
                                   />
                                 </a>
                                 <div className="user-menu dropdown-menu">
-                                  <a className="nav-link" href="#">
+                                  <Link className="nav-link" to= {`/setting/${accessToken}`}>
                                     <i className="fa fa-user" /> My Profile
-                                  </a>
+                                  </Link>
                                   <a className="nav-link" href="#">
                                     <i className="fa fa-user" /> Notifications{" "}
                                     <span className="count">13</span>

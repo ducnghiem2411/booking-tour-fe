@@ -351,7 +351,8 @@ span.block.edit .btn-edit {
   width: 100%;
   height: 100%;
 }
-.single-package-item h3{
+
+.single-package-item h3 {
   font-size: 17px;
   padding: 20px 0 5px 0;
 }
@@ -368,13 +369,16 @@ span.block.edit .btn-edit {
   top: 0;
   transition: .2s ease-in-out;
 }
-.packages-para{
+
+.packages-para {
   padding-top: 10px;
 }
-.single-package-item:hover{
+
+.single-package-item:hover {
   top: -10px;
 }
-.single-package-item:hover h3 .title{
+
+.single-package-item:hover h3 .title {
   color: #00d8ff;
 }
 
@@ -385,7 +389,8 @@ span.block.edit .btn-edit {
   position: relative;
   transition: .4s ease-in-out;
 }
-.single-package-item .package-img.similar{
+
+.single-package-item .package-img.similar {
   height: 180px;
 }
 
@@ -853,6 +858,7 @@ nav.breadcumb ul li a:hover {
   background: none;
   color: #919191;
 }
+
 .btn-back.setting {
   margin-left: 0;
 }
@@ -871,7 +877,6 @@ nav.breadcumb ul li a:hover {
   animation: slide 1s ease-in-out infinite;
   margin-left: 9px;
 }
-
 
 @keyframes slide {
   0%, 100% {
@@ -2176,12 +2181,17 @@ nav.breadcumb ul li a:hover {
   border-bottom-left-radius: 25px;
 }
 
+
 .wrapper .account .body .container-account .navigate .list a {
   display: block;
   padding: 20px 0 20px 35px;
   color: white;
   text-transform: uppercase;
+  border-bottom: 2px solid #61d2f8;
   letter-spacing: 1px;
+}
+.wrapper .account .body .container-account .navigate .list a:last-child{
+  border-bottom: none;
 }
 
 .wrapper .account .body .container-account .col-setting .body-setting {
@@ -2248,7 +2258,8 @@ nav.breadcumb ul li a:hover {
     transform: translateY(10%);
   }
 }
-.donut.multi{
+
+.donut.multi {
   width: 23px;
   height: 23px;
   overflow: hidden;
@@ -2264,6 +2275,7 @@ nav.breadcumb ul li a:hover {
     transform: rotate(360deg);
   }
 }
+
 .wrap-btn-setting {
   display: block;
   margin: 20px 0;
@@ -2281,29 +2293,33 @@ nav.breadcumb ul li a:hover {
   transition: .4s ease-in-out;
   border-radius: 5px;
 }
+
 .wrap-btn-setting .btn-setting:hover {
   background: #1892ba;
 }
-.wrap-btn-setting .btn-setting:active:focus{
+
+.wrap-btn-setting .btn-setting:active:focus {
   background: #4ad2ff;
   border-color: #4ad2ff;
 }
+
 .img-user {
-    display: inline-block;
-    width: 75px;
-    height: 75px;
-    overflow: hidden;
-    text-align: center;
-    border: 2px solid #c2c2c2;
-    border-radius: 50%;
+  display: inline-block;
+  width: 75px;
+  height: 75px;
+  overflow: hidden;
+  text-align: center;
+  border: 2px solid #c2c2c2;
+  border-radius: 50%;
 }
 
 .img-user img {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
+
 .ant-carousel .slick-dots li button {
   width: 15px !important;
   height: 15px !important;
@@ -2314,27 +2330,34 @@ nav.breadcumb ul li a:hover {
 .ant-carousel .slick-dots li.slick-active button {
   background: #00d8ff !important;
 }
-.ant-carousel .slick-dots li.slick-active{
+
+.ant-carousel .slick-dots li.slick-active {
   width: 15px !important;
 }
-.ant-carousel .slick-dots-bottom{
+
+.ant-carousel .slick-dots-bottom {
   bottom: 0 !important;
 }
+
 .single-package-item.similar h3 {
   font-size: 15px;
 }
-.packages-para.similar p{
+
+.packages-para.similar p {
   font-size: 13px;
 }
+
 .detail .similar-tours {
   margin: 50px 0 0 0;
   padding-top: 15px;
   background: white;
 }
-.ant-carousel .slick-dots{
+
+.ant-carousel .slick-dots {
   z-index: 4 !important;
 }
-.album{
+
+.album {
   margin-bottom: 30px;
 }
 
@@ -2342,15 +2365,148 @@ nav.breadcumb ul li a:hover {
   height: 450px;
   overflow: hidden;
 }
+
 .album .package-img img {
   display: block;
   width: 100%;
   height: 100%;
 }
+
 .album .ant-carousel .slick-dots {
   bottom: 10px !important;
 }
-.about-view.packages-btn.similar{
+
+.about-view.packages-btn.similar {
   width: 85px;
   height: 30px;
+}
+
+
+.detail .side-bar {
+  padding: 20px 20px 50px 20px;
+  background: #eeeeee;
+}
+
+.detail .side-bar p {
+  font-size: 15px;
+  color: black;
+
+}
+
+.detail .side-bar .date {
+  border-top: 1px solid #bababa;
+  border-bottom: 1px solid #bababa;
+  padding: 15px 0;
+}
+
+.detail .side-bar .price {
+  border-bottom: 1px solid #bababa;
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail .side-bar .price p {
+  color: red;
+  font-weight: 600;
+}
+
+.detail .side-bar .call {
+  padding: 15px 0;
+}
+
+.home1-testm-txt p {
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 185px;
+}
+.support {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail .info .review{
+  margin-top: 50px;
+}
+
+.support-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background: #000000a6;
+ 
+  z-index: 6;
+  opacity: 0;
+  height: 0;
+}
+.support-modal.active{
+  height: 100%;
+  opacity: 1;
+}
+
+.support-modal .body {
+  width: 700px;
+  height: auto;
+  background: white;
+  padding: 20px 20px 0 20px;
+  border-radius: 15px;
+ position: absolute;
+ top: -200%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+  transition: 0s ease;
+  z-index: 10;
+}
+.support-modal .body.active{
+  top: 50%;
+}
+
+
+.support-modal .body h3 {
+  color: red;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #cfcfcf;
+}
+
+.support-modal .body input {
+  background: #e6e6e6cc;
+  padding: 12px 10px;
+  display: inline-block;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+.support-modal .body input:focus{
+  box-shadow: none;
+  border: none;
+}
+
+.support-modal .body input .ant-form-item-control-input-content {
+  text-align: right;
+}
+
+.support-modal .body input .ant-form-item-control-input-content {
+  /* text-align: right; */
+  /* display: block; */
+}
+
+.support-modal .body {}
+
+.support-modal .body .ant-form-item-control-input-content {
+  text-align: right;
+  /* border-top: 1px solid grey; */
+}
+
+.support-modal .body .ant-form-item-control-input-content button {
+  padding: 5px 20px;
+  border-radius: 5px;
 }

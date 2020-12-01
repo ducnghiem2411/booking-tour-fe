@@ -122,12 +122,14 @@ const ModalTour = (props) => {
   
   const onChangeDate = (value, dateString) => {
     //   console.log('value', value)
-    console.log(dateString);
     setDateString(dateString);
   };
 
   console.log('fileImageTour', fileImageTour)
   const onSubmit = (values) => {
+
+    console.log('dateString[0]', dateString[0])
+    console.log('dateString[0]', dateString[1])
     
     // values = {
     //   ...values,

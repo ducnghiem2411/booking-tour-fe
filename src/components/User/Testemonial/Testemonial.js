@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import OwlCarousel from "react-owl-carousel";
+// import OwlCarousel from "react-owl-carousel";
 import { Carousel } from "antd";
 import { connect, useDispatch } from "react-redux";
 import index from "../../Admin";
@@ -23,14 +23,14 @@ const Testemonial = (props) => {
             </p>
           </div>
 
-          <Carousel slidesToShow={3} draggable dots={true} autoplay>
-            {allReviews && allReviews.length > 0
+          <Carousel slidesToShow={3} draggable dots={false}>
+            {allReviews 
               ? allReviews.map((item, index) => {
                   return (
                     <div
                       className="home1-testm item"
                       key={item._id}
-                      id="testemonial-carousel"
+                      // id="testemonial-carousel"
                     >
                       <div className="home1-testm-single text-center">
                         <div className="home1-testm-img text-center">
@@ -44,7 +44,7 @@ const Testemonial = (props) => {
                             alt="img"
                           />
                           </div>
-                         
+
                         </div>
                         <div className="home1-testm-txt">
                           <span className="icon section-icon">
@@ -64,42 +64,6 @@ const Testemonial = (props) => {
                 })
               : []}
           </Carousel>
-
-          {/* <OwlCarousel
-            className="owl-theme"
-            loop
-            autoplay
-            nav
-            dots
-            margin={10}
-            // responsive={responsive}
-          >
-            {allReviews && allReviews.length >0 ?
-              allReviews.map((item, index) => {
-                return (
-                  <div className="home1-testm item" key={item._id}>
-                    <div className="home1-testm-single text-center">
-                      <div className="home1-testm-img">
-                        <img
-                          src="assets/images/client/testimonial1.jpg"
-                          alt="img"
-                        />
-                      </div>
-                      <div className="home1-testm-txt">
-                        <span className="icon section-icon">
-                          <i className="fa fa-quote-left" aria-hidden="true" />
-                        </span>
-                        <p>{item ? item.content : ""}</p>
-                        <h3>
-                          <a href="#"> {item.username} </a>
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
-                );
-              }) : []
-            }
-          </OwlCarousel> */}
         </div>
       </section>
     </>

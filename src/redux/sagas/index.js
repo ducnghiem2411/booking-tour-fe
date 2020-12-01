@@ -28,6 +28,7 @@ import fetchAllReviewsSaga from './fetchAllReviewsSaga'
 import resetPasswordSaga from './resetPasswordSaga'
 import getInfoUserSaga from './getInfoUserSaga'
 import updateInfoUserSaga from './updateInfoUserSaga'
+import subscribeEmailSaga from './subscribeEmailSaga'
 
 export default function* rootSaga() {
     yield all([
@@ -59,7 +60,8 @@ export default function* rootSaga() {
         fetchAllReviewsSaga(),
         resetPasswordSaga(),
         getInfoUserSaga(),
-        updateInfoUserSaga()
+        updateInfoUserSaga(),
+        subscribeEmailSaga()
         
     ])
 }

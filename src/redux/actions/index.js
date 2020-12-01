@@ -314,6 +314,27 @@ const fetchDataCountryRequest = () => {
   };
 };
 
+const subscribeEmailRequest = (email) => {
+  return {
+    type: type.SUBSCRIBE_EMAIL_REQUEST,
+    email
+  };
+};
+
+const subscribeEmailSucced = (message) => {
+  return {
+    type: type.SUBSCRIBE_EMAIL_SUCCED,
+    message
+  };
+};
+
+const subscribeEmailFailed = (message) => {
+  return {
+    type: type.SUBSCRIBE_EMAIL_FAILED,
+    message
+  };
+};
+
 const fetchDataCountrySucced = (data) => {
   return {
     type: type.FETCH_COUNTRY_SUCCED,
@@ -533,6 +554,11 @@ const resetRegisterStatus = () => {
 const resetStatusAdmin = () => {
   return {
     type: type.RESET_STATUS_ADMIN,
+  };
+};
+const resetStatusSubscribeMail = () => {
+  return {
+    type: type.RESET_STATUS_SUBSCRIBE_MAIL,
   };
 };
 
@@ -892,6 +918,7 @@ export {
   dataItemTourFailed,
   onShowModalRegister,
   getDataRowTableFailed,
+  subscribeEmailFailed,
   fetchDataCountryRequest,
   updateInfoTourItemRequest,
   loginGoogleRequest,
@@ -922,6 +949,7 @@ export {
   createPlaceRequest,
   resetStatusReset,
   createCountryFailed,
+  subscribeEmailSucced,
   fetchDataTourRequest,
   fetchDataTourSucced,
   fetchDataTourFailed,
@@ -949,6 +977,7 @@ export {
   fetchAllReviewsSucced,
   getInfoUserRequest,
   fetchDataPlaceInCountryFailed,
+  subscribeEmailRequest,
   showResetModal,
   onChangeStatusCreateAccModal,
   registerFailed,
@@ -956,6 +985,7 @@ export {
   updateLoginSucced,
   updateLoginFailed,
   onCloseModal,
+  resetStatusSubscribeMail,
   onShowModal,
   onUpdateStatusError,
 };

@@ -22,6 +22,7 @@ const Review = (props) => {
         itemTour.placeId
       )
     );
+    form.resetFields()
   };
 
   
