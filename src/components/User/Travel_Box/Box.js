@@ -13,9 +13,8 @@ const Box = (props) => {
   const [formLayout, setFormLayout] = useState("vertical");
   const [country, setCountry] = useState("");
   const [place, setPlace] = useState("");
-  const [memNumber, setMemNumber] = useState(1);
-  const [minBudget, setMinBudget] = useState(0);
-  const [maxBudget, setMaxBudget] = useState(0);
+  const [minBudget, setMinBudget] = useState(500_000);
+  const [maxBudget, setMaxBudget] = useState(100_000_000);
   const { dataPlace } = props.dataPlace;
   const dateFormat = "YYYY-MM-DD";
   const { RangePicker } = DatePicker;
@@ -38,7 +37,7 @@ const Box = (props) => {
   //   setMemNumber(e.target.value);
   // };
   const onChangeBudget = (value) => {
-    setMinBudget(value[0]*100000);
+    setMinBudget(value[0] * 100000);
     setMaxBudget(value[1] * 100000);
   };
   const onChangeDate = (value, dateString) => {

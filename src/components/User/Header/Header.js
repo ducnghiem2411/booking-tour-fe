@@ -37,8 +37,6 @@ const Header = (props) => {
     }
   }, []);
 
-  
-
   useEffect(() => {}, [updateLoginStatus]);
 
   useEffect(() => {
@@ -121,7 +119,7 @@ const Header = (props) => {
                                 >
                                   <img
                                     className="user-avatar rounded-circle"
-                                    src= {dataUser ? dataUser.image : "/assets/images/admin/admin.jpg" }  
+                                    src= { dataUser?.image || "/assets/images/admin/admin.jpg" }  
                                     alt="User Avatar"
                                   />
                                 </a>

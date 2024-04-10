@@ -134,11 +134,11 @@ const Tour = (props) => {
       dataIndex: "member",
       width: 300,
     },
-    {
-      title: "Description",
-      dataIndex: "description",
-      width: 300,
-    },
+    // {
+    //   title: "Description",
+    //   dataIndex: "description",
+    //   width: 300,
+    // },
     {
       title: "Image",
       dataIndex: "image",

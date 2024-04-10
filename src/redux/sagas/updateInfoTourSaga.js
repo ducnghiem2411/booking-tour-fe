@@ -34,11 +34,11 @@ export function* updateInfoTourInSaga(action) {
 
 
     const response  = yield call(axios.put, apiUrl, { 
-      // countryId: action.countryId,
-      // placeId: action.placeId,
+      countryId: action.countryId,
+      placeId: action.placeId,
       name: action.body.tourName,
-      // checkIn: action.body.dateString[0],
-      // checkOut: action.body.dateString[1],
+      checkIn: action.body.dateString[0],
+      checkOut: action.body.dateString[1],
       price: action.body.price,
       member: action.body.memNumber,
       // description: action.body.description,

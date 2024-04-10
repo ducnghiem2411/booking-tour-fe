@@ -202,13 +202,13 @@ const Login = (props) => {
                         <a id="google_login" className="circle google" href="#">
                           <i className="fa fa-google-plus fa-fw" />
                         </a>
-                        <GoogleLogin
+                        {/* <GoogleLogin
                           clientId="388356051193-2o77ddjb3i1v4nd4fn7v5g566gph0415.apps.googleusercontent.com"
                           buttonText="Login"
                           onSuccess={responseGoogle}
                           onFailure={responseGoogle}
                           cookiePolicy={"single_host_origin"}
-                        />
+                        /> */}
                         <a
                           id="facebook_login"
                           className="circle facebook"

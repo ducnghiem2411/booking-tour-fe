@@ -1,5 +1,5 @@
 import React from "react";
-// import "./style.css";
+import "./style.css";
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,7 +17,7 @@ const Navigate = () => {
       <div className="navigation">
         <header>
           <div className="title">
-            <span className="icon"><img src="https://demos.creative-tim.com/light-bootstrap-dashboard-react/static/media/reactlogo.9b864b36.png" /></span>
+            {/* <span className="icon"><img src="https://demos.creative-tim.com/light-bootstrap-dashboard-react/static/media/reactlogo.9b864b36.png" /></span> */}
             <span>Creative time</span>
           </div>
         </header>
@@ -25,7 +25,7 @@ const Navigate = () => {
         <div className="list">
           <ul>
             <li>
-              <Link to="/admin/dashboard" className="list-item active"> <span><i className="fa fa-dashboard"></i></span> <span>Dashboard</span></Link>
+              <Link to="/admin/dashboard" className="list-item"> <span><i className="fa fa-dashboard"></i></span> <span>Dashboard</span></Link>
             </li>
             <li>
               <Link to="/admin/country" className="list-item"> <span><i className="fa fa-map-marker"></i></span> <span>Country</span></Link>
@@ -36,9 +36,9 @@ const Navigate = () => {
             <li>
               <Link to="/admin/tour" className="list-item"> <span><i className="fa fa-anchor"></i></span> <span>Tour</span></Link>
             </li>
-            <li>
-              <a className="list-item"> <span><i className="fa fa-bell"></i></span>  <span>Notifications</span> </a>
-            </li>
+            {/* <li>
+              <Link to="/admin/tour" className="list-item"> <span><i className="fa fa-bell"></i></span><span>Notifications</span></Link>
+            </li> */}
             <li>
               {/* <Link className="list-item" to={`/admin/tour`}>Notifications</Link> */}
             </li>

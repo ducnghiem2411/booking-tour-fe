@@ -143,7 +143,6 @@ const Detail = (props) => {
                     <Carousel
                       slidesToShow={1}
                       draggable
-                      infinite
                       dots={true}
                       autoplay
                       infinite={false}

@@ -111,22 +111,7 @@ const ModalCountry = (props) => {
                         },
                       ]}
                     >
-                      <Select
-                        placeholder="Select country name pls"
-                        onChange={handleChange}
-                        disabled={statusEdit ? true : false}
-                        allowClear
-                      >
-                        {countries
-                          ? countries.map((item, index) => {
-                              return (
-                                <Option value={item.name} key={index}>
-                                  {item.name}
-                                </Option>
-                              );
-                            })
-                          : []}
-                      </Select>
+                      <Input maxLength={50} />
                     </Form.Item>
 
                     <Form.Item
