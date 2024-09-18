@@ -16,7 +16,11 @@ const Box = (props) => {
   const [minBudget, setMinBudget] = useState(500_000);
   const [maxBudget, setMaxBudget] = useState(100_000_000);
   const { dataPlace } = props.dataPlace;
-  const dateFormat = "YYYY-MM-DD";
+  // const dateFormat = "YYYY-MM-DD";
+  const dateFormat = "DD-MM-YYYY";
+  const defaultCheckIn = `30-04-2024`
+  const defaultCheckOut = `01-05-2024`
+
   const { RangePicker } = DatePicker;
   const { Option } = Select;
   const [form] = Form.useForm();
@@ -202,8 +206,8 @@ const Box = (props) => {
                                   <RangePicker
                                     onChange={onChangeDate}
                                     defaultValue={[
-                                      moment("2020-01-01", dateFormat),
-                                      moment("2020-12-01", dateFormat),
+                                      moment(defaultCheckIn, dateFormat),
+                                      moment(defaultCheckOut, dateFormat),
                                     ]}
                                     format={dateFormat}
                                   />

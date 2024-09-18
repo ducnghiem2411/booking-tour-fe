@@ -19,6 +19,7 @@ export function* fetchTourInSaga(action) {
     const response = yield call(axios.get, apiUrl, null);
 
 
+    console.log({ response });
     if (response) {
       yield put(fetchDataTourSucced(response.data.data));
     }

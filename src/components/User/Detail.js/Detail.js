@@ -5,6 +5,7 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SuccessBookModal from "../Modal/StatusBookingTourModal";
 import { Form, Input, Button, Rate, Checkbox, Carousel } from "antd";
+// import { PhoneOutlined } from "antd/es/icon";
 import Review from "../Review/Review";
 import {
   bookingTourRequest,
@@ -78,9 +79,9 @@ const Detail = (props) => {
               <div className="col-md-4">
                 <div className="side-bar">
                   <div className="date">
-                    <p>Ngày khởi hành: 03/11/2020</p>
-                    <p>Số chỗ còn nhận: {itemTour && itemTour.member} </p>
-                    <p>Nơi khởi hành: {itemTour && itemTour.place} </p>
+                    <p>Departure Date: {itemTour && itemTour.checkIn.substring(0,10)} </p>
+                    <p>Available slots: {itemTour && itemTour.member} </p>
+                    <p>Departure Location: {itemTour && itemTour.place} </p>
                   </div>
                   <div className="price">
                     <p>
@@ -98,20 +99,22 @@ const Detail = (props) => {
                     </button>
                   </div>
                   <div className="call">
-                    <p>Bạn cần hỗ trợ ?</p>
+                    <p>Contact us</p>
 
                     <div className="support">
                       <div className="phone">
                         <a href="tel:+900300400">
                         <img
-                          src="https://travel.com.vn/Content/ThemeHe/img/btn-call1.png"
+                          src="https://cdn-icons-png.flaticon.com/128/724/724664.png"
                           alt="phone"
+                          style={{ width: '40px', height: '40px' }}
                         /></a>
                       </div>
                       <a className="letter" href="" onClick={showSupportModal}>
                         <img
-                          src="https://travel.com.vn/Content/ThemeHe/img/btn-call2.png"
+                          src="https://cdn-icons-png.flaticon.com/128/14026/14026792.png"
                           alt="letter"
+                          style={{ width: '40px', height: '40px' }}
                         />
                       </a>
                     </div>
